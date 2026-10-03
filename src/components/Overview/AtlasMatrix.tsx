@@ -594,20 +594,21 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
               })}
 
             {/* 标注层：每个气泡一个名字。
-                位置用「相对各自气泡中心的偏移」表达，并按气泡同样的 √k 速率缩放，
-                于是放大时文字始终贴着自己那个圈，不会被拉远的间距甩开；
-                同时用下限保证文字不压进气泡。 */}
+                位置用「相对各自气泡中心的偏移」表达：偏移随 √k 收缩，
+                并以气泡半径为上限做压缩——放大时文字不会被拉远的间距甩开，
+                而是直接压在自己的气泡上显示（带白色描边，压在气泡上依然清晰），
+                大幅压缩密集区的散开范围。 */}
             {labels.map(({ id, x, y, anchor, leader, name }) => {
               const dim = hover !== null && hover !== id
               const c = centerOf.get(id)
               if (!c) return null
-              // 贴合偏移：随 √k 收缩，但不低于「气泡半径 + 一点间隙」
               const bx = x - c.cx
               const by = y - c.cy
-              const minOff = (c.r + 3) / scaleK
+              // 偏移上限：不超过气泡半径的 0.55，让文字压在圈上而非散在圈外
+              const cap = (c.r * 0.55) / scaleK
               const fit = (v: number) => {
                 const s = v / scaleK
-                return Math.abs(s) < minOff ? Math.sign(v || 1) * minOff : s
+                return Math.abs(s) > cap ? Math.sign(v || 1) * cap : s
               }
               const tx = c.cx + fit(bx)
               const ty = c.cy + fit(by)
@@ -615,10 +616,10 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                 <g key={`lab-${id}`} pointerEvents="none">
                   {leader && (
                     <line
-                      x1={c.cx + (leader.x1 - c.cx) / scaleK}
-                      y1={c.cy + (leader.y1 - c.cy) / scaleK}
-                      x2={c.cx + (leader.x2 - c.cx) / scaleK}
-                      y2={c.cy + (leader.y2 - c.cy) / scaleK}
+                      x1={c.cx + fit(leader.x1 - c.cx)}
+                      y1={c.cy + fit(leader.y1 - c.cy)}
+                      x2={c.cx + fit(leader.x2 - c.cx)}
+                      y2={c.cy + fit(leader.y2 - c.cy)}
                       className="text-faint"
                       stroke="currentColor"
                       strokeWidth={ink(0.8)}
@@ -635,8 +636,8 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                       fontSize: ink(9),
                       paintOrder: 'stroke',
                       stroke: '#fff',
-                      strokeWidth: ink(2.6),
-                      strokeOpacity: 0.8,
+                      strokeWidth: ink(3.2),
+                      strokeOpacity: 0.92,
                     }}
                   >
                     {name}
