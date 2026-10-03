@@ -1,0 +1,2672 @@
+{
+  "candidates": [
+    {
+      "slug": "rowan-an-open-source-sast-scanner-for-ai-apps-code-models-mc",
+      "name": "Rowan, an open-source SAST scanner for AI apps (code, models, MCP)\"",
+      "url": "https://github.com/hedgerow-dev/rowan",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 3,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/hedgerow-dev/rowan",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "google-maps-scraper-mcp",
+      "name": "Google Maps Scraper MCP",
+      "url": "https://gmapscrawl.com/google-maps-scraper-mcp",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 9,
+        "hnComments": 5
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://gmapscrawl.com/google-maps-scraper-mcp",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "television-an-open-source-gui-for-your-agent-harness",
+      "name": "Television – an open source GUI for your agent harness",
+      "url": "https://television.run/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 6,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://television.run/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "i-found-api-keys-in-my-coding-agent-history-so-i-built-agent",
+      "name": "I found API keys in my coding agent history so I built Agent Scrub",
+      "url": "https://github.com/thesubtlety/agent-scrub",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/thesubtlety/agent-scrub",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "figma-server-the-solution-to-figma-s-hostility-towards-agent",
+      "name": "figma-server, the solution to Figma's hostility towards agents",
+      "url": "https://github.com/ctxrs/figma-server",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/ctxrs/figma-server",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "portus-a-rust-based-api-ai-mcp-gateway",
+      "name": "Portus, A Rust Based API/AI/MCP Gateway",
+      "url": "https://portus-gateway.dev/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 3,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://portus-gateway.dev/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "pi-pod-run-your-pi-coding-agent-in-sandboxes-on-your-own-ser",
+      "name": "Pi pod – run your pi coding agent in sandboxes on your own server",
+      "url": "https://pipod.dev/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 6,
+        "hnComments": 2
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://pipod.dev/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "snip-terminal-notes-app-that-claude-can-read-and-write-via-m",
+      "name": "Snip – Terminal notes app that Claude can read and write via MCP",
+      "url": "https://github.com/jerichosiahaya/snip",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "productivity",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/jerichosiahaya/snip",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "arda-marketing-agents-to-help-brands-win-google-and-ai-searc",
+      "name": "Arda – Marketing agents to help brands win Google and AI Search",
+      "url": "https://www.ardainc.com",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 4,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://www.ardainc.com",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "agent-sdk-go-build-crash-resilient-ai-agents-in-go",
+      "name": "Agent-SDK-go – Build crash-resilient AI agents in Go",
+      "url": "https://github.com/agenticenv/agent-sdk-go",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "infrastructure",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/agenticenv/agent-sdk-go",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "pre-payment-and-post-payment-checks-for-personal-ai-agents",
+      "name": "Pre-payment and Post-payment checks for personal AI agents",
+      "url": "https://contextiq.trango-compute.com",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://contextiq.trango-compute.com",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "gpt-6-astra-and-claude-5-5-opus-race-to-create-the-best-star",
+      "name": "GPT-6 Astra and Claude 5.5 Opus race to create the best StarCraft bot",
+      "url": "https://starskirmish.com/hillclimb/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://starskirmish.com/hillclimb/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "odd-essentials-agent-guild",
+      "name": "Odd Essentials Agent Guild",
+      "url": "https://github.com/oddessentials/agent-guild",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/oddessentials/agent-guild",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "one-line-so-llm-workers-share-a-429-wait-and-keep-jobs-an-ou",
+      "name": "One line so LLM workers share a 429 wait and keep jobs an outage stops",
+      "url": "https://github.com/baldurhq/baldur",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/baldurhq/baldur",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "client-rooms-where-calls-and-ai-agents-suggest-edits-people-",
+      "name": "Client rooms where calls and AI agents suggest edits, people approve",
+      "url": "https://twitter.com/deamosV/status/2105679521240514788",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 2
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://twitter.com/deamosV/status/2105679521240514788",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "what-s-agent-doing-a-claude-code-ui-mod-that-explains-each-s",
+      "name": "What's Agent Doing – a Claude Code UI mod that explains each step",
+      "url": "https://github.com/tzafrir/whats-agent-doing",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/tzafrir/whats-agent-doing",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "bise-a-multi-agent-harness-made-for-humans",
+      "name": "Bise – a multi-agent harness, made for humans",
+      "url": "https://bise.dev/",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 6,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://bise.dev/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "arrowproof-check-an-llm-drawn-architecture-diagram-against-y",
+      "name": "Arrowproof – check an LLM-drawn architecture diagram against your code",
+      "url": "https://github.com/ahmtsahin/arrowproof",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/ahmtsahin/arrowproof",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "scopelock-autonomous-git-scope-creep-auditor-and-ucc-2-209-e",
+      "name": "ScopeLock – Autonomous Git scope-creep auditor and UCC 2-209 engine",
+      "url": "https://github.com/ahirwardhanmanti83-bit/scopelock-ai",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/ahirwardhanmanti83-bit/scopelock-ai",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "spens-sandboxed-observable-coding-agents",
+      "name": "Spens sandboxed, observable coding agents",
+      "url": "https://spens.refwd.ai/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://spens.refwd.ai/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "moon-dev-tools-rust-and-egui-agentic-task-board-shell-and-re",
+      "name": "Moon-dev-tools – rust and egui agentic task board, shell and reviews",
+      "url": "https://antoinemopa.github.io/moon-dev-tools/",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://antoinemopa.github.io/moon-dev-tools/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "yokka-simple-project-management-for-coding-agents",
+      "name": "Yokka – Simple project management for coding agents",
+      "url": "https://yokka.ai/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 3,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://yokka.ai/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "kodama-a-multi-agent-pack-for-kiro",
+      "name": "Kodama – a multi-agent pack for Kiro",
+      "url": "https://github.com/amergrgic/kodama",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/amergrgic/kodama",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "a-linux-terminal-agent-with-transparent-context-permissions-",
+      "name": "A Linux terminal agent with transparent context, permissions, and logs",
+      "url": "https://github.com/ljedrz/nachalnik/tree/master/kamchatka",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/ljedrz/nachalnik/tree/master/kamchatka",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "agent-chrome-claude-code-browses-in-chrome-without-stealing-",
+      "name": "Agent-Chrome – Claude Code browses in Chrome without stealing focus",
+      "url": "https://github.com/rav4nn/agent-chrome",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/rav4nn/agent-chrome",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "apple-developer-mcp-app-store-connect-via-your-ai-assistants",
+      "name": "Apple Developer MCP, App Store Connect via Your AI Assistants",
+      "url": "https://nova.civai.co/agent/mcp-apple_developer",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://nova.civai.co/agent/mcp-apple_developer",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "mixdog-open-source-coding-agent-for-windows-desktop",
+      "name": "Mixdog – open-source coding agent for Windows desktop",
+      "url": "https://github.com/tribgames/mixdog",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 4,
+        "hnComments": 2
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/tribgames/mixdog",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "avigpt-250m-edge-slm-with-nvme-memory-bus-488mb-runs-offline",
+      "name": "AviGPT-250M – Edge SLM with NVMe memory bus (488MB, runs offline)",
+      "url": "https://github.com/Avinashricky211/AviGPT-250M",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/Avinashricky211/AviGPT-250M",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "simply-dotlink-in-chatgpt-web-space-or-dot-to-access-local-f",
+      "name": "Simply @dotlink in ChatGPT web,space or dot to access local files,tools",
+      "url": "https://github.com/abird-ai/dotlink/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/abird-ai/dotlink/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "agent-team-runtime-with-concrete-lifecycle-management",
+      "name": "Agent team runtime with concrete lifecycle management",
+      "url": "https://github.com/ringlochid/oh-my-subagents",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "infrastructure",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/ringlochid/oh-my-subagents",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "pair-nvim-agent-assistance-while-staying-in-the-codebase",
+      "name": "Pair.nvim – Agent assistance while staying in the codebase",
+      "url": "https://github.com/sampsn/pair.nvim",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/sampsn/pair.nvim",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "graphene-data-analysis-toolkit-for-your-coding-agent",
+      "name": "Graphene – Data analysis toolkit for your coding agent",
+      "url": "https://github.com/graphene-data/graphene",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 7,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/graphene-data/graphene",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "premortem-ai-agents-that-red-team-your-startup-idea",
+      "name": "Premortem – AI agents that red-team your startup idea",
+      "url": "https://premortem.site",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 11,
+        "hnComments": 12
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://premortem.site",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "ferry-sync-your-coding-agent-setup-to-remote-linux-boxes",
+      "name": "Ferry – Sync your coding agent setup to remote Linux boxes",
+      "url": "https://dlhck.github.io/ferry/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://dlhck.github.io/ferry/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "zsh-codex-assistant-codex-session-attached-to-your-shell",
+      "name": "Zsh-codex-assistant: codex session attached to your shell",
+      "url": "https://github.com/klntsky/zsh-codex-assistant",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/klntsky/zsh-codex-assistant",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "d-engine-deterministic-llm-code-edits-42-fewer-tokens-than-a",
+      "name": "D-Engine – deterministic LLM code edits, 42× fewer tokens than an agent",
+      "url": "https://github.com/corruchaga/D-Engine",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/corruchaga/D-Engine",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "mutually-beneficial-agentic-common-law",
+      "name": "Mutually beneficial agentic Common Law",
+      "url": "https://www.peregrini.ai",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://www.peregrini.ai",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "scrubbed-fast-native-web-data-cleaning-for-llm-training",
+      "name": "Scrubbed – fast native web-data cleaning for LLM training",
+      "url": "https://schancel.github.io/scrubbed/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://schancel.github.io/scrubbed/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "mcp-server-for-editing-excel-with-real-time-calc-and-diffs",
+      "name": "MCP server for editing Excel with real-time calc and diffs",
+      "url": "https://github.com/pixelsmasher13/gridpath",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 4,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/pixelsmasher13/gridpath",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "taracode-a-local-devops-agent-and-18-open-models-scored-on-o",
+      "name": "Taracode – a local DevOps agent, and 18 open models scored on one GPU",
+      "url": "https://github.com/tara-vision/taracode",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/tara-vision/taracode",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "keel-give-your-agent-a-typed-strategy-language-not-a-trading",
+      "name": "Keel – Give your agent a typed strategy language, not a trading account",
+      "url": "https://usekeel.io/how-it-works",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://usekeel.io/how-it-works",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "the-coordination-and-durability-layer-for-multi-agents",
+      "name": "The coordination and durability layer for multi-agents",
+      "url": "https://cellaflow.com",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://cellaflow.com",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "call4me-an-ai-agent-that-handles-phone-calls-for-you",
+      "name": "Call4me, an AI agent that handles phone calls for you",
+      "url": "https://call4.me/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://call4.me/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "past-dev-memory-layer-for-agent-reaching-85-on-beam-10m",
+      "name": "Past.dev – memory layer for agent reaching 85% on BEAM 10M",
+      "url": "https://past.dev/blog/introducing-past-dev",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://past.dev/blog/introducing-past-dev",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "bananasplit-cli-manage-personal-and-group-expenses-with-ai-a",
+      "name": "BananaSplit CLI – manage personal and group expenses with AI agents",
+      "url": "https://bananasplit.net/en/agents/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 3,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://bananasplit.net/en/agents/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "fast-browser-agent-using-jev-with-deep-reasoning-as-needed",
+      "name": "Fast browser agent (using Jev) with deep reasoning as needed",
+      "url": "https://github.com/ironbee-ai/ironbee-express",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 7,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/ironbee-ai/ironbee-express",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "sundaedb-multimodal-analytics-for-agents",
+      "name": "SundaeDB – Multimodal Analytics for Agents",
+      "url": "https://sundaedb.com/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://sundaedb.com/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "inferpilot-the-vllm-doctor-that-tells-you-when-fp8-won-t-hel",
+      "name": "InferPilot – the vLLM doctor that tells you when fp8 won't help",
+      "url": "https://github.com/poojithdevan4D/InferPilot",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/poojithdevan4D/InferPilot",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "bivy-drive-your-coding-agents-from-your-phone-with-live-prev",
+      "name": "Bivy – Drive your coding agents from your phone, with live previews",
+      "url": "https://github.com/bivysh/bivy",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/bivysh/bivy",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "running-shoes-compared-built-solo-with-a-swarm-of-claude-age",
+      "name": "Running shoes compared, built solo with a swarm of Claude agents",
+      "url": "https://runometry.com/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://runometry.com/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "silta-family-assistant-on-matrix-with-continuity-across-cont",
+      "name": "Silta: family assistant on Matrix with continuity across context limits",
+      "url": "https://github.com/dmitry-markin/silta",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 4,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/dmitry-markin/silta",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "merageo-check-whether-chatgpt-claude-and-gemini-name-your-br",
+      "name": "MeraGEO – check whether ChatGPT, Claude and Gemini name your brand",
+      "url": "https://merageo.com",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://merageo.com",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "an-open-source-llm-guardrail-powered-by-jev",
+      "name": "An open-source LLM guardrail powered by Jev",
+      "url": "https://github.com/gulbaki/jev-llm-guard",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/gulbaki/jev-llm-guard",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "vectorless-reasoning-based-rag",
+      "name": "Vectorless, Reasoning-Based RAG",
+      "url": "https://github.com/VectifyAI/PageIndex",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 8,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/VectifyAI/PageIndex",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "miniagent-free-coding-agent-no-installation-required",
+      "name": "Miniagent – Free coding agent, no installation required",
+      "url": "https://miniagent.sh",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://miniagent.sh",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "vietnam-tender-intelligence-gov-procurement-data-ai-agent-re",
+      "name": "Vietnam Tender Intelligence – gov procurement data, AI-agent ready",
+      "url": "https://apify.com/donerightlabs/tender-intelligence",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://apify.com/donerightlabs/tender-intelligence",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "dots",
+      "name": "dots",
+      "url": "https://github.com/feder-cr/dots",
+      "source": "github",
+      "score": 57,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Open-source dots for the web: an AI agent with its own browser, one that does not get blocked.",
+      "signals": {
+        "stars": 2563,
+        "license": "MIT",
+        "forks": 434,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/feder-cr/dots",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "yomiyasu",
+      "name": "yomiyasu",
+      "url": "https://github.com/nanaism/yomiyasu",
+      "source": "github",
+      "score": 57,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "AI生成の日本語を自然な日本語へ推敲するAgent Skill / Agent Skill for Refining AI-Generated Japanese into Natural Japanese",
+      "signals": {
+        "stars": 1235,
+        "license": "MIT",
+        "forks": 27,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/nanaism/yomiyasu",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "open-dot",
+      "name": "open-dot",
+      "url": "https://github.com/composio-community/open-dot",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Open-source personal AI agents that work on their own, on their own computers. Mac app, OpenAI + Composio.",
+      "signals": {
+        "stars": 456,
+        "license": null,
+        "forks": 58,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/composio-community/open-dot",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "awesome-claude-video-skills",
+      "name": "awesome-claude-video-skills",
+      "url": "https://github.com/zhuyansen/awesome-claude-video-skills",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Open-source skills and toolkits that let Claude Code, Codex and other coding agents make video. 180 repos by type, each security-graded. English / 中文.",
+      "signals": {
+        "stars": 385,
+        "license": "NOASSERTION",
+        "forks": 41,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/zhuyansen/awesome-claude-video-skills",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "icode",
+      "name": "iCode",
+      "url": "https://github.com/openJiuwen-ai/iCode",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "A lightweight, extensible, fully offline development platform and agent/workflow toolkit for the AI era, with an intuitive TUI, easy deployment, and complete control over your data, agents, and workflows.",
+      "signals": {
+        "stars": 294,
+        "license": "Apache-2.0",
+        "forks": 49,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/openJiuwen-ai/iCode",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "strands-decider",
+      "name": "strands-decider",
+      "url": "https://github.com/strands-labs/strands-decider",
+      "source": "github",
+      "score": 70,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "A small, fast decision model, or system one model, for agentic workflows. Pick between options or rate on a scale faster than an LLM, with a calibrated confidence on every decision.",
+      "signals": {
+        "stars": 233,
+        "license": "Apache-2.0",
+        "forks": 38,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/strands-labs/strands-decider",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "seiso",
+      "name": "seiso",
+      "url": "https://github.com/scarletkc/seiso",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A Markdown convention and linter for project docs written by AI and read by humans and agents",
+      "signals": {
+        "stars": 170,
+        "license": "MIT",
+        "forks": 10,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/scarletkc/seiso",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "bootloops",
+      "name": "bootloops",
+      "url": "https://github.com/BootLoops-ai/bootloops",
+      "source": "github",
+      "score": 57,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "BootLoops 1.0: certified computational tools and house engines for exact and high-precision physics and quantitative science, built to be driven by LLM agents. MIT; docs CC BY 4.0.",
+      "signals": {
+        "stars": 168,
+        "license": "MIT",
+        "forks": 33,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/BootLoops-ai/bootloops",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "ten-levels-of-jev",
+      "name": "ten-levels-of-jev",
+      "url": "https://github.com/disler/ten-levels-of-jev",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Ten levels of Jev, from one smart if statement to a coding agent that reaches for Jev on its own",
+      "signals": {
+        "stars": 163,
+        "license": "MIT",
+        "forks": 47,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/disler/ten-levels-of-jev",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "comma",
+      "name": "Comma",
+      "url": "https://github.com/AFK-surf/Comma",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "The sessionless, relentless personal agent. Open source alternative to Muse, Dots, Instinct and Town.",
+      "signals": {
+        "stars": 158,
+        "license": "AGPL-3.0",
+        "forks": 11,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/AFK-surf/Comma",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "wenzi-xhs-agent-skills",
+      "name": "wenzi-xhs-agent-skills",
+      "url": "https://github.com/wenziai/wenzi-xhs-agent-skills",
+      "source": "github",
+      "score": 57,
+      "regionHint": "china",
+      "tierHint": "vertical",
+      "description": "文子的小红书 Agent Skills：从账号定位、选题标题、真人化改稿、图文规划到排期复盘的一套可安装工作流。",
+      "signals": {
+        "stars": 148,
+        "license": null,
+        "forks": 28,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/wenziai/wenzi-xhs-agent-skills",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "skills",
+      "name": "skills",
+      "url": "https://github.com/SkylarKitchen/skills",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Agent skills for design work: 3D build guides and more.",
+      "signals": {
+        "stars": 114,
+        "license": "MIT",
+        "forks": 13,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/SkylarKitchen/skills",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "museai",
+      "name": "museai",
+      "url": "https://github.com/d4ncboz/museai",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "High-performance OpenAI-compatible API gateway and bridge for muse.ai personal AI agents, ready for 9Router multi-model integration.",
+      "signals": {
+        "stars": 114,
+        "license": "MIT",
+        "forks": 6,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/d4ncboz/museai",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "remocn-studio",
+      "name": "remocn-studio",
+      "url": "https://github.com/Remocn/remocn-studio",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Agent-native video editor",
+      "signals": {
+        "stars": 102,
+        "license": "MIT",
+        "forks": 9,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Remocn/remocn-studio",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "tirx-harness",
+      "name": "TIRx-harness",
+      "url": "https://github.com/mlc-ai/TIRx-harness",
+      "source": "github",
+      "score": 57,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "An Open Compiler Harness for Agentic GPU Programming",
+      "signals": {
+        "stars": 102,
+        "license": null,
+        "forks": 15,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/mlc-ai/TIRx-harness",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "chat-ui",
+      "name": "Chat_UI",
+      "url": "https://github.com/KODAMA-TECHNOLOGY/Chat_UI",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "The fastest and litest LLM chating ui with 2 fields, less than 100 kb and completely no dependent.",
+      "signals": {
+        "stars": 102,
+        "license": "GPL-3.0",
+        "forks": 15,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/KODAMA-TECHNOLOGY/Chat_UI",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "tame-3d",
+      "name": "Tame_3D",
+      "url": "https://github.com/apromisedland/Tame_3D",
+      "source": "github",
+      "score": 57,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Tame3D research framework: evidence-grounded multi-agent 3D reasoning with scene-level conformal uncertainty alignment",
+      "signals": {
+        "stars": 100,
+        "license": "Apache-2.0",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/apromisedland/Tame_3D",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "kantor-agent",
+      "name": "kantor-agent",
+      "url": "https://github.com/humaedihume/kantor-agent",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Kantor Agent: kantor 3D tanpa konfigurasi yang menampilkan Claude Code & subagent-nya bekerja (plugin Claude Code)",
+      "signals": {
+        "stars": 98,
+        "license": "MIT",
+        "forks": 16,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/humaedihume/kantor-agent",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "dsh-jev-plugin",
+      "name": "dsh-jev-plugin",
+      "url": "https://github.com/luobosibing2/dsh-jev-plugin",
+      "source": "github",
+      "score": 47,
+      "regionHint": "china",
+      "tierHint": "vertical",
+      "description": "Native DeepSeek Harness (DSH) plugin integrating TypeSafe Jev as a System One decision layer for agent selection, supervision, corrections, and approvals.",
+      "signals": {
+        "stars": 89,
+        "license": "MIT",
+        "forks": 6,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/luobosibing2/dsh-jev-plugin",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "ufo-core",
+      "name": "ufo-core",
+      "url": "https://github.com/ufo-ai/ufo-core",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Agent operating system",
+      "signals": {
+        "stars": 88,
+        "license": "Apache-2.0",
+        "forks": 12,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/ufo-ai/ufo-core",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "hermes-virtual-office",
+      "name": "hermes-virtual-office",
+      "url": "https://github.com/JuniorXcoder/hermes-virtual-office",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A 3D virtual office for your AI agent fleet — desks, meetings with auto-generated minutes, live screen-peeking, and a Kanban board synced to Hermes. Next.js + Three.js, stateless, no DB.",
+      "signals": {
+        "stars": 77,
+        "license": "MIT",
+        "forks": 12,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/JuniorXcoder/hermes-virtual-office",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "silver-tourism-digital-twin",
+      "name": "silver-tourism-digital-twin",
+      "url": "https://github.com/Zhangweihui666/silver-tourism-digital-twin",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Semantic digital twin and 500-agent simulation laboratory for age-friendly research in historic districts.",
+      "signals": {
+        "stars": 75,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Zhangweihui666/silver-tourism-digital-twin",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "evovlm",
+      "name": "EvoVLM",
+      "url": "https://github.com/zzzz7788990213-ops/EvoVLM",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Evolving Multimodal Inference Programs: LLM-guided evolutionary search for accurate and efficient vision-language inference.",
+      "signals": {
+        "stars": 74,
+        "license": null,
+        "forks": 1,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/zzzz7788990213-ops/EvoVLM",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "cubefarm",
+      "name": "cubefarm",
+      "url": "https://github.com/leonvanzyl/cubefarm",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A cartoon 3D office where a swarm of Claude Code agents (plus QA testers) works through your GitHub issues",
+      "signals": {
+        "stars": 69,
+        "license": "MIT",
+        "forks": 24,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/leonvanzyl/cubefarm",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "emdash-build",
+      "name": "emdash-build",
+      "url": "https://github.com/emdash-cms/emdash-build",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Chat-based site builder for EmDash CMS — describe a site, watch an AI agent build it in a Cloudflare Sandbox",
+      "signals": {
+        "stars": 67,
+        "license": "MIT",
+        "forks": 4,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/emdash-cms/emdash-build",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "claude-council-khalifa",
+      "name": "claude-council-khalifa",
+      "url": "https://github.com/faroukahmed89-droid/claude-council-khalifa",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Claude Council Khalifa ⚖️ مجلس من 4 Agents (المؤيد، المشكك، المستثمر، الحَكَم) بيحكم على فكرة البيزنس بتاعتك: ابنيها، عدّلها الأول، ولا انساها",
+      "signals": {
+        "stars": 60,
+        "license": "MIT",
+        "forks": 14,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/faroukahmed89-droid/claude-council-khalifa",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "jelly",
+      "name": "jelly",
+      "url": "https://github.com/dctanner/jelly",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A local-first workspace for persistent AI agents. Built with Bun, React, SQLite, and Pi.",
+      "signals": {
+        "stars": 55,
+        "license": "MIT",
+        "forks": 5,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/dctanner/jelly",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "awesome-ai-motion",
+      "name": "awesome-ai-motion",
+      "url": "https://github.com/gongnyang/awesome-ai-motion",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "637 motion techniques for AI video, infographics and scroll decks — rendered clips, recipes, routes and an agent skill (ko/en)",
+      "signals": {
+        "stars": 54,
+        "license": "NOASSERTION",
+        "forks": 9,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/gongnyang/awesome-ai-motion",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "ai-agent-gateway",
+      "name": "ai-agent-gateway",
+      "url": "https://github.com/Tuskira/ai-agent-gateway",
+      "source": "github",
+      "score": 65,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "AI Agent Gateway - an open-source gateway that secures, governs and observes AI agents' MCP tool calls and LLM traffic",
+      "signals": {
+        "stars": 52,
+        "license": "Apache-2.0",
+        "forks": 8,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Tuskira/ai-agent-gateway",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "agentic-gpu-programming-for-mlsys",
+      "name": "agentic-gpu-programming-for-mlsys",
+      "url": "https://github.com/mlc-ai/agentic-gpu-programming-for-mlsys",
+      "source": "github",
+      "score": 57,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "stars": 52,
+        "license": null,
+        "forks": 7,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/mlc-ai/agentic-gpu-programming-for-mlsys",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "factorylog",
+      "name": "factorylog",
+      "url": "https://github.com/flaviocopes/factorylog",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "See what your coding agents did for you: a timeline of each day and week on your Mac, and where your time went, project by project",
+      "signals": {
+        "stars": 52,
+        "license": "MIT",
+        "forks": 2,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/flaviocopes/factorylog",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "skillscout",
+      "name": "skillscout",
+      "url": "https://github.com/flaviocopes/skillscout",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Find the skills your coding agents load, see which agents can use each one, and count how often you use them",
+      "signals": {
+        "stars": 50,
+        "license": "MIT",
+        "forks": 3,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/flaviocopes/skillscout",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "ruic-motion-reel",
+      "name": "RuiC-motion-reel",
+      "url": "https://github.com/HRuiCcc/RuiC-motion-reel",
+      "source": "github",
+      "score": 47,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "用代码生成 15 秒动态图形成片 · Agent Skill。交付 1920×1080 / 30fps。自研渲染引擎：2× 超采样矢量/文字 + 真 3D 点云 + 丝网印四色分色 + 代码合成配乐，不用任何外部美术素材、不用 AE。15 张风格牌，已做过暗色科技 / riso 印刷 / 纸艺 / 银盐暗房 / 恒星普朗克配色 / 氰版蓝图 / 紫外光刻，成片见 docs/films/",
+      "signals": {
+        "stars": 50,
+        "license": "NOASSERTION",
+        "forks": 6,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/HRuiCcc/RuiC-motion-reel",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "openpages",
+      "name": "openpages",
+      "url": "https://github.com/arjunkshah12345-hash/openpages",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Open-source AI workspace for humans and agents — SuperCompress as the core context layer.",
+      "signals": {
+        "stars": 48,
+        "license": "MIT",
+        "forks": 4,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/arjunkshah12345-hash/openpages",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "fomo-cc",
+      "name": "fomo-cc",
+      "url": "https://github.com/zack-the-worker/fomo-cc",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "An Agent Skill that roasts AI-hype delusions - then shows the way out.",
+      "signals": {
+        "stars": 48,
+        "license": null,
+        "forks": 4,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/zack-the-worker/fomo-cc",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "openwar3ai",
+      "name": "OpenWar3AI",
+      "url": "https://github.com/OPENXXAI/OpenWar3AI",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "为 AI 打造的《魔兽争霸 III》1.27 开放接口：用任何语言写 AI · An open API for Warcraft III 1.27, built for AI agents — write bots in any language",
+      "signals": {
+        "stars": 48,
+        "license": "Apache-2.0",
+        "forks": 12,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/OPENXXAI/OpenWar3AI",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "ai-chatroom",
+      "name": "ai-chatroom",
+      "url": "https://github.com/Moris-kr/ai-chatroom",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A web group chat where Claude, ChatGPT, Grok and Gemini hang out and talk on their own, powered by your logged-in CLIs (no API keys). English / 한국어 / 日本語",
+      "signals": {
+        "stars": 48,
+        "license": "MIT",
+        "forks": 8,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Moris-kr/ai-chatroom",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "ai-agent-for-pc",
+      "name": "ai-agent-for-pc",
+      "url": "https://github.com/VoltEmperorChaos/ai-agent-for-pc",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A simple Windows AI agent that runs locally with a single .exe file. No command line or complex setup required.",
+      "signals": {
+        "stars": 46,
+        "license": null,
+        "forks": 22,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/VoltEmperorChaos/ai-agent-for-pc",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "physicalcoding",
+      "name": "PhysicalCoding",
+      "url": "https://github.com/HexaFuture/PhysicalCoding",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Self-Evolving Coding Agents for Physical World",
+      "signals": {
+        "stars": 46,
+        "license": null,
+        "forks": 3,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/HexaFuture/PhysicalCoding",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "meeting-preparation-agent",
+      "name": "meeting-preparation-agent",
+      "url": "https://github.com/paritalamounika07-design/meeting-preparation-agent",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Our project is a technology-based solution designed to address a real-world problem in a simple and efficient way. It focuses on understanding user needs, improving accessibility, and providing a practical solution through innovation, automation, and an easy-to-use interface. The project aims to cre",
+      "signals": {
+        "stars": 45,
+        "license": null,
+        "forks": 8,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/paritalamounika07-design/meeting-preparation-agent",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "television",
+      "name": "television",
+      "url": "https://github.com/telepath-computer/television",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "The missing GUI for personal agents. Television gives you and your agent a visual space for creating and working with artifacts. ",
+      "signals": {
+        "stars": 44,
+        "license": "NOASSERTION",
+        "forks": 5,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/telepath-computer/television",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "tweetytweets",
+      "name": "tweetytweets",
+      "url": "https://github.com/vedantdhande04/tweetytweets",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Autonomous X/Twitter posting pipeline for your AI agent. No API key, no paid scrapers: researches your niche, writes in your voice, publishes through a real browser, and verifies its own posts.",
+      "signals": {
+        "stars": 44,
+        "license": "MIT",
+        "forks": 8,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/vedantdhande04/tweetytweets",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "authflowmap",
+      "name": "AuthFlowMap",
+      "url": "https://github.com/Jinssi/AuthFlowMap",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Interactive map of OAuth, Conditional Access, Entra Agent ID and MCP authentication flows, step by step",
+      "signals": {
+        "stars": 43,
+        "license": null,
+        "forks": 5,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Jinssi/AuthFlowMap",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "forest",
+      "name": "FOREST",
+      "url": "https://github.com/mikamikasuki/FOREST",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "FOREST is a research agent for long-horizon science, where evidence gets lost, errors compound, and goals drift. It explores ideas, reads literature, forms hypotheses, runs real experiments, analyzes results, revises paths, and builds a full paper—all in an editable graph you can inspect, branch, re",
+      "signals": {
+        "stars": 43,
+        "license": "Apache-2.0",
+        "forks": 3,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/mikamikasuki/FOREST",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "answer-me-with-html",
+      "name": "answer-me-with-html",
+      "url": "https://github.com/QingYunA/answer-me-with-html",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Answer me with HTML — an agent skill that answers hard questions with a one-page HTML you can actually read. 让 AI Agent 用一页 HTML 回答复杂问题。",
+      "signals": {
+        "stars": 41,
+        "license": "MIT",
+        "forks": 6,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/QingYunA/answer-me-with-html",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "blazo",
+      "name": "blazo",
+      "url": "https://github.com/agentblazo/blazo",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Runs, traces, tool calls, LLM calls, errors, latency, tokens, and eventually detection for agents that appear stuck or caught in loops.",
+      "signals": {
+        "stars": 41,
+        "license": null,
+        "forks": 7,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/agentblazo/blazo",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "hello-agent-system",
+      "name": "hello-agent-system",
+      "url": "https://github.com/heaven999b/hello-agent-system",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "platform",
+      "description": "👋 Hello Agent System — learn enterprise AI agent system design by building every production layer from scratch. 17 bilingual lessons (EN/中文) with tested exercises: tools, architectures, reliability, security, evals, distributed execution, cost, RAG, release ops. 企业级 Agent 系统设计训练营",
+      "signals": {
+        "stars": 41,
+        "license": "MIT",
+        "forks": 1,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/heaven999b/hello-agent-system",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "hk-traffic-intelligence",
+      "name": "hk-traffic-intelligence",
+      "url": "https://github.com/keithligh/hk-traffic-intelligence",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "A live Hong Kong smart-city dashboard on public APIs. Harbour crossing minutes, strategic-road speed, street cameras, works, incidents, eight land control points, and Observatory warnings, drawn as one map. Traditional Chinese and English. Made in 24 hours with Cursor and Grok 4.7, for Agentic Engin",
+      "signals": {
+        "stars": 40,
+        "license": "MIT",
+        "forks": 8,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/keithligh/hk-traffic-intelligence",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "agentic-dev-kit",
+      "name": "agentic-dev-kit",
+      "url": "https://github.com/ARYANK-08/agentic-dev-kit",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Markdown skills to improve the SDLC with Claude Code",
+      "signals": {
+        "stars": 37,
+        "license": null,
+        "forks": 3,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/ARYANK-08/agentic-dev-kit",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "谷歌gemini-4突然发布-rsi加持-gpt和opus都让让",
+      "name": "谷歌Gemini 4突然发布！RSI加持，GPT和Opus都让让",
+      "url": "https://www.qbitai.com/2026/10/499663.html",
+      "source": "rss",
+      "score": 38,
+      "date": "Thu, 01",
+      "regionHint": "china",
+      "description": "",
+      "signals": {},
+      "suggestedSources": [
+        {
+          "title": "量子位 报道",
+          "url": "https://www.qbitai.com/2026/10/499663.html",
+          "type": "media",
+          "date": "Thu, 01"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    },
+    {
+      "slug": "the-latest-ai-news-we-announced-in-september-2026",
+      "name": "The latest AI news we announced in September 2026",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/",
+      "source": "rss",
+      "score": 38,
+      "date": "Fri, 02",
+      "regionHint": "overseas",
+      "description": "&lt;img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/September_AI_Recap_hero.max-600x600.format-webp.webp\"&gt;Here are Google’s latest AI updates from September 2026",
+      "signals": {},
+      "suggestedSources": [
+        {
+          "title": "Google AI 报道",
+          "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/",
+          "type": "media",
+          "date": "Fri, 02"
+        }
+      ],
+      "discoveredAt": "2026-10-03",
+      "decided": false
+    }
+  ],
+  "generatedAt": "2026-10-03"
+}

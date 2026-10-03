@@ -2,8 +2,43 @@ import agentsData from '../data/agents.json'
 import metaData from '../data/meta.json'
 import type { Agent, Meta, Tier, Status, Confidence } from '../types'
 
-export const agents = agentsData as Agent[]
-export const meta = (metaData as Meta).meta
+/*
+ * 为什么不直接 `as Agent[]`：
+ * 类型断言对 JSON 里的数据没有任何校验力，agents.json 一旦被写坏
+ * （尤其是 tier/status 写出枚举外的值），编译照过，运行时才炸——
+ * FilterPanel 渲染 meta.tiers[t].label 时抛 TypeError，整页白屏。
+ * 数据源是「人工维护 + 每日自动更新」的混合体，这类问题迟早会发生。
+ *
+ * 完整校验在 scripts/lib/schema.mjs（npm run validate，构建前自动跑）。
+ * 这里只做一次运行时断言兜底：结构明显不对就直接抛错，
+ * 把问题从「线上白屏」提前到「dev 立即失败」。
+ */
+const RAW_TIERS = ['infrastructure', 'coding', 'productivity', 'platform', 'vertical'] as const
+const RAW_STATUSES = ['active', 'preview', 'maintenance', 'acquired', 'discontinued'] as const
+
+function validateAtRuntime(list: unknown): Agent[] {
+  if (!Array.isArray(list) || list.length === 0) {
+    throw new Error('agents.json 根节点必须是非空数组')
+  }
+  // 只抽查第一条：全量校验交给 npm run validate，这里只求「快速失败」
+  const first = list[0] as Partial<Agent>
+  for (const [field, dict] of [
+    ['tier', RAW_TIERS],
+    ['status', RAW_STATUSES],
+  ] as const) {
+    const v = first[field]
+    if (typeof v !== 'string' || !(dict as readonly string[]).includes(v)) {
+      throw new Error(
+        `agents.json 数据非法：第 1 条的 ${field} = ${JSON.stringify(v)}，不在允许范围内。[${dict.join(', ')}]。` +
+          `请运行 npm run validate 查看全部问题`
+      )
+    }
+  }
+  return list as Agent[]
+}
+
+export const agents: Agent[] = validateAtRuntime(agentsData)
+export const meta: Meta['meta'] = (metaData as Meta).meta
 
 export const TIER_ORDER: Tier[] = [
   'infrastructure',

@@ -7,9 +7,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run validate && tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate": "node scripts/lib/schema.mjs --check src/data/agents.json",
+    "fetch": "node scripts/fetch.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
