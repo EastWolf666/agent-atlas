@@ -4498,7 +4498,7 @@
         }
       ],
       "discoveredAt": "2026-10-03",
-      "decided": false
+      "decided": true
     },
     {
       "slug": "maskit",
@@ -4523,7 +4523,7 @@
         }
       ],
       "discoveredAt": "2026-10-03",
-      "decided": false
+      "decided": true
     },
     {
       "slug": "ai-model-world",
@@ -4573,7 +4573,7 @@
         }
       ],
       "discoveredAt": "2026-10-03",
-      "decided": false
+      "decided": true
     },
     {
       "slug": "cida",
@@ -4998,7 +4998,7 @@
         }
       ],
       "discoveredAt": "2026-10-03",
-      "decided": false
+      "decided": true
     },
     {
       "slug": "solidworks",
@@ -5373,7 +5373,7 @@
         }
       ],
       "discoveredAt": "2026-10-03",
-      "decided": false
+      "decided": true
     },
     {
       "slug": "growth-engineer",

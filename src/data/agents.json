@@ -326,6 +326,166 @@
     }
   },
   {
+    "id": "maskit",
+    "name": "Maskit / 数据面具",
+    "vendor": "xiaYuTian11（个人开发者）",
+    "region": "china",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 1,
+    "autonomyReason": "本质是一个本地反向代理网关：拦截发往大模型的请求，按规则对敏感字段脱敏（打码），响应回来时再流式还原。每个请求是一进一出的单次转换，没有任务拆解、没有多步规划、没有自我验证，故判 L1。其价值在「管道」而非「智能」——把任意支持自定义 Base URL 的工具（Cursor / Claude Code / Codex / Pi）接进来都能生效，是协议层/网关层组件，归基础设施。",
+    "tagline": "为大模型打造的本地隐私脱敏网关",
+    "description": "数据面具 Data Maskit 是专为大模型场景设计的本地隐私脱敏网关。它以反向代理形式部署在本地，拦截发往大模型 API 的请求，对身份证号、手机号、邮箱、密钥等敏感字段自动打码，待响应返回后再将脱敏结果流式还原为明文。支持 Cursor、Claude Code、Codex、Pi 等任何可配置 Base URL 的工具接驳。全程本地运行，敏感数据不必离开内网即可使用云端大模型能力。局限：脱敏粒度依赖规则与正则，对结构化程度低的自由文本召回有限；网关本身不审核「该不该发」，只负责「发出去前遮住」；需自行维护规则库以适配业务字段。",
+    "highlights": [
+      "本地反向代理，请求自动打码、响应流式还原",
+      "支持任意可配 Base URL 的工具（Cursor/Claude Code/Codex/Pi）",
+      "敏感数据不离内网即可调用云端大模型",
+      "AGPL-3.0 开源"
+    ],
+    "limitations": [
+      "脱敏依赖正则与规则，自由文本召回有限",
+      "只负责打码，不判断「该不该发」",
+      "规则库需自行维护以适配业务字段"
+    ],
+    "bestFor": "调用云端大模型但不允许敏感数据出内网的团队与个人",
+    "deployment": [
+      "private",
+      "cli",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "AGPL-3.0 开源自托管免费；个人项目，无商业支持（口径 2026-10）",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 4,
+    "officialUrl": "https://github.com/xiaYuTian11/maskit",
+    "sources": [
+      {
+        "title": "Maskit GitHub 仓库",
+        "url": "https://github.com/xiaYuTian11/maskit",
+        "type": "official",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/xiaYuTian11/maskit",
+    "metrics": {
+      "stars": 291,
+      "license": "AGPL-3.0"
+    }
+  },
+  {
+    "id": "omnistudio",
+    "name": "OmniStudio",
+    "vendor": "kunpengtalk（鲲鹏生态团队）",
+    "region": "china",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "它是一个本地大模型一体化桌面工作台：把模型市集下载、llama.cpp/vLLM/SGLang 三引擎推理管理，以及对话/语音合成/ASR/图片生成/视频生成/OCR 八大应用集成在一个 GUI 里。这些能力是「可独立调用的多个固定模块」，用户点哪个跑哪个，路径由人决定，不是 Agent 自主规划串联，故判 L2 而非 L3。归基础设施：核心定位是「本地模型运行 + 多引擎调度」这一底座层，8 类应用是在底座上挂载的工具集，与 Ollama、RAGFlow 等本地推理底座同类。",
+    "tagline": "本地大模型一体化桌面工作台，三引擎推理 + 八类应用",
+    "description": "OmniStudio 是一个本地大模型一体化桌面工作台，主打「全程本地优先」。它集成了模型市集（一键下载各类开源模型）、llama.cpp/vLLM/SGLang 三引擎推理管理，以及对话、语音合成、ASR 语音识别、图片生成、视频生成、OCR 等多种大模型应用于一体。用户可在同一界面内下载模型、切换推理后端、调用不同模态的生成能力，适合对数据隐私敏感、希望完全离线运行的场景。局限：定位是「集成工作台」而非「自主 Agent」，各应用模块由用户手动触发，缺乏任务级编排；推理性能受本地硬件（显存、内存）约束明显；生态与社区规模相比 Ollama/ComfyUI 等仍小。",
+    "highlights": [
+      "模型市集一键下载，llama.cpp/vLLM/SGLang 三引擎统一调度",
+      "对话/语音/图像/视频/OCR 八类应用一体",
+      "全程本地优先，数据不出本机",
+      "MIT 开源"
+    ],
+    "limitations": [
+      "各模块由用户手动触发，无任务级自主编排",
+      "推理性能受本地硬件显存与内存约束",
+      "社区规模相比 Ollama/ComfyUI 仍小"
+    ],
+    "bestFor": "希望离线、本地私有化运行多模态大模型的个人与中小团队",
+    "deployment": [
+      "app",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "MIT 开源自托管免费；个人/小团队项目（口径 2026-10）",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": true,
+    "prominence": 4,
+    "officialUrl": "https://github.com/kunpengtalk/OmniStudio",
+    "sources": [
+      {
+        "title": "OmniStudio GitHub 仓库",
+        "url": "https://github.com/kunpengtalk/OmniStudio",
+        "type": "official",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/kunpengtalk/OmniStudio",
+    "metrics": {
+      "stars": 186,
+      "license": "MIT"
+    }
+  },
+  {
+    "id": "agents-universe",
+    "name": "Agents Universe",
+    "vendor": "agents-universe（开源社区）",
+    "region": "china",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "定位为「能真正干活的数字分身」协作平台：多个共享智能体共享同一项目上下文，成员一起协同，且智能体会主动从资料/工作中抽象、总结经验并沉淀回项目上下文。这超过 L3 的「动态规划」——描述的是跨 Agent 的上下文共享与经验沉淀闭环，有明确的自我改进循环（把工作抽象成经验、下次复用），达 L4 长程自治 + 自检。判不到 L5：定义里 L5 要求「能观察到子任务的并行派发与跨 Agent 的结果交接」，而项目文档只说「共享上下文 + 经验沉淀」，没有披露子任务并行调度或 Agent 间结果合并协议的证据。归基础设施：它是构建与管理多 Agent 协作系统的框架/平台，与 LangGraph、CrewAI 同类。",
+    "tagline": "数字分身协作平台，共享项目上下文并沉淀经验",
+    "description": "Agents Universe 不是问答机器人，而是「能真正干活的数字分身」协作平台。它提供共享智能体，让项目所有成员与多个 Agent 共享同一项目上下文协同工作；更重要的是，智能体会像人一样从资料或工作中抽象、总结经验，并把这些经验沉淀回项目上下文中供后续复用。它试图把「Agent 协作」从单次对话升级为带记忆与经验积累的长期协作系统。局限：项目较新、star 量中等，文档与实战案例偏少；「经验沉淀」的自动化程度依赖其抽取机制，效果需实测；作为开源框架，生产级稳定性与企业治理能力尚未经过大规模验证。",
+    "highlights": [
+      "数字分身式多 Agent 共享同一项目上下文",
+      "智能体主动抽象经验并沉淀回上下文复用",
+      "强调长期协作而非单次问答",
+      "Apache-2.0 开源"
+    ],
+    "limitations": [
+      "项目较新，文档与实战案例偏少",
+      "经验沉淀自动化效果待实测",
+      "生产级稳定性与企业治理未大规模验证"
+    ],
+    "bestFor": "想搭建带记忆与经验积累的多 Agent 协作系统的团队",
+    "deployment": [
+      "private",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "Apache-2.0 开源自托管免费（口径 2026-10）",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 5,
+    "officialUrl": "https://github.com/agents-universe/agents-universe",
+    "sources": [
+      {
+        "title": "Agents Universe GitHub 仓库",
+        "url": "https://github.com/agents-universe/agents-universe",
+        "type": "official",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/agents-universe/agents-universe",
+    "metrics": {
+      "stars": 419,
+      "license": "Apache-2.0"
+    }
+  },
+  {
     "id": "trae",
     "name": "Trae",
     "vendor": "字节跳动",
@@ -1962,6 +2122,58 @@
     "lastVerified": "2026-10"
   },
   {
+    "id": "gongwen-gbt9704-skill",
+    "name": "公文 GB/T 9704 排版 Skill",
+    "vendor": "mizzlelover（个人开发者）",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "它是一个按国家标准 GB/T 9704-2012 生成公文的排版 Skill：输入内容后按固定版式规则输出可编辑 DOCX。流程由预设的版式模板驱动，换一份公文仍走同一条排版路径，没有自主拆解或动态规划，故判 L2。归办公生产力：产出是「符合国标的公文文档」这一成果物，与 WPS 灵犀、Kimi 文档同类但更窄、更专。",
+    "tagline": "按国标 GB/T 9704-2012 生成可编辑 DOCX 公文",
+    "description": "gongwen-gbt9704-skill 是一个中文公文排版 Skill，严格按国家标准 GB/T 9704-2012 的公文格式要求，将用户输入的内容生成可编辑的 DOCX 文档，而不是截图或纯文本。配套另有 CEB 格式支持仓库。项目强调信息安全：提醒用户不要上传企业禁止对外公开的文件，并建议在本地或企业内网部署大模型后使用。局限：定位是排版工具而非写作助手，不负责公文内容生成质量；版式严格遵循 2012 版国标，与部分单位自定义版式可能需微调；本质是一个 Skill/提示词工程产物，依赖宿主大模型能力。",
+    "highlights": [
+      "严格按 GB/T 9704-2012 国标生成可编辑 DOCX",
+      "产出是真格式文档而非截图或纯文本",
+      "强调本地/内网部署与信息安全",
+      "MIT 开源，star 与 forks 较高"
+    ],
+    "limitations": [
+      "只负责排版不负责内容质量",
+      "严格遵循 2012 版国标，自定义版式需微调",
+      "本质是 Skill 产物，依赖宿主模型能力"
+    ],
+    "bestFor": "需要批量、规范生成党政机关/企事业单位公文的用户",
+    "deployment": [
+      "private",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "MIT 开源自托管免费（口径 2026-10）",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 5,
+    "officialUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
+    "sources": [
+      {
+        "title": "gongwen-gbt9704-skill GitHub 仓库",
+        "url": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
+        "type": "official",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
+    "metrics": {
+      "stars": 744,
+      "license": "MIT"
+    }
+  },
+  {
     "id": "tencent-adp",
     "name": "Tencent Cloud ADP",
     "nameZh": "腾讯云智能体开发平台",
@@ -3009,6 +3221,58 @@
     ],
     "dataConfidence": "medium",
     "lastVerified": "2026-10"
+  },
+  {
+    "id": "bid-agent-vscode",
+    "name": "电力标书解析 Agent",
+    "vendor": "fanfanyuyang（个人开发者）",
+    "region": "china",
+    "tier": "vertical",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "它针对电力行业招投标文档，设计了「七步工作流 + 文档处理台账」：多格式上传、设备参数自动抽取、证据审查、人工核验闭环。它能在不同输入下动态决定抽取与审查的步骤顺序（不同标书结构不同，路径随之变化），满足 L3 动态规划；但工作流本身是设计者预设的七步框架，Agent 在框架内灵活但不在框架外自创，未体现出 L4 的长程自我验证循环，故判 L3。归垂直行业：单一行业（电力招投标）深度应用，准确性优先。",
+    "tagline": "电力标书智能解析 Agent，七步工作流 + 文档台账",
+    "description": "bid-agent-vscode 是一个面向电力行业招投标文档的智能解析 Agent，以 VS Code 插件形态提供。它采用七步工作流加文档处理台账：支持多格式文件上传、自动抽取设备参数、进行证据审查，并提供人工核验闭环。可热切换 DeepSeek 与本地图形化模型以平衡成本与隐私。局限：垂直在电力招投标这一细分场景，跨行业泛化能力有限；工作流步骤由设计者固化，Agent 在框架内灵活但不在框架外自创；作为个人项目 star 量不高，工程成熟度与长期维护需观察。",
+    "highlights": [
+      "面向电力招投标的七步解析工作流",
+      "多格式上传、设备参数自动抽取、证据审查",
+      "人工核验闭环 + 文档处理台账",
+      "可热切换 DeepSeek 与本地模型平衡成本/隐私"
+    ],
+    "limitations": [
+      "垂直电力招投标，跨行业泛化有限",
+      "工作流步骤固化，Agent 框架内灵活",
+      "个人项目，工程成熟度待观察"
+    ],
+    "bestFor": "需要把电力标书结构化、提取设备参数并做合规审查的投标团队",
+    "deployment": [
+      "ide",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "开源项目，仓库未声明具体许可；免费使用（口径 2026-10）",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 3,
+    "officialUrl": "https://github.com/fanfanyuyang/bid-agent-vscode",
+    "sources": [
+      {
+        "title": "bid-agent-vscode GitHub 仓库",
+        "url": "https://github.com/fanfanyuyang/bid-agent-vscode",
+        "type": "official",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/fanfanyuyang/bid-agent-vscode",
+    "metrics": {
+      "stars": 134,
+      "license": null
+    }
   },
   {
     "id": "mcp",
