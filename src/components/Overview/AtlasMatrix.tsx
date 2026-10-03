@@ -57,18 +57,23 @@ const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(mi
 export function AtlasMatrix({ agents, onSelect }: Props) {
   const [colorByForm, setColorByForm] = useState(false)
   const [hover, setHover] = useState<string | null>(null)
-  // 缩放 / 平移状态：k=缩放比，x/y=平移（屏幕 px）
-  const [viewT, setViewT] = useState({ k: 1, x: 0, y: 0 })
+  /**
+   * 视口状态（内容坐标系）：k=缩放比，vx/vy=可视窗口左上角的内容坐标。
+   * 用 SVG viewBox 实现缩放而非 CSS transform——transform 会把 SVG 栅格化成
+   * 位图再拉伸，放大后文字发虚；viewBox 每帧重新矢量渲染，文字始终锐利。
+   */
+  const [viewT, setViewT] = useState({ k: 1, vx: 0, vy: 0 })
   const viewTRef = useRef(viewT)
   viewTRef.current = viewT
   const vpRef = useRef<HTMLDivElement>(null)
+  const svgRef = useRef<SVGSVGElement>(null)
   const pointers = useRef(new Map<number, { x: number; y: number }>())
   const g = useRef({
     mode: 'none' as 'none' | 'pan' | 'pinch',
     sx: 0,
     sy: 0,
-    tx0: 0,
-    ty0: 0,
+    vx0: 0,
+    vy0: 0,
     dist: 1,
     k0: 1,
     mx: 0,
@@ -254,18 +259,30 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
   const scaleK = Math.sqrt(viewT.k)
   const ink = (v: number) => v / scaleK
 
-  // ——— 缩放 / 平移交互 ———
+  // ——— 缩放 / 平移交互（viewBox 窗口） ———
+  /** 当前 SVG 在屏幕上的渲染宽度，用于把屏幕坐标 ↔ 内容坐标互换 */
+  const renderScale = () => {
+    const w = svgRef.current?.getBoundingClientRect().width ?? 0
+    return w > 0 ? w / W : 1
+  }
+
+  /** 以视口内某点（屏幕 px，相对 vp）为锚缩放，保持该点下的内容不动 */
   const zoomAbout = (fx: number, fy: number, newK: number) => {
     const cur = viewTRef.current
     const k = clamp(newK, 1, MAXZ)
-    const ratio = k / cur.k
-    let x = fx - (fx - cur.x) * ratio
-    let y = fy - (fy - cur.y) * ratio
     if (k <= 1.001) {
-      x = 0
-      y = 0
+      const reset = { k: 1, vx: 0, vy: 0 }
+      viewTRef.current = reset
+      setViewT(reset)
+      return
     }
-    const next = { k, x, y }
+    const s = renderScale() * cur.k // 每内容单位对应的屏幕 px
+    // 锚点当前对应的内容坐标
+    const cx = cur.vx + fx / s
+    const cy = cur.vy + fy / s
+    // 缩放后仍让该内容点落在同一屏幕位置
+    const ns = renderScale() * k
+    const next = { k, vx: cx - fx / ns, vy: cy - fy / ns }
     viewTRef.current = next
     setViewT(next)
   }
@@ -277,8 +294,9 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
   }
 
   const resetZoom = () => {
-    viewTRef.current = { k: 1, x: 0, y: 0 }
-    setViewT({ k: 1, x: 0, y: 0 })
+    const reset = { k: 1, vx: 0, vy: 0 }
+    viewTRef.current = reset
+    setViewT(reset)
   }
 
   // 滚轮缩放（桌面：Ctrl/⌘ + 滚轮，等价于触控板捏合）；用原生非 passive 监听确保可 preventDefault
@@ -302,8 +320,8 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
       g.current.mode = viewT.k > 1 ? 'pan' : 'none'
       g.current.sx = e.clientX
       g.current.sy = e.clientY
-      g.current.tx0 = viewT.x
-      g.current.ty0 = viewT.y
+      g.current.vx0 = viewT.vx
+      g.current.vy0 = viewT.vy
       g.current.moved = false
       g.current.t0 = Date.now()
     } else if (pointers.current.size === 2) {
@@ -311,8 +329,8 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
       g.current.mode = 'pinch'
       g.current.dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1
       g.current.k0 = viewT.k
-      g.current.tx0 = viewT.x
-      g.current.ty0 = viewT.y
+      g.current.vx0 = viewT.vx
+      g.current.vy0 = viewT.vy
       g.current.mx = (pts[0].x + pts[1].x) / 2 - r.left
       g.current.my = (pts[0].y + pts[1].y) / 2 - r.top
     }
@@ -325,19 +343,27 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
       const dx = e.clientX - g.current.sx
       const dy = e.clientY - g.current.sy
       if (Math.abs(dx) + Math.abs(dy) > 4) g.current.moved = true
-      setViewT({ k: viewT.k, x: g.current.tx0 + dx, y: g.current.ty0 + dy })
+      // 手指位移换算成内容坐标位移（方向相反）
+      const s = renderScale() * viewT.k
+      const next = { k: viewT.k, vx: g.current.vx0 - dx / s, vy: g.current.vy0 - dy / s }
+      viewTRef.current = next
+      setViewT(next)
     } else if (g.current.mode === 'pinch' && pointers.current.size >= 2) {
       const pts = [...pointers.current.values()]
       const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)
       const newK = clamp(g.current.k0 * (dist / g.current.dist), 1, MAXZ)
-      const ratio = newK / g.current.k0
-      let x = g.current.mx - (g.current.mx - g.current.tx0) * ratio
-      let y = g.current.my - (g.current.my - g.current.ty0) * ratio
       if (newK <= 1.001) {
-        x = 0
-        y = 0
+        const reset = { k: 1, vx: 0, vy: 0 }
+        viewTRef.current = reset
+        setViewT(reset)
+        return
       }
-      const next = { k: newK, x, y }
+      // 捏合中点下的内容坐标保持不动
+      const s0 = renderScale() * g.current.k0
+      const cx = g.current.vx0 + g.current.mx / s0
+      const cy = g.current.vy0 + g.current.my / s0
+      const ns = renderScale() * newK
+      const next = { k: newK, vx: cx - g.current.mx / ns, vy: cy - g.current.my / ns }
       viewTRef.current = next
       setViewT(next)
     }
@@ -363,8 +389,8 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
       const rem = [...pointers.current.values()][0]
       g.current.sx = rem.x
       g.current.sy = rem.y
-      g.current.tx0 = viewT.x
-      g.current.ty0 = viewT.y
+      g.current.vx0 = viewT.vx
+      g.current.vy0 = viewT.vy
       g.current.moved = true
     }
   }
@@ -430,14 +456,13 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
       >
-        <div
-          style={{
-            transform: `translate(${viewT.x}px, ${viewT.y}px) scale(${viewT.k})`,
-            transformOrigin: '0 0',
-            willChange: 'transform',
-          }}
+        <svg
+          ref={svgRef}
+          viewBox={`${viewT.vx} ${viewT.vy} ${W / viewT.k} ${H / viewT.k}`}
+          className="block w-full select-none"
+          role="img"
+          aria-label="Agent 能力与领域分布图谱"
         >
-          <svg viewBox={`0 0 ${W} ${H}`} className="block w-full select-none" role="img" aria-label="Agent 能力与领域分布图谱">
             {/* 网格与坐标轴 */}
             {TIER_ORDER.map((t, i) => (
               <g key={t}>
@@ -620,7 +645,6 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
               )
             })}
           </svg>
-        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-edge px-4 py-2.5">
