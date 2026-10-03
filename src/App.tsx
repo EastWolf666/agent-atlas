@@ -70,7 +70,12 @@ export default function App() {
   }, [detailId, showCompare])
 
   const openDetail = (id: string) => setDetailId(id)
-  const goBrowse = () => setView('browse')
+  // 切到浏览页时把窗口滚到最顶部：从概览（通常已下滚）点统计框/分类跳转过来时，
+  // 不归零会停在浏览页的中/底部，用户看不清当前筛选进了哪些数据
+  const goBrowse = () => {
+    setView('browse')
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }
 
   /*
    * 概览页统计框点击：跳到浏览页，并只勾上对应那一个筛选条件。
@@ -95,6 +100,7 @@ export default function App() {
         break
     }
     setView('browse')
+    window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
   /*
@@ -104,6 +110,7 @@ export default function App() {
     atlas.reset()
     atlas.toggleTier(tier)
     setView('browse')
+    window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
   return (
