@@ -14,7 +14,7 @@ interface Props {
   onSelect: (id: string) => void
 }
 
-const MAXZ = 5
+const MAXZ = 8
 
 /**
  * 同格内多个产品时的散布偏移。
@@ -240,6 +240,15 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
     return out
   }, [placed, iw, axisXOf])
 
+  /**
+   * 语义缩放：坐标系整体随 k 放大（气泡间距被拉开），
+   * 但「墨迹」——气泡半径、笔画粗细、字号——只按 √k 放大。
+   * 这样放大后，原本重叠挤在一起的气泡会因为间距增长更快而散开，
+   * 同时文字依旧清晰可读，不会被拉糊。
+   */
+  const scaleK = Math.sqrt(viewT.k)
+  const ink = (v: number) => v / scaleK
+
   // ——— 缩放 / 平移交互 ———
   const zoomAbout = (fx: number, fy: number, newK: number) => {
     const cur = viewTRef.current
@@ -434,7 +443,7 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                   y2={yMidOf(i)}
                   stroke="currentColor"
                   className="text-edge"
-                  strokeWidth={1}
+                  strokeWidth={ink(1)}
                   strokeDasharray={i === 0 ? undefined : '3 4'}
                 />
                 <text
@@ -442,7 +451,8 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                   y={yMidOf(i)}
                   textAnchor="end"
                   dominantBaseline="middle"
-                  className="fill-muted text-[11px]"
+                  className="fill-muted"
+                  style={{ fontSize: ink(11) }}
                 >
                   {meta.tiers[t].label}
                 </text>
@@ -458,14 +468,15 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                   y2={M.top + ih}
                   stroke="currentColor"
                   className="text-edge"
-                  strokeWidth={1}
+                  strokeWidth={ink(1)}
                   strokeDasharray="3 4"
                 />
                 <text
                   x={axisXOf.get(l)}
                   y={M.top - 14}
                   textAnchor="middle"
-                  className="fill-muted text-[10px]"
+                  className="fill-muted"
+                  style={{ fontSize: ink(10) }}
                 >
                   {meta.autonomyLevels[String(l)].name}
                 </text>
@@ -473,7 +484,8 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                   x={axisXOf.get(l)}
                   y={M.top - 3}
                   textAnchor="middle"
-                  className="fill-ink text-[12px] font-semibold"
+                  className="fill-ink font-semibold"
+                  style={{ fontSize: ink(12) }}
                 >
                   L{l}
                 </text>
@@ -483,37 +495,43 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
             {/* 悬浮提示层 */}
             {hovered && (() => {
               const p = placed.find((x) => x.a.id === hovered.id)!
-              const boxW = 210
-              const flip = p.cx > W - boxW - 40
+              const boxW = 210 / scaleK
+              const pad = 10 / scaleK
+              const boxH = 58 / scaleK
+              const flip = p.cx > W - boxW - 40 / scaleK
+              const by = Math.max(4 / scaleK, p.cy - 46 / scaleK)
               return (
                 <g pointerEvents="none">
                   <rect
-                    x={flip ? p.cx - boxW - 12 : p.cx + 12}
-                    y={Math.max(4, p.cy - 46)}
+                    x={flip ? p.cx - boxW - pad : p.cx + pad}
+                    y={by}
                     width={boxW}
-                    height={58}
-                    rx={8}
+                    height={boxH}
+                    rx={ink(8)}
                     className="fill-panel stroke-edge"
-                    strokeWidth={1}
+                    strokeWidth={ink(1)}
                   />
                   <text
-                    x={flip ? p.cx - boxW - 2 : p.cx + 22}
-                    y={Math.max(4, p.cy - 46) + 21}
-                    className="fill-ink text-[12px] font-semibold"
+                    x={flip ? p.cx - boxW - pad / 2 : p.cx + pad + pad / 2}
+                    y={by + 21 / scaleK}
+                    className="fill-ink font-semibold"
+                    style={{ fontSize: ink(12) }}
                   >
                     {hovered.name}
                   </text>
                   <text
-                    x={flip ? p.cx - boxW - 2 : p.cx + 22}
-                    y={Math.max(4, p.cy - 46) + 37}
-                    className="fill-muted text-[10px]"
+                    x={flip ? p.cx - boxW - pad / 2 : p.cx + pad + pad / 2}
+                    y={by + 37 / scaleK}
+                    className="fill-muted"
+                    style={{ fontSize: ink(10) }}
                   >
                     {hovered.vendor} · L{hovered.autonomyLevel}
                   </text>
                   <text
-                    x={flip ? p.cx - boxW - 2 : p.cx + 22}
-                    y={Math.max(4, p.cy - 46) + 50}
-                    className="fill-faint text-[10px]"
+                    x={flip ? p.cx - boxW - pad / 2 : p.cx + pad + pad / 2}
+                    y={by + 50 / scaleK}
+                    className="fill-faint"
+                    style={{ fontSize: ink(10) }}
                   >
                     {hovered.tagline}
                   </text>
@@ -532,11 +550,11 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                     data-id={a.id}
                     cx={cx}
                     cy={cy}
-                    r={r}
+                    r={ink(r)}
                     fill={colorOf(a)}
                     fillOpacity={dim ? 0.18 : 0.3}
                     stroke={colorOf(a)}
-                    strokeWidth={hover === a.id ? 2 : 1.2}
+                    strokeWidth={hover === a.id ? ink(2) : ink(1.2)}
                     strokeOpacity={dim ? 0.25 : 0.85}
                     className="cursor-pointer transition-opacity"
                     onMouseEnter={() => setHover(a.id)}
@@ -558,7 +576,7 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                       y2={leader.y2}
                       className="text-faint"
                       stroke="currentColor"
-                      strokeWidth={0.8}
+                      strokeWidth={ink(0.8)}
                       strokeOpacity={dim ? 0.12 : 0.6}
                     />
                   )}
@@ -566,12 +584,13 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                     x={x}
                     y={y}
                     textAnchor={anchor}
-                    className="fill-ink text-[9px] font-medium"
+                    className="fill-ink font-medium"
                     opacity={dim ? 0.18 : 0.95}
                     style={{
+                      fontSize: ink(9),
                       paintOrder: 'stroke',
                       stroke: '#fff',
-                      strokeWidth: 2.6,
+                      strokeWidth: ink(2.6),
                       strokeOpacity: 0.8,
                     }}
                   >
