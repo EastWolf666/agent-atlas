@@ -2666,31 +2666,6 @@
       ],
       "discoveredAt": "2026-10-03",
       "decided": false
-    },
-    {
-      "slug": "offrun-manage-every-coding-agent-from-one-workspace",
-      "name": "Offrun – manage every coding agent from one workspace",
-      "url": "https://offrun.dev/",
-      "source": "hn",
-      "score": 35,
-      "date": "2026-10",
-      "regionHint": "overseas",
-      "tierHint": "coding",
-      "description": "",
-      "signals": {
-        "hnPoints": 1,
-        "hnComments": 0
-      },
-      "suggestedSources": [
-        {
-          "title": "hn 报道",
-          "url": "https://offrun.dev/",
-          "type": "media",
-          "date": "2026-10"
-        }
-      ],
-      "discoveredAt": "2026-10-03",
-      "decided": false
     }
   ],
   "generatedAt": "2026-10-03"

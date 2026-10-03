@@ -151,7 +151,42 @@ async function main() {
   const knownIds = new Set(agents.map((a) => a.id))
   const knownUrls = new Set(agents.map((a) => a.officialUrl))
 
+  /*
+   * 地区比例守卫
+   * ----------------
+   * 项目定位已调整为「国内为主」：正式数据中国内 48 / 海外 32 ≈ 6:4。
+   *
+   * 但现有抓取源（HN Show HN、GitHub trending、英文 RSS）天然偏海外，
+   * 每天灌进来的候选会持续把候选池推向海外。若不做干预，
+   * 人工消费候选时会不断优先看到海外产品，比例会慢慢被侵蚀回50:50。
+   *
+   * 处理方式：给候选池设置 TARGET_CN_RATIO 的软上限。
+   * 国内候选达到水位线后，仍低于水位线的海外候选不再入池，
+   * 而国内候选永远优先入池——即使当下比例已经超标。
+   *
+   * 已知限制（不要假装这个守卫能解决它）：
+   * 国内可用的一手 RSS 源在沙箱与 CI 环境下都极不稳定——
+   *   机器之心 rss、36氪 feed   → HTTP 200 但 0 items（空壳）
+   *   量子位 feed               → 需带 User-Agent，否则返回空 body
+   *   IT之家 rss                → 可用（60 items），但综合科技新闻，
+   *                               前25 条里仅 2 条与AI 相关，噪声比过高，
+   *                               接入会污染候选池
+   * 所以「国内为主」目前只能靠人工补充 + 守卫防止比例回退，
+   * 不能靠自动抓取解决。守卫的价值是「守住下限」，不是「拉高上限」。
+   */
+  const TARGET_CN_RATIO = 0.6
+  const pool = existingCandidates.candidates
+  const cnInPool = pool.filter((c) => c.regionHint === 'china').length
+  const ratioInPool = pool.length === 0 ? 1 : cnInPool / pool.length
+  if (pool.length >= 20 && ratioInPool < TARGET_CN_RATIO - 0.1) {
+    log(
+      `  ⚠️ 候选池国内占比 ${(ratioInPool * 100).toFixed(0)}%（${cnInPool}/${pool.length}），` +
+        `低于目标 ${(TARGET_CN_RATIO * 100).toFixed(0)}%：海外候选照常入池，国内源缺失需人工补充`
+    )
+  }
+
   let added = 0
+  let skippedByRatio = 0
   for (const c of candidates) {
     if (seen.has(c.slugSource)) continue
     // 已在库里的产品（按 id 或官网链接匹配）不再重复入池
@@ -161,6 +196,17 @@ async function main() {
     seen.add(c.slugSource)
 
     const text = `${c.name} ${c.description ?? ''} ${c.title ?? ''}`
+    const region = c.regionHint ?? guessRegion(text)
+
+    // 国内候选无条件优先入池；海外候选在水位线达标后才放行
+    const liveRatio = existingCandidates.candidates.length === 0
+      ? 1
+      : cnInPool / existingCandidates.candidates.length
+    if (region !== 'china' && existingCandidates.candidates.length >= 20 && liveRatio >= TARGET_CN_RATIO) {
+      skippedByRatio++
+      continue
+    }
+
     existingCandidates.candidates.push({
       slug,
       name: c.name,
@@ -168,7 +214,7 @@ async function main() {
       source: c.source,
       score: c.score,
       date: c.date,
-      regionHint: c.regionHint ?? guessRegion(text),
+      regionHint: region,
       tierHint: c.regionHint ? undefined : guessTier(text, c.name),
       description: c.description ?? c.summary ?? '',
       signals: c.signals ?? {},
@@ -182,6 +228,11 @@ async function main() {
   }
   existingCandidates.generatedAt = now.toISOString().slice(0, 10)
   log(`  新增候选 ${added} 条，池内共 ${existingCandidates.candidates.length} 条待处理`)
+  if (skippedByRatio > 0) {
+    log(`  其中 ${skippedByRatio} 条海外候选因国内占比已达目标而未入池（需人工从国内侧补充）`)
+  }
+  const cnNow = existingCandidates.candidates.filter((c) => c.regionHint === 'china').length
+  log(`  候选池地区构成：国内 ${cnNow} / 海外 ${existingCandidates.candidates.length - cnNow}`)
   const pending = existingCandidates.candidates.filter((c) => !c.decided).length
   log(`  其中 ${pending} 条尚未人工处理`)
 
