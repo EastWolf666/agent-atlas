@@ -145,7 +145,29 @@ export function CompareView({ agents, onClose, onRemove, onClear, onBrowse }: Pr
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      // Tab 焦点陷阱，理由同详情面板：模态必须锁住焦点
+      if (e.key !== 'Tab' || !ref.current) return
+      const focusables = ref.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (!focusables.length) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      const active = document.activeElement
+      if (e.shiftKey && (active === first || active === ref.current)) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    const prevFocus = document.activeElement as HTMLElement | null
     document.addEventListener('keydown', onKey)
     ref.current?.focus()
     const prev = document.body.style.overflow
@@ -153,6 +175,7 @@ export function CompareView({ agents, onClose, onRemove, onClear, onBrowse }: Pr
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prev
+      prevFocus?.focus?.()
     }
   }, [onClose])
 

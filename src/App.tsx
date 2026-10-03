@@ -31,15 +31,30 @@ export default function App() {
         target.isContentEditable
       if (e.key === '/' && !typing) {
         e.preventDefault()
+        /*
+         * 关键：详情面板 / 对比视图打开时，必须先关掉浮层。
+         * 否则焦点会落到被遮罩（或全屏 modal）挡住的搜索框上——
+         * DOM 层面 focus() 成功了，用户却什么也看不到，
+         * 表现为「按了 / 没反应」。
+         */
+        if (detailId) setDetailId(null)
+        if (showCompare) setShowCompare(false)
         setView('browse')
+        /*
+         * 双 rAF：等浮层卸载动画走完、搜索框真正挂载后再聚焦。
+         * 单 rAF 在快速开关时可能早于 DOM 提交，focus() 会落空。
+         */
         requestAnimationFrame(() => {
-          document.getElementById('aa-search')?.focus()
+          requestAnimationFrame(() => {
+            const el = document.getElementById('aa-search')
+            if (el) el.focus()
+          })
         })
       }
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [])
+  }, [detailId, showCompare])
 
   const openDetail = (id: string) => setDetailId(id)
   const goBrowse = () => setView('browse')

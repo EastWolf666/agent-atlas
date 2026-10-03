@@ -47,7 +47,31 @@ export function DetailPanel({ agent, onClose, onSelect, onToggleCompare, inCompa
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      // Tab 焦点陷阱：浮层是模态，焦点必须留在内部，
+      // 否则 Tab 会走到被遮罩挡住的背景内容上（键盘用户看不见）。
+      if (e.key !== 'Tab' || !ref.current) return
+      const focusables = ref.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (!focusables.length) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      const active = document.activeElement
+      if (e.shiftKey && (active === first || active === ref.current)) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    // 记住打开前的焦点，关闭后归还——否则焦点掉到 body，键盘用户会丢失位置
+    const prevFocus = document.activeElement as HTMLElement | null
     document.addEventListener('keydown', onKey)
     ref.current?.focus()
     // 锁定背景滚动
@@ -56,6 +80,7 @@ export function DetailPanel({ agent, onClose, onSelect, onToggleCompare, inCompa
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prev
+      prevFocus?.focus?.()
     }
   }, [onClose, agent.id])
 
