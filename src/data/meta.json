@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-10-03",
+    "total": 64,
+    "disclaimer": "本站数据为人工整理的研究快照，Agent 领域迭代极快，使用前请以各产品官方信息为准。每条数据均标注来源与采集时间。",
+    "tiers": {
+      "infrastructure": {
+        "label": "基础设施",
+        "short": "基建",
+        "desc": "模型、编排框架与协议。其他所有类型的 Agent 都建立在这一层之上。",
+        "color": "#8b5cf6"
+      },
+      "coding": {
+        "label": "开发工具",
+        "short": "开发",
+        "desc": "开发者日常使用的编程 Agent。2026 年竞争最激烈、落地最成熟的赛道。",
+        "color": "#3b82f6"
+      },
+      "productivity": {
+        "label": "办公生产力",
+        "short": "办公",
+        "desc": "面向个人与小团队的通用办公 Agent，目标是交付可验收的成果物。",
+        "color": "#06b6d4"
+      },
+      "platform": {
+        "label": "企业平台",
+        "short": "平台",
+        "desc": "组织级部署、治理与分发。解决的不是'能不能做'，而是'如何管住'。",
+        "color": "#f59e0b"
+      },
+      "vertical": {
+        "label": "垂直行业",
+        "short": "垂直",
+        "desc": "单一行业深度应用。准确性与合规性优先于通用能力。",
+        "color": "#ec4899"
+      }
+    },
+    "autonomyLevels": {
+      "1": {
+        "label": "L1",
+        "name": "单次工具调用",
+        "criteria": "单次调用即返回结果，无自主决策环节。",
+        "example": "查询某个 API、格式化一段文本",
+        "benchmark": "统计窗口内的调用次数为 1，或输出不依赖前序步骤的成败"
+      },
+      "2": {
+        "label": "L2",
+        "name": "多步固定流程",
+        "criteria": "可执行多步任务，但流程由人预先编排，执行路径确定。",
+        "example": "固定模板的报告生成、多系统间的数据同步",
+        "benchmark": "存在显式编排的流程图或工作流定义，换一个输入仍走同一条路径"
+      },
+      "3": {
+        "label": "L3",
+        "name": "动态规划",
+        "criteria": "自主拆解目标并动态决定执行步骤，失败会重试或换路径。",
+        "example": "「调研这个主题并整理成表格」——步骤数由任务本身决定",
+        "benchmark": "同一句指令在不同输入下产生的工具调用序列不同"
+      },
+      "4": {
+        "label": "L4",
+        "name": "长程自治 + 自检",
+        "criteria": "可持续运行数十分钟以上的任务，主动检查并修正自己的产出。",
+        "example": "在代码库中跨多个文件实现功能、跑测试、修到通过",
+        "benchmark": "任务时长超过 15 分钟且存在自我验证循环（写完代码后自己跑测试并据结果修改）"
+      },
+      "5": {
+        "label": "L5",
+        "name": "多 Agent 协作",
+        "criteria": "多个 Agent 分工协作，可并行处理子任务并汇总结果。",
+        "example": "研究员 Agent、写作 Agent、审核 Agent 并行组成流水线",
+        "benchmark": "能观察到子任务的并行派发与跨 Agent 的结果交接"
+      }
+    },
+    "statuses": {
+      "active": { "label": "活跃", "desc": "持续维护或迭代中" },
+      "preview": { "label": "预览", "desc": "已发布但尚未正式GA，功能与价格可能变化" },
+      "maintenance": { "label": "维护模式", "desc": "仅修复安全问题，不再新增功能" },
+      "acquired": { "label": "已被并购", "desc": "公司或产品被收购，服务可能延续也可能终止" },
+      "discontinued": { "label": "已停止", "desc": "已明确停止运营或产品线关闭" }
+    },
+    "dataConfidence": {
+      "high": {
+        "label": "有官方来源",
+        "desc": "信息来自产品官网、官方文档或官方公告"
+      },
+      "medium": { "label": "可信二手", "desc": "来自技术媒体、行业分析或实测报告" },
+      "low": { "label": "待核实", "desc": "仅有推测或单一来源，需自行验证" }
+    },
+    "deployments": {
+      "web": { "label": "网页" },
+      "app": { "label": "桌面/移动客户端" },
+      "cli": { "label": "命令行" },
+      "ide": { "label": "IDE 插件" },
+      "api": { "label": "API" },
+      "saas": { "label": "SaaS" },
+      "private": { "label": "私有化部署" }
+    },
+    "pricingModels": {
+      "free": { "label": "完全免费" },
+      "freemium": { "label": "免费增值" },
+      "subscription": { "label": "订阅制" },
+      "usage": { "label": "按量计费" },
+      "open_source": { "label": "开源免费" },
+      "enterprise": { "label": "企业定制" }
+    },
+    "modalities": {
+      "text": { "label": "文本" },
+      "image": { "label": "图像" },
+      "audio": { "label": "音频" },
+      "video": { "label": "视频" },
+      "3d": { "label": "3D" }
+    },
+    "insights": [
+      {
+        "text": "编程赛道是唯一集体挤进 L4 的类别——11 个开发工具中 8 个达到长程自治，「能写代码」本身已不构成差异化。",
+        "basis": "coding 类自主性分布：8/11 为 L4 及以上"
+      },
+      {
+        "text": "全站仅 8% 的产品达到 L5（多Agent 协作），且集中在少数平台与开源框架。多 Agent 目前仍是工程实践，不是成熟商品。",
+        "basis": "L5 条目 5 条 / 总计 64 条"
+      },
+      {
+        "text": "8 个企业平台中 7 个评为 L2——它们的价值在治理、权限与合规，不在自主性。选平台看的是管得住，不是聪明。",
+        "basis": "platform 类自主性分布"
+      },
+      {
+        "text": "两条路径的短板完全不同：海外产品强在能力上限与开源生态，国内产品强在场景贴合与私有化交付。",
+        "basis": "infrastructure 类中国厂商条目以平台方主导，海外由独立开源项目主导"
+      },
+      {
+        "text": "6 条产品已停止、并购或仅在维护。Robin AI 在融资失败后工程团队被 acqui-hire——供应商的生存性本身就是采购指标。",
+        "basis": "status 为 discontinued / acquired / maintenance / preview 的条目"
+      },
+      {
+        "text": "全部 64 条均附来源链接，其中 49 条直接引用厂商官方页面。仅 2 条标注为「待核实」——价格与状态变动极快，采购前仍需回到官方页面确认。",
+        "basis": "dataConfidence 分布：high 29 / medium 33 / low 2"
+      }
+    ]
+  }
+}

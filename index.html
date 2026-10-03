@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Atlas · 全球 AI Agent 应用图谱</title>
+    <meta
+      name="description"
+      content="可筛选、可对比、可探索的全球 AI Agent 应用图谱。覆盖基础设施、开发工具、办公生产力、企业平台、垂直行业五大类，国内外 60+ 智能体产品，标注自主性等级、数据来源与时效。"
+    />
+    <meta name="keywords" content="AI Agent,智能体,Agent 图谱,大模型,AI 应用,Claude Code,Manus,Dify" />
+    <meta property="og:title" content="Agent Atlas · 全球 AI Agent 应用图谱" />
+    <meta
+      property="og:description"
+      content="按能力自主性与应用领域双维度探索全球 AI Agent 落地全景。60+ 产品，标注自主性等级与数据来源。"
+    />
+    <meta property="og:type" content="website" />
+    <script>
+      // 在首屏渲染前应用主题，避免闪白
+      (function () {
+        try {
+          var t = localStorage.getItem('aa-theme')
+          if (!t) {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          document.documentElement.classList.toggle('dark', t === 'dark')
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,3690 @@
+[
+  {
+    "id": "mcp",
+    "name": "Model Context Protocol",
+    "nameZh": "模型上下文协议",
+    "vendor": "Anthropic",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 1,
+    "autonomyReason": "协议本身不做任何决策，它定义的是 Agent 与外部工具之间的通信规范，行为完全由上层 Agent 决定。",
+    "tagline": "让 Agent 用统一方式接入外部工具与数据源",
+    "description": "MCP 是 Anthropic 提出并开源的协议规范，解决的是「Agent 如何标准化地接入外部世界」这个基础问题。在它出现之前，每个 Agent 框架都要为每个数据源单独写集成代码，一个企业接 20 个系统就要维护 200 个连接。MCP 把数据源抽象成 server、把Agent 侧抽象成 client，形成了一套双向通信规范。目前已被 OpenAI、谷歌、微软等主要厂商接受，成为跨厂商的事实标准之一。它的重要性不在于能力，而在于降低了整个行业的集成成本。",
+    "highlights": [
+      "跨厂商标准，主流厂商与框架均已支持",
+      "把 N×M 的集成问题收敛为 N+M",
+      "规范开放，协议本身不绑定任何模型厂商"
+    ],
+    "limitations": [
+      "只解决通信标准，不提供任何能力增强",
+      "安全边界依赖 server 实现方自律，缺乏强制沙箱",
+      "企业落地需要配套的权限治理方案"
+    ],
+    "bestFor": "需要让 Agent 接入内部系统的团队，无论你用哪个模型框架",
+    "deployment": [
+      "api",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "协议免费开源，官方提供托管版server",
+    "contextWindow": "不适用",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": true,
+    "prominence": 10,
+    "officialUrl": "https://modelcontextprotocol.io",
+    "sources": [
+      {
+        "title": "Model Context Protocol 官方文档",
+        "url": "https://modelcontextprotocol.io",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "Anthropic 宣布 MCP 协议开源",
+        "url": "https://www.anthropic.com/news/model-context-protocol",
+        "type": "official",
+        "date": "2024-11"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-28"
+  },
+  {
+    "id": "langgraph",
+    "name": "LangGraph",
+    "vendor": "LangChain",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 5,
+    "autonomyReason": "本身不提供智能，但支撑多 Agent 图状编排：多个角色节点并行执行、互相交接结果，并支持人在环路中干预。",
+    "tagline": "用图的方式编排有状态、可中断的 Agent 工作流",
+    "description": "LangGraph 解决了「Agent 流程控制」的问题。它把 Agent 应用建模成一张图：节点是执行单元（模型调用、工具调用、人工审批），边是流转关系。相比直接用链式编排，图结构能表达循环、条件分支和中断恢复，这三件事是做生产级 Agent 时绕不开的。它的价值在复杂场景才显现——简单任务用链就够了，但一旦涉及多轮审批、失败重试、人机混排，图模型就是唯一能讲清楚的设计。LangChain 团队本身在 2024 年后重心明显转向 LangGraph。",
+    "highlights": [
+      "显式的状态机模型，流程可追溯",
+      "支持 checkpointer 实现持久化与中断恢复",
+      "支持 human-in-the-loop 人工审批节点"
+    ],
+    "limitations": [
+      "学习曲线陡于直接调用模型 API",
+      "图结构复杂时状态管理成本高",
+      "版本迭代较快，API 有变动"
+    ],
+    "bestFor": "需要人工审批、失败恢复或长流程编排的企业级应用",
+    "deployment": [
+      "api",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "框架免费开源，企业支持另计",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": true,
+    "prominence": 9,
+    "officialUrl": "https://langchain-ai.github.io/langgraph/",
+    "sources": [
+      {
+        "title": "LangGraph 官方文档",
+        "url": "https://langchain-ai.github.io/langgraph/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "LangChain 官方文档",
+        "url": "https://python.langchain.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-25"
+  },
+  {
+    "id": "crewai",
+    "name": "CrewAI",
+    "vendor": "CrewAI Inc.",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 5,
+    "autonomyReason": "以「角色扮演」为核心抽象，Agent 被赋予职能身份并协作完成任务，天然支持多 Agent 分工与任务交接。",
+    "tagline": "用「组建团队」的方式编排多 Agent 协作",
+    "description": "CrewAI 的设计出发点是一个直觉：编排多 Agent 就像组建团队——每个成员有角色、有目标、有能力边界，由负责人分派任务、汇总成果。这个比喻让它的 API 非常易读，十几行代码就能搭出一个「研究员 + 写作员 + 审核员」的流水线。它在教学和原型验证场景里受欢迎度很高，2024 年 GitHub 星标数增长很快。代价是它把复杂度藏在了抽象之后——当流程需要精细控制时，往往要绕开框架自己写代码。",
+    "highlights": [
+      "API 贴近人类直觉，原型搭建极快",
+      "角色与任务定义清晰，团队结构一目了然",
+      "社区活跃，示例丰富"
+    ],
+    "limitations": [
+      "复杂流程控制能力弱于图结构方案",
+      "抽象层较厚，调试时不易定位问题",
+      "生产环境下的错误处理与重试机制需自行补充"
+    ],
+    "bestFor": "快速验证多 Agent 协作的概念，或结构清晰的任务流水线",
+    "deployment": [
+      "api",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "社区版免费开源，企业版另计",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 7,
+    "officialUrl": "https://www.crewai.com",
+    "sources": [
+      {
+        "title": "CrewAI 官方文档",
+        "url": "https://docs.crewai.com",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "CrewAI GitHub 仓库",
+        "url": "https://github.com/crewAIInc/crewAI",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-25"
+  },
+  {
+    "id": "openai-agents-sdk",
+    "name": "OpenAI Agents SDK",
+    "vendor": "OpenAI",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 5,
+    "autonomyReason": "核心抽象是 handoff——多个 Agent 之间显式移交控制权，天然支持多 Agent 协作与分工。",
+    "tagline": "OpenAI 原生的 Agent 编排框架，主打 handoff 协作模式",
+    "description": "OpenAI Agents SDK 是 OpenAI 官方的编排框架，设计上刻意保持精简：Agent、工具、handoff（移交）、guardrail（护栏）四个核心概念，覆盖大多数场景。它最独特的部分是 handoff——一个 Agent 可以把对话完全移交给另一个专门 Agent，就像电话转接，这比共享上下文的多 Agent 方案更可控也更易调试。对已经在用 OpenAI 模型的团队，它是最省心的选择；跨模型场景下生态支持相对有限。",
+    "highlights": [
+      "handoff 机制简洁，协作关系清晰",
+      "内置护栏与追踪，安全性设计完整",
+      "与 OpenAI 模型深度集成，开箱即用"
+    ],
+    "limitations": [
+      "对非 OpenAI 模型的生态支持较弱",
+      "抽象精简，复杂编排需要绕开框架",
+      "抽象概念较多，团队学习需时间"
+    ],
+    "bestFor": "已在 OpenAI 技术栈上的团队，或需要 handoff 式多 Agent 架构的项目",
+    "deployment": [
+      "api",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "SDK 免费，模型调用按标准计费",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "openSource": true,
+    "prominence": 8,
+    "officialUrl": "https://openai.github.io/openai-agents-python/",
+    "sources": [
+      {
+        "title": "OpenAI Agents SDK 官方文档",
+        "url": "https://openai.github.io/openai-agents-python/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "OpenAI 新 Agent 平台发布",
+        "url": "https://openai.com/index/new-tools-for-building-agents/",
+        "type": "official",
+        "date": "2025-03"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-26"
+  },
+  {
+    "id": "claude-agent-sdk",
+    "name": "Claude Agent SDK",
+    "vendor": "Anthropic",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 5,
+    "autonomyReason": "支持 subagent 派生子 Agent 并汇总结果，是官方 SDK 中明确提供多 Agent 协作能力的一类。",
+    "tagline": "Anthropic 官方 SDK，内置 subagent 与钩子机制",
+    "description": "Claude Agent SDK（此前称 Claude Code SDK）是 Anthropic 官方的 Agent 开发框架，与 MCP 深度集成——这是它最明显的优势：工具生态天然互通。SDK 提供 hooks（生命周期钩子，可拦截与干预执行过程）和 subagents（派生子 Agent 并行处理子任务）两个关键能力，用来解决「如何在不失控的前提下给 Agent 更多权力」这个工程难题。它在需要精细控制执行流程的场景里表现好，但主要面向 Claude 生态。",
+    "highlights": [
+      "与 MCP 生态深度集成，工具接入成本低",
+      "hooks 可在关键节点拦截、审批或改写行为",
+      "subagents 支持并行子任务"
+    ],
+    "limitations": [
+      "主要面向 Claude 生态，跨模型支持有限",
+      "hooks 与 subagents 会显著提高系统复杂度",
+      "文档偏简略，复杂场景需自行摸索"
+    ],
+    "bestFor": "需要精细控制执行过程、且深度使用 Claude 生态的团队",
+    "deployment": [
+      "api",
+      "cli",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "SDK 免费，模型调用按标准计费",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": true,
+    "prominence": 8,
+    "officialUrl": "https://docs.anthropic.com/en/docs/claude-code/sdk",
+    "sources": [
+      {
+        "title": "Claude Agent SDK 官方文档",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/sdk",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-28"
+  },
+  {
+    "id": "mcp-servers-registry",
+    "name": "AutoClaw",
+    "nameZh": "本地版智能体运行环境",
+    "vendor": "智谱 AI",
+    "region": "china",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "单机桌面环境下的本地 Agent，能自主拆解并执行多步任务，但无云端多 Agent 并行调度。",
+    "tagline": "国内首个一键安装的本地 Agent 运行环境",
+    "description": "AutoClaw 是智谱推出的本地化桌面 Agent 运行环境，主打「开箱即用、无需配置」——安装后可直接在本地文件与环境中执行任务，不依赖云端沙箱。它的定位更像一个轻量的本地自动化底座，而不是完整的 Agent 产品。值得注意的判断是：这类本地运行环境解决的是数据不出机器的问题，在隐私敏感场景有价值，但能力边界明显小于云端旗舰 Agent。",
+    "highlights": [
+      "本地部署，数据不出机器",
+      "一键安装，零配置门槛",
+      "基于智谱自研模型"
+    ],
+    "limitations": [
+      "功能相对单一，扩展性有限",
+      "本地算力限制导致模型能力受限",
+      "生态与工具接入规模较小"
+    ],
+    "bestFor": "隐私敏感、要求数据不出本地的基础自动化任务",
+    "deployment": [
+      "app",
+      "private"
+    ],
+    "pricingModel": "free",
+    "pricingNote": "开源免费",
+    "contextWindow": "受限",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": true,
+    "prominence": 4,
+    "officialUrl": "https://www.zhipuai.cn",
+    "sources": [
+      {
+        "title": "智谱 AI 官方站点",
+        "url": "https://www.zhipuai.cn",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 国内 AI Agent 工具清单",
+        "url": "http://www.hqwc.cn/news/1266767.html",
+        "type": "media",
+        "date": "2026-08"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-08-30"
+  },
+  {
+    "id": "agent-infrastructure-trend",
+    "name": "Agent 可观测性与评测工具",
+    "vendor": "多家（LangSmith / Arize / Langfuse 等）",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "工具本身不做任务决策，只提供追踪、回放与评分能力，流程由外部系统驱动。",
+    "tagline": "赛道里最薄的一环，但决定 Agent 能否进生产",
+    "description": "这一类工具解决的是「Agent 跑起来之后你什么都不知道」的问题。Agent 的执行链路比传统程序复杂得多——同样的输入可能走出不同路径，失败原因往往藏在中间某次工具调用里。追踪与评测工具提供执行链路回放、失败归因、模型对比、提示词版本管理和回归测试集。市场分析显示这是整个赛道里公司数量最少的一层，原因不复杂：客户往往在Agent 已经上线出事故之后才想起需要它。",
+    "highlights": [
+      "执行链路可视化，支持逐步回放",
+      "支持评测集与回归测试，量化改动影响",
+      "提示词版本管理"
+    ],
+    "limitations": [
+      "与具体框架耦合，迁移成本高",
+      "追踪数据量增长快，存储成本高",
+      "回放不等于复现，Agent 输出仍具随机性"
+    ],
+    "bestFor": "任何准备把 Agent 推到生产环境、且出问题时需要定位的团队",
+    "deployment": [
+      "web",
+      "api",
+      "saas"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "多为免费额度 + 按量付费，企业版另计",
+    "contextWindow": "不适用",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 6,
+    "officialUrl": "https://smith.langchain.com",
+    "sources": [
+      {
+        "title": "AI Agent Market Map 2026",
+        "url": "https://www.botmemo.com/ai-agent-market-map",
+        "type": "research",
+        "date": "2026-09"
+      },
+      {
+        "title": "LangSmith 官方文档",
+        "url": "https://docs.smith.langchain.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-09-20"
+  },
+  {
+    "id": "sandbox-runtime",
+    "name": "Agent 沙箱运行时",
+    "vendor": "多家（E2B / Modal / Daytona 等）",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "提供隔离执行环境，本身不参与任务决策，是 Agent 能力的运行环境而非智能体。",
+    "tagline": "给 Agent 一个安全、可抛弃的执行环境",
+    "description": "当 Agent 要真正执行动作——跑代码、装依赖、改文件、发请求——直接给主机权限是危险的。沙箱运行时解决的就是这个问题：为每个任务提供隔离的容器或虚拟机，用完即抛。它的兴起是 Agent 从「会聊天」走向「会干活」的必要条件。典型能力包括秒级冷启动、快照与恢复、文件系统与网络策略控制、镜像预置。开源方案（Firecracker、gVisor）与商业服务并存，企业选型主要看冷启动速度与合规能力。",
+    "highlights": [
+      "强隔离，Agent 执行不威胁主机",
+      "秒级冷启动，避免长任务等待",
+      "支持快照恢复与镜像预置"
+    ],
+    "limitations": [
+      "资源开销显著，高并发下成本不可忽略",
+      "隔离不等于无风险，仍需限制网络出口",
+      "调试跨沙箱问题需要额外工具"
+    ],
+    "bestFor": "需要让 Agent 真实执行代码或系统操作的任何生产场景",
+    "deployment": [
+      "api",
+      "private",
+      "saas"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "开源版本免费，商业服务按用量计费",
+    "contextWindow": "不适用",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 6,
+    "officialUrl": "https://e2b.dev",
+    "sources": [
+      {
+        "title": "E2B 官方文档",
+        "url": "https://e2b.dev/docs",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "当 Agentic AI 重塑生产关系（AWS）",
+        "url": "https://aws.amazon.com/cn/blogs/china/agentic-ai-intelligent-enterprise-framework/",
+        "type": "research",
+        "date": "2026-06"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-09-18"
+  },
+  {
+    "id": "mem0",
+    "name": "Mem0",
+    "vendor": "Mem0 AI",
+    "region": "overseas",
+    "tier": "infrastructure",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "提供记忆的存取与检索能力，不参与任务规划，属于 Agent 的记忆层组件。",
+    "tagline": "给 Agent 装上跨会话的长期记忆",
+    "description": "Mem0 专注解决 Agent 的「失忆」问题。它把对话与交互过程提炼成结构化记忆存储，下一次会话时召回相关部分，让 Agent 不必每次都从头交代背景。相比简单的向量库方案，它多做了一步——判断哪些内容值得记、哪些是噪音。团队数据显示在长对话场景下相比朴素检索有明显改善。争议在于：记忆的正确写入与错误删除同样困难，错误的记忆比没有记忆更危险。",
+    "highlights": [
+      "自动从交互中提炼记忆，减少人工标注",
+      "跨会话、跨应用保持上下文",
+      "开源，部署选择灵活"
+    ],
+    "limitations": [
+      "错误记忆难以清除，可能污染后续决策",
+      "记忆质量缺乏统一评估标准",
+      "引入额外延迟与成本"
+    ],
+    "bestFor": "长期陪伴型助手、需要跨会话记住用户偏好的产品",
+    "deployment": [
+      "api",
+      "private"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "开源免费，云服务按用量计费",
+    "contextWindow": "不适用",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 5,
+    "officialUrl": "https://mem0.ai",
+    "sources": [
+      {
+        "title": "Mem0 官方文档",
+        "url": "https://docs.mem0.ai",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-09-20"
+  },
+  {
+    "id": "claude-code",
+    "name": "Claude Code",
+    "vendor": "Anthropic",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "在真实代码库中跨文件实现功能、运行测试并据结果自我修正，符合 L4 的长程自治与自检标准。",
+    "tagline": "终端里的资深工程师，长上下文与大重构能力突出",
+    "description": "Claude Code 是目前工程实践中最成熟的编程 Agent 之一。它的长上下文让它能装下整个代码库，跨文件重构时不会因为看不到全局而破坏一致性；自主性体现在会主动运行测试、读取失败输出、然后修改代码直到通过。Anthropic 官方榜单上它长期位居前列，JetBrains 调研中90% 的开发者已将AI 编程工具融入日常。已知局限是偶发的长任务截断，以及面对超复杂指令时需要人工拆解——这类问题多出现在上下文压力极大的场景。",
+    "highlights": [
+      "长上下文表现优秀，适合跨文件重构",
+      "工具调用准确率高，会自己跑测试并修复",
+      "与 MCP 生态互通，工具扩展方便"
+    ],
+    "limitations": [
+      "偶发长任务截断，需要重试",
+      "复杂指令需人工拆分为可执行单元",
+      "高强度使用成本较高"
+    ],
+    "bestFor": "大规模重构、复杂系统维护、需要在真实代码库中做跨文件改动",
+    "deployment": [
+      "cli",
+      "ide",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "随 Claude 订阅计划，Pro $20/mo 起",
+    "contextWindow": "200K",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 10,
+    "officialUrl": "https://claude.com/product/claude-code",
+    "sources": [
+      {
+        "title": "Claude Code 官方页面",
+        "url": "https://claude.com/product/claude-code",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 年好用的 AI 智能体分类推荐",
+        "url": "https://xie.infoq.cn/article/d91792792935a1a38434fae2f",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-29",
+    "relatedIds": [
+      "codex",
+      "cursor",
+      "claude-agent-sdk"
+    ]
+  },
+  {
+    "id": "codex",
+    "name": "Codex",
+    "vendor": "OpenAI",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "云端沙箱中执行代码修改与测试，可持续运行长任务并自我验证，符合 L4 标准。",
+    "tagline": "云端代码工厂，可接入 GitHub 做云端协作",
+    "description": "Codex 是 OpenAI 的云端编程 Agent，最大差异点是运行在云端沙箱而非本地——这让它可以同时处理多个任务，也便于接入 GitHub 实现 PR 自动化。它与 OpenAI 生态深度绑定，对已有 OpenAI 工具链的团队是顺手的选择。局限性与 Claude Code 类似：长任务可能中断，且 Token 消耗在多任务并行时增长快。",
+    "highlights": [
+      "云端沙箱执行，不占用本地资源",
+      "可接入 GitHub，支持 PR 工作流",
+      "多任务并行处理"
+    ],
+    "limitations": [
+      "长任务可能中断需恢复",
+      "多任务并行时 Token 消耗增长快",
+      "强依赖 OpenAI 生态"
+    ],
+    "bestFor": "已有 OpenAI 生态、需要云端并行处理多个开发任务的团队",
+    "deployment": [
+      "cli",
+      "web",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "随 ChatGPT 订阅，Plus/Pro/Enterprise 分档",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://openai.com/codex/",
+    "sources": [
+      {
+        "title": "Codex 官方页面",
+        "url": "https://openai.com/codex/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "OpenAI 新 Agent 平台发布",
+        "url": "https://openai.com/index/new-tools-for-building-agents/",
+        "type": "official",
+        "date": "2025-03"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-27",
+    "relatedIds": [
+      "claude-code",
+      "github-copilot",
+      "devin"
+    ]
+  },
+  {
+    "id": "cursor",
+    "name": "Cursor",
+    "vendor": "Anysphere",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "在编辑器内跨文件改动并自我校验，但整体更偏人机协同而非完全放手，属于 L4 下界。",
+    "tagline": "AI 原生 IDE，人机协同编程的标杆",
+    "description": "Cursor 把 AI 融进了 IDE 本身，而不是作为插件存在。核心体验是「Tab 补全 + Agent 模式」双轨：前者做低摩擦的逐行预测，后者做跨文件的自主改动。它的定位刻意区别于全自动编程——强调开发者保留控制权，随时的Tab 接受/拒绝是它与传统 Agent 最重要的差异。商业上进展迅猛，据报道 2025 年末融资后估值已从 293亿升至追求 500 亿美元。",
+    "highlights": [
+      "Tab 补全延迟低，日常编码摩擦小",
+      "Agent 模式支持跨文件自主改动",
+      "AI 原生 IDE，交互设计成熟"
+    ],
+    "limitations": [
+      "更偏协同而非完全放手，与 Cursor Composer 定位有重叠",
+      "闭源，定制能力有限",
+      "高价档位成本明显"
+    ],
+    "bestFor": "希望 AI 辅助但保留控制权的日常开发，尤其是习惯 IDE 的开发者",
+    "deployment": [
+      "ide"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "Hobby 免费，Pro $20/mo，Ultra $200/mo",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://cursor.com",
+    "sources": [
+      {
+        "title": "Cursor 官方网站",
+        "url": "https://cursor.com",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "AI Agent Market Map 2026",
+        "url": "https://www.botmemo.com/ai-agent-market-map",
+        "type": "research",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-29",
+    "relatedIds": [
+      "claude-code",
+      "codex",
+      "devin"
+    ]
+  },
+  {
+    "id": "devin",
+    "name": "Devin",
+    "vendor": "Cognition AI",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "自主完成完整开发任务并提交 PR，异步长程运行，符合 L4 标准；尚无跨 Agent 协作证据故不评 L5。",
+    "tagline": "最早引发关注的自主编程 Agent 产品",
+    "description": "Devin 在 2024 年初的发布是 Agent 领域的分水岭事件——第一个明确宣称「自主完成完整开发任务」并大规模引发关注的产品。它的核心差异是把工作异步化：给一个任务，让它在后台跑，中间通过消息协作。这个交互模型后来被几乎所有编程 Agent 借鉴。Cognition 融资 4 亿美元后转向自研模型，定位从「通用自主程序员」收敛为「与资深工程师协作的 AI 同事」。",
+    "highlights": [
+      "异步任务模型，不占用开发者同步时间",
+      "自主完成从理解需求到提交 PR 的全流程",
+      "在训练数据与实际工程任务上表现接近初级工程师"
+    ],
+    "limitations": [
+      "异步协作需要适应，节奏与同步开发不同",
+      "复杂需求仍需多次干预",
+      "定价偏高，成本需评估"
+    ],
+    "bestFor": "把重复性开发任务整体外包出去，需要异步并行的团队",
+    "deployment": [
+      "web",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "Core $20/mo，Team $500/mo，Enterprise 定制",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://devin.ai",
+    "sources": [
+      {
+        "title": "Devin 官方网站",
+        "url": "https://devin.ai",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "AI Agent Market Map 2026",
+        "url": "https://www.botmemo.com/ai-agent-market-map",
+        "type": "research",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-27",
+    "relatedIds": [
+      "claude-code",
+      "cursor"
+    ]
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot",
+    "vendor": "GitHub / Microsoft",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "以代码补全与对话式修改为主，能自主完成多步编辑但缺少长时间自我验证循环，评 L3。",
+    "tagline": "普及度最高的 AI 编程助手，与 GitHub 工作流原生集成",
+    "description": "Copilot 是最早实现大规模普及的 AI 编程工具，核心优势不在能力而在分发——直接嵌在 GitHub、VS Code、JetBrains 全系列里。2024 年起它从「补全工具」扩展为「Agent 平台」，增加了代码审查、PR 描述生成、Issue 处理等能力。但补全型交互的形态决定了它仍偏被动：多数时候是开发者主动触发，Agent 自主性发挥空间小于 Claude Code 这类独立 Agent。",
+    "highlights": [
+      "分发优势明显，IDE 覆盖最广",
+      "与 GitHub Issue/PR 工作流原生打通",
+      "企业版支持组织级策略与审计"
+    ],
+    "limitations": [
+      "偏被动触发，自主性弱于独立 Agent",
+      "复杂跨文件任务的自我验证能力有限",
+      "高级功能需付费订阅"
+    ],
+    "bestFor": "已经在用 GitHub 工作流、想要低摩擦补全与 PR 辅助的开发者",
+    "deployment": [
+      "ide",
+      "web",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "个人 $10/mo，Business $19/user/mo，Enterprise 定制",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://github.com/features/copilot",
+    "sources": [
+      {
+        "title": "GitHub Copilot 官方页面",
+        "url": "https://github.com/features/copilot",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "GitHub Copilot Workspace 发布",
+        "url": "https://github.blog/news-insights/product-news/github-copilot-workspace/",
+        "type": "official",
+        "date": "2024-04"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-27",
+    "relatedIds": [
+      "codex",
+      "cursor"
+    ]
+  },
+  {
+    "id": "replit-agent",
+    "name": "Replit Agent",
+    "vendor": "Replit",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "从自然语言描述生成完整可部署应用，含自我检查与修复循环，符合 L4 标准。",
+    "tagline": "让非开发者也能用自然语言做出可部署的应用",
+    "description": "Replit Agent 的差异化是「闭环」——它生成的不只是代码，而是从代码到数据库、到域名、到部署的完整在线应用。Replit 官方把定位放在非开发者群体，融资 4 亿美元后从代码编辑器转型为 Agent 平台。它的意义在于降低了应用构建的绝对门槛：不会编程的人也能出一个能访问的 Web 应用。局限是大规模复杂项目的可维护性仍弱于专业开发流程。",
+    "highlights": [
+      "从描述到可访问应用的全链路闭环",
+      "面向非开发者，门槛极低",
+      "内置数据库与部署托管"
+    ],
+    "limitations": [
+      "复杂项目的可维护性与扩展性有限",
+      "平台绑定强，迁移成本高",
+      "复杂性能需求难以满足"
+    ],
+    "bestFor": "快速验证产品想法、原型验证、或非技术背景的团队成员",
+    "deployment": [
+      "web",
+      "app"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "有免费额度，Core $25/mo 起，按Agent 用量计费",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://replit.com/agent",
+    "sources": [
+      {
+        "title": "Replit Agent 官方页面",
+        "url": "https://replit.com/agent",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "AI Agent Market Map 2026",
+        "url": "https://www.botmemo.com/ai-agent-market-map",
+        "type": "research",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-26"
+  },
+  {
+    "id": "windsurf",
+    "name": "Windsurf",
+    "vendor": "Cognition AI",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "acquired",
+    "autonomyLevel": 4,
+    "autonomyReason": "具备跨文件自主改动与自我校验能力，符合 L4 标准；被并购后产品策略调整。",
+    "tagline": "提出「Cascade」协作流的 IDE，后被 Cognition 收购",
+    "description": "Windsurf 最初以「Agent 感知 IDE」为定位，核心创新是 Cascade 协作流——AI 与开发者共享一个动作流，人机切换更自然。2025 年被 Cognition AI 收购（此前 Devin 也由 Cognition 开发），这成为编程 Agent 领域规模最大的整合案之一。它的留存与用户满意度一度位居同类前列，但被并购后的产品方向与团队稳定性存在不确定性。收录于此是因为「被并购」本身是这个赛道整合趋势的重要信号。",
+    "highlights": [
+      "Cascade 协作流设计领先，人机切换自然",
+      "代码库级索引响应速度快",
+      "曾是同类中留存与满意度表现较好的产品"
+    ],
+    "limitations": [
+      "被并购后产品方向与团队稳定性存在不确定性",
+      "多 IDE 方案并存，用户注意力分散",
+      "与 Cognition 生态整合需要时间"
+    ],
+    "bestFor": "关注编程Agent 赛道整合趋势的研究者；现有用户可关注官方整合公告",
+    "deployment": [
+      "ide"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "免费额度，Pro 付费档位",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "https://windsurf.com",
+    "sources": [
+      {
+        "title": "Windsurf 官方网站",
+        "url": "https://windsurf.com",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "AI Agent Market Map 2026",
+        "url": "https://www.botmemo.com/ai-agent-market-map",
+        "type": "research",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-08-15"
+  },
+  {
+    "id": "trae",
+    "name": "Trae",
+    "vendor": "字节跳动",
+    "region": "china",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "IDE 内置 Agent 模式，支持跨文件自主改动与运行验证，符合 L4 标准。",
+    "tagline": "字节跳动的 AI 原生 IDE，主打国内生态适配",
+    "description": "Trae 是字节跳动的 AI IDE，目标市场明确指向国内开发者。它的竞争策略是「更懂中文语境 + 更贴合国内工程环境」——在中文注释理解、国内技术栈文档、国内云服务集成上做了优化。字节的另一条产品线TRAE Work 面向办公场景，两者共用底层能力。它在国内 IDE 市场的挑战者位置上表现稳定，但生态扩展性相比 VS Code 系仍有距离。",
+    "highlights": [
+      "中文语境与国内技术栈适配较好",
+      "IDE 原生集成，体验流畅",
+      "字节生态支持，模型资源充足"
+    ],
+    "limitations": [
+      "插件生态相比 VS Code 系明显更小",
+      "版本迭代与功能深度偶有滞后",
+      "海外用户支持有限"
+    ],
+    "bestFor": "中文项目、国内技术栈、需要 IDE 内嵌 Agent 的开发者",
+    "deployment": [
+      "ide"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "个人版免费使用",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://www.trae.ai",
+    "sources": [
+      {
+        "title": "Trae 官方网站",
+        "url": "https://www.trae.ai",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 AI Agent 产品梯队全景盘点",
+        "url": "https://tianqi.csdn.net/6a9a3ba148977663a5dcfb58.html",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-26",
+    "relatedIds": [
+      "qoder",
+      "cursor",
+      "wenxin-fastcode"
+    ]
+  },
+  {
+    "id": "qoder",
+    "name": "QoderWork",
+    "vendor": "阿里巴巴",
+    "region": "china",
+    "tier": "coding",
+    "status": "preview",
+    "autonomyReason": "具备仓库级理解与跨文件改动能力，符合 L4；但为预览版，能力边界仍在变化。",
+    "autonomyLevel": 4,
+    "tagline": "阿里的 Agent 编程产品，面向企业研发场景",
+    "description": "QoderWork 依托阿里的云与算力资源，定位偏企业研发提效。与个人 IDE 工具不同，它更强调与阿里云生态的集成以及在企业内网的部署能力。国内厂商做编程 Agent 的共同特点是：模型与云资源有保障，但在插件生态和海外市场拓展上相对薄弱。它的具体能力边界因预览版仍在调整，因此收录时标注为预览状态。",
+    "highlights": [
+      "与阿里云生态集成紧密",
+      "支持企业内网部署",
+      "模型资源有保障"
+    ],
+    "limitations": [
+      "预览版，能力与定价可能大幅变化",
+      "生态与插件数量少于国际产品",
+      "海外支持有限"
+    ],
+    "bestFor": "阿里云生态内的企业研发团队",
+    "deployment": [
+      "ide",
+      "private",
+      "web"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "预览期，具体定价未公开",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 4,
+    "officialUrl": "https://qoder.aliyun.com",
+    "sources": [
+      {
+        "title": "2026 国内 AI Agent 工具完整清单",
+        "url": "http://www.hqwc.cn/news/1266767.html",
+        "type": "media",
+        "date": "2026-08"
+      }
+    ],
+    "dataConfidence": "low",
+    "lastVerified": "2026-08-30"
+  },
+  {
+    "id": "huawei-codeart",
+    "name": "华为云码道",
+    "nameZh": "CodeArts Doer",
+    "vendor": "华为云",
+    "region": "china",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "以代码生成与补全为主，支持多步修改但自我验证循环有限，评 L3。",
+    "tagline": "信创友好、数据不出端的国产代码智能体",
+    "description": "华为云码道面向信创与数据合规要求高的场景，核心卖点是私有化部署与数据不出端。在金融、政务、军工等对代码资产敏感的行业，这是硬性门槛而非加分项。能力上以代码生成、单元测试生成、代码解释为主，属于典型的「辅助编程」定位而非自主 Agent。生态相对聚焦，不追求通用性。",
+    "highlights": [
+      "支持私有化部署，数据不出端",
+      "信创环境适配",
+      "与华为云 DevOps 工具链集成"
+    ],
+    "limitations": [
+      "自主性相对保守，以辅助编程为主",
+      "生态相对聚焦，插件与集成较少",
+      "国际用户支持有限"
+    ],
+    "bestFor": "信创合规要求高的政企、金融、军工行业研发团队",
+    "deployment": [
+      "private",
+      "ide",
+      "web"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "企业定制，支持信创一体机交付",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "https://www.huaweicloud.com/product/codearts.html",
+    "sources": [
+      {
+        "title": "2026 年好用的AI 智能体分类推荐",
+        "url": "https://xie.infoq.cn/article/d91792792935a1a38434fae2f",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "AI Agent Market Map 2026（国内企业级）",
+        "url": "http://www.hqwc.cn/news/1266767.html",
+        "type": "media",
+        "date": "2026-08"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-08-30",
+    "relatedIds": [
+      "trae",
+      "wenxin-fastcode"
+    ]
+  },
+  {
+    "id": "wenxin-fastcode",
+    "name": "文心快码",
+    "vendor": "百度",
+    "region": "china",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "以代码补全与生成、单元测试为主，具备多步修改能力但缺少长程自治，评 L3。",
+    "tagline": "百度智能代码助手，已并入百度搭子",
+    "description": "文心快码是百度自研的编程助手，2026 年 9 月正式并入百度通用智能体平台「百度搭子」。这次整合反映了国内大厂的趋势：从分散的 AI 工具产品线收敛到单一入口级平台。文心快码本身依托文心大模型，在中文代码理解上有一定优势，并提供与飞桨生态的协同。整合后的产品形态仍在调整，故标注为活跃但需持续观察。",
+    "highlights": [
+      "中文代码理解较好",
+      "与飞桨生态协同",
+      "已并入百度搭子平台，入口统一"
+    ],
+    "limitations": [
+      "整合后产品形态仍在调整",
+      "自主性偏辅助编程定位",
+      "国际生态支持弱"
+    ],
+    "bestFor": "百度生态内的开发者，或中文项目用户",
+    "deployment": [
+      "ide",
+      "web"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "个人使用有免费额度，企业版另计",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 4,
+    "officialUrl": "https://cloud.baidu.com/product/wenxin-fastcode",
+    "sources": [
+      {
+        "title": "市面上常用智能体介绍（2026）",
+        "url": "https://agent.csdn.net/6a9fd37348977663a5ddf411.html",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-09-20"
+  },
+  {
+    "id": "manus",
+    "name": "Manus",
+    "vendor": "Monica.im",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "多子 Agent 并行 + 多模型路由，能完成研究、建站等长程任务，符合 L4；协作模式接近但未达 L5 明确派发。",
+    "tagline": "通用自主 Agent，「给过程 + 给结果」的展示形态让大众直观感受到 Agent 威力",
+    "description": "Manus 在 2025 年初的爆火是大众层面的现象级事件——第一次让非技术用户直观看到「AI 真的可以自己干活」。它采用多子 Agent 并行架构，遇到复杂任务会拆分成多个子任务同时执行，并按需路由到不同模型。能力覆盖研究、数据分析、建站、文档生成等通用场景。Meta 收购传闻曾多次出现，团队规模迅速扩张，但商业模式与算力成本压力始终是悬而未决的问题。",
+    "highlights": [
+      "多子 Agent 并行，复杂任务效率高",
+      "覆盖研究、分析、建站等通用场景",
+      "执行过程可视化，产品体验设计优秀"
+    ],
+    "limitations": [
+      "算力成本高，账单需预估",
+      "长期面临底层模型增强的替代风险",
+      "复杂任务的稳定性仍需人工确认"
+    ],
+    "bestFor": "需要端到端完成研究、建站、分析等综合任务的个人与小团队",
+    "deployment": [
+      "web",
+      "app",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "入门免费额度，订阅档位按月计",
+    "contextWindow": "由路由模型决定",
+    "modalities": [
+      "text",
+      "image",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://manus.im",
+    "sources": [
+      {
+        "title": "Manus 官方网站",
+        "url": "https://manus.im",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 年好用的 AI 智能体分类推荐",
+        "url": "https://xie.infoq.cn/article/d91792792935a1a38434fae2f",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-29",
+    "relatedIds": [
+      "workbuddy",
+      "chatgpt-agent",
+      "general-declined",
+      "autogpt"
+    ]
+  },
+  {
+    "id": "general-declined",
+    "name": "AutoGPT",
+    "vendor": "AutoGPT 社区",
+    "region": "overseas",
+    "tier": "productivity",
+    "status": "maintenance",
+    "autonomyLevel": 3,
+    "autonomyReason": "具备自主循环与目标拆解能力，但稳定性与成本控制不佳；现版本已重构为通用平台，评L3。",
+    "tagline": "第一个引爆大众关注的自主 Agent，如今已转向平台化",
+    "description": "AutoGPT 在 2023 年 3 月引爆了第一波 Agent 热潮，「让 GPT 自己干活」这个概念由它普及。但它也是最早的牺牲品：自主循环导致的无限循环、Token 消耗失控、产出质量不可控，让绝大多数尝鲜者放弃。项目后来的转向很有意思——从「做一个通用自主 Agent」变成「做通用 Agent 平台」，重心从模型转向基础设施。收录它是因为它定义了这个赛道的第一波浪潮，即便现在已不是可用产品。",
+    "highlights": [
+      "开创了大众自主 Agent 概念",
+      "推动了工具调用与循环机制的普及",
+      "现版本转向平台化，仍在维护"
+    ],
+    "limitations": [
+      "自主循环易失控，Token 消耗不可预测",
+      "产出质量不稳定，需大量人工筛选",
+      "项目重心已转移，功能与愿景偏离"
+    ],
+    "bestFor": "研究Agent 发展史与技术演进；不建议作为生产工具使用",
+    "deployment": [
+      "web",
+      "app"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "社区版免费，云服务按量计费",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": true,
+    "prominence": 6,
+    "officialUrl": "https://agpt.co",
+    "sources": [
+      {
+        "title": "AutoGPT 官方网站",
+        "url": "https://agpt.co",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "开源框架补充列表",
+        "url": "https://xie.infoq.cn/article/d91792792935a1a38434fae2f",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-08-20"
+  },
+  {
+    "id": "autogpt",
+    "name": "SuperAGI",
+    "vendor": "SuperAGI",
+    "region": "overseas",
+    "tier": "productivity",
+    "status": "discontinued",
+    "autonomyLevel": 3,
+    "autonomyReason": "具备工具注册与自主循环能力，但自主决策层能力有限；项目已停止运营，评 L3。",
+    "tagline": "曾的开源 Agent 平台标杆，现已停止运营",
+    "description": "SuperAGI 在 2023 年是与 AutoGPT 并列的开源 Agent 平台代表，特点是工具市场、GUI 控制台、并发 Agent 管理等工程化设计。它比 AutoGPT 更接近「平台」而非「玩具」，社区贡献了大量工具集成。2024 年公司停止运营，项目转为社区维护（其实体公司已解散）。它和 AutoGPT、AgentGPT 一起构成了 2023-2024 年 Agent 泡沫的三个典型样本——技术演示效果惊艳，生产可用性不足。收录保留，因为这段历史本身就是这个赛道最贵的一课。",
+    "highlights": [
+      "工具市场与GUI 控制台，工程化程度较高",
+      "支持并发多 Agent 管理",
+      "社区工具生态丰富"
+    ],
+    "limitations": [
+      "公司已停止运营，项目仅社区维护",
+      "自主决策能力弱于宣传预期",
+      "生产可用性不足，稳定性差"
+    ],
+    "bestFor": "研究 Agent 平台工程化设计；不建议用于生产",
+    "deployment": [
+      "web",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "项目已停止运营，无商业支持",
+    "contextWindow": "由底层模型决定",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 4,
+    "officialUrl": "https://github.com/TransformerOptimus/SuperAGI",
+    "sources": [
+      {
+        "title": "SuperAGI GitHub 仓库",
+        "url": "https://github.com/TransformerOptimus/SuperAGI",
+        "type": "official",
+        "date": "2026-08"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-07-15"
+  },
+  {
+    "id": "workbuddy",
+    "name": "WorkBuddy",
+    "vendor": "腾讯",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "交付级办公 Agent，能读写本地文件、跨系统操作、交付前自校验，符合 L4；多专家团协作接近 L5。",
+    "tagline": "把专业工作的方法论编译进产品的交付级办公 Agent",
+    "description": "WorkBuddy 与其他办公 Agent 的根本差异在于交付物定位——它不满足于「给你一段文字」，而是要真正读写本地文件、操作软件、产出可验收的成品（文档、表格、PPT、网站）。内置专家团与技能市场、连接器生态、多模型池与沙箱权限模型构成了它的能力底座。它的产品哲学是「先给消耗预估，交付后自带自校验」，这在办公场景里是少见的工程化考量。适用人群覆盖从个人到企业，且提供个人体验版免费。",
+    "highlights": [
+      "真正读写本地文件并交付成品，非纯对话",
+      "内置专家团与技能市场，可复用方法论",
+      "连接器生态打通腾讯办公与第三方服务",
+      "动手前给消耗预估，交付后自校验"
+    ],
+    "limitations": [
+      "多 Agent 协作时积分消耗显著上升（3-5 倍）",
+      "能力上限受所选模型影响",
+      "腾讯生态外的工作流整合需额外配置"
+    ],
+    "bestFor": "需要交付可验收成果物的知识工作者；腾讯生态用户尤其顺手",
+    "deployment": [
+      "app",
+      "web",
+      "private",
+      "api"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "个人体验版免费，专业版 58元/月，积分制计费",
+    "contextWindow": "由所选模型决定",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://workbuddy.cn",
+    "sources": [
+      {
+        "title": "WorkBuddy 官方站点",
+        "url": "https://workbuddy.cn",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "WorkBuddy 零基础教程",
+        "url": "https://www.iyiou.com/news/202606171132811",
+        "type": "media",
+        "date": "2026-06"
+      },
+      {
+        "title": "2026 AI Agent 产品梯队全景盘点",
+        "url": "https://tianqi.csdn.net/6a9a3ba148977663a5dcfb58.html",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-09-29",
+    "relatedIds": [
+      "manus",
+      "coze"
+    ]
+  },
+  {
+    "id": "chatgpt-agent",
+    "name": "ChatGPT Agent",
+    "nameZh": "ChatGPT 智能体模式",
+    "vendor": "OpenAI",
+    "region": "overseas",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "单任务可连续自主操作数十分钟：内置可视浏览器点网页、填表单、跑代码、改表格，遇页面改版会换路径重试，并在发邮件、下单、支付前主动停下交还控制权。达不到L5——没有可观察的子任务并行派发，多步执行在单一执行体内串行完成。",
+    "tagline": "开虚拟电脑替你跑完多步网页任务",
+    "description": "你说出目标后，它开一台虚拟电脑：可视浏览器点网页、填表单、跑代码、编辑电子表格，再把结果交回对话。登录、支付等敏感步骤会主动停下交还控制权，发邮件、下单前再问一次。同一句指令落在不同网页上点击序列并不固定，页面变了会换路径重试。支持定时重复任务，Business 与 Enterprise 版可连 Google Drive、SharePoint、Slack、GitHub。局限：Plus 与 Business 每月仅 40 条 agent 消息，Pro 才有 400 条且 $200 档已暂停新注册；CAPTCHA 与风控墙撞上即整段失败；消费版对话默认用于训练。",
+    "highlights": [
+      "可视浏览器加代码执行一体",
+      "敏感步骤强制交还控制权",
+      "支持定时重复任务",
+      "企业版可连MCP服务器"
+    ],
+    "limitations": [
+      "Plus 每月仅 40 条 agent 消息",
+      "CAPTCHA 与风控墙致整段失败",
+      "Pro $200 档已暂停新注册",
+      "消费版对话默认用于训练"
+    ],
+    "bestFor": "已付 ChatGPT 订阅、偶尔需要调研与填表代办的知识工作者",
+    "deployment": [
+      "web",
+      "app",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "Plus $20/月、Pro $100 与 $200/月（$200 档 2026-09-10 起暂停新注册）、Business $25/席/月（年付）或 $125/月 Premium 席。Agent 模式不含在 Free 与 Go；每月额度 Plus 40 条、Pro 400 条、Business/Enterprise 40 条，弹性计费工作区超出后每条 30 credits",
+    "contextWindow": "1M",
+    "modalities": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 10,
+    "officialUrl": "https://chatgpt.com/",
+    "sources": [
+      {
+        "title": "ChatGPT Agent 产品页与额度说明",
+        "url": "https://theaiagentindex.com/agents/chatgpt-agent",
+        "type": "research",
+        "date": "2026-09"
+      },
+      {
+        "title": "Best AI Agents for Work in 2026（含 agent 模式限额核实）",
+        "url": "https://youraitoolstack.com/blog/best-ai-agents-for-work-2026",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "ChatGPT Agent Review：2026 定价与能力边界",
+        "url": "https://litmustools.com/review/chatgpt-agent/",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "claude-computer-use",
+    "name": "Claude Computer Use",
+    "nameZh": "Claude 计算机操作能力",
+    "vendor": "Anthropic",
+    "region": "overseas",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "同一句指令落在不同界面状态下会产生不同的动作序列，模型会自主判断是点击确认还是回退重试，属动态规划。但开发者仍需自行编写 Agent 循环与终止条件，模型不主动声明任务完成，单次运行通常在几分钟到十几分钟，不满足 L4 的长程自检要求。",
+    "tagline": "让模型用截图和键鼠操作任意界面",
+    "description": "作为 API 工具，Claude 通过截图加鼠标键盘动作序列操作桌面或浏览器：读屏、点击、输入、滚动，跑完把新截图喂回模型决定下一步。同一句指令落在不同界面下动作序列不同，模型会自主决定是点确认还是回退重试。适合接进自有后端做表单处理、遗留系统迁移与批量 GUI 脚本，1M 上下文让它能记住长流程的中间状态。局限：Agent 循环与终止条件要开发者自己写，模型不主动宣布收工；单次运行通常十几分钟级，缺数十分钟级的自检闭环；密集 UI 上误点率明显高于基于 DOM 的方案；2026 年 6 月 15 日起程序化调用需另申领 Agent SDK 额度。",
+    "highlights": [
+      "纯视觉操作无需目标站点API",
+      "1M上下文支撑长流程记忆",
+      "可自定义敏感操作白名单",
+      "支持接入自有后端服务"
+    ],
+    "limitations": [
+      "Agent 循环需开发者自行实现",
+      "单次运行多为十几分钟级",
+      "密集 UI 误点率高于 DOM 方案",
+      "程序化调用需另申领额度"
+    ],
+    "bestFor": "需把 GUI 自动化接进自有后端、且目标系统没有 API 的工程团队",
+    "deployment": [
+      "api",
+      "cli"
+    ],
+    "pricingModel": "usage",
+    "pricingNote": "按 token 计费。Sonnet 5 输入 $2/输出 $10 每百万 token（1M 上下文），Opus 5.5 输入 $4/输出 $20，Opus 5 输入 $5/输出 $25，Haiku 4.5 输入 $1/输出 $5（200K 上下文）。Claude 订阅 Pro $20/月、Max $100 与 $200/月，不含程序化调用",
+    "contextWindow": "1M",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://docs.claude.com/",
+    "sources": [
+      {
+        "title": "Claude API Pricing 2026（各模型输入输出价与上下文）",
+        "url": "https://www.reqkey.com/tools/claude-api-pricing",
+        "type": "research",
+        "date": "2026-09"
+      },
+      {
+        "title": "Claude Pricing 2026：套餐、API 与隐藏成本",
+        "url": "https://www.opslyft.com/blog/claude-pricing-2026",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Claude API Pricing 2026 完整模型表",
+        "url": "https://chudi.dev/blog/claude-pricing",
+        "type": "community",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "gemini-agent",
+    "name": "Gemini Agent",
+    "nameZh": "Gemini Agent 智能体",
+    "vendor": "Google",
+    "region": "overseas",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "跨标签页比价、填表、订位这类多步网页任务的工具调用序列随页面状态动态变化，具备动态规划能力。但单次自主跑动在分钟级，缺长任务自检，也没有可观察的子 Agent 并行派发。",
+    "tagline": "Gemini 里的多步网页代办 Agent",
+    "description": "在 Gemini 应用内把整段多步网页任务交出去：跨标签页比价、填表、订位，跑完给结论而不是教你怎么点。底层源自 Project Mariner，Google 于 2026 年 5 月 4 日结束其十七个月公开实验，把浏览器操控产品化进 Gemini Agent 与 Chrome 的 auto-browse。与 Deep Research、Veo、Gemini 3 系列模型打包在同一订阅里。局限：仅美国、仅英语可用，而含它的订阅在 150 多国销售，付费后才发现用不了是典型坑；没有公开 API，这是给人用的工具而非系统组件；单次自主跑动在分钟级，长任务与自检弱于 ChatGPT Agent。",
+    "highlights": [
+      "Mariner 浏览器能力正式产品化",
+      "与既有订阅打包边际成本为零",
+      "可退回 Chrome 自动浏览兜底",
+      "跨标签页连续操作"
+    ],
+    "limitations": [
+      "仅美国、仅英语可用",
+      "没有公开 API",
+      "单次自主跑动仅分钟级",
+      "订阅多国销售但功能未开放"
+    ],
+    "bestFor": "美国区、已在付 Google AI Pro 或 Ultra 订阅的网页重度使用者",
+    "deployment": [
+      "web",
+      "app"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "含于 Google AI 订阅：Plus $7.99/月、Pro $19.99/月、Ultra $99.99 与 $199.99/月。无单独购买方式，也无公开 API 计费",
+    "contextWindow": "1M",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://gemini.google.com/",
+    "sources": [
+      {
+        "title": "Gemini Agent Review：Project Mariner 的继任者及其限制",
+        "url": "https://recatools.com/ai-directory/gemini-agent",
+        "type": "research",
+        "date": "2026-09"
+      },
+      {
+        "title": "Google I/O 2026 Google AI 订阅更新",
+        "url": "https://blog.google/products-and-platforms/products/google-one/google-ai-subscriptions/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "Google Gemini Pricing 2026 方案比较与区域限制",
+        "url": "https://leadion.ai/blog/gemini-pricing/",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "feishu-aily",
+    "name": "Feishu Aily",
+    "nameZh": "豆包工作伙伴（原飞书 aily）",
+    "vendor": "字节跳动（飞书）",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "自主拆解目标并按上下文选择工具——上传两万行 Excel 会先清洗再出图文解读，一句话生成发布会 PPT 会先定大纲再配图，工具调用序列随输入结构变化。做不到 L4：跨软件长程自治与产出自检没有公开证据。",
+    "tagline": "飞书里常驻的 AI 同事，会主动派活",
+    "description": "在飞书里把活派给一个常驻的 AI 同事：读文档与多维表格、在群里总结近三天消息并列出待办、把上传的两万行 Excel 做成图文解读报告，或按一句话生成调研报告与发布会 PPT。2026 年 8 月 14 日起「飞书 aily」整体更名为「豆包工作伙伴」，9 月 1 日新增「主动工作」，按你的日程、文档与聊天上下文主动推每日前瞻与每日回顾。权限上模型输入输出双向脱敏，员工严格继承本人权限访问知识库。局限：智能伙伴仅支持访问中国大陆公网，访问不了海外站点与企业内网；自定义模型接入需 29.7 万元/年的企业版 Plus 以上；额度按产物类型扣，PPT 60 点，任务一多消耗比预期快。",
+    "highlights": [
+      "主动工作按上下文推每日卡片",
+      "员工权限严格继承不越权",
+      "可切自有模型免收模型费",
+      "对话本身不收费仅产物计费"
+    ],
+    "limitations": [
+      "仅支持中国大陆公网访问",
+      "自定义模型需29.7万/年以上",
+      "额度按产物扣消耗偏快",
+      "主动工作每次推送扣20点"
+    ],
+    "bestFor": "已在用飞书、希望 AI 嵌入协同流程并继承组织权限的企业",
+    "deployment": [
+      "web",
+      "app",
+      "api",
+      "saas"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "飞书 AI 基础版 ¥9,900/年含 18 万点额度；企业版 ¥9.9 万/年含 200 万点；企业版 Plus 29.7 万/年含 600 万点；旗舰版 99 万/年含 2000 万点。个人可购 AI 会员与豆包订阅。简单对话约 2 点、群聊总结约 10 点、2 万行 Excel 分析约 40 点、发布会 PPT 约 60 点；主动工作每有效推送日次日 0:00 扣 20 点",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://aily.feishu.cn/",
+    "sources": [
+      {
+        "title": "豆包工作伙伴计费说明（2026-08-14 更名公告与额度表）",
+        "url": "https://aily.feishu.cn/hc/1u7kleqg/1cnvbb55",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "飞书 AI 版本与定价（基础版/企业版/Plus/旗舰版）",
+        "url": "https://www.feishu.cn/product/feishuai",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "飞书智能伙伴发布：知识、记忆与主动工作设计",
+        "url": "https://www.feishu.cn/content/wechat_post_6515",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "dingtalk-ai-assistant",
+    "name": "DingTalk AI Assistant",
+    "nameZh": "钉钉 AI 助理",
+    "vendor": "阿里巴巴（钉钉）",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "助理能力被限定在钉钉内预先编排好的场景路径——制度问答、会议纪要、周报生成、审批流转，流程与触发条件由管理员在平台侧配置，同一输入走同一路径。不具备自主拆解目标的动态规划，也不做长程自治。",
+    "tagline": "钉钉内建的组织级 AI 助理",
+    "description": "在钉钉里建一个组织级 AI 助理，回答制度问题、整理会议纪要、生成周报，并把 AI 搜问、AI 听记、AI 表格与 DEAP 挂进同一套审批与组织架构里。取向是「不额外采购」：个人基础版免费，365 会员 19 元/月已含个人 AI 助理与 AI 搜索；企业侧 AI 算粒单独售卖，Basic 9800 元/年含 20 万算粒，Plus 9.8 万元/年含 200 万，组织内不限人数共享。硬件侧另有 A1 录音设备做转写与面试辅助。局限：免费版每周仅赠 300 算粒；复杂流程自动化与跨部门知识库共享要专业版 9800 元/年起；定价单位是「每组织」而非「每账号」，签约时谈错会差上万元。",
+    "highlights": [
+      "算粒组织内共享不限人数",
+      "按每组织计费而非按账号",
+      "自带 A1 录音硬件买断选项",
+      "助理能力挂进原生审批流"
+    ],
+    "limitations": [
+      "免费版每周仅赠300算粒",
+      "复杂流程自动化需专业版起",
+      "单位为每组织易谈错成本",
+      "场景路径由平台预设不可编排"
+    ],
+    "bestFor": "已用钉钉做审批与组织管理、想低成本补上 AI 的成长型企业",
+    "deployment": [
+      "web",
+      "app",
+      "saas"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "个人基础版免费；365 会员 ¥19/月（尝鲜连续包月 ¥15）；企业专业版 ¥9,800/年起（100-500 人）、专属版 ¥98,000/年起（500 人以上）。AI 算粒：Lite ¥980/年起、Basic ¥9,800/年含 20 万、Plus ¥98,000/年含 200 万、Pro ¥98,000/年含 2000 万；免费版每周赠 300 算粒。另有第三方渠道报价的专业版+/AI ¥1.98 万/年起、专属版+/AI ¥11.8 万/年起，与官方版本互斥不叠加",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://www.dingtalk.com/",
+    "sources": [
+      {
+        "title": "钉钉官方定价页（版本、AI 算粒与硬件）",
+        "url": "https://www.dingtalk.com/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "钉钉 AI 时代的工作方式（价格与算粒套餐）",
+        "url": "https://m.dingtalk.com/detail-418-%E4%EF%BE%A9",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "钉钉 AI 价格怎么选：专业版与专属版对比",
+        "url": "http://ding.cn/center/789018.html",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "baidu-dumate",
+    "name": "DuMate",
+    "nameZh": "百度搭子 DuMate",
+    "vendor": "百度",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "自主拆解目标并按文件夹与文件实际状态选择技能路径——批量分类、去重、格式互转、跨表关联计算的调用序列随输入结构变化，任务中断后可接续。缺 L4 所需的公开自检证据：无自我验证循环的文档，长流程偶发卡在沙箱环境准备。",
+    "tagline": "本机沙箱里替你批量处理 Office 文件",
+    "description": "把桌面上的 Word、Excel、PPT、PDF 批量分类、格式互转、抽条款、生成结构化摘要，再做跨表格关联计算与热力图，全部在本机安全沙箱内跑，数据不出设备。2026 年 3 月 22 日全量上线后保持近乎一天一版的节奏，5 月登顶 PinchBench 与 DeepResearch 双榜，5 月 13 日补上移动端 App，手机可远程给 PC 派任务并实时回传。技能广场可装 Skill 与 MCP，「连接应用」已打通飞书、企业微信、钉钉、如流。删文件、改系统、外发数据这类高危操作强制逐次授权，操作全程可审计。局限：免费版每日 1000 积分，Pro 129 元/月；任务中断需手动接续。",
+    "highlights": [
+      "本机沙箱隔离数据不出设备",
+      "登顶两大智能体评测榜首",
+      "手机可远程遥控 PC 派任务",
+      "高危操作逐次授权可审计"
+    ],
+    "limitations": [
+      "免费版每日仅1000积分",
+      "企业版按席位另计189元/月",
+      "任务中断需手动接续",
+      "长流程偶发卡在沙箱准备"
+    ],
+    "bestFor": "文件与表格处理量大、且对数据不出本机有硬要求的白领",
+    "deployment": [
+      "app",
+      "web",
+      "private"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "个人版免费版每日赠 1,000 积分；Pro 订阅 ¥129/月（首月 ¥9.9）、Max ¥69.9/月（首月）；可按 ¥10/1,000 积分加购。企业版 ¥189/席位/月含团队知识共享与合规审计，企业版完整价目未公开",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://cloud.baidu.com/product/dumate",
+    "sources": [
+      {
+        "title": "DuMate 个人版更新动态（版本迭代记录）",
+        "url": "https://cloud.baidu.com/doc/Dumate/s/cmmu7shvw",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "百度搭子 DuMate 功能介绍与使用指南",
+        "url": "https://www.runmie.com/24253.html",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "百度搭子 DuMate 词条（发布与评测成绩）",
+        "url": "https://baike.so.com/doc/30564297-32451959.html",
+        "type": "community",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "tencent-yuanqi",
+    "name": "Tencent Yuanqi",
+    "nameZh": "腾讯元器",
+    "vendor": "腾讯",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "以可视化配置为主：知识库、插件调用、提示词与分发渠道由人在搭建时选定，智能体运行时主要按既定配置应答。复杂长链路任务的 Agentic 编排能力仍在迭代，缺少可观察的动态重规划行为。",
+    "tagline": "零代码配智能体，一键发到微信 QQ",
+    "description": "用零代码把一个智能体配出来，再一键发到微信公众号、微信客服、企业微信、QQ、小程序，让它替你在私域里接问答、做客服、跑内容分发。底层是腾讯混元大模型，也支持接入第三方模型；平台支持多 Agent 协同、工作流编排与数据库直连。官方口径的企业客户已超 3000 家，零售与互联网行业占比过半。腾讯云 ADP 也已与元器联动，在 QQ 浏览器等 C 端生态上线了 PPT 生成、表格数据分析等十余个官方精品 Agent。局限：脱离腾讯生态后能力明显变弱，复杂推理与长链路编排仍在迭代；不支持私有化部署，额外付费才提供专属实例；工作流编排弱于 Dify 这类专用平台。",
+    "highlights": [
+      "直连微信 QQ 全生态分发",
+      "零代码拖拽搭建门槛低",
+      "支持多 Agent 协同编排",
+      "企业客户已超3000家"
+    ],
+    "limitations": [
+      "脱离腾讯生态后能力明显变弱",
+      "不支持私有化部署",
+      "复杂推理与长链路编排在迭代",
+      "工作流弱于 Dify 类平台"
+    ],
+    "bestFor": "业务主战场在微信私域、需把智能体直接触达终端用户的团队",
+    "deployment": [
+      "web",
+      "saas",
+      "api"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "个人版免费。企业版订阅制，公开资料显示区间 3 万-30 万元/年，官方页面未公开标准报价，需联系商务。企业私有化部署不支持",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://yuanqi.tencent.com/",
+    "sources": [
+      {
+        "title": "巨头混战企业级 AI Agent（腾讯元器企业客户数与定位）",
+        "url": "https://www.thepaper.cn/detail/33181571",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 年 AI 智能体公司推荐：服务商选型指南（腾讯元器）",
+        "url": "https://www.cet.com.cn/wzsy/cyzx/10428675.shtml",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "腾讯云 ADP 升级：与元器联动 C 端精品 Agent",
+        "url": "https://cnews.chinadaily.com.cn/a/202601/23/WS6972e8f0a310942cc499c766.html",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "doubao",
+    "name": "Doubao",
+    "nameZh": "豆包",
+    "vendor": "字节跳动",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "「办公任务」模式下自主拆解目标、调用本地电脑、文档、表格与网页工具持续执行，同一句指令在不同文件状态下会走出不同操作序列，并可设定时任务让长活挂着跑。达不到 L4：复杂长流程缺公开的自我验证循环，多表公式与精细排版仍会出错。",
+    "tagline": "国产第一 AI 入口长出的办公 Agent",
+    "description": "在豆包专业版的「办公任务」模式下，你给一句目标，它自己拆解任务、操作本地电脑、调用内置 Office 套件、跑浏览器与技能商店，把结果导成文件交回，也能设定时任务让长活后台挂着跑。2026 年 6 月 24 日上线专业版，基于豆包 2.1 系列模型，标准档接入 2.1 Pro。三档订阅：标准 68 元/月、加强 200 元/月、高级 500 元/月，免费版基础功能不变。手机装 App 后可远程发指令，桌面整理在电脑端跑、长任务可放云电脑。局限：额度消耗快且不透明，重度使用易触顶；免费版没有本地 GUI 操控与技能商店；财务合同类产出必须人工复核。",
+    "highlights": [
+      "办公任务模式自主操作本地",
+      "定时任务与云电脑挂后台",
+      "68元档覆盖多数办公场景",
+      "免费版功能未被阉割"
+    ],
+    "limitations": [
+      "额度消耗快且不透明易触顶",
+      "免费版无本地GUI与技能商店",
+      "复杂多表公式与排版仍会出错",
+      "财务合同类产出须人工复核"
+    ],
+    "bestFor": "预算有限、要一个手机到电脑全链路通用中文办公 Agent 的个人",
+    "deployment": [
+      "app",
+      "web",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "免费版 ¥0 长期免费；专业版标准 ¥68/月（连续包年 ¥688，单月 ¥80、单年 ¥828）、加强 ¥200/月（¥2,048/年）、高级 ¥500/月（¥5,088/年）。在校大学生认证后标准套餐可享连续包月 ¥38，并赠 6 个月特惠",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://www.doubao.com/",
+    "sources": [
+      {
+        "title": "豆包正式推出收费版，三档订阅方案",
+        "url": "https://news.qq.com/rain/a/20260625A05YLU00",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "豆包专业版上线：最高 500 元/月",
+        "url": "https://www.jwview.com/jingwei/html/m/06-24/676339.shtml",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "豆包电脑版权益与专业版价格表",
+        "url": "http://secure.mydown.com/soft/211/272711.shtml",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "kimi-work",
+    "name": "Kimi Work",
+    "nameZh": "Kimi Work 桌面端",
+    "vendor": "月之暗面",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 5,
+    "autonomyReason": "Agent Swarm 会把一个目标拆成多段并行派发给最多 300 个子 Agent，各子 Agent 跑完后把结果交接汇总，这是可观察的子任务并行与跨 Agent 结果交接；配合最长 13 小时连续执行与 Goal 模式。",
+    "tagline": "300 子 Agent 集群操控你真实的浏览器",
+    "description": "桌面装一个客户端，它读你挂载的本地文件夹、在本机跑 Python，并通过 WebBridge 扩展用 Chrome DevTools Protocol 接管你已登录的真实浏览器——所以它能碰到你的 cookie、银行与内网工具，ask before acting 模式默认改文件前先过一遍。真正的差异点是 Agent Swarm：并行派发最多 300 个子 Agent 各干一段再汇总交接，配上最长 13 小时连续执行与 Goal 模式。局限：合上笔记本任务即停，7×24 常驻要另用云端 Kimi Claw；「本地」只指执行地，推理仍可能走云端；仍处 Beta。",
+    "highlights": [
+      "最多300个子Agent并行派发",
+      "接管真实已登录浏览器会话",
+      "原生接入中文金融数据源",
+      "最长13小时连续执行"
+    ],
+    "limitations": [
+      "合上笔记本任务即中断",
+      "推理仍可能走云端非全本地",
+      "仍处Beta Skill生态尚早",
+      "不支持Linux主力用户"
+    ],
+    "bestFor": "做研报、投研、法务与长文档、想派任务而非聊任务的知识工作者",
+    "deployment": [
+      "app",
+      "cli",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "客户端免费下载，中文侧五档 ¥0/49/99/199/699，海外侧四档 $19（Moderato）/$39（Allegretto）/$99（Allegro）/$199（Vivace）；完整 300 Agent 集群能力需 $99 档及以上。公测免费档 Agent 次数有限",
+    "contextWindow": "256K",
+    "modalities": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.kimi.com/",
+    "sources": [
+      {
+        "title": "Moonshot AI's Kimi Work Brings 300 AI Agents to Your Desktop",
+        "url": "https://decrypt.co/?p=370954",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Kimi Work 深度体验：本地文件、浏览器自动化与 300 Agent 集群",
+        "url": "https://aiproducthub.cn/?p=13248/",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Moonshot AI Launches Kimi Work（订阅分档）",
+        "url": "https://newclawtimes.com/articles/moonshot-ai-kimi-work-300-parallel-agents-desktop-app",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "nami-ai",
+    "name": "Nami AI",
+    "nameZh": "纳米 AI 搜索",
+    "vendor": "360",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "「超级智能体」把复杂任务自动分解为多步、每步派不同专家智能体执行，具备动态规划与一定并行度。但厂商只给出「蜂群协作成功率 95.4%」的汇总口径，缺少可观察的子 Agent 交接证据与可复现评测，故不判 L5。",
+    "tagline": "16 家模型并答加专家蜂群的任务平台",
+    "description": "360 旗下，把一个复杂任务拆成多步、每步派不同专家智能体去做，最后拼成完整成品交给你，官方称多智能体蜂群协作任务成功率 95.4%。同时聚合 16 家厂商 50+ 款模型，同一问题可勾选多个模型并行作答、左右滑动对比，「大模型群聊」让多位模型自动分工解题。另有 MCP 工具箱、5 万个智能体模板、纳米 P 图、数字人 3.0 口播视频与 PPT 制作大师。基础搜索写作画图免费，视频生成扣纳米点数。2026 年 4 月网页端月访问 2.22 亿次，国内第二。局限：多模型并答意味着没有单一权威结论，重要数据仍需自行溯源；重度视频生成要另付费；蜂群成功率是厂商口径，缺可复现的第三方评测。",
+    "highlights": [
+      "聚合16家厂商50+款模型并答",
+      "专家蜂群自动分工拆解任务",
+      "MCP工具箱与5万智能体模板",
+      "网页端月访问量国内第二"
+    ],
+    "limitations": [
+      "多模型并答无单一权威结论",
+      "重度视频生成需另付费",
+      "蜂群成功率为厂商口径难复现",
+      "复杂推理深度任务表现平平"
+    ],
+    "bestFor": "学生、自媒体与需要横向比价模型答案的轻量办公人群",
+    "deployment": [
+      "app",
+      "web"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "AI 搜索、智能体与创作功能免费；视频生成扣纳米点数，1 元约 10 点；360 AI 大会员 ¥19.9/月起（送 300 点，含 AI 办公套件）。云手机、云电脑等增值能力另计费",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://www.n.cn/",
+    "sources": [
+      {
+        "title": "AI 搜索，战争打响（纳米 AI 访问量与多智能体定位）",
+        "url": "https://www.toutiao.com/article/7670114643813122575",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "纳米 AI 搜索：免费聚合十六家大模型",
+        "url": "https://m.toutiao.com/article/7675725015219798562",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "纳米AI 应用宝开发者页（版本与功能简介）",
+        "url": "https://sj.qq.com/appdetail/com.qihoo.namiso",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "stepfun-desktop",
+    "name": "StepFun Desktop",
+    "nameZh": "阶跃 AI 桌面版（StepClaw）",
+    "vendor": "阶跃星辰",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "「任务执行」与 StepClaw 模式下能自主拆解目标、调 MCP 工具推进跨软件流程，工具序列随任务变化。但复杂长任务偶发需重跑、重要结果需人工复核，缺稳定的自我验证循环，达不到 L4。",
+    "tagline": "兼容 OpenClaw 技能的国产桌面 Agent",
+    "description": "装上就能用的国产桌面 Agent：读本地文件、做定时任务、能调 Excel 与飞书等 16 款 MCP 工具，100% 兼容 OpenClaw 技能生态并吃 Claude Skill 格式，5000+ 社区技能可直接复用。三档模式从「快速回答」到「任务执行」到 StepClaw 多 Agent 跑跨软件长流程，微信、飞书、钉钉、企微、QQ 都能远程指挥。底层 Step 3.7 Flash 是专为 Agent 工作流训练的多模态模型，可解析 PDF、表格与 UI 截图，文件默认存本地。局限：3 天全功能体验（160 积分）到期后须订阅才有进阶算力，入门 39 元/月起；API 用量不含在会员内。",
+    "highlights": [
+      "兼容OpenClaw与Claude技能",
+      "五大IM均可远程指挥任务",
+      "原生长文档与UI截图理解",
+      "本地文件默认不上云"
+    ],
+    "limitations": [
+      "3天体验后须订阅才有算力",
+      "入门39元/月专业版499元",
+      "复杂长任务偶尔需要重跑",
+      "API用量不含在会员内"
+    ],
+    "bestFor": "想要全本地文件安全、日常用微信与飞书派活的零基础办公人群",
+    "deployment": [
+      "app",
+      "web",
+      "api",
+      "private"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "桌面客户端免费下载安装，基础问答与本地文件整理永久免费；新用户 3 天全功能体验（160 积分）、尝鲜周卡 ¥9.9（250 积分）；Step Plan 月订阅入门 ¥39（1,300 积分）、高级 ¥99（4,500）、进阶 ¥199（10,000）、专业 ¥499（27,000）。API 费用不含在会员内",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "https://www.stepfun.com/",
+    "sources": [
+      {
+        "title": "阶跃AI 会员权益说明（积分档位与云端托管）",
+        "url": "https://www.stepfun.com/subscription/membership-benefits-explanation",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "阶跃AI 桌面伙伴（2026-01-19 Windows 版与免费政策）",
+        "url": "https://baike.baidu.com/item/阶跃AI桌面伙伴/67260788",
+        "type": "community",
+        "date": "2026-09"
+      },
+      {
+        "title": "国内桌面端 AI Agent 选型（StepClaw 免费与订阅口径）",
+        "url": "https://aiproducthub.cn/?p=25927",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "autoclaw",
+    "name": "AutoClaw",
+    "nameZh": "澳龙",
+    "vendor": "智谱 AI",
+    "region": "china",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "Pony-Alpha-2 是专为连续规划、多步执行与重复工具调用微调的模型，同一指令在不同界面下动作序列不同，失败会重试。达不到 L4：Pony-Alpha-2 尚在 beta 且缺独立基准，长任务稳定性未经验证。",
+    "tagline": "一分钟装好 OpenClaw 的本地 Agent",
+    "description": "智谱把开源 OpenClaw 打包成一键安装的桌面应用，把原本要装 Node.js、配 API Key、调端口的半小时流程压到 1 分钟，内核与 OpenClaw 完全一致。默认模型是 Pony-Alpha-2——GLM-5 的微调版，针对工具调用准确性与多步任务拆解做了优化，目前仍是 beta；也可热切换 DeepSeek、Kimi 等第三方 API，GLM-4.7-Flash 系列免费。内置 50+ 预制技能覆盖办公、代码、内容与金融分析，并集成 AutoGLM 浏览器 Agent 补上跨页面操作短板。局限：客户端不开源依赖上游；积分制 29 元起为持续成本；该模型未经独立基准。",
+    "highlights": [
+      "一分钟完成原本30分钟的部署",
+      "为连续工具调用专门微调",
+      "飞书接入全自动约两分半",
+      "可热切换DeepSeek等三方模型"
+    ],
+    "limitations": [
+      "客户端不开源依赖上游更新",
+      "积分制29元起为持续成本",
+      "Pony-Alpha-2仍为beta未验证",
+      "免费模型额度有限"
+    ],
+    "bestFor": "想用 OpenClaw 但被环境配置卡住、要求数据留在本机的非技术用户",
+    "deployment": [
+      "app",
+      "private"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "客户端免费安装，注册赠免费积分，GLM-4.7-Flash 与 GLM-4.7-FlashX 免费提供；后续按积分充值包计费，¥29 起按用量阶梯。自带 API Key 可绕过积分限制；月度会员暂未开放",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "https://autoglm.zhipuai.cn/autoclaw",
+    "sources": [
+      {
+        "title": "Zhipu AI Releases AutoClaw to Simplify Open-Source Agent Installation and Feishu Integration",
+        "url": "https://www.toolmesh.ai/news/zhipu-autoclaw-simplify-openclaw-feishu-integration",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "AutoClaw 产品说明（50+ 技能、模型接入与积分）",
+        "url": "https://www.ainav.cn/sites/5686.html",
+        "type": "community",
+        "date": "2026-09"
+      },
+      {
+        "title": "Zhipu AI Launches AutoClaw, a One-Click Local OpenClaw Client",
+        "url": "https://aihola.com/article/zhipu-autoclaw-local-openclaw",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "microsoft-copilot-studio",
+    "name": "Microsoft Copilot Studio",
+    "nameZh": "微软 Copilot Studio",
+    "vendor": "微软",
+    "region": "overseas",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "智能体的 topic、generative answer、agent flow 与 action 均由搭建者在平台侧预先配置，运行时的分支逻辑与工具序列由编排决定。虽有 agent flow 的动态连接能力，但自主性上限受编排约束，且官方文档未描述开放式的目标自拆解。",
+    "tagline": "Power Platform 上的企业智能体工坊",
+    "description": "在 Power Platform 里低代码搭企业智能体：接 Microsoft Graph 做知识库 grounding、用 Agent flow 串业务流程、用 generative answer 应答开放问题，管理员在后台管身份与数据策略。计费单位已从「消息」改名 Copilot Credits，额度租户内池化共用，费率直接反映自主度，从 classic answer 1 点到 graph grounding 10 点差 10 倍。治理侧 Purview 把 DLP 延伸到智能体，7 月起新建智能体自动获得 Entra Agent ID。局限：credit 消耗随自主度线性上升难预测。",
+    "highlights": [
+      "额度租户内池化共用",
+      "费率按自主度分级差异25倍",
+      "Agent 365 中心化注册表",
+      "Purview DLP 覆盖智能体"
+    ],
+    "limitations": [
+      "credit随自主度线性上升难预测",
+      "CUA用量不含在M365席位内",
+      "预付额度耗尽直接拦截停跑",
+      "自主性受平台编排约束"
+    ],
+    "bestFor": "已全面采用 Microsoft 365 与 Power Platform、需要治理审计的 IT 部门",
+    "deployment": [
+      "web",
+      "saas",
+      "api"
+    ],
+    "pricingModel": "usage",
+    "pricingNote": "计费单位为 Copilot Credits。预付容量包 $200/月含 25,000 credits，Azure 按量 $0.01/credit。费率：classic answer 1 点、generative answer 2 点、agent action 5 点、tenant graph grounding 10 点、agent flow 每 100 次动作 13 点、基础文本生成工具每千 token 0.1 点、每页内容处理 8 点。持 M365 Copilot 许可的员工发起的企业内部场景按零计费。Microsoft Agent 365 为 $15/用户/月",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://www.microsoft.com/microsoft-copilot/microsoft-copilot-studio",
+    "sources": [
+      {
+        "title": "Billing rates and management（Copilot Credits 费率表）",
+        "url": "https://learn.microsoft.com/en-au/power-virtual-agents/analytics-billed-sessions",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "Microsoft Copilot Studio Agents: Build, Cost & Governance [2026]",
+        "url": "https://atlan.com/know/ai-agent/ai-agent-applications/what-are-microsoft-copilot-studio-agents/",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Licensing and Copilot Credits（AI Builder 消耗规则）",
+        "url": "https://docs.microsoft.com/en-us/ai-builder/message-management",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "salesforce-agentforce",
+    "name": "Agentforce",
+    "nameZh": "Salesforce Agentforce",
+    "vendor": "Salesforce",
+    "region": "overseas",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "Atlas 推理引擎在 CRM 数据上做多步自主推理：同一句客户请求在不同账户状态下会触发不同的记录更新、工单总结与流程分支，失败会换策略重试。属动态规划，但无长程自治与子 Agent 并行证据。",
+    "tagline": "长在 CRM 里的自主销售与客服 Agent",
+    "description": "在 Salesforce 数据与流程上落地客服与销售智能体：Atlas 推理引擎做多步 CRM 推理，智能体可自主更新记录、总结复杂工单、回答产品问题、调 Flow 与自定义 Action，权限天然继承既有体系而不需连接器。计费单位是 Flex Credits，标准 action 消耗 20 点、语音 action 30 点；2026 年 9 月 3 日起 Core、Advanced、Max 三档分别 195、395、550 美元每用户每月。局限：三种计费模型并行、成本预测困难，额度按组织还是按席位必须写进订单；实施成本常在 5 万-15 万美元以上，且需先有 Enterprise 版前提。",
+    "highlights": [
+      "权限天然继承CRM体系",
+      "按action计费对齐业务价值",
+      "实时查用量消耗明细",
+      "employee版给无限量使用"
+    ],
+    "limitations": [
+      "三种计费模型并行成本难预测",
+      "捆绑额度口径须写进订单",
+      "实施成本常超5万至15万美元",
+      "需先有Enterprise版前提"
+    ],
+    "bestFor": "Salesforce 存量客户，希望把智能体直接嵌进既有 CRM 流程与权限的组织",
+    "deployment": [
+      "web",
+      "saas",
+      "api"
+    ],
+    "pricingModel": "usage",
+    "pricingNote": "Flex Credits 消耗制，$500 每 10 万 credits（$0.005/credit），标准 action 20 credits、语音 action 30 credits。2026-09-03 起 Core $195、Advanced $395、Max $550 每用户每月，分别捆绑 50 万/100 万/275 万 Flex Credits。employee 附加包 $125/用户/月（无限量），Agentforce 1 Edition $550/用户/月起含 100 万 credits、至少 10 用户。Salesforce Foundations 免费层含 20 万 bundled credits",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://www.salesforce.com/agentforce/",
+    "sources": [
+      {
+        "title": "Flex Credits Rate Card（截至 2026-02-23）",
+        "url": "https://www.salesforce.com/en-us/wp-content/uploads/sites/4/assets/pdf/agentforce/Flex-Credits-Rate-Card-as-of-02.23.26.pdf",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "Prezzi Agentforce（按量与每用户许可两套模式）",
+        "url": "https://www.salesforce.com/it/agentforce/pricing/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "Salesforce Agentforce Review 2026（含 TCO 拆解）",
+        "url": "https://aiagentsquare.com/agents/salesforce-agentforce",
+        "type": "research",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "bedrock-agentcore",
+    "name": "Amazon Bedrock AgentCore",
+    "nameZh": "亚马逊 Bedrock AgentCore",
+    "vendor": "亚马逊 AWS",
+    "region": "overseas",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "AgentCore 提供的是执行环境、工具网关、记忆与策略等托管基础设施，智能体的决策逻辑由使用方自带的框架（LangGraph、CrewAI、Strands 或自研）实现。它决定智能体有多能跑，不决定它有多自主。",
+    "tagline": "AWS 上把 Agent 送上生产的托管运行时",
+    "description": "把智能体上生产所需的组件打包成托管服务：隔离 microVM 运行时、Browser、Code Interpreter、Gateway 工具网关、Identity、Memory、Policy 授权与 Evaluations 评测共 12 项。harness 本身免费，只对用到的资源计费，且与模型 token 分账，可接任意模型与框架。计费基准是 CPU 0.0895 美元/vCPU-小时（只算活跃 CPU）与内存 0.00945 美元/GB-小时；2026 年 8 月 6 日 runtime instances GA，Agent 跑在自家 EC2 上另加 12% 管理费。局限：账目分散。",
+    "highlights": [
+      "harness免费仅按组件计费",
+      "CPU只算活跃周期省I/O费用",
+      "可接任意模型与Agent框架",
+      "Policy提供每请求授权管控"
+    ],
+    "limitations": [
+      "12个组件独立计量账单复杂",
+      "内存按会话存活计费空转更贵",
+      "runtime实例12%管理费不可折扣",
+      "自主性取决于自带框架"
+    ],
+    "bestFor": "数据与基础设施已在 AWS、需生产级隔离与身份管控的工程团队",
+    "deployment": [
+      "api",
+      "saas",
+      "private"
+    ],
+    "pricingModel": "usage",
+    "pricingNote": "计费单位为各组件用量。Runtime/Browser/Code Interpreter：CPU $0.0895/vCPU-小时、内存 $0.00945/GB-小时（v2 消费模式 $0.1276/vCPU-小时、$0.0169/GB-小时，承诺基线 2026 年 10 月起为 $0.0997 与 $0.0132）。Gateway 调用 $0.005/千次、Search $0.025/千次、工具索引 $0.02/百工具/月。Memory 短期 $0.25/千事件、长期存储 $0.75/千条/月、检索 $0.50/千次。Policy $0.000025/次授权 + $0.13/千输入 token。Agent Registry 前 5000 条记录与前 100 万次搜索调用每月免费",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://aws.amazon.com/bedrock/agentcore/",
+    "sources": [
+      {
+        "title": "Amazon Bedrock AgentCore Pricing（官方全组件价目表）",
+        "url": "https://aws.amazon.com/bedrock/agentcore/pricing/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "Amazon Bedrock AgentCore Pricing: 12 Components Breakdown",
+        "url": "https://cloudburn.io/blog/amazon-bedrock-agentcore-pricing",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "AgentCore runtime instances：12% 管理费与利用率临界点",
+        "url": "https://ecorpit.com/bedrock-agentcore-runtime-instances-ec2-cost-decision-2026",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "vertex-ai-agent-builder",
+    "name": "Vertex AI Agent Builder",
+    "nameZh": "Google Gemini Enterprise Agent Platform",
+    "vendor": "Google Cloud",
+    "region": "overseas",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "Agent Studio 提供可视化构建、ADK 提供代码框架，智能体的决策逻辑由使用方在 ADK 中实现，平台只托管运行时与会话。ADK 支持多 Agent 编排，但编排拓扑由开发者预先定义，不构成平台侧的开放自主规划。",
+    "tagline": "Google Cloud 上的 Agent 构建与托管运行时",
+    "description": "用 Agent Studio 低代码或 ADK 代码框架搭智能体，Agent Engine 负责运行时、会话管理与 Memory Bank 长期记忆，Agent Builder 提供托管检索与工具治理——含 A2UI，可把富交互组件直接推给前端应用而不用 iframe。Memory Bank 的主题式记忆方法已被 ACL 2025 接收。2026 年 Cloud Next 上产品更名为 Gemini Enterprise Agent Platform 并并入 Agentspace。计费四个独立 SKU，单次提问可能触发四项。局限：没有硬性支出上限，配错的 endpoint 会持续静默计费。",
+    "highlights": [
+      "A2UI直接下发富交互免iframe",
+      "Memory Bank主题式记忆已GA",
+      "Agent Engine已下调运行时价格",
+      "更名后存量客户无需迁移"
+    ],
+    "limitations": [
+      "无硬性支出上限易现意外账单",
+      "IAM与API权限配置门槛高",
+      "四SKU叠加单次提问四项计费",
+      "刚更名文档控制台命名混用"
+    ],
+    "bestFor": "数据已在 Google Cloud、需 ADK 代码级控制与长期记忆的 ML 团队",
+    "deployment": [
+      "web",
+      "api",
+      "saas",
+      "private"
+    ],
+    "pricingModel": "usage",
+    "pricingNote": "无固定月费，按四个独立 SKU 用量计费。Agent Engine runtime $0.0864/vCPU-小时、内存 $0.0090/GB-小时；Sessions $0.25/千事件、Memory Bank $0.25/千条存储（LLM 成本另计）与 $0.50/千次检索；Search $4.00/千次查询、Advanced LLM $6.00/千次。免费额度每月 50 vCPU-小时与 100 GB-小时内存，Search 每月 1 万次免费查询，新客 $300 信用额 90 天有效",
+    "contextWindow": "1M",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://cloud.google.com/vertex-ai",
+    "sources": [
+      {
+        "title": "New Enhanced Tool Governance in Vertex AI Agent Builder（定价变更与 A2UI）",
+        "url": "https://cloud.google.com/blog/products/ai-machine-learning/new-enhanced-tool-governance-in-vertex-ai-agent-builder",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "Vertex AI Agent Builder Review 2026：四 SKU 账单与上手成本",
+        "url": "https://www.betterclaw.io/blog/google-vertex-ai-agent-builder",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Google Vertex AI Pricing: Complete Enterprise Guide (2026)",
+        "url": "https://www.cloudzero.com/blog/google-vertex-ai-pricing/",
+        "type": "research",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "tencent-adp",
+    "name": "Tencent Cloud ADP",
+    "nameZh": "腾讯云智能体开发平台",
+    "vendor": "腾讯云",
+    "region": "china",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "Claw 模式可用一句自然语言自动生成提示词、Skills、知识库与工作流的全套配置，但生成后路径即被固化；运行时的分支与工具序列由已编排的工作流决定，不做开放式目标自拆解。",
+    "tagline": "企业级 AgentOps 全生命周期平台",
+    "description": "面向企业做智能体的构建—连接—分发—治理全生命周期。4.0 版（2026 年 6 月）把 Claw 模式与 Agentic RAG 作为双核心：Claw 模式下输入一句业务需求，AI 自动生成提示词、Skills、知识库与工作流的全套配置；Agentic RAG 加预置近 40 个 Connector，直连 CRM、ERP、OA 与客服系统，原生兼容 MCP。治理侧是多租户数据隔离，不同部门与项目的知识库、会话独立加密；任务失败与异常调用自动告警并推送企微。局限：私有化换算实施人力往往高于云上；行业专有系统仍需自研连接；License 自激活日起算，采购与上线节奏易错配。",
+    "highlights": [
+      "Claw模式一句话生成全套配置",
+      "近40个业务系统连接器",
+      "多租户数据隔离独立加密",
+      "任务失败与异常调用自动告警"
+    ],
+    "limitations": [
+      "私有化成本常高于云上方案",
+      "行业专有系统仍需自研连接",
+      "License自激活日起算易错配",
+      "Claw生成后路径固化不再规划"
+    ],
+    "bestFor": "已用腾讯云或企业微信生态、需多租户隔离与集中治理的集团型 IT 部门",
+    "deployment": [
+      "web",
+      "api",
+      "saas",
+      "private"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "公有云：专业版 ¥188/月起、¥1,880/年，企业版 ¥48,000/年起（公有云连接器与多租户权限）；新用户赠 100 元 PU 资源包。云部署（私有化）订阅授权仅标准版 ¥800,000/年，含 500 应用 + 500 空间 + 2,000 成员上限，License 有效期自激活起算。私有化定制报价百万级/年起，未公开具体价格",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://cloud.tencent.com/product/adp",
+    "sources": [
+      {
+        "title": "腾讯云 ADP 计费概述（云部署 License ¥80 万/年）",
+        "url": "https://cloud.tencent.com/document/product/1376/128390",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "腾讯云 ADP 4.0 发布：Claw 模式与 Agentic RAG 双核心",
+        "url": "https://cloud.tencent.cn/developer/article/2706430",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 年企业 AI 平台全景盘点（腾讯云 ADP 定价与定位）",
+        "url": "https://tizdata.com/zx/47",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "aliyun-bailian",
+    "name": "Alibaba Cloud Model Studio (Bailian)",
+    "nameZh": "阿里云百炼",
+    "vendor": "阿里巴巴",
+    "region": "china",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "百炼提供 Agent 应用框架、MCP & Skill 标准化接入与 Managed Agents 托管运行环境，但智能体的决策逻辑由使用方在应用编排中定义。Managed Agents 只负责把已定义的智能体托管起来并按时长计费，不改变其自主程度。",
+    "tagline": "通义底座上的 Agent 开发与托管环境",
+    "description": "阿里云的智能体开发与运行底座。2026 年 8 月 17 日起 Managed Agents 正式商业化：会话运行时 0.5 元/小时，按已创建并处于运行中状态的会话时长计费，空闲不收费，不足 1 小时按实际折算；模型 token 与工具/MCP 调用费均不含在内，一条长跑任务的账单会分三段。平台侧提供 RAG、Memory 长期与短期记忆、MCP & Skill 标准化接入，把常用工作流封装成可复用技能一键共享，并承诺不用对话数据训练模型。局限：空闲会话即断档不适合 7×24 常驻；个人版有 5 小时与 7 天双重滚动限额，耗尽只能等重置。",
+    "highlights": [
+      "托管运行时仅0.5元/小时",
+      "MCP与Skill封装可复用",
+      "坐席制多档覆盖个人到团队",
+      "承诺不用对话数据训练"
+    ],
+    "limitations": [
+      "空闲会话断档不适合常驻",
+      "模型与工具费不含在运行时费",
+      "个人版有5小时与7天双重限额",
+      "额度耗尽只能等滚动重置"
+    ],
+    "bestFor": "阿里云存量用户，需把已定义智能体托管成在线服务并统一管额度",
+    "deployment": [
+      "web",
+      "api",
+      "saas",
+      "private"
+    ],
+    "pricingModel": "usage",
+    "pricingNote": "Managed Agents 会话运行时 ¥0.5/小时（商业化自 2026-08-17，赠 10 小时免费运行时长、30 天内有效，仅抵扣运行时费），模型 token 与工具/MCP 调用费另按公开价计。Token Plan 个人版 Lite ¥39/月（2,500 credits）、Standard ¥139（10,000）、Pro ¥499（40,000）；团队版标准坐席 ¥198/席/月（25,000 credits）、高级 ¥698（100,000）、尊享 ¥1,398（250,000）；共享用量包 ¥5,000/个（625,000 credits）",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://bailian.console.aliyun.com/",
+    "sources": [
+      {
+        "title": "阿里云公告：百炼 Managed Agents 商业化通知（0.5 元/小时）",
+        "url": "https://www.aliyun.com/notice/detail?notice-id=118456",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "阿里云百炼 Token Plan 服务页（套餐档位与权益）",
+        "url": "https://www.aliyun.com/benefit/scene/coding",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 百炼 Token Plan 完整指南（Credits 计费与并发上限）",
+        "url": "https://developer.aliyun.com/article/1760297",
+        "type": "community",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "baidu-qianfan",
+    "name": "Baidu Qianfan",
+    "nameZh": "百度智能云千帆",
+    "vendor": "百度",
+    "region": "china",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "提供零代码与低代码双模式、RAG 知识库与 20 万字长文档解析，智能体的执行路径由所选模板与编排决定。官方以 Agent-first 架构与百万级 Agent 承载量为卖点，但未描述开放式的目标自拆解与动态重试机制。",
+    "tagline": "以 Agent-first 架构重构的百度云平台",
+    "description": "以 Agent-first 理念重构产品架构的百度智能云平台，官方称已累计支撑企业构建超 130 万个智能体，工具日均调用达数千万级，覆盖智能硬件、制造、交通、能源等主流行业。技术上聚合 150 余个精选模型，提供零代码与低代码双模式，内置 20 万字长文档解析，配套 RAG 知识库与生态流量分发。合规是真正的差异点：支持公有云、专属实例、私有化、混合云与政务金融合规部署，通过信通院可信 AI 与等保三级。局限：私有化授权起步价高，政务合规包另需按年付费，中小团队基本用不上；自带流量分发对内网场景价值有限；复杂流程往往要落到自研。",
+    "highlights": [
+      "已支撑超130万个智能体构建",
+      "公有云到私有化全形态部署",
+      "20万字长文档解析内置",
+      "信通院可信AI与等保三级"
+    ],
+    "limitations": [
+      "私有化起步价与合规包成本高",
+      "自带流量分发对内网价值有限",
+      "企业级开发者生态弱于Dify系",
+      "复杂流程常需落到自研"
+    ],
+    "bestFor": "政务、金融、制造业等对国产合规与私有化有硬要求的中大型企业",
+    "deployment": [
+      "web",
+      "api",
+      "saas",
+      "private"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "公有云按量计费，企业套餐约 ¥5,000-20,000/月。私有化部署授权起步价 ¥452,000/年（平台 license + 大模型调用费），面向政务客户的合规包 ¥120,000/年。官方未直接公布完整价目表，具体报价需联系商务",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://cloud.baidu.com/product/qianfan",
+    "sources": [
+      {
+        "title": "巨头混战企业级 AI Agent（千帆 Agent Infra 定位与规模）",
+        "url": "https://www.thepaper.cn/detail/33181571",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "2026 年企业 AI 平台全景盘点（千帆定价与部署形态）",
+        "url": "https://tizdata.com/zx/47",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "智能体开发平台对比：HiAgent 3.0 与百度千帆（私有化起步价）",
+        "url": "https://ima.qq.com/wiki/?shareId=1e1ca7960529a53287d39a9c6608dd2001ea3091eaa4e4e9d09a6b269d29fdac",
+        "type": "research",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "low",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "coze",
+    "name": "Coze",
+    "nameZh": "扣子",
+    "vendor": "字节跳动",
+    "region": "china",
+    "tier": "platform",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "以拖拽式可视化编排与插件市场为主，执行路径由搭建时确定的对话流与工作流决定。扣子 3.0 加入多 Agent 协作与项目空间，但协同拓扑仍由使用方预先定义，不做开放式自主规划。",
+    "tagline": "零代码拖拽搭建并一键发布的 Agent 平台",
+    "description": "字节跳动的低代码智能体开发平台，从注册到搭出一个能用的客服 Agent 全程不到 15 分钟。以拖拽编排对话、插件与工作流为主，做完可一键发到飞书、抖音、企业微信与网页，插件生态 700+ 项。扣子 3.0 新增多 Agent 协作、模型自定义接入、项目空间与行业技能包，企业版可连接本地 Agent 且数量不限。计费按积分统一计量，对话、编程任务与视频创作都消耗积分。2026 年 7 月 14 日起企业版调价：标准版 498→980 元/月，旗舰版 5980→8980 元/月。局限：不支持私有化部署；调价后单人开发者的单位经济性明显变差；积分逐轮累加，复杂 Agent 消耗极难事前估准。",
+    "highlights": [
+      "15分钟搭出可用的客服Agent",
+      "一键发布到飞书抖音企业微信",
+      "700+插件与行业技能包生态",
+      "企业版可不限量连本地Agent"
+    ],
+    "limitations": [
+      "不支持私有化部署数据出域",
+      "企业版调价抬高交付成本",
+      "积分逐轮累加难事前估准",
+      "复杂推理与长文本能力偏弱"
+    ],
+    "bestFor": "中小企业营销、客服与内容团队，需要快速搭出并多端发布的轻量 Agent",
+    "deployment": [
+      "web",
+      "app",
+      "saas",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "个人免费版 ¥0；个人进阶 ¥39.9/月（3 万积分）、高阶 ¥99（9.9 万）、旗舰 ¥199（19.9 万）、尊享 ¥999（99.9 万）；团队高阶 ¥198、旗舰 ¥398、尊享 ¥1,998。2026-07-14 起企业标准版 ¥980/月起（5 席位、34.5 万积分）、企业旗舰版 ¥8,980/月起（30 席位、207 万积分），席位 ¥29/个/月、积分订阅 ¥69/席位/月（每席 6.9 万积分），企业版按 1,000 积分 = ¥1 从火山引擎账户自动扣款",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://www.coze.cn/",
+    "sources": [
+      {
+        "title": "企业版套餐定价调整（2026-07-14 生效公告）",
+        "url": "https://docs.coze.cn/guides_enterprise_plan_pricing_adjustment",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "扣子套餐与定价（全部档位与权益对照表）",
+        "url": "https://docs.coze.cn/cozespace_coze_billing_overview",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "扣子 Coze 价格 2026（个人/团队/企业与外挂点数）",
+        "url": "https://micount.cn//tw//blog/coze-price.html",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "harvey-ai",
+    "name": "Harvey",
+    "nameZh": "哈维 AI",
+    "vendor": "Harvey",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "法律",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "用户可交办「审查这份 500 页并购协议包并标出偏离标准条款的项」这类目标，Harvey 自主拆解文件清单、逐份比对、汇总输出并在中途失败时重试；但全流程受律师指令与权限边界约束，不具备数小时无人值守的自检闭环，故为 L3 而非 L4。",
+    "tagline": "大所与法务部门的法律工作台",
+    "description": "读取数据室里的成百上千份文件，逐份比对条款、标出偏离律所标准立场的位置、把散落在合同与附件里的义务和期限汇成一张可检索的清单，最后产出一份带原文引用的尽调备忘录。早期客户披露，处理数千份文件的尽调从数周压缩到数小时量级。真正拉开差距的不是单份合同审查速度，而是它允许客户在平台上沉淀并微调专属 Agent（25,000+ 个定制 Agent 已在运行），把「我们律所怎么审并购协议」变成可复用流程。局限：所有输出都停留在「提示」层面，条款取舍、谈判策略与最终结论必须由律师判断并签字；跨境交易规则和新兴法域的覆盖仍不完整；定价不透明且门槛高（AmLaw 100 级别）。",
+    "highlights": [
+      "25,000+ 客户定制 Agent",
+      "数千份文件尽调数小时完成",
+      "按律所 playbook 微调模型",
+      "Word 原生集成"
+    ],
+    "limitations": [
+      "最终结论须律师复核签字",
+      "跨境与新兴法域覆盖不全",
+      "定价不透明、起订门槛高",
+      "幻觉与错误抽取风险固有存在"
+    ],
+    "bestFor": "预算充足、希望把内部审查 know-how 固化成可复用流程的 AmLaw 100 律所与大型企业法务部",
+    "deployment": [
+      "web",
+      "app",
+      "api",
+      "private"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "约 $1,000-1,200/律师/月，年付，常见起订量 25-50 席位；具体报价未公开，需联系销售",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://www.harvey.ai",
+    "sources": [
+      {
+        "title": "Harvey 定价与客户席位门槛",
+        "url": "https://cc-ai-law.netlify.app/articles/%E6%B3%95%E5%BE%8B%E4%BA%A7%E5%93%81%E5%AE%9A%E4%BB%B7%E7%AD%96%E7%95%A5%E5%AD%A6%E4%B9%A0%E6%8A%A5%E5%91%8A",
+        "type": "research",
+        "date": "2026-09"
+      },
+      {
+        "title": "Robin AI Alternatives: What Happened to Robin AI",
+        "url": "https://www.spellbook.legal/learn/robin-ai-alternatives",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "luminance",
+    "name": "Luminance",
+    "nameZh": "Luminance",
+    "vendor": "Luminance",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "法律",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "尽调/审查的流程路径由平台预先编排——抽取条款、比对立场、评级、生成报告均为固定流水线，用户不能中途改写步骤计划；不符合 L3 的「自主决定下一步」。",
+    "tagline": "批量合同审查与谈判位点管理",
+    "description": "把一份 200 页的服务协议在几十分钟内拆成数千个条款级数据点，自动标出落在客户谈判底线之外的红旗项，并按严重度排序输出可直接发给对方的修订建议；同时维护一份会持续比对的合同台账，新签署的履约条款一旦偏离既定标准就主动告警。客户在采购季高峰用它把逐条人工比对压缩为抽查式复核，单轮审查周期从数日降到当日。局限：它只判断「与既定立场是否偏离」，不判断条款在具体语境下是否合理；跨法域的本地化判断依赖模板而非本地律师；谈判策略取舍与签署决策仍须由法务负责人拍板。",
+    "highlights": [
+      "数十秒完成单份长合同拆解",
+      "条款级红黄绿风险评级",
+      "合同台账持续监测履约偏离",
+      "谈判立场可直接对照输出"
+    ],
+    "limitations": [
+      "不判断条款在具体语境下的合理性",
+      "跨法域依赖模板而非本地律师",
+      "谈判与签署决策须法务拍板",
+      "非标结构的识别偶有偏差"
+    ],
+    "bestFor": "有标准谈判立场、需要在旺季批量处理尽调与续约审查的企业法务团队",
+    "deployment": [
+      "web",
+      "api",
+      "saas"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "未公开，演示驱动报价，按合同批量与席位定制",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.luminance.com",
+    "sources": [
+      {
+        "title": "Robin AI 倒闭后 Luminance 成为金融服务业与私募更稳定的替代",
+        "url": "https://www.pangea.app/glossary/robin-ai",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "合同 AI 三档市场分层对比（Harvey / Ironclad / Luminance）",
+        "url": "https://www.spellbook.legal/learn/robin-ai-alternatives",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "evenup-cocounsel",
+    "name": "EvenUp CoCounsel",
+    "nameZh": "EvenUp 律所副驾",
+    "vendor": "EvenUp",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "法律",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "从检索案例、生成时间线到起草文书是预先编排好的串联流水线（源自 Casetext CoCounsel 的四条产品线整合），任务链路由产品定义而非模型运行时决定；但单次任务内可按用户追问切换检索角度。",
+    "tagline": "面向个人伤害与劳动争议的诉讼准备",
+    "description": "把卷宗里成百上千页的医疗记录、雇佣文件和庭审笔录读进去，自动抽出与案情相关的时间线、专家姓名与关键日期，再据此生成带原文出处的证据摘要、证人质询大纲和动议初稿；公司自述在其主要战场（个人伤害与劳动争议）把「每案研究准备从数周压到数小时」。真正的差异点在于它用律所自己过去办过的成案数据训练，而不是通用模型。局限：范围被刻意限制在少数几个案由，超出范围的案件质量明显下降；生成的动议和质询稿必须逐条核对引用与法条，尤其医疗记录的理解容易出现「读了但没读懂」的错误；赔偿金额等最终策略必须由律师决定。",
+    "highlights": [
+      "卷宗时间线自动抽取",
+      "生成内容带原文出处",
+      "用律所成案数据而非通用模型",
+      "覆盖个人伤害与劳动争议主战场"
+    ],
+    "limitations": [
+      "仅覆盖少数案由，超范围质量下降",
+      "医疗记录理解易出现隐性偏差",
+      "引用与法条须逐条人工核对",
+      "赔偿与和解策略须律师决定"
+    ],
+    "bestFor": "处理个人伤害或劳动争议、需要快速完成案卷梳理与文书初稿的原告方与被告方律所",
+    "deployment": [
+      "web",
+      "app"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "未公开，律所级报价（源自 Casetext CoCounsel 的企业订阅）",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.evenuplaw.com",
+    "sources": [
+      {
+        "title": "EvenUp 律所产品线（源自 Casetext CoCounsel）",
+        "url": "https://www.evenuplaw.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "robin-ai",
+    "name": "Robin AI",
+    "nameZh": "Robin AI",
+    "vendor": "Robin AI",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "法律",
+    "status": "discontinued",
+    "autonomyLevel": 2,
+    "autonomyReason": "产品定位就是「副驾」：每一条红线建议都由律师在 Word 里逐条接受或拒绝，AI 主动要求人类控制权，工作流为固定编排，因此仅 L2。",
+    "tagline": "已停运的 Word 内合同审查副驾",
+    "description": "在 Microsoft Word 里逐条解析 NDA、SLA、供应商协议全文，对照企业自定义 playbook 标出偏离条款并给出可编辑的红线修改，让律师不必在浏览器和文档之间来回切换——这一集成曾让它进入 13 家财富 500 强和 UBS、PwC 等客户，最高宣称审查速度快 80%。它也能把已签署合同转成可检索结构化数据，跨千份文件做组合条款查询。局限，也是它最值得记录的部分：2025 年增长轮融资失败后大幅裁员，同年 12 月托管法务服务业务被 Scissero 收购，2026 年 1 月工程团队被 Microsoft acqui-hire，微软明确表示未收购主体。产品随之停运。",
+    "highlights": [
+      "Word 原生插件，律师零迁移成本",
+      "曾进入 13 家财富 500 强",
+      "跨合同组合条款检索",
+      "已验证的 playbook 红线工作流"
+    ],
+    "limitations": [
+      "公司已进入清算，主体停运",
+      "服务业务售予 Scissero、团队被微软吸收",
+      "支持与数据导出状态须逐家确认",
+      "所有输出仍须律师逐条审核"
+    ],
+    "bestFor": "仅作反面教材研究：法律 AI 的单位经济性与供应商生存性同样是采购指标",
+    "deployment": [
+      "app"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "已停运。原为 Free / Pro（第三方估约 $100/月 5 席）/ Enterprise 年约，托管法务服务另按量计费",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "https://robinai.com",
+    "sources": [
+      {
+        "title": "Robin AI Alternatives: What happened to the company",
+        "url": "https://www.spellbook.legal/learn/robin-ai-alternatives",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Robin AI 术语条目：倒闭时间线与 13 家财富 500 强客户",
+        "url": "https://www.pangea.app/glossary/robin-ai",
+        "type": "community",
+        "date": "2026-09"
+      },
+      {
+        "title": "Robin AI Review 2026: 供应商稳定性风险",
+        "url": "https://litmustools.com/?p=557",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "mecheck-milvzn",
+    "name": "MeCheck 智能合同审查",
+    "nameZh": "幂律智能 MeCheck",
+    "vendor": "北京幂律智能科技（PowerLaw AI）",
+    "region": "china",
+    "tier": "vertical",
+    "verticalDomain": "法律",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "审查流程由预设的 1000+ 风险审查点与 CoT 推理链驱动，可为每个审查点配置风险判断逻辑，属于「多步但路径确定」的固定编排，故为 L2。",
+    "tagline": "中文合同的 AI 风险筛查与修订建议",
+    "description": "把一份中文合同逐条过一遍千级风险审查点，标出风险条款、缺失条款和前后不一致的表述，附上法条依据和可直接复用的修改建议，一分钟完成全文档风险定位；支持自定义企业专属审查标准，用得越久准确性越高。厂商公开数据称已服务 100+ 企业、累计审查 10 万+ 份合同、时间节省约 60%，南方电网、金拱门等企业有落地案例。另提供 AI 法律翻译（保留术语与结构）和 AI 类案检索（从裁判文书网找支撑判例）。局限：只覆盖合同文本本身的合规审查，复杂投融资、跨境合规场景仍须人工深核；小微企业免费额度有限；是否修改、是否签署由企业法务决定。",
+    "highlights": [
+      "1000+ 风险审查点，一分钟定位",
+      "CoT 推理链，结论可解释可追溯",
+      "支持民法典条文比对与类案检索",
+      "可私有化部署，对接钉钉企微 ERP"
+    ],
+    "limitations": [
+      "仅覆盖合同文本层合规审查",
+      "投融资与跨境合规须人工深核",
+      "免费额度对小微企业有限",
+      "平台自述准确率无第三方验证"
+    ],
+    "bestFor": "处理中文合同、有常态化审核需求的中大型企业法务部与规模化律所",
+    "deployment": [
+      "web",
+      "app",
+      "saas",
+      "private"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "基础版免费，专业版 299 元/年（第三方评测），个人版约 2,999 元/年起、团队版 9,999 元/年起（媒体口径），私有化另议",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "http://www.mecheck.net.cn",
+    "sources": [
+      {
+        "title": "MeCheck 智能合同审查官网：100+ 类合同、1000+ 审查点、服务数据",
+        "url": "http://www.mecheck.net.cn",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "MeCheck 产品测评：南方电网、金拱门落地案例与短板",
+        "url": "https://www.zhaozhaoai.com/tools/legal-compliance-ai/392.html",
+        "type": "community",
+        "date": "2026-07"
+      },
+      {
+        "title": "AI 合同审阅横评：Ironclad / Lawgeex / 幂律 AI",
+        "url": "https://lifeclass.com.cn/ai-contract-review",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "dragon-copilot-dax",
+    "name": "Microsoft Dragon Copilot (DAX Copilot)",
+    "nameZh": "微软 Dragon Copilot 临床副驾",
+    "vendor": "Microsoft",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "医疗",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "作为环境听录工具，其工作流完全固定：听对话 → 生成结构化病历草稿 → 医生签发；不自主决定下一步临床动作，故为 L2。",
+    "tagline": "门诊病历自动听录与生成",
+    "description": "在门诊问诊时旁听医患对话，把整段交流自动转成 SOAP 结构的病历草稿，主诉、现病史、查体、评估与处置计划分栏填好，医生核对修改后签发，公开数据显示可把单次问诊的病历记录时间从 15-20 分钟压缩到 2 分钟以内，并已接入 Epic 等主流 EHR 直接写回。它也支持用自然语言检索既往病历并在查房中生成摘要，2026 年被整合进 Microsoft Dragon Copilot 品牌。局限：它记录的是「说过的话」，不判断医学逻辑是否正确，遗漏或误记只能靠医生自己发现；只覆盖英语与部分欧洲语言；病历内容的医疗法律责任仍由签字医生承担。",
+    "highlights": [
+      "病历记录 15-20 分钟压到 2 分钟",
+      "直接写回 Epic 等 EHR",
+      "门诊与查房双场景",
+      "已并入微软 Dragon Copilot"
+    ],
+    "limitations": [
+      "只转写不校验医学逻辑",
+      "语言覆盖不含中文病历场景",
+      "错误与遗漏需医生自查",
+      "诊断责任始终在签字医生"
+    ],
+    "bestFor": "门诊量大的初级医生与规范化程度高的美国医院系统",
+    "deployment": [
+      "web",
+      "app",
+      "private"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "约 $369-830/医生/月，另有约 $650 一次性上线费；企业级打包，未公开完整价目",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://www.microsoft.com/en-us/health/microsoft-dragon-copilot",
+    "sources": [
+      {
+        "title": "AI 医疗工具 2026：环境听录 vs 临床决策支持分类与定价",
+        "url": "https://byteledger.vizleo.com/blog/ai-medical-diagnosis-tools-2026",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Microsoft Dragon Copilot 官方产品页",
+        "url": "https://www.microsoft.com/en-us/health/microsoft-dragon-copilot",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "suki-ai",
+    "name": "Suki",
+    "nameZh": "Suki AI",
+    "vendor": "Suki Health",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "医疗",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "以语音听录为核心的固定流程产品，可自适应专科与个人发音习惯但不自主规划临床步骤，属 L2。",
+    "tagline": "语音优先的全科临床副驾",
+    "description": "医生用语音直接下达指令：说「Suki，记录一下刚才的病史」或「把这段对话整理成 SOAP」，它同时承担环境听录和语音问答两件事——一边听完整场问诊生成结构化病历，一边随叫随到回答「这个患者的过敏史是什么」。行业评测普遍把每名临床医生每天节省 1-2 小时列为最实在的 ROI，按小时折算的产能价值下年回收可达数十倍。它在多专科场景下的适应性比单一专科听录工具更好，已进入多家大型医疗系统。局限：识别准确率与口音、科室术语强相关，方言与非英语患者场景明显下降；病历与建议均须医生逐字复核，医疗责任完全在医生；文献证据能力不如 UpToDate、OpenEvidence。",
+    "highlights": [
+      "每医生每天节省 1-2 小时",
+      "听录与语音问答双模式合一",
+      "跨多专科自适应",
+      "ROI 年回收可达数十倍"
+    ],
+    "limitations": [
+      "口音与科室术语影响识别准确率",
+      "输出须医生逐字复核",
+      "医学责任由医生承担",
+      "文献证据能力弱于专用检索工具"
+    ],
+    "bestFor": "门诊量大、切换频繁且希望用语音而非键盘录入的临床医生",
+    "deployment": [
+      "web",
+      "app",
+      "private"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "约 $99-300/医生/月，企业按量与部署规模浮动，未公开标准价目",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.suki.ai",
+    "sources": [
+      {
+        "title": "AI 医疗工具 2026：Suki 的定位、成本与 ROI 测算",
+        "url": "https://byteledger.vizleo.com/blog/ai-medical-diagnosis-tools-2026",
+        "type": "media",
+        "date": "2026-09"
+      },
+      {
+        "title": "Suki 官方产品页",
+        "url": "https://www.suki.ai",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "ambience-healthcare",
+    "name": "Ambience",
+    "nameZh": "Ambience 临床听录",
+    "vendor": "Ambience Healthcare",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "医疗",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "以专科听录模板为核心的多步固定流程：由选定的专科模板驱动结构化输出，AI 不自主决定问诊或处置路径，故为 L2。",
+    "tagline": "按专科打磨的临床听录与编码",
+    "description": "为 20 多个医疗专科分别训练了听录模型，在嘈杂的门诊环境里做全流程记录：儿科门诊同一时段可能并行数名患儿家属的说话声，它仍能分别归位到正确患者的记录里。生成的不只是病历草稿，还会自动铺出 ICD-10 编码建议，直接进入院内计费与编码流程——这一步是很多听录工具没有的，也是它在美国大型门诊系统里被反复采购的原因。客户公开数据称单次问诊可省下数分钟到十余分钟不等，具体取决于专科与病历复杂度。局限：模板化带来的优势在记录之外就终止了，它不提供文献检索、不生成鉴别诊断，也不参与诊疗决策；编码建议同样只是建议，编码员与医生需复核；目前以英语为主，专科覆盖之外的语言需单独确认。",
+    "highlights": [
+      "20+ 专科分别训练的听录模型",
+      "嘈杂儿科门诊多说话人分离",
+      "自动生成 ICD-10 编码建议",
+      "直接接入计费与编码流程"
+    ],
+    "limitations": [
+      "不提供文献检索与鉴别诊断",
+      "编码建议须编码员与医生复核",
+      "以英语场景为主",
+      "收益幅度随专科与病历复杂度波动"
+    ],
+    "bestFor": "希望同时解决病历记录与门诊编码两项负担的专科医院与大型门诊系统",
+    "deployment": [
+      "web",
+      "app",
+      "private"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "未公开，按坐席数与部署规模定制报价",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://www.ambiencehealthcare.com",
+    "sources": [
+      {
+        "title": "Ambience 官方产品页：专科听录与编码能力",
+        "url": "https://www.ambiencehealthcare.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "xunfei-medical-agent",
+    "name": "讯飞医疗 AI 诊疗助理",
+    "nameZh": "讯飞星火医疗大模型诊疗助理",
+    "vendor": "科大讯飞 / 讯飞医疗",
+    "region": "china",
+    "tier": "vertical",
+    "verticalDomain": "医疗",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "由文书生成、质量管控、诊疗决策、循证支撑四个模块按需动态调度：医生说一句「查一下这个病人的用药冲突」，系统自行决定调用哪条知识链并组合多源证据再返回，属动态规划；但单次诊疗动作仍不可脱离医生独立闭环，故为 L3。",
+    "tagline": "中文病历质控与辅助诊疗一体化",
+    "description": "在医生诊治病历的全程同时做四件事：听完对话自动生成病历初稿、按规范扫描并挑出书写缺陷、给出诊疗决策支持线索、附上循证医学依据——这四块是并列智能体而非单一工具，医生需要哪块就调哪块。落地数据里最实的一条来自安徽医科大学第一附属院：接入后病历书写时间每天节省 2.8 小时，主任级医师的书写负担下降最明显。整体规模上已累计辅助诊断 12.3 亿次、覆盖 7.7 万家基层医疗机构，底层是星火医疗大模型 V3.5。局限：中文语境下书写规范与术语训练充分，英文病历与海外适应症参考明显不足；循证支撑的证据等级需逐条核对；「辅助诊断」在监管与责任上不等同于诊断权，最终责任必须由执业医师承担。",
+    "highlights": [
+      "四大智能体模块动态调度",
+      "病历书写每天节省 2.8 小时",
+      "累计辅助诊断 12.3 亿次",
+      "覆盖 7.7 万家基层医疗机构"
+    ],
+    "limitations": [
+      "中文语境强，英文病历与海外指南覆盖弱",
+      "循证证据等级须逐条核对",
+      "辅助诊断不等于诊断权",
+      "诊疗决策责任始终在执业医师"
+    ],
+    "bestFor": "病历书写负担重、二级及以下医院与基层机构的临床与质控团队",
+    "deployment": [
+      "web",
+      "app",
+      "private"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "未公开，按机构规模与部署方式（云/私有化）项目化报价",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "audio"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.xfyun.cn",
+    "sources": [
+      {
+        "title": "讯飞医疗 AI 诊疗助理 2.0：四大 Agent 模块与落地量化数据",
+        "url": "https://www.xfyun.cn",
+        "type": "official",
+        "date": "2026-08"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "sierra-ai",
+    "name": "Sierra",
+    "nameZh": "Sierra AI",
+    "vendor": "Sierra",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "客服",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "Agent 运行时自行决定调用哪些业务系统接口、何时追问用户、失败后换策略重试，是典型动态规划；但其行动边界由企业定义的动作清单限定，故为 L3 而非 L4。",
+    "tagline": "按解决结果计费的客服 Agent",
+    "description": "不是把客户问题转给人，而是直接去解决问题：接到「我的订单没到」这类请求后，Agent 自己查订单系统、查物流、发起补发或退款，然后把结果回给客户，中途遇到权限或异常再转人工。它是这个赛道里第一个把计费从「按席位」改成「按解决结果」的厂商——只有真的解决了才计费，倒逼厂商对单次解决的成本负责。公司 ARR 报道在 1.5-2 亿美元区间、估值约 158 亿美元，客户覆盖金融、医疗、旅游等高合规行业。局限：能解决的动作类型完全由企业预先配置，越界诉求一律转人工；跨系统串联时任一系统改版就会整链失败；涉及退款、账户变更等有资金或权益影响的操作，多数行业仍要求人工确认或事后审计。",
+    "highlights": [
+      "按解决结果计费而非按席位",
+      "自主调用业务系统完成闭环",
+      "ARR 1.5-2 亿美元，估值百亿级",
+      "金融、医疗等高合规行业已落地"
+    ],
+    "limitations": [
+      "可解决动作类型需企业预先配置",
+      "依赖的系统改版会导致整链失败",
+      "资金与权益类操作需人工确认",
+      "长尾诉求仍大量转人工"
+    ],
+    "bestFor": "工单量大、流程可数字化且愿为「已解决」付费的金融与零售客服中心",
+    "deployment": [
+      "web",
+      "api",
+      "saas"
+    ],
+    "pricingModel": "usage",
+    "pricingNote": "按成功解决计费，行业估算约 $1.50/次解决；具体单价未公开，需联系销售",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 9,
+    "officialUrl": "https://sierra.ai",
+    "sources": [
+      {
+        "title": "Sierra AI 估值与 ARR 报道",
+        "url": "https://sierra.ai",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "intercom-fin",
+    "name": "Fin",
+    "nameZh": "Fin 客服 Agent",
+    "vendor": "Intercom（已被 Salesforce 收购）",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "客服",
+    "status": "acquired",
+    "autonomyLevel": 3,
+    "autonomyReason": "可在限定动作范围内动态决定检索来源、调用 API 执行操作并按置信度决定是否转人工，属动态规划；但产品明确设定「答不准就转人工」的边界，非 L4。",
+    "tagline": "以回答准确率为护栏的客服 Agent",
+    "description": "嵌在中台型客服系统里做「顶班」：读取帮助中心文章、真实历史工单和客户过往对话来回答问题，能直接执行查订单、退款申请这类动作，把人工客服从「逐条回复」变成「只看 Agent 拿不准的转人工」。它最有辨识度的设计是把「解决率」和「未解决即转人工」同时挂在产品上——每条回答末尾标出是否自信，运营可以逐周回看哪些问题它不该接。2026 年 5 月 Intercom 品牌正式更名为 Fin，同年 6 月 Salesforce 同意以约 36 亿美元收购。局限：知识库质量直接决定上限，文档缺失时它会编；跨市场语言表现差异大；被并购后的产品方向与定价存在不确定性，存量客户应明确续约与数据安排。",
+    "highlights": [
+      "每条回答标注自信度与是否转人工",
+      "可执行退款等业务动作",
+      "基于历史真实工单学习",
+      "2026 年 5 月品牌升级为 Fin"
+    ],
+    "limitations": [
+      "知识库缺失时容易产生编造",
+      "跨市场语言表现差异大",
+      "被收购后产品与定价不确定",
+      "复杂多轮问题仍须人工接手"
+    ],
+    "bestFor": "帮助中心文档完善、追求用「未解决即转人工」守住服务质量的 SaaS 与电商团队",
+    "deployment": [
+      "web",
+      "app",
+      "api",
+      "saas"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "Fin 按解决数计费（每约 $0.99 起），Intercom 主平台按席位；2026 年被 Salesforce 收购后定价体系待定",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://fin.ai",
+    "sources": [
+      {
+        "title": "Fin 官方产品页（Intercom 更名后）",
+        "url": "https://fin.ai",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "meiqia-ai-cs",
+    "name": "美洽 AI 客服",
+    "nameZh": "美洽智能客服机器人",
+    "vendor": "美洽",
+    "region": "china",
+    "tier": "vertical",
+    "verticalDomain": "客服",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "以知识库匹配 + 预设流程图为主的编排式机器人，命中则按脚本应答、未命中则转人工，路径由企业配置决定，属 L2。",
+    "tagline": "中国中小商家的在线客服 SaaS",
+    "description": "在国内电商与本地生活商家中铺得极广的一套客服工具：把商品详情、店铺规则、退换货政策灌进知识库，客人进线后自动回答高频问题，从咨询「几天发货」一路走到「帮我改地址」「我要退货」这类能落库的操作，并把对话打进侧边栏让真人客服接手。用它的商家最直接的收益是夜班不再空转——大量店铺的咨询高峰在晚九点之后，人工排班覆盖不到。局限：本质仍是关键词与意图匹配驱动的机器人，遇到刁钻问法、情绪化表达或跨多个诉求的复杂对话时容错一般；它不做真正的意图拆解和跨系统事务编排，需要复杂流程得另配工作流；微信生态内的会话受平台策略约束，跨平台能力有限。",
+    "highlights": [
+      "夜班咨询自动覆盖不空转",
+      "可执行改地址、退货等落库操作",
+      "侧边栏无缝转人工",
+      "国内电商商家装机量基础大"
+    ],
+    "limitations": [
+      "复杂多诉求对话容错一般",
+      "不做真正的事务级流程编排",
+      "跨平台能力主要在微信生态内",
+      "情绪化与刁钻问法表现弱"
+    ],
+    "bestFor": "以微信/网页在线咨询为主、夜间咨询量大但无力排班的中小电商与本地生活商家",
+    "deployment": [
+      "web",
+      "app",
+      "saas"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "基础版免费，付费版按坐席与功能分档，具体档位价格未公开",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "https://www.meiqia.com",
+    "sources": [
+      {
+        "title": "美洽官方产品页",
+        "url": "https://www.meiqia.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "jpmorgan-indexgpt",
+    "name": "IndexGPT",
+    "nameZh": "摩根大通 IndexGPT",
+    "vendor": "JPMorgan Chase",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "金融",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "面向研究员的固定工作流：解析研报 PDF、抽取数据表格并按需生成摘要，步骤预先编排、可审计，不做自主任务分解，故为 L2。",
+    "tagline": "卖方研究的 PDF 拆解助手",
+    "description": "为投行与资管研究员处理最占时间的一件事：读几十页到上百页的卖方研报 PDF。它把整份报告读进来，抽出关键数据、模型假设表和财务预测表，整理成结构化摘要并可直接提问——「这家公司的毛利率假设是逐年下滑还是走平」这类问题，答案在原文里都能定位到出处。对同时跟进十几家公司的分析师，这把「先通读再提问」的时间压到了可接受范围。局限：只处理文档，不接入行情或交易系统，无法做实时定价与组合决策；抽取复杂表格与手写图表时准确率下降明显；输出是研究辅助材料而非投资建议，涉及客户交易决策的内容受银行内部合规与信息安全策略约束，外部使用须先确认数据授权边界。",
+    "highlights": [
+      "整份研报 PDF 结构化解析",
+      "预测表与假设表抽取",
+      "答案可定位回原文出处",
+      "面向多机构分析师协作"
+    ],
+    "limitations": [
+      "不接入行情与交易系统",
+      "复杂表格与手写图表抽取下降",
+      "输出为研究辅助非投资建议",
+      "数据授权与合规边界须先确认"
+    ],
+    "bestFor": "需要快速消化大量卖方研报的机构研究员与投行分析师",
+    "deployment": [
+      "web",
+      "private"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "仅面向机构客户，不对外开放购买",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://www.jpmorgan.com",
+    "sources": [
+      {
+        "title": "JPMorgan IndexGPT 产品说明与机构定位",
+        "url": "https://www.jpmorgan.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "hebbia-matrix",
+    "name": "Hebbia",
+    "nameZh": "Hebbia 矩阵",
+    "vendor": "Hebbia",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "金融",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "以多步检索矩阵在数十万页文档间自主决定检索路径、并按单元格并行生成再汇总，可动态调整策略；但最终结论与投资判断仍由人给出，非 L4。",
+    "tagline": "为尽调而生的文档矩阵检索",
+    "description": "把一份 30 万页的投资组合数据包（公司文件、纪要、法律文书、财报）摊成一张多列矩阵，每一列对应一家公司或一个主题，Agent 自己去翻、去比对、去归纳，最后给出一张横向对照表：每家公司的条款差异、异常点、历史争议点都被摊在同一行上并附原文引用。用在并购尽调或组合筛查时，原本需要分析师团队逐份读完的工作被压缩成审阅一份矩阵。它的杀手锏是把「每个单元格独立取证再横向对齐」的机制落到了产品里，因此结论天然可追溯到具体页码。局限：结论质量高度依赖源文件质量，扫描件与手写件识别不可靠；输出的矩阵是被整理过的事实集合，不构成投资判断或尽调结论，仍须投行与律师团队自行下判断；价格面向机构，未公开。",
+    "highlights": [
+      "30 万页级数据集多列并行检索",
+      "单元格独立取证、结论可溯页码",
+      "横向对照表一次看清差异",
+      "尽调与组合筛查实测效率提升明显"
+    ],
+    "limitations": [
+      "扫描件与手写件识别不可靠",
+      "输出为事实集合非投资结论",
+      "最终判断须投行与律师自行负责",
+      "机构级定价未公开"
+    ],
+    "bestFor": "面对超大文档体量的并购尽调、组合筛查与投资研究团队",
+    "deployment": [
+      "web",
+      "app",
+      "private"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "未公开，机构级年约",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://www.hebbia.com",
+    "sources": [
+      {
+        "title": "Hebbia 官方产品页：矩阵式文档检索",
+        "url": "https://www.hebbia.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "hundsun-lightgpt",
+    "name": "恒生电子 LightGPT / 光子智能体平台",
+    "nameZh": "恒生电子 LightGPT 光子平台",
+    "vendor": "恒生电子",
+    "region": "china",
+    "tier": "vertical",
+    "verticalDomain": "金融",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "光子平台把行情、交易、合规等工具封装为可调用接口，由 Agent 基于 ReAct 架构自主拆解并完成资产配置、账户诊断类复合任务，完成率报道达 95% 以上；但涉及资金交易的动作仍受权限与合规护栏限制，故为 L3。",
+    "tagline": "中国金融机构私有化的大模型底座",
+    "description": "为中国银行、券商、基金提供一套能装进自己机房的金融大模型：底层 LightGPT 已迭代三轮、训练数据量达 4000 亿条并通过国家网信办备案，是首批合规金融 AI 产品之一，已在东方证券、招商证券等 20 余家头部机构部署。之上搭的「光子」平台把通用工具链、金融插件、业务数据串成一个中控，Agent 在里面自主调工具完成资产配置诊断、投研材料生成等复合任务，公开评测称复杂金融任务完成率在 95% 以上。局限：私有化部署与信创适配带来显著实施成本；监管要求算法可解释、决策留痕，模型输出不能直接进入授信与投顾的最终环节；辅助引导而非代客决策是监管明确的风控底线。",
+    "highlights": [
+      "4000 亿条训练数据，通过网信办备案",
+      "20+ 家头部券商与机构部署",
+      "光子平台任务完成率 95%+",
+      "支持私有化部署与信创一体机"
+    ],
+    "limitations": [
+      "私有化与信创适配实施成本高",
+      "监管要求可解释、决策留痕",
+      "不得直接进入授信与投顾最终环节",
+      "监管明确要求辅助而非代客决策"
+    ],
+    "bestFor": "数据不能出内网、需要私有化部署与信创适配的银行、券商与保险机构",
+    "deployment": [
+      "private",
+      "api",
+      "app"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "未公开，机构级项目化报价（私有化部署、一机两卡推理起）",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.hundsun.com",
+    "sources": [
+      {
+        "title": "恒生电子 LightGPT 三次迭代、4000 亿条训练数据与 20 余家机构落地",
+        "url": "https://www.zhonghongwang.com/show-140-470229-1.html",
+        "type": "media",
+        "date": "2026-08"
+      },
+      {
+        "title": "LightGPT 五大能力七大场景与光子平台",
+        "url": "https://www.sgpjbg.com/labels/jinrongdamoxinglightgpt.html",
+        "type": "research",
+        "date": "2026-09"
+      },
+      {
+        "title": "银行智能体守牢风险底线：监管对授信与投顾环节的要求",
+        "url": "https://finance.sina.com.cn/jjxw/2026-06-10/doc-iniawief1460984.shtml",
+        "type": "media",
+        "date": "2026-06"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "minglue-deepminer",
+    "name": "DeepMiner",
+    "nameZh": "明略科技 DeepMiner",
+    "vendor": "明略科技",
+    "region": "china",
+    "tier": "vertical",
+    "verticalDomain": "数据分析",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "多智能体协作架构（Mano 数据理解 + Cito 洞察生成 + 行业分析智能体）可长程运行复杂分析任务并自我校验重试，符合「能跑较长时间并自我修正」的 L4；但尚未达到子任务并行派发与跨 Agent 结果交接的通用协作层级，故不评 L5。",
+    "tagline": "专家级复杂数据分析的国产标杆",
+    "description": "把「帮我分析一下这批数据背后的问题」这种模糊需求交给它：Mano 负责理解多源异构数据并对齐口径，Cito 负责生成带逻辑链条的洞察，行业分析智能体在前面两者之上做归因和结论，产出的不是图表而是一份带推理过程的分析报告。在金融、零售等领域的大型数据集上，处理上万条记录的分析可压到分钟级，单步操作准确率报道达 98.9%，处于公开结果的 SOTA 水平。公司已在港交所上市（2718.HK）。局限：能力上限受数据质量与口径定义制约，数据源本身混乱时再多智能体也救不回来；复杂归因结论仍需业务专家判断真伪，工具不替你承担判断责任；部署与实施成本高，主要面向有数据工程能力的中大型组织。",
+    "highlights": [
+      "Mano+Cito 多智能体协作架构",
+      "上万条记录分析压至分钟级",
+      "单步操作准确率 98.9%（SOTA）",
+      "港交所上市（2718.HK）"
+    ],
+    "limitations": [
+      "能力上限受数据质量与口径制约",
+      "归因结论须业务专家验证",
+      "部署与实施成本高",
+      "面向中大型组织，非自助产品"
+    ],
+    "bestFor": "有数据工程能力、需要长程复杂归因分析的中大型金融与零售组织",
+    "deployment": [
+      "private",
+      "app",
+      "api"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "未公开，项目化报价",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.minglue.com",
+    "sources": [
+      {
+        "title": "明略科技 DeepMiner 多智能体架构与准确率数据",
+        "url": "https://www.minglue.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "hex-magic",
+    "name": "Hex Magic",
+    "nameZh": "Hex Magic 数据分析 Agent",
+    "vendor": "Hex Technologies",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "数据分析",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "Magic 在数据仓库中自主决定查询写法、逐步补齐所需中间表并按需重写 SQL，路径依数据而变，属动态规划；但仍聚焦单个分析任务，不做长程自检闭环，故为 L3。",
+    "tagline": "在数据仓库里自己写 SQL 的分析 Agent",
+    "description": "在笔记本式工作流里接上数据仓库后，用自然语言交代「看一下这个指标为什么上周掉了」，它自己判断该查哪些表、用什么口径做 join、要不要先建中间表，再把 SQL 写出来跑一遍并配上解释——关键是中间步骤会留在可复现的 notebook 里，而不是像聊天式工具那样算完就消失。团队可以把它生成的代码直接检视、修改、沉淀为资产，这是它与纯对话式分析工具的核心区别。适合有数据仓库、但分析师被取数需求占满的团队。局限：它是分析工作台而非实时看板，需要实时监控得配 BI 工具；多表复杂连接与领域特定口径容易出错，尤其列名歧义时；生成结果与 SQL 必须经人检视；定价按团队规模定制，未公开。",
+    "highlights": [
+      "自动生成并执行仓库级 SQL",
+      "中间步骤留存为可复现 notebook",
+      "代码可检视、可修改、可沉淀",
+      "适配已有数据仓库的团队"
+    ],
+    "limitations": [
+      "非实时看板工具，需配合 BI",
+      "多表连接与歧义列名易出错",
+      "结论与 SQL 必须人工检视",
+      "团队定价未公开"
+    ],
+    "bestFor": "已有数据仓库、被取数需求占满的分析师团队与技术数据团队",
+    "deployment": [
+      "web",
+      "app",
+      "api",
+      "private"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "未公开，按团队规模定制年约",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://hex.tech",
+    "sources": [
+      {
+        "title": "Hex 官方产品页：Magic 与 notebook 工作流",
+        "url": "https://hex.tech",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "julius-ai",
+    "name": "Julius AI",
+    "nameZh": "Julius AI",
+    "vendor": "Julius AI",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "数据分析",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "对用户问题做「写 Python → 跑 → 出图 → 解释」的固定四步闭环，路径不随任务动态变化（Learning Sub Agent 只做数据画像适配，不改变执行路径），属 L2。",
+    "tagline": "把表格问题变成图表和结论",
+    "description": "上传 CSV/Excel 或直接连 Postgres、Snowflake、BigQuery，然后用日常英语提问「哪个渠道的 ROI 最高」「下个月线索量会怎样」，它在后台写 Python 跑完再返回带图表和文字解读的答案，可导出为 slides 或 HTML 报告，定时任务还能把每周报推到 Slack。评测一致认为它最大的价值是门槛——不会 pandas、不写 VLOOKUP 的人也能把一次性临时分析做完。用户量报道已超 200 万。局限：单表和标准聚合可靠，复杂多表连接与领域口径会出错且不易察觉；GB 级以上数据集会超时；图表与计算结果必须逐项核对，透视表遇空值时总额可能算错。",
+    "highlights": [
+      "自然语言提问直出图表与解读",
+      "直连 Snowflake 等数仓",
+      "定时报告可推送到 Slack",
+      "用户量超 200 万，含大厂客户"
+    ],
+    "limitations": [
+      "复杂多表连接易出错且不易察觉",
+      "GB 级以上数据集易超时",
+      "透视表遇空值总额可能算错",
+      "结果必须逐项人工核对"
+    ],
+    "bestFor": "不写代码但要频繁做一次性中等规模数据分析的业务与运营人员",
+    "deployment": [
+      "web",
+      "app",
+      "api"
+    ],
+    "pricingModel": "freemium",
+    "pricingNote": "Free $0（15 条消息/月）；Plus $20/月（年付 $16，2000 credits）；Pro $45/月（年付 $37，5000 credits）；Max $200/月；Business $450/月；Enterprise 询价（2026-07 核价）",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text",
+      "image"
+    ],
+    "openSource": false,
+    "prominence": 6,
+    "officialUrl": "https://julius.ai",
+    "sources": [
+      {
+        "title": "Julius AI 定价页核价（2026-07-26）",
+        "url": "https://aiandrealtors.com/review-julius-ai",
+        "type": "media",
+        "date": "2026-07"
+      },
+      {
+        "title": "Julius AI 平台能力与客户案例",
+        "url": "https://agentsindex.ai/julius-ai",
+        "type": "community",
+        "date": "2026-05"
+      },
+      {
+        "title": "Julius AI 已知问题：透视表总额错误、图表导出截断",
+        "url": "https://aitooltier.com/tools/julius-ai",
+        "type": "community",
+        "date": "2026-02"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "simazhuge-docmind",
+    "name": "司马诸葛 DocMind",
+    "nameZh": "司马诸葛 文档智能体",
+    "vendor": "司马诸葛",
+    "region": "china",
+    "tier": "vertical",
+    "verticalDomain": "知识管理",
+    "status": "active",
+    "autonomyLevel": 2,
+    "autonomyReason": "以 DocMind 文档大模型做解析、比对、风险识别与知识问答，流程由文档类型与预设规则节点编排，可追问但不自主改写任务结构，属 L2。",
+    "tagline": "中文长文档的解析与风险识别",
+    "description": "把几十页到几百页的中文长文档（合同、制度、报告、招投标文件）读进去，自动建出章节结构、抽出关键字段与要素表，并把同类文档逐份比对出差异高亮；对合同类文档还会标出风险点，厂商称风险识别准确率在 97% 以上。知识侧可以按公司沉淀的制度与流程回答「出差报销标准是什么」，新人查制度不必再翻群文件。定价门槛低，首购 1 元、续费约 249 元/月。局限：97% 准确率是厂商自述口径，缺少第三方独立验证；制度问答命中的是已沉淀内容，公司文档没入库就答不出；对跨文档推理和复杂条款冲突的识别弱于专业法律 AI；风险提示不构成法律或合规结论。",
+    "highlights": [
+      "长文档自动建结构、抽要素表",
+      "同类文档差异比对高亮",
+      "合同风险识别自述准确率 97%+",
+      "首购 1 元、续费 249 元/月"
+    ],
+    "limitations": [
+      "准确率为厂商自述，无第三方验证",
+      "依赖企业已有文档沉淀",
+      "跨文档复杂推理弱于专业法律 AI",
+      "风险提示不构成法律或合规结论"
+    ],
+    "bestFor": "中文文档密集、需要低成本做合同比对与制度问答的中小企业与创业团队",
+    "deployment": [
+      "web",
+      "app",
+      "saas"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "首购 1 元，续费约 249 元/月（官方渠道口径）",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 5,
+    "officialUrl": "https://www.smartchoose.cn",
+    "sources": [
+      {
+        "title": "司马诸葛官方产品页：DocMind 文档智能大模型与定价",
+        "url": "https://www.smartchoose.cn",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  },
+  {
+    "id": "glean-enterprise-search",
+    "name": "Glean",
+    "nameZh": "Glean 企业搜索",
+    "vendor": "Glean",
+    "region": "overseas",
+    "tier": "vertical",
+    "verticalDomain": "知识管理",
+    "status": "active",
+    "autonomyLevel": 3,
+    "autonomyReason": "跨 SaaS 与文档源自主决定检索路径、追问澄清并按权限过滤后生成带引用的答案，会依据前一轮结果调整策略，属动态规划；但不自主执行业务动作，故为 L3。",
+    "tagline": "跨企业全部系统的权限感知搜索",
+    "description": "把公司散在 Slack、Notion、Confluence、Google Drive、邮件日历里的内容统一成一个入口，问一句「上季度我们为什么把免费额度砍了」，它给出答案并把出处链回原文档、原消息和原邮件线程；更关键的是答案只包含你有权限看的那部分——同事看不到的文档不会因为搜到就泄漏，这条权限继承是它在中大型企业落地的决定性因素。接入 100 个以上应用后，新员工入职查资料、工程师排查历史报错这两类需求被压缩到分钟级。局限：价值高度依赖企业内的资料质量与数据接入完整度，私聊里沉淀的知识取不到；答案质量受权限配置正确性影响；它是检索与问答层，不代替专业系统做业务决策。",
+    "highlights": [
+      "答案严格继承原文档访问权限",
+      "接入 100+ 企业应用统一入口",
+      "答案带原文出处链接",
+      "显著压缩新员工与排障查资料时间"
+    ],
+    "limitations": [
+      "价值取决于企业文档质量与接入完整度",
+      "口头沉淀的知识取不到",
+      "答案质量受权限配置正确性影响",
+      "仅检索问答层，不做业务决策"
+    ],
+    "bestFor": "系统多、数据散、痛点是「找不到东西」的中大型企业知识管理场景",
+    "deployment": [
+      "web",
+      "app",
+      "api",
+      "saas",
+      "private"
+    ],
+    "pricingModel": "enterprise",
+    "pricingNote": "未公开，按坐席数定制年约",
+    "contextWindow": "未公开",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 7,
+    "officialUrl": "https://www.glean.com",
+    "sources": [
+      {
+        "title": "Glean 官方产品页：企业搜索与权限感知",
+        "url": "https://www.glean.com",
+        "type": "official",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10"
+  }
+]

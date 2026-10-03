@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --surface: 250250 250;
+    --panel: 255 255 255;
+    --edge: 226 232 240;
+    --ink: 15 23 42;
+    --muted: 100 116 139;
+    --faint: 148 163 184;
+    --brand: 79 70 229;
+    --brand-soft: 238 242 255;
+  }
+
+  .dark {
+    --surface: 9 10 15;
+    --panel: 17 19 28;
+    --edge: 39 42 58;
+    --ink: 237 240 248;
+    --muted: 148 157 179;
+    --faint: 106 114 141;
+    --brand: 129 140 248;
+    --brand-soft: 30 32 56;
+  }
+
+  * {
+    @apply border-edge;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface text-ink antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'tnum';
+    /* 奇数宽度下 px padding 的亚像素舍入会造成 1px 溢出，钳住消除 */
+    overflow-x: hidden;
+  }
+
+  /* 主题切换时的平滑过渡，但尊重用户的减少动画偏好 */
+  html.theme-transition,
+  html.theme-transition * {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* 自定义滚动条 */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full border-[3px] border-solid border-transparent bg-faint bg-clip-content;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted bg-clip-content;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-surface;
+  }
+}
+
+@layer components {
+  .aa-card {
+    @apply rounded-xl border border-edge bg-panel transition-all duration-200;
+  }
+
+  .aa-chip {
+    @apply inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-2xs font-medium;
+  }
+
+  /* 隐藏滚动条但保留滚动能力 */
+  .aa-no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .aa-no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 独立滚动容器的纤细滚动条 */
+  .aa-panel-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--faint) / 0.5) transparent;
+  }
+  .aa-panel-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .aa-panel-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .aa-panel-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--faint) / 0.45);
+    border-radius: 9999px;
+  }
+  .aa-panel-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(var(--faint) / 0.7);
+  }
+}
+
+@layer utilities {
+  .aa-line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .aa-line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 打印时隐藏交互控件，只留内容 */
+  @media print {
+    .aa-no-print {
+      display: none !important;
+    }
+    body {
+      @apply bg-white text-black;
+    }
+    .aa-card {
+      @apply border-gray-300;
+      break-inside: avoid;
+    }
+  }
+}
