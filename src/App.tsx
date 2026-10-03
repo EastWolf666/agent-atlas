@@ -72,6 +72,31 @@ export default function App() {
   const openDetail = (id: string) => setDetailId(id)
   const goBrowse = () => setView('browse')
 
+  /*
+   * 概览页统计框点击：跳到浏览页，并只勾上对应那一个筛选条件。
+   * 先 reset 清空其它条件，再单独开启目标维度，避免和历史选择叠加。
+   */
+  const explorePreset = (preset: 'all' | 'l4' | 'oss' | 'nonactive') => {
+    switch (preset) {
+      case 'all':
+        atlas.reset()
+        break
+      case 'l4':
+        atlas.reset()
+        atlas.setMinAutonomy(4)
+        break
+      case 'oss':
+        atlas.reset()
+        atlas.toggleOpenSource()
+        break
+      case 'nonactive':
+        atlas.reset()
+        atlas.toggleNonActive()
+        break
+    }
+    setView('browse')
+  }
+
   return (
     <div className="min-h-screen">
       {/* 顶栏 */}
@@ -156,6 +181,7 @@ export default function App() {
             onBrowse={goBrowse}
             onCompare={() => setShowCompare(true)}
             compareCount={cmp.selected.length}
+            onStatExplore={explorePreset}
           />
         ) : (
           <div className="grid items-start gap-5 lg:grid-cols-[248px_minmax(0,1fr)]">

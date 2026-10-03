@@ -202,7 +202,7 @@ export function FilterPanel({ filters, actions, resultCount }: Props) {
           </div>
         </Group>
 
-        <div className="max-lg:col-span-2">
+        <div className="max-lg:col-span-1">
           <button
             onClick={actions.toggleOpenSource}
             aria-pressed={filters.openSourceOnly}
@@ -216,6 +216,25 @@ export function FilterPanel({ filters, actions, resultCount }: Props) {
             <span
               className={`size-3 rounded-full border ${
                 filters.openSourceOnly ? 'border-white bg-white' : 'border-faint'
+              }`}
+            />
+          </button>
+        </div>
+
+        <div className="max-lg:col-span-1">
+          <button
+            onClick={actions.toggleNonActive}
+            aria-pressed={filters.nonActiveOnly}
+            className={`flex w-full items-center justify-between rounded-md border px-2.5 py-1.5 text-2xs font-medium transition-colors lg:py-2 ${
+              filters.nonActiveOnly
+                ? 'border-transparent bg-brand text-white'
+                : 'border-edge bg-transparent text-muted hover:border-faint/40'
+            }`}
+          >
+            仅看非活跃
+            <span
+              className={`size-3 rounded-full border ${
+                filters.nonActiveOnly ? 'border-white bg-white' : 'border-faint'
               }`}
             />
           </button>

@@ -7,6 +7,8 @@ interface Props {
   onBrowse: () => void
   onCompare: () => void
   compareCount: number
+  /** 点击统计框：跳到浏览页并只勾上对应筛选条件 */
+  onStatExplore: (preset: 'all' | 'l4' | 'oss' | 'nonactive') => void
 }
 
 function StatCard({
@@ -14,14 +16,25 @@ function StatCard({
   value,
   sub,
   accent,
+  onClick,
 }: {
   label: string
   value: string | number
   sub: string
   accent?: string
+  onClick: () => void
 }) {
   return (
-    <div className="aa-card p-4">
+    <button
+      onClick={onClick}
+      aria-label={`${label}：${value}，点击查看对应筛选`}
+      className="aa-card aa-no-print group relative p-4 text-left transition-all hover:-translate-y-0.5 hover:border-brand/50 hover:shadow-sm"
+    >
+      <span className="pointer-events-none absolute right-3 top-3 text-faint transition-colors group-hover:text-brand">
+        <svg className="size-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M3 9L9 3M9 3H4M9 3V8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </span>
       <p className="text-2xs text-muted">{label}</p>
       <p
         className="mt-1 font-mono text-2xl font-semibold tabular-nums"
@@ -30,11 +43,11 @@ function StatCard({
         {value}
       </p>
       <p className="mt-1 text-2xs text-faint">{sub}</p>
-    </div>
+    </button>
   )
 }
 
-export function Overview({ onSelect, onBrowse, onCompare, compareCount }: Props) {
+export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatExplore }: Props) {
   const stats = useMemo(() => {
     const total = allAgents.length
     const china = allAgents.filter((a) => a.region === 'china').length
@@ -92,30 +105,34 @@ export function Overview({ onSelect, onBrowse, onCompare, compareCount }: Props)
         </div>
       </div>
 
-      {/* 统计卡片 */}
+      {/* 统计卡片（可点击：跳浏览页并应用对应筛选） */}
       <div className="grid animate-fade-in grid-cols-2 gap-3 lg:grid-cols-4">
         <StatCard
           label="收录产品"
           value={stats.total}
           sub={`${stats.china} 国内 / ${stats.overseas} 海外`}
+          onClick={() => onStatExplore('all')}
         />
         <StatCard
           label="达到 L4 及以上"
           value={stats.l45}
           sub={`占比 ${Math.round((stats.l45 / stats.total) * 100)}%，具备长程自治`}
           accent="#fbbf24"
+          onClick={() => onStatExplore('l4')}
         />
         <StatCard
           label="开源项目"
           value={stats.oss}
           sub="可自部署、可二次开发"
           accent="#34d399"
+          onClick={() => onStatExplore('oss')}
         />
         <StatCard
           label="非活跃状态"
           value={stats.nonActive}
           sub="已停止 / 并购 / 仅维护"
           accent="#fb7185"
+          onClick={() => onStatExplore('nonactive')}
         />
       </div>
 

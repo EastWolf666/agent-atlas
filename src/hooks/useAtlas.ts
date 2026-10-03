@@ -12,6 +12,8 @@ export interface Filters {
   modalities: Set<Modality>
   pricing: Set<PricingModel>
   openSourceOnly: boolean
+  /** 仅看非活跃状态（status !== 'active'） */
+  nonActiveOnly: boolean
 }
 
 const EMPTY: Filters = {
@@ -23,6 +25,7 @@ const EMPTY: Filters = {
   modalities: new Set(),
   pricing: new Set(),
   openSourceOnly: false,
+  nonActiveOnly: false,
 }
 
 /**
@@ -47,6 +50,7 @@ function encodeToUrl(f: Filters): string {
   if (f.modalities.size) p.set('mod', [...f.modalities].join(','))
   if (f.pricing.size) p.set('price', [...f.pricing].join(','))
   if (f.openSourceOnly) p.set('oss', '1')
+  if (f.nonActiveOnly) p.set('na', '1')
   return p.toString()
 }
 
@@ -66,6 +70,7 @@ function decodeFromUrl(): Filters {
     modalities: set<Modality>(p.get('mod')),
     pricing: set<PricingModel>(p.get('price')),
     openSourceOnly: p.get('oss') === '1',
+    nonActiveOnly: p.get('na') === '1',
   }
 }
 
@@ -105,6 +110,9 @@ export function useFilters() {
     if (filters.openSourceOnly) {
       list = list.filter((a) => a.openSource)
     }
+    if (filters.nonActiveOnly) {
+      list = list.filter((a) => a.status !== 'active')
+    }
     return list
   }, [filters])
 
@@ -116,6 +124,7 @@ export function useFilters() {
     filters.modalities.size +
     filters.pricing.size +
     (filters.openSourceOnly ? 1 : 0) +
+    (filters.nonActiveOnly ? 1 : 0) +
     (filters.autonomyMin > 0 ? 1 : 0)
 
   return {
@@ -139,6 +148,8 @@ export function useFilters() {
       setFilters((f) => ({ ...f, autonomyMin: n })),
     toggleOpenSource: () =>
       setFilters((f) => ({ ...f, openSourceOnly: !f.openSourceOnly })),
+    toggleNonActive: () =>
+      setFilters((f) => ({ ...f, nonActiveOnly: !f.nonActiveOnly })),
   }
 }
 
