@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Overview } from './components/Overview'
 import { FilterPanel } from './components/Grid/FilterPanel'
 import { AgentCard } from './components/Grid/AgentCard'
@@ -18,6 +18,19 @@ export default function App() {
   const [view, setView] = useState<View>('overview')
   const [detailId, setDetailId] = useState<string | null>(null)
   const [showCompare, setShowCompare] = useState(false)
+
+  /*
+   * 手机端筛选折叠状态：没选任何条件时默认收起（首屏直接看到卡片，不用先滚过筛选）；
+   * 一旦开始选条件自动展开，方便即时看到/调整已选项；全部清空后自动收起。
+   * 用受控 open + 仅在状态跳变时干预，既满足默认折叠，又不抢用户的手动开合。
+   */
+  const [filterOpen, setFilterOpen] = useState(atlas.activeCount > 0)
+  const prevActive = useRef(atlas.activeCount)
+  useEffect(() => {
+    if (prevActive.current === 0 && atlas.activeCount > 0) setFilterOpen(true)
+    if (atlas.activeCount === 0) setFilterOpen(false)
+    prevActive.current = atlas.activeCount
+  }, [atlas.activeCount])
 
   const detail: Agent | null = detailId ? agents.find((a) => a.id === detailId) ?? null : null
 
@@ -164,7 +177,11 @@ export default function App() {
 
             <div className="min-w-0">
               {/* 移动端筛选入口：默认折叠，避免占满首屏看不到卡片 */}
-              <details className="aa-no-print mb-4 lg:hidden">
+              <details
+                open={filterOpen}
+                onToggle={(e) => setFilterOpen((e.target as HTMLDetailsElement).open)}
+                className="aa-no-print mb-4 lg:hidden"
+              >
                 <summary className="aa-card flex cursor-pointer list-none items-center justify-between px-4 py-2.5 text-xs font-medium">
                   <span>
                     筛选

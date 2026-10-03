@@ -85,7 +85,13 @@ export function FilterPanel({ filters, actions, resultCount }: Props) {
           避免一屏滚不到底。
         - 桌面（lg+，左侧吸附侧栏，宽约 248px）：回到单列宽松布局，保持原观感。
       */}
-      <div className="mt-3 grid grid-cols-1 gap-3 max-lg:grid-cols-2 max-lg:gap-x-3 max-lg:mt-3 lg:mt-5 lg:gap-y-5">
+      {/*
+        响应式分组布局：
+        - 手机/平板（<lg）：2 列紧凑网格，所有分组都按格子放置（不再有跨整行的分组），
+          「分类」在手机端改为横排 chip、桌面端仍是竖排整宽（观感不变），整体更短更紧凑。
+        - 桌面（lg+，左侧吸附侧栏）：回到单列宽松布局，保持原观感。
+      */}
+      <div className="mt-3 grid grid-cols-1 gap-3 max-lg:grid-cols-2 max-lg:gap-2 max-lg:mt-3 lg:mt-5 lg:gap-y-5">
         <Group title="地区">
           <div className="flex gap-1.5">
             {REGIONS.map((r) => (
@@ -100,36 +106,34 @@ export function FilterPanel({ filters, actions, resultCount }: Props) {
           </div>
         </Group>
 
-        <div className="max-lg:col-span-2">
-          <Group title="分类">
-            <div className="space-y-1">
-              {TIER_ORDER.map((t: Tier) => (
-                <button
-                  key={t}
-                  onClick={() => actions.toggleTier(t)}
-                  aria-pressed={filters.tiers.has(t)}
-                  className={`flex w-full items-center gap-2 rounded-md border px-2.5 py-1 text-left text-2xs transition-colors lg:py-1.5 ${
-                    filters.tiers.has(t)
-                      ? 'border-transparent text-white'
-                      : 'border-edge bg-transparent hover:border-faint/40'
-                  }`}
-                  style={filters.tiers.has(t) ? { backgroundColor: tierColor(t) } : undefined}
-                >
-                  <span
-                    className="size-2 shrink-0 rounded-full"
-                    style={{
-                      backgroundColor: filters.tiers.has(t) ? '#fff' : tierColor(t),
-                      opacity: filters.tiers.has(t) ? 1 : 0.45,
-                    }}
-                  />
-                  <span className={filters.tiers.has(t) ? 'font-medium' : 'text-muted'}>
-                    {meta.tiers[t].label}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </Group>
-        </div>
+        <Group title="分类">
+          <div className="flex flex-wrap gap-1.5 lg:flex-col lg:gap-1">
+            {TIER_ORDER.map((t: Tier) => (
+              <button
+                key={t}
+                onClick={() => actions.toggleTier(t)}
+                aria-pressed={filters.tiers.has(t)}
+                className={`flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-2xs font-medium transition-colors lg:w-full lg:gap-2 lg:px-2.5 lg:py-1 ${
+                  filters.tiers.has(t)
+                    ? 'border-transparent text-white'
+                    : 'border-edge bg-transparent text-muted hover:border-faint/40 hover:text-ink'
+                }`}
+                style={filters.tiers.has(t) ? { backgroundColor: tierColor(t) } : undefined}
+              >
+                <span
+                  className="size-2 shrink-0 rounded-full"
+                  style={{
+                    backgroundColor: filters.tiers.has(t) ? '#fff' : tierColor(t),
+                    opacity: filters.tiers.has(t) ? 1 : 0.45,
+                  }}
+                />
+                <span className={filters.tiers.has(t) ? 'font-medium' : ''}>
+                  {meta.tiers[t].label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </Group>
 
         <Group title={filters.autonomyMin ? `自主性 · L${filters.autonomyMin} 及以上` : '自主性'}>
           <div className="flex flex-wrap gap-1.5">
@@ -149,7 +153,7 @@ export function FilterPanel({ filters, actions, resultCount }: Props) {
               </button>
             ))}
           </div>
-          <p className="mt-1 text-[10px] leading-relaxed text-faint lg:mt-1.5">
+          <p className="mt-1 text-[10px] leading-relaxed text-faint max-lg:hidden lg:mt-1.5">
             {filters.autonomyMin === 0
               ? '不限制，显示全部等级'
               : `显示 L${filters.autonomyMin} – L5 的产品`}
