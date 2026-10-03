@@ -23,6 +23,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20 # 抓三个源 + 刷新存量，20 分钟足够；防卡死
 
+    # 显式声明 GITHUB_TOKEN 注入抓取脚本。
+    # 不加这行，脚本读到的是空字符串，GitHub API 走未鉴权限流
+    # （search 10次/分、core 60次/时），而刷新存量要调30+ 次 core 端点，
+    # 结果是一半以上条目静默刷不到 star。GITHUB_TOKEN 是 Actions 自动生成的
+    # 短期令牌，不需要手动配置，也不涉及额外secret。
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4

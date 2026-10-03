@@ -26,7 +26,7 @@ import { discoverRepos, refreshRepos } from './lib/sources/github.mjs'
 import { fetchFromRSS } from './lib/sources/rss.mjs'
 import { mergeObjective, collectStatusSignals } from './lib/merge.mjs'
 import { refreshMetaNumbers, refreshInsights, confidenceBreakdown } from './lib/insights.mjs'
-import { slugify, guessRegion, guessTier } from './lib/filter.mjs'
+import { slugify, guessRegion, guessTier, isReviewable } from './lib/filter.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
@@ -165,14 +165,22 @@ async function main() {
    * 而国内候选永远优先入池——即使当下比例已经超标。
    *
    * 已知限制（不要假装这个守卫能解决它）：
-   * 国内可用的一手 RSS 源在沙箱与 CI 环境下都极不稳定——
+   * 国内 RSS 源在沙箱与 CI 环境下都不可用——
    *   机器之心 rss、36氪 feed   → HTTP 200 但 0 items（空壳）
-   *   量子位 feed               → 需带 User-Agent，否则返回空 body
+   *   量子位feed               → 需带 User-Agent，否则返回空 body
    *   IT之家 rss                → 可用（60 items），但综合科技新闻，
-   *                               前25 条里仅 2 条与AI 相关，噪声比过高，
-   *                               接入会污染候选池
-   * 所以「国内为主」目前只能靠人工补充 + 守卫防止比例回退，
-   * 不能靠自动抓取解决。守卫的价值是「守住下限」，不是「拉高上限」。
+   *                               前 25 条里仅 2 条与 AI 相关，噪声比过高
+   *
+   * 但「国内为主」并非只能靠人工：实测（2026-10-03）GitHub 中文关键词搜索
+   * 能稳定捞到国内开发者的项目——
+   *   「智能体」近 30 天 2,240 条，捞到 Loopera-ai/loopera、agents-universe
+   *   「AI Agent」近 30 天 66,034 条，捞到 zai-org/ZCode（智谱）
+   *   「LLM Agent」捞到 qiz029/dscode（DeepSeek 的 coding agent）
+   * 国内开发者的项目在 GitHub 上，只是他们用中文写 description，
+   * 英文关键词搜不到。github.mjs 的 QUERY_GROUPS 已加入中文词组。
+   *
+   * 所以现在国内候选有两条通路：中文 GitHub 搜索（自动）+ 人工补充。
+   * 守卫的价值从「唯一的手段」降级为「兜底」：防止某天中文源抽风时比例回退。
    */
   const TARGET_CN_RATIO = 0.6
   const pool = existingCandidates.candidates
@@ -187,12 +195,24 @@ async function main() {
 
   let added = 0
   let skippedByRatio = 0
+  let skippedUnreviewable = 0
   for (const c of candidates) {
     if (seen.has(c.slugSource)) continue
     // 已在库里的产品（按 id 或官网链接匹配）不再重复入池
     const slug = slugify(c.name)
     if (knownIds.has(slug)) continue
     if (c.url && knownUrls.has(c.url)) continue
+
+    /*
+     * 质量门槛：挡掉人工无法判断的条目（纯新闻、AI 新闻公告、无描述的 repo 名）。
+     * 放在 seen.add 之前——被判废的条目不该占去重位，
+     * 否则同一 slug 下次换个源再抓一次，还是会被这里挡掉，掩盖了源本身的问题。
+     */
+    if (!isReviewable({ title: c.name ?? c.title, description: c.description })) {
+      skippedUnreviewable++
+      continue
+    }
+
     seen.add(c.slugSource)
 
     const text = `${c.name} ${c.description ?? ''} ${c.title ?? ''}`
@@ -228,6 +248,9 @@ async function main() {
   }
   existingCandidates.generatedAt = now.toISOString().slice(0, 10)
   log(`  新增候选 ${added} 条，池内共 ${existingCandidates.candidates.length} 条待处理`)
+  if (skippedUnreviewable > 0) {
+    log(`  质量门槛挡下 ${skippedUnreviewable} 条（纯新闻/无法判断的条目）`)
+  }
   if (skippedByRatio > 0) {
     log(`  其中 ${skippedByRatio} 条海外候选因国内占比已达目标而未入池（需人工从国内侧补充）`)
   }

@@ -125,6 +125,75 @@ export function shouldEnqueue(score) {
   return score >= MIN_MATCH_SCORE
 }
 
+/**
+ * 候选池质量门槛
+ * ================
+ * 加这条规则时的判断被数据纠正了一次，值得记下来：
+ *
+ * 最初看池内 107 条有 58 条「描述不足 20 字」，判定为噪声占一半，
+ * 于是写了条规则剔除「长句标题」——因为 Show HN 把整句标题塞进了 name。
+ * 实测误杀严重：Kodama（多 agent 框架）、Mixdog（Windows coding agent）、
+ * Taracode（本地 DevOps agent）都是真实产品，只是格式是长句。
+ * 「格式不像产品名」不等于「不是产品」。
+ *
+ * 修正后规则只挡两类确实无法判断的条目，实测 107 条只剔掉 3 条：
+ * 纯新闻、AI 新闻公告、无描述且名字过短的 repo。
+ *
+ * 真正的瓶颈不是噪声，而是：池子只进不出，每天新增 1 条却从未被消费。
+ * 这条规则解决不了这个问题——它只保证新入池的条目质量，
+ * 存量清理和「值不值得收录」的判断仍然只能由人工做。
+ */
+export function isReviewable(
+  { title = '', description = '' } = {},
+  { maxTitleWords = 12 } = {}
+) {
+  const desc = String(description).trim()
+  const t = String(title).trim()
+  const text = `${t} ${desc}`.trim()
+
+  // 描述和标题加起来总得有内容
+  if (text.length < 6) return false
+
+  /*
+   * 关键前提：HN 源从不填 description（实测池内 107 条有 58 条为空），
+   * Show HN 的整句标题被直接塞进 name。所以「描述为空」不等于「没信息」——
+   * 很多条目的全部信息就在 name 里。
+   *
+   * 第一版规则曾试图剔除「长句标题」，实测误杀严重：
+   *   「Kodama – a multi-agent pack for Kiro」   是真产品
+   *   「Miniagent – Free coding agent, no installation required」 也是真产品
+   * 它们的格式确实是长句，但信息量完全够人工判断。格式不等于质量。
+   *
+   * 所以这里只挡两类**确实无法判断**的：
+   *   1. 纯新闻/公告（GPT-6 发布、融资、跑分对比）—— 不是产品收录对象
+   *   2. 完全没有描述、名字也短到无法判断是什么（如「skills」「dots」）
+   * 其余一律放过，把判断权交给人工。
+   */
+
+  // 1. 纯新闻/公告
+  if (NON_PRODUCT_PATTERNS.some((re) => re.test(text))) return false
+  /*
+   * 注意 open-source 里的 open 不是「发布」。
+   * 第一版写/\bopens?\b/ 时把「Mixdog – open-source coding agent for Windows」
+   * 和「Taracode – a local DevOps agent, and 18 open models」误杀了——
+   * 它们是真实产品。\b 在连字符前不构成词边界，open-source 会被切开匹配。
+   * 所以这里改成只匹配动词形态，且排除 open-source / opened。
+   */
+  if (
+    /(^|[^-\w])(launch(es|ed)?|released?|introducing|announc\w+|out now|here'?s|now available)/i.test(
+      t
+    ) &&
+    !/open[- ]source/i.test(t)
+  ) {
+    return false
+  }
+
+  // 2. 无描述且名字过短：不足以判断这是什么
+  if (desc.length === 0 && t.split(/\s+/).length < 3) return false
+
+  return true
+}
+
 /** 去掉 Show HN 前缀，得到干净的产品名 */
 export function cleanTitle(title = '') {
   return String(title)

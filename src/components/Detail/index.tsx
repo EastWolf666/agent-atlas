@@ -314,6 +314,32 @@ export function DetailPanel({ agent, onClose, onSelect, onToggleCompare, inCompa
           >
             访问官网 ↗
           </a>
+          {/* 有仓库地址才显示：开源项目的仓库往往比官网更有用，
+              能看到 star 增长、issue 和提交记录 */}
+          {agent.repoUrl && (
+            <a
+              href={agent.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={
+                agent.metrics?.stars != null
+                  ? `${agent.metrics.stars.toLocaleString('en-US')} star${
+                      agent.metrics.license ? ` · ${agent.metrics.license}` : ''
+                    }`
+                  : undefined
+              }
+              className="rounded-lg border border-edge px-3 py-2 text-center text-xs font-medium text-ink-soft transition-colors hover:border-brand hover:text-brand"
+            >
+              源码
+              {agent.metrics?.stars != null && (
+                <span className="ml-1 tabular-nums opacity-70">
+                  {agent.metrics.stars >= 1000
+                    ? `${(agent.metrics.stars / 1000).toFixed(1)}k`
+                    : agent.metrics.stars}
+                </span>
+              )}
+            </a>
+          )}
         </div>
       </div>
     </>

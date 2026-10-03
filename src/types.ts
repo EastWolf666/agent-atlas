@@ -56,6 +56,18 @@ export interface Agent {
   /** 相对知名度1-10，用于图谱气泡大小 */
   prominence: number
   officialUrl: string
+  /**
+   * 开源仓库地址。仅 openSource 为 true 且能找到公开仓库时有值。
+   * 存在的意义：officialUrl 常指向官网或文档页，而 star /许可证这类
+   * 只能从仓库读。缺了它，自动刷新就只能覆盖少数几个项目。
+   */
+  repoUrl?: string
+  /** 外部客观信号，由每日脚本从 GitHub API 刷新 */
+  metrics?: {
+    stars?: number | null
+    license?: string | null
+    pushedAt?: string | null
+  }
   sources: Source[]
   dataConfidence: Confidence
   lastVerified: string

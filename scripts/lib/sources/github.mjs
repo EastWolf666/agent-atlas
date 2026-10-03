@@ -12,48 +12,91 @@ import { scoreCandidate, shouldEnqueue } from '../filter.mjs'
 
 const SEARCH = 'https://api.github.com/search/repositories'
 
+/*
+ * 搜索 query 组
+ * ----------------
+ * 为什么要分多组、而不是一个 `agent OR agentic OR llm`：
+ *
+ * 1) 一组就够的话，国内候选会继续维持在 3% 的水平。实测（2026-10-03）
+ *    纯英文 query 捞回的前 20 条里，中文项目只有 2 个，且都不是 Agent 产品。
+ *    但换成中文词（智能体 / AI Agent / LLM Agent），立刻捞到
+ *    zai-org/ZCode（智谱）、qiz029/dscode（DeepSeek 的 coding agent）这类真项目。
+ *    国内开发者的开源项目确实在 GitHub 上，只是英文词搜不到——他们用中文写 description。
+ *
+ * 2) 单个宽query 的噪声极高。`agent created:>X` 实测有 5.3 万条，
+ *    按 star 排序取前 60 会捞到 skills / dots / seiso 这类
+ *    「名字里蹭到 agent、实际不是 Agent 产品」的仓库。
+ *    拆成多个窄 query 各自排序，等于把 star 排序的竞争池缩小，信噪比高得多。
+ *
+ * 注意：created:> 是全局约束（实测无意义词 + created 返回 0），
+ * 所以每组 query 都要带上时间条件，不能只加一次。
+ */
+const QUERY_GROUPS = [
+  { label: 'en-agent', q: 'agent OR agentic OR "ai agent" OR "llm agent"' },
+  { label: 'zh-agent', q: '智能体 OR AI Agent OR LLM Agent' },
+  { label: 'zh-llm', q: '大模型 OR 智能助手 OR 多智能体' },
+  { label: 'en-framework', q: 'multi-agent OR agent-framework OR agent-runtime OR mcp-server' },
+]
+
 /**
  * 发现新建的开源 Agent 项目
  * @param {string} since ISO 时间戳
  */
-export async function discoverRepos(since, { perPage = 60 } = {}) {
-  // created:>水位线 是增量的关键——不加这个条件会每次捞回全部仓库
-  const q = `agent OR agentic OR llm created:>${since.slice(0, 10)}`
-  const url =
-    `${SEARCH}?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=${perPage}`
-
-  const data = await fetchJson(url)
-  const items = data.items ?? []
-
+export async function discoverRepos(since, { perGroup = 25 } = {}) {
+  const sinceDay = since.slice(0, 10)
   const out = []
-  for (const r of items) {
-    // 已归档的项目没有收录价值——它已经是过去式了
-    if (r.archived) continue
+  const seen = new Set()
 
-    const score = scoreCandidate({
-      title: r.name,
-      description: r.description ?? '',
-      signals: { stars: r.stargazers_count ?? 0 },
-      sourceType: 'github',
-    })
-    if (!shouldEnqueue(score)) continue
+  for (const group of QUERY_GROUPS) {
+    // created:>水位线是增量的关键——不加这个条件会每次捞回全库最热的仓库
+    const q = `(${group.q}) created:>${sinceDay}`
+    const url = `${SEARCH}?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=${perGroup}`
 
-    out.push({
-      slugSource: `gh:${r.full_name.toLowerCase()}`,
-      name: r.name,
-      url: r.html_url,
-      score,
-      description: (r.description ?? '').slice(0, 300),
-      signals: {
-        stars: r.stargazers_count ?? 0,
-        license: r.license?.spdx_id ?? null,
-        forks: r.forks_count ?? 0,
-        archived: r.archived,
-      },
-      fullName: r.full_name,
-      pushedAt: r.pushed_at ?? null,
-    })
+    let data
+    try {
+      data = await withRetry(() => fetchJson(url))
+    } catch (e) {
+      // 单组失败不影响其他组——search 端点限流最容易在这里发生
+      console.warn(`  ⚠️ GitHub 搜索组${group.label} 失败: ${e.message}`)
+      continue
+    }
+
+    for (const r of data.items ?? []) {
+      // 已归档的项目没有收录价值——它已经是过去式了
+      if (r.archived) continue
+      if (seen.has(r.full_name.toLowerCase())) continue
+      seen.add(r.full_name.toLowerCase())
+
+      const score = scoreCandidate({
+        title: r.name,
+        description: r.description ?? '',
+        signals: { stars: r.stargazers_count ?? 0 },
+        sourceType: 'github',
+      })
+      if (!shouldEnqueue(score)) continue
+
+      out.push({
+        slugSource: `gh:${r.full_name.toLowerCase()}`,
+        name: r.name,
+        url: r.html_url,
+        score,
+        description: (r.description ?? '').slice(0, 300),
+        signals: {
+          stars: r.stargazers_count ?? 0,
+          license: r.license?.spdx_id ?? null,
+          forks: r.forks_count ?? 0,
+          archived: r.archived,
+        },
+        fullName: r.full_name,
+        pushedAt: r.pushed_at ?? null,
+        queryGroup: group.label,
+      })
+    }
+
+    // search 端点鉴权后 30 次/分，这里只有 4 组，仍留 1 秒间隔避免撞线
+    await new Promise((r) => setTimeout(r, 1000))
   }
+
   return out
 }
 
@@ -84,9 +127,23 @@ async function withRetry(fn, { retries = 3, baseDelay = 2000 } = {}) {
  * @param {Array<{id:string, officialUrl:string}>} existing
  */
 export async function refreshRepos(existing) {
-  // 认得出 owner/repo 形式的官方链接才刷，其余（比如厂商官网）跳过
+  /*
+   * 优先用 repoUrl，退回从 officialUrl 里解析。
+   *
+   * 为什么要改：原先只看 officialUrl，而库里 13 个 openSource 项目有 12 个的
+   * officialUrl 指向官网或文档页（ragflow.io、docs.anthropic.com、kimi.com/code…），
+   * 只有 superagi 一个是仓库地址。结果这个函数基本在空转——
+   * 每次只刷到 1 个项目，而日志里看不出异常，看起来像「今天没变化」。
+   *
+   * repoUrl 是逐个用 GitHub API 核实过存在的真实仓库地址。
+   * kimi-code 特别说明：MoonshotAI/kimi-cli 已archived（Python 旧版），
+   * 活跃仓库是 MoonshotAI/kimi-code，别填错。
+   */
   const targets = existing
-    .map((a) => ({ id: a.id, slug: ownerRepoFromUrl(a.officialUrl) }))
+    .map((a) => ({
+      id: a.id,
+      slug: ownerRepoFromUrl(a.repoUrl) ?? ownerRepoFromUrl(a.officialUrl),
+    }))
     .filter((t) => t.slug)
 
   const updated = []
@@ -118,8 +175,10 @@ export async function refreshRepos(existing) {
       //单个项目失败（404 是常态：仓库改名或删除）不影响整体
       continue
     }
-    // 主动限速，避免撞上 60 次/时
-    await new Promise((r) => setTimeout(r, 1100))
+    // 主动限速，避免撞上限流。
+    // 鉴权后 core 端点额度 5000 次/时（未鉴权只有 60），
+    // 1.1 秒/次 ≈ 3300次/时，留足余量；未鉴权时退回 1.1 秒也不会超。
+    await new Promise((r) => setTimeout(r, 400))
   }
 
   return { updated, signals }

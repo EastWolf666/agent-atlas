@@ -51,7 +51,12 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-08-30"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "metrics": {
+      "stars": 90965,
+      "license": "NOASSERTION"
+    }
   },
   {
     "id": "zhipu-autoglm",
@@ -120,7 +125,12 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/zai-org/Open-AutoGLM",
+    "metrics": {
+      "stars": 26341,
+      "license": "Apache-2.0"
+    }
   },
   {
     "id": "minimax-agent",
@@ -308,7 +318,12 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/infiniflow/ragflow",
+    "metrics": {
+      "stars": 91619,
+      "license": "Apache-2.0"
+    }
   },
   {
     "id": "trae",
@@ -579,10 +594,15 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10",
+    "lastVerified": "2026-10-03",
     "relatedIds": [
       "kimi-work"
-    ]
+    ],
+    "repoUrl": "https://github.com/MoonshotAI/kimi-code",
+    "metrics": {
+      "stars": 7760,
+      "license": "MIT"
+    }
   },
   {
     "id": "manus",
@@ -642,7 +662,7 @@
       "workbuddy",
       "chatgpt-agent",
       "general-declined",
-      "autogpt"
+      "superagi"
     ]
   },
   {
@@ -3042,7 +3062,12 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-09-28"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+    "metrics": {
+      "stars": 9368,
+      "license": "NOASSERTION"
+    }
   },
   {
     "id": "langgraph",
@@ -3095,7 +3120,12 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-09-25"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/langchain-ai/langgraph",
+    "metrics": {
+      "stars": 42656,
+      "license": "MIT"
+    }
   },
   {
     "id": "crewai",
@@ -3147,7 +3177,12 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-09-25"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/crewAIInc/crewAI",
+    "metrics": {
+      "stars": 59306,
+      "license": "MIT"
+    }
   },
   {
     "id": "openai-agents-sdk",
@@ -3201,7 +3236,12 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-09-26"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/openai/openai-agents-python",
+    "metrics": {
+      "stars": 29821,
+      "license": "MIT"
+    }
   },
   {
     "id": "claude-agent-sdk",
@@ -3249,7 +3289,12 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-09-28"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/anthropics/claude-agent-sdk-python",
+    "metrics": {
+      "stars": 8208,
+      "license": "MIT"
+    }
   },
   {
     "id": "mem0",
@@ -3295,7 +3340,12 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-09-20"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/mem0ai/mem0",
+    "metrics": {
+      "stars": 66513,
+      "license": "Apache-2.0"
+    }
   },
   {
     "id": "amazon-nova-act",
@@ -3734,10 +3784,15 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-08-20"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
+    "metrics": {
+      "stars": 187647,
+      "license": "NOASSERTION"
+    }
   },
   {
-    "id": "autogpt",
+    "id": "superagi",
     "name": "SuperAGI",
     "vendor": "SuperAGI",
     "region": "overseas",
@@ -4442,7 +4497,12 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10"
+    "lastVerified": "2026-10-03",
+    "repoUrl": "https://github.com/dust-tt/dust",
+    "metrics": {
+      "stars": 1479,
+      "license": "MIT"
+    }
   },
   {
     "id": "harvey-ai",
