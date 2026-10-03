@@ -240,6 +240,11 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
     return out
   }, [placed, iw, axisXOf])
 
+  const centerOf = useMemo(
+    () => new Map(placed.map((p) => [p.a.id, { cx: p.cx, cy: p.cy, r: p.r }])),
+    [placed]
+  )
+
   /**
    * 语义缩放：坐标系整体随 k 放大（气泡间距被拉开），
    * 但「墨迹」——气泡半径、笔画粗细、字号——只按 √k 放大。
@@ -563,17 +568,32 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                 )
               })}
 
-            {/* 标注层：每个气泡一个名字，细引线连回圆点，密集区也不混淆 */}
+            {/* 标注层：每个气泡一个名字。
+                位置用「相对各自气泡中心的偏移」表达，并按气泡同样的 √k 速率缩放，
+                于是放大时文字始终贴着自己那个圈，不会被拉远的间距甩开；
+                同时用下限保证文字不压进气泡。 */}
             {labels.map(({ id, x, y, anchor, leader, name }) => {
               const dim = hover !== null && hover !== id
+              const c = centerOf.get(id)
+              if (!c) return null
+              // 贴合偏移：随 √k 收缩，但不低于「气泡半径 + 一点间隙」
+              const bx = x - c.cx
+              const by = y - c.cy
+              const minOff = (c.r + 3) / scaleK
+              const fit = (v: number) => {
+                const s = v / scaleK
+                return Math.abs(s) < minOff ? Math.sign(v || 1) * minOff : s
+              }
+              const tx = c.cx + fit(bx)
+              const ty = c.cy + fit(by)
               return (
                 <g key={`lab-${id}`} pointerEvents="none">
                   {leader && (
                     <line
-                      x1={leader.x1}
-                      y1={leader.y1}
-                      x2={leader.x2}
-                      y2={leader.y2}
+                      x1={c.cx + (leader.x1 - c.cx) / scaleK}
+                      y1={c.cy + (leader.y1 - c.cy) / scaleK}
+                      x2={c.cx + (leader.x2 - c.cx) / scaleK}
+                      y2={c.cy + (leader.y2 - c.cy) / scaleK}
                       className="text-faint"
                       stroke="currentColor"
                       strokeWidth={ink(0.8)}
@@ -581,8 +601,8 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                     />
                   )}
                   <text
-                    x={x}
-                    y={y}
+                    x={tx}
+                    y={ty}
                     textAnchor={anchor}
                     className="fill-ink font-medium"
                     opacity={dim ? 0.18 : 0.95}
