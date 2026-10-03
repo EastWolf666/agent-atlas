@@ -7,7 +7,7 @@ import { CompareView } from './components/Compare'
 import { EmptyState } from './components/bits'
 import { useFilters, useCompare, useTheme } from './hooks/useAtlas'
 import { agents } from './lib/agents'
-import type { Agent } from './types'
+import type { Agent, Tier } from './types'
 
 type View = 'overview' | 'browse'
 
@@ -97,6 +97,15 @@ export default function App() {
     setView('browse')
   }
 
+  /*
+   * 概览页分类分布点击：跳到浏览页，并只勾上对应的 Tier 筛选。
+   */
+  const exploreTier = (tier: Tier) => {
+    atlas.reset()
+    atlas.toggleTier(tier)
+    setView('browse')
+  }
+
   return (
     <div className="min-h-screen">
       {/* 顶栏 */}
@@ -182,6 +191,7 @@ export default function App() {
             onCompare={() => setShowCompare(true)}
             compareCount={cmp.selected.length}
             onStatExplore={explorePreset}
+            onTierExplore={exploreTier}
           />
         ) : (
           <div className="grid items-start gap-5 lg:grid-cols-[248px_minmax(0,1fr)]">

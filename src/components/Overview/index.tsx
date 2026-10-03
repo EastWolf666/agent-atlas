@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { agents as allAgents, meta, TIER_ORDER, tierColor } from '../../lib/agents'
 import { AtlasMatrix } from './AtlasMatrix'
+import type { Tier } from '../../types'
 
 interface Props {
   onSelect: (id: string) => void
@@ -9,6 +10,8 @@ interface Props {
   compareCount: number
   /** 点击统计框：跳到浏览页并只勾上对应筛选条件 */
   onStatExplore: (preset: 'all' | 'l4' | 'oss' | 'nonactive') => void
+  /** 点击分类分布条目：跳到浏览页并勾上对应 Tier */
+  onTierExplore: (tier: Tier) => void
 }
 
 function StatCard({
@@ -47,7 +50,7 @@ function StatCard({
   )
 }
 
-export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatExplore }: Props) {
+export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatExplore, onTierExplore }: Props) {
   const stats = useMemo(() => {
     const total = allAgents.length
     const china = allAgents.filter((a) => a.region === 'china').length
@@ -151,20 +154,28 @@ export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatEx
               const pct = Math.round((count / stats.total) * 100)
               return (
                 <li key={tier}>
-                  <div className="flex items-baseline justify-between text-xs">
-                    <span className="font-medium">{meta.tiers[tier].label}</span>
-                    <span className="font-mono tabular-nums text-muted">
-                      {count}
-                      <span className="ml-1 text-faint">{pct}%</span>
-                    </span>
-                  </div>
-                  <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-faint/15">
-                    <div
-                      className="h-full rounded-full transition-all duration-500"
-                      style={{ width: `${pct}%`, backgroundColor: tierColor(tier) }}
-                    />
-                  </div>
-                  <p className="mt-1 text-2xs text-faint">{meta.tiers[tier].desc}</p>
+                  <button
+                    onClick={() => onTierExplore(tier)}
+                    aria-label={`查看「${meta.tiers[tier].label}」分类下的 ${count} 个产品`}
+                    className="group w-full rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-faint/10"
+                  >
+                    <div className="flex items-baseline justify-between text-xs">
+                      <span className="font-medium transition-colors group-hover:text-brand">
+                        {meta.tiers[tier].label}
+                      </span>
+                      <span className="font-mono tabular-nums text-muted">
+                        {count}
+                        <span className="ml-1 text-faint">{pct}%</span>
+                      </span>
+                    </div>
+                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-faint/15">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{ width: `${pct}%`, backgroundColor: tierColor(tier) }}
+                      />
+                    </div>
+                    <p className="mt-1 text-2xs text-faint">{meta.tiers[tier].desc}</p>
+                  </button>
                 </li>
               )
             })}

@@ -1,14 +1,13 @@
 import { useMemo, useState } from 'react'
 import {
   TIER_ORDER,
-  AUTONOMY_COLORS,
   AUTONOMY_LEVELS,
   tierColor,
   formOf,
   FORM_META,
   meta,
 } from '../../lib/agents'
-import type { Agent, ColorMode } from '../../types'
+import type { Agent } from '../../types'
 
 interface Props {
   agents: Agent[]
@@ -56,14 +55,14 @@ function labelWidth(name: string, fontSize: number): number {
 }
 
 export function AtlasMatrix({ agents, onSelect }: Props) {
-  const [colorMode, setColorMode] = useState<ColorMode>('tier')
+  const [colorByForm, setColorByForm] = useState(false)
   const [hover, setHover] = useState<string | null>(null)
 
   const W = 1000
-  const H = 560
+  const H = 700
   // 边距必须容纳最大气泡（r=15）+ 抖动偏移（±34px）+ 标签宽度，
-  // 否则 L5 列与垂直行业行会被画布边界裁掉
-  const M = { top: 58, right: 56, bottom: 34, left: 96 }
+  // 否则 L5 列与垂直行业行会被画布边界裁掉；上下多留空间给名字标签
+  const M = { top: 58, right: 56, bottom: 48, left: 96 }
   const iw = W - M.left - M.right
   const ih = H - M.top - M.bottom
 
@@ -114,83 +113,18 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
   }, [agents])
 
   /**
-   * 标签避让：按知名度从高到低尝试放置，与已放置标签或轴标签相交则放弃。
-   * 放弃的产品仅显示气泡，悬停时在提示框里看名字——保证密集区仍可读。
+   * 标签层见下方 `labels`（依赖 axisXOf，故置于其后定义）。
    */
-  const labelledIds = useMemo(() => {
-    const FS = 9
-    const taken: { x1: number; y1: number; x2: number; y2: number }[] = []
-
-    // 轴标签占位也要避开（留出4px 余量）
-    for (let i = 0; i < TIER_ORDER.length; i++) {
-      const label = meta.tiers[TIER_ORDER[i]].label
-      const w = labelWidth(label, 11)
-      taken.push({
-        x1: M.left - 14 - w - 4,
-        y1: yMidOf(i) - 10,
-        x2: M.left - 12 + 4,
-        y2: yMidOf(i) + 10,
-      })
-    }
-
-    const out = new Set<string>()
-    const sorted = [...placed].sort((a, b) => b.a.prominence - a.a.prominence)
-    for (const p of sorted) {
-      const name = p.a.name
-      const w = labelWidth(name, FS)
-      // 标签锚在气泡上方，向上偏移让文字落在气泡顶部之外
-      const ty = p.cy - p.r - 4
-      const box = {
-        x1: p.cx - w / 2 - 2,
-        y1: ty - FS,
-        x2: p.cx + w / 2 + 2,
-        y2: ty + 3,
-      }
-      // 与其他所有气泡（含未标-label 的）相交也算冲突，避免文字压在邻近气泡上
-      const overlapsBubble = placed.some((q) => {
-        if (q.a.id === p.a.id) return false
-        return (
-          box.x1 < q.cx + q.r &&
-          box.x2 > q.cx - q.r &&
-          box.y1 < q.cy + q.r &&
-          box.y2 > q.cy - q.r
-        )
-      })
-      const hit =
-        box.x1 < M.left ||
-        box.x2 > M.left + iw ||
-        box.y1 < M.top - 4 ||
-        overlapsBubble ||
-        taken.some((t) => box.x1 < t.x2 && box.x2 > t.x1 && box.y1 < t.y2 && box.y2 > t.y1)
-      if (hit) continue
-      taken.push(box)
-      out.add(p.a.id)
-    }
-    return out
-  }, [placed, iw])
 
 
-  const colorOf = (a: Agent) => {
-    if (colorMode === 'tier') return tierColor(a.tier)
-    if (colorMode === 'autonomy') return AUTONOMY_COLORS[a.autonomyLevel]
-    return FORM_META[formOf(a)].color
-  }
+
+  const colorOf = (a: Agent) =>
+    colorByForm ? FORM_META[formOf(a)].color : tierColor(a.tier)
 
   const hovered = hover ? agents.find((a) => a.id === hover) : null
-  const legend =
-    colorMode === 'tier'
-      ? TIER_ORDER.map((t) => ({ key: t, label: meta.tiers[t].label, color: tierColor(t) }))
-      : colorMode === 'autonomy'
-        ? AUTONOMY_LEVELS.map((l) => ({
-            key: String(l),
-            label: `L${l} ${meta.autonomyLevels[String(l)].name}`,
-            color: AUTONOMY_COLORS[l],
-          }))
-        : Object.entries(FORM_META).map(([k, v]) => ({
-            key: k,
-            label: v.label,
-            color: v.color,
-          }))
+  const legend = colorByForm
+    ? Object.entries(FORM_META).map(([k, v]) => ({ key: k, label: v.label, color: v.color }))
+    : TIER_ORDER.map((t) => ({ key: t, label: meta.tiers[t].label, color: tierColor(t) }))
 
   /**
    * 每根竖线的实际绘制位置 = 该列所有气泡的 x 重心。
@@ -207,14 +141,122 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
   }, [placed])
 
   /**
-   * 可切换的着色维度。
-   * 不提供「按自主性」：X 轴本就是自主性等级，整列必然同色，
-   * 与位置信息完全重复，看不到任何新信息。
+   * 全量标注：每个气泡都对应一个名字标签，并用细引线连回圆点，
+   * 保证在密集区也不会把名字误认到别的圆点上。
+   * 按知名度从高到低贪心放置：优先贴着气泡（无引线），放不下再向外推并用引线连接。
    */
-  const modes: { key: ColorMode; label: string; hint: string }[] = [
-    { key: 'tier', label: '按领域', hint: '与纵轴一致' },
-    { key: 'form', label: '按形态', hint: '形态是第三个独立维度，可看出分布' },
-  ]
+  const labels = useMemo(() => {
+    const FS = 8.5
+    const ordered = [...placed].sort((a, b) => b.a.prominence - a.a.prominence)
+
+    type Box = { x1: number; y1: number; x2: number; y2: number }
+    const taken: Box[] = []
+    // 预留纵轴（领域）标签与顶部（自主性）标签的占位，避免被名字压住
+    for (let i = 0; i < TIER_ORDER.length; i++) {
+      const w = labelWidth(meta.tiers[TIER_ORDER[i]].label, 11)
+      taken.push({ x1: M.left - 18 - w, y1: yMidOf(i) - 9, x2: M.left - 12, y2: yMidOf(i) + 9 })
+    }
+    for (const l of AUTONOMY_LEVELS) {
+      const x = axisXOf.get(l)!
+      taken.push({ x1: x - 14, y1: M.top - 34, x2: x + 14, y2: M.top - 4 })
+    }
+
+    const collide = (b: Box): boolean => {
+      if (
+        b.x1 < M.left - 2 ||
+        b.x2 > M.left + iw + 2 ||
+        b.y1 < M.top - 40 ||
+        b.y2 > M.top + ih + 28
+      )
+        return true
+      for (const t of taken)
+        if (b.x1 < t.x2 && b.x2 > t.x1 && b.y1 < t.y2 && b.y2 > t.y1) return true
+      for (const q of placed)
+        if (
+          b.x1 < q.cx + q.r + 1 &&
+          b.x2 > q.cx - q.r - 1 &&
+          b.y1 < q.cy + q.r + 1 &&
+          b.y2 > q.cy - q.r - 1
+        )
+          return true
+      return false
+    }
+
+    const out: {
+      id: string
+      name: string
+      x: number
+      y: number
+      anchor: 'middle' | 'start' | 'end'
+      leader?: { x1: number; y1: number; x2: number; y2: number }
+    }[] = []
+
+    for (const p of ordered) {
+      // 优先用中文名（更短更直观），过长则退回英文名
+      const name = p.a.nameZh && p.a.nameZh.length <= 12 ? p.a.nameZh : p.a.name
+      const w = labelWidth(name, FS)
+      const h = FS + 2
+      const cands: { dx: number; dy: number; anchor: 'middle' | 'start' | 'end'; side: string }[] = [
+        { dx: 0, dy: -(p.r + 3), anchor: 'middle', side: 'top' },
+        { dx: 0, dy: p.r + 3 + h, anchor: 'middle', side: 'bottom' },
+        { dx: p.r + 5, dy: h / 2, anchor: 'start', side: 'right' },
+        { dx: -(p.r + 5), dy: h / 2, anchor: 'end', side: 'left' },
+        { dx: 0, dy: -(p.r + 16), anchor: 'middle', side: 'top2' },
+        { dx: 0, dy: p.r + 16 + h, anchor: 'middle', side: 'bottom2' },
+      ]
+      let pick:
+        | { bx1: number; by1: number; bx2: number; by2: number; anchor: 'middle' | 'start' | 'end'; side: string }
+        | null = null
+      for (const c of cands) {
+        let bx1: number, bx2: number, by1: number, by2: number
+        if (c.anchor === 'middle') {
+          bx1 = p.cx + c.dx - w / 2
+          bx2 = p.cx + c.dx + w / 2
+        } else if (c.anchor === 'start') {
+          bx1 = p.cx + c.dx
+          bx2 = p.cx + c.dx + w
+        } else {
+          bx2 = p.cx + c.dx
+          bx1 = p.cx + c.dx - w
+        }
+        by1 = p.cy + c.dy - h
+        by2 = p.cy + c.dy
+        const box: Box = { x1: bx1 - 1, y1: by1 - 1, x2: bx2 + 1, y2: by2 + 1 }
+        if (collide(box)) continue
+        pick = { bx1, by1, bx2, by2, anchor: c.anchor, side: c.side }
+        break
+      }
+      // 兜底：实在放不下也强制定在正上方（密集区难免叠字，但引线保证对应正确）
+      if (!pick) {
+        pick = {
+          bx1: p.cx - w / 2,
+          bx2: p.cx + w / 2,
+          by1: p.cy - (p.r + 3) - h,
+          by2: p.cy - (p.r + 3),
+          anchor: 'middle',
+          side: 'top',
+        }
+      }
+      taken.push({ x1: pick.bx1 - 1, y1: pick.by1 - 1, x2: pick.bx2 + 1, y2: pick.by2 + 1 })
+
+      const labelX =
+        pick.anchor === 'middle' ? p.cx : pick.anchor === 'start' ? pick.bx1 : pick.bx2
+      const labelY = pick.by2 - 2
+
+      let leader: { x1: number; y1: number; x2: number; y2: number } | undefined
+      if (pick.side === 'right')
+        leader = { x1: pick.bx1 - 1, y1: pick.by1 + h / 2, x2: p.cx + p.r, y2: p.cy }
+      else if (pick.side === 'left')
+        leader = { x1: pick.bx2 + 1, y1: pick.by1 + h / 2, x2: p.cx - p.r, y2: p.cy }
+      else if (pick.side === 'top2')
+        leader = { x1: p.cx, y1: pick.by2 + 1, x2: p.cx, y2: p.cy - p.r }
+      else if (pick.side === 'bottom2')
+        leader = { x1: p.cx, y1: pick.by1 - 1, x2: p.cx, y2: p.cy + p.r }
+
+      out.push({ id: p.a.id, name, x: labelX, y: labelY, anchor: pick.anchor, leader })
+    }
+    return out
+  }, [placed, iw, axisXOf])
 
   return (
     <div className="aa-card overflow-hidden">
@@ -225,33 +267,19 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
             横轴自主性等级，纵轴应用领域，气泡大小代表相对知名度
           </p>
         </div>
-        <div
-          className="flex items-center gap-2"
-        >
+        <div className="flex items-center gap-2">
           <span className="text-2xs text-faint">
-            {modes.find((m) => m.key === colorMode)?.hint}
+            {colorByForm ? '颜色：按形态' : '颜色：按领域'}
           </span>
-          <div
-            className="flex gap-0.5 rounded-lg bg-faint/10 p-0.5"
-            role="tablist"
-            aria-label="图谱着色维度"
+          <button
+            onClick={() => setColorByForm((v) => !v)}
+            aria-pressed={colorByForm}
+            className={`rounded-md px-2.5 py-1 text-2xs font-medium transition-colors ${
+              colorByForm ? 'bg-panel text-ink shadow-sm' : 'text-muted hover:text-ink'
+            }`}
           >
-            {modes.map((m) => (
-              <button
-                key={m.key}
-                role="tab"
-                aria-selected={colorMode === m.key}
-                onClick={() => setColorMode(m.key)}
-                className={`rounded-md px-2.5 py-1 text-2xs font-medium transition-colors ${
-                  colorMode === m.key
-                    ? 'bg-panel text-ink shadow-sm'
-                    : 'text-muted hover:text-ink'
-                }`}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
+            按形态着色
+          </button>
         </div>
       </div>
 
@@ -382,20 +410,40 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
                     onMouseLeave={() => setHover(null)}
                     onClick={() => onSelect(a.id)}
                   />
-                  {labelledIds.has(a.id) && !dim && (
-                    <text
-                      x={cx}
-                      y={cy - r - 4}
-                      textAnchor="middle"
-                      className="pointer-events-none fill-ink text-[9px] font-medium"
-                      opacity={0.85}
-                    >
-                      {a.name}
-                    </text>
-                  )}
                 </g>
               )
             })}
+
+          {/* 标注层：每个气泡一个名字，细引线连回圆点，密集区也不混淆 */}
+          {labels.map(({ id, x, y, anchor, leader, name }) => {
+            const dim = hover !== null && hover !== id
+            return (
+              <g key={`lab-${id}`} pointerEvents="none">
+                {leader && (
+                  <line
+                    x1={leader.x1}
+                    y1={leader.y1}
+                    x2={leader.x2}
+                    y2={leader.y2}
+                    className="text-faint"
+                    stroke="currentColor"
+                    strokeWidth={0.7}
+                    strokeOpacity={dim ? 0.12 : 0.5}
+                  />
+                )}
+                <text
+                  x={x}
+                  y={y}
+                  textAnchor={anchor}
+                  className="fill-ink text-[8.5px] font-medium"
+                  opacity={dim ? 0.18 : 0.92}
+                  style={{ paintOrder: 'stroke', stroke: '#fff', strokeWidth: 2.4, strokeOpacity: 0.72 }}
+                >
+                  {name}
+                </text>
+              </g>
+            )
+          })}
         </svg>
       </div>
 
@@ -410,7 +458,7 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
           </span>
         ))}
         <span className="ml-auto text-2xs text-faint">
-          {hover ? '点击查看详情' : `${placed.length} 个产品 · 悬停查看名称`}
+          {hover ? '点击查看详情' : `${placed.length} 个产品 · 点击气泡查看详情`}
         </span>
       </div>
     </div>
