@@ -6474,7 +6474,1132 @@
       ],
       "discoveredAt": "2026-10-04",
       "decided": false
+    },
+    {
+      "slug": "the-poteto-frontier-for-ai-agents",
+      "name": "The Poteto Frontier for AI Agents",
+      "url": "https://poteto-frontier.vercel.app/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://poteto-frontier.vercel.app/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "tapracer-drag-racing-with-real-car-physics-and-a-two-key-thr",
+      "name": "TapRacer – drag racing with real car physics and a two-key throttle",
+      "url": "https://store.steampowered.com/app/5077320/TapRacer/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://store.steampowered.com/app/5077320/TapRacer/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "sortbot-io-your-physical-inventory-with-an-api-and-mcp-acces",
+      "name": "Sortbot.io – Your physical inventory, with an API and MCP access",
+      "url": "https://www.sortbot.io",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://www.sortbot.io",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "ranking-the-most-ai-agent-friendly-tools",
+      "name": "Ranking the most AI agent friendly tools",
+      "url": "https://www.anchorterminal.com/tools/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://www.anchorterminal.com/tools/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "stateful-linux-microvms-for-coding-agents",
+      "name": "Stateful Linux microVMs for coding agents",
+      "url": "https://github.com/mariobm/agent-house",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/mariobm/agent-house",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "repoguard-fast-architecture-guardrails-for-claude-and-cursor",
+      "name": "RepoGuard – Fast Architecture Guardrails for Claude and Cursor via MCP",
+      "url": "https://github.com/taylormatematica-beep/repoguard",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/taylormatematica-beep/repoguard",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "pve-agents-coding-agents-on-your-existing-proxmox-infrastruc",
+      "name": "Pve-agents – coding agents on your existing Proxmox infrastructure",
+      "url": "https://pve-agents.sh",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://pve-agents.sh",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "bearbits-ai-copilot-that-helps-during-meetings-instead-of-on",
+      "name": "Bearbits – AI copilot that helps during meetings instead of only after",
+      "url": "https://bearbits.io/",
+      "source": "hn",
+      "score": 45,
+      "date": "2026-10",
+      "regionHint": "china",
+      "tierHint": "productivity",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://bearbits.io/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "jarvis-an-android-voice-assistant-that-drives-other-apps-by-",
+      "name": "Jarvis, an Android voice assistant that drives other apps by itself",
+      "url": "https://github.com/AnaaySampat/jarvis",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/AnaaySampat/jarvis",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "agents-sleep-preventer-keep-your-mac-awake-only-while-ai-age",
+      "name": "Agents Sleep Preventer – keep your Mac awake only while AI agents work",
+      "url": "https://github.com/CharlonTank/agents-sleep-preventer",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/CharlonTank/agents-sleep-preventer",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "the-first-ever-competition-of-ai-personal-agents-on-the-inte",
+      "name": "The first ever competition of AI personal agents on the internet",
+      "url": "https://instapath.ai/personal-agent-challenge",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://instapath.ai/personal-agent-challenge",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "untyped-check-recorded-agent-runs-against-a-tla-spec",
+      "name": "Untyped – check recorded agent runs against a TLA+ spec",
+      "url": "https://github.com/untyped-ai/untyped",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/untyped-ai/untyped",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "colorful-design-system-for-agents",
+      "name": "Colorful Design System for Agents",
+      "url": "https://orbeez-kit.vercel.app/chat",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 2
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://orbeez-kit.vercel.app/chat",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "loa-a-local-coding-agent-built-around-a-mutable-dag",
+      "name": "Loa – a local coding agent built around a mutable DAG",
+      "url": "https://github.com/laughingmandev/loa",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/laughingmandev/loa",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "solvi-1-0-an-llm-proposes-checks-decide-every-decision-repla",
+      "name": "Solvi 1.0 – an LLM proposes, checks decide, every decision replays",
+      "url": "https://github.com/solvi-ai/solvi",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/solvi-ai/solvi",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "artbucket-oss-brand-assets-and-portals-for-humans-and-ai-age",
+      "name": "Artbucket – OSS brand assets and portals for humans and AI agents",
+      "url": "https://github.com/pwnera/artbucket",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/pwnera/artbucket",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "superlocalmemory-4-0-governed-memory-operating-system-for-ai",
+      "name": "SuperLocalMemory 4.0 \"Governed Memory Operating System for AI Agents\"",
+      "url": "https://arxiv.org/abs/2608.08253",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 5,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://arxiv.org/abs/2608.08253",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "gomen-nas-ai-cloud",
+      "name": "gomen-nas-ai-cloud",
+      "url": "https://github.com/code-refinery-works/gomen-nas-ai-cloud",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Produced by agent🟡 | Featured by agent🔴",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/code-refinery-works/gomen-nas-ai-cloud",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "agent-watchdog",
+      "name": "agent-watchdog",
+      "url": "https://github.com/moecui22/agent-watchdog",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Did each scheduled AI agent actually do its work? Existence check + LLM-as-judge on the output, state-change alerts.",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/moecui22/agent-watchdog",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "ai-proje-1791158486",
+      "name": "ai-proje-1791158486",
+      "url": "https://github.com/Omerondr/ai-proje-1791158486",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "AI Agent Company tarafından üretildi: proje-1791158486",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Omerondr/ai-proje-1791158486",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "agent-harness-build",
+      "name": "agent-harness-build",
+      "url": "https://github.com/jaysmartinez/agent-harness-build",
+      "source": "github",
+      "score": 60,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Educational Python LLM agent harness with file tools, persistent memory, model switching, and MCP integrations",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/jaysmartinez/agent-harness-build",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "skills-agent-orchestration-build-your-ai-dream-team",
+      "name": "skills-agent-orchestration-build-your-ai-dream-team",
+      "url": "https://github.com/JAPV-X2612/skills-agent-orchestration-build-your-ai-dream-team",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "platform",
+      "description": "Exercise: Agent Orchestration: Build Your AI Dream Team",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/JAPV-X2612/skills-agent-orchestration-build-your-ai-dream-team",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "aws-finops-ai-multi-agent-system-with-crewai",
+      "name": "AWS-FinOps-AI-Multi-Agent-System-with-CrewAI.",
+      "url": "https://github.com/AyoubElmortaji/AWS-FinOps-AI-Multi-Agent-System-with-CrewAI.",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Built a multi-agent AI system (CrewAI) to automate AWS cost optimization (FinOps). ",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/AyoubElmortaji/AWS-FinOps-AI-Multi-Agent-System-with-CrewAI.",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "society-lab",
+      "name": "society-lab",
+      "url": "https://github.com/Atharvap14/society-lab",
+      "source": "github",
+      "score": 60,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Agentic research for agent societies: source-grounded behavior discovery, controlled proxy environments, real LLM experiments, scientific charts and replay.",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Atharvap14/society-lab",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "pt-influencer",
+      "name": "pt-influencer",
+      "url": "https://github.com/pt-evm/pt-influencer",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "AI influencer CLI for agents with a zkAPI client",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/pt-evm/pt-influencer",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "agent-state-evidence-ledger-field-guide",
+      "name": "agent-state-evidence-ledger-field-guide",
+      "url": "https://github.com/ankitforce/agent-state-evidence-ledger-field-guide",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Field guide, checklist, schema, and example record for AI agent state evidence ledgers.",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/ankitforce/agent-state-evidence-ledger-field-guide",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "dify-plugin-cohesivity",
+      "name": "dify-plugin-cohesivity",
+      "url": "https://github.com/AragAgg/dify-plugin-cohesivity",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "infrastructure",
+      "description": "Cohesivity plugin for Dify — managed backend infrastructure for AI agents",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/AragAgg/dify-plugin-cohesivity",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "shinchokuzero-engine",
+      "name": "ShinchokuZero-Engine",
+      "url": "https://github.com/code-refinery-works/ShinchokuZero-Engine",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Produced by agent🟡 | Featured by agent🔴",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/code-refinery-works/ShinchokuZero-Engine",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "dynamic-agent-runner",
+      "name": "dynamic-agent-runner",
+      "url": "https://github.com/bob-schumaker/dynamic-agent-runner",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A Python library for running generated agent workflows from agent-development artifacts.",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/bob-schumaker/dynamic-agent-runner",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "zabbix-sybase",
+      "name": "zabbix-sybase",
+      "url": "https://github.com/ThomasPIEDEFER/zabbix-sybase",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Plugin Agent 2 + Template",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/ThomasPIEDEFER/zabbix-sybase",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "ai-tools-assets-template",
+      "name": "ai-tools-assets-template",
+      "url": "https://github.com/dag-node/ai-tools-assets-template",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Template repository for portable, permission-neutral sets of skills/subagents/scripts for AI coding agents using the SKILL.md format.",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/dag-node/ai-tools-assets-template",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "autonomous-repository-support-agent",
+      "name": "Autonomous-Repository-Support-Agent",
+      "url": "https://github.com/harsh-mangukia44/Autonomous-Repository-Support-Agent",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A TypeScript prototype that combines a Mastra AI agent, Temporal workflows, MongoDB Atlas Vector Search, Ollama embeddings, SerpApi web search, and Sentry monitoring. The agent is designed to investigate a technical issue using repository context and web search, then return a suggested fix.",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/harsh-mangukia44/Autonomous-Repository-Support-Agent",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "restaurant-n8n",
+      "name": "restaurant_n8n",
+      "url": "https://github.com/mostafaelmniawy7-glitch/restaurant_n8n",
+      "source": "github",
+      "score": 52,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "AI Restaurant Bot built with n8n — Telegram chatbot with AI agent, RAG knowledge base, and Google Sheets order management.",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/mostafaelmniawy7-glitch/restaurant_n8n",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "agent-3de8a980",
+      "name": "agent-3de8a980",
+      "url": "https://github.com/andyprevalsky/agent-3de8a980",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Auto-created workspace for Rose Labs agent",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/andyprevalsky/agent-3de8a980",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "deep-intelligence-voice-agent",
+      "name": "deep-intelligence-voice-agent",
+      "url": "https://github.com/Deepintellli/deep-intelligence-voice-agent",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Deep Intelligence voice agent: research, design, and provider comparison",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Deepintellli/deep-intelligence-voice-agent",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "skills-build-applications-w-copilot-agent-mode",
+      "name": "skills-build-applications-w-copilot-agent-mode",
+      "url": "https://github.com/jonixpier/skills-build-applications-w-copilot-agent-mode",
+      "source": "github",
+      "score": 60,
+      "regionHint": "china",
+      "tierHint": "vertical",
+      "description": "Exercise: Build applications with GitHub Copilot agent mode",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/jonixpier/skills-build-applications-w-copilot-agent-mode",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "projectsetup",
+      "name": "projectsetup",
+      "url": "https://github.com/ronald32acunadev/projectsetup",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "My project setup for agents and more",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/ronald32acunadev/projectsetup",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "rustgap",
+      "name": "rustgap",
+      "url": "https://github.com/mobashirrahman/rustgap",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "How much performance does rustc leave behind on hot functions, and can an AI agent recover it safely?",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/mobashirrahman/rustgap",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "anti-slop",
+      "name": "anti-slop",
+      "url": "https://github.com/Mo-Awadalla/anti-slop",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Evidence-first anti-slop skill for coding agents",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Mo-Awadalla/anti-slop",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "cybr-proof",
+      "name": "cybr-proof",
+      "url": "https://github.com/CybrFlux/cybr-proof",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "Proof-of-work video for AI agents: Hermes plugin that turns computer_use runs into ghost-cursor videos. Zero overhead.",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/CybrFlux/cybr-proof",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "ra",
+      "name": "ra",
+      "url": "https://github.com/icehomura/ra",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "infrastructure",
+      "description": "ra — an embeddable Rust agent runtime with a terminal client",
+      "signals": {
+        "stars": 0,
+        "license": "Apache-2.0",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/icehomura/ra",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "campus-customs-hw5",
+      "name": "campus-customs-hw5",
+      "url": "https://github.com/Drozdyuk1985/campus-customs-hw5",
+      "source": "github",
+      "score": 60,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "MGT 409 HW5 — Campus Customs multi-agent shop desk (PydanticAI + FastMCP + FastAPI + React)",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/Drozdyuk1985/campus-customs-hw5",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "mcp-job-tracker",
+      "name": "mcp-job-tracker",
+      "url": "https://github.com/CloudCorpRecords/mcp-job-tracker",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Ask Claude about your job hunt — MCP server over your application tracker: search applications, find stale leads, check reply status",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/CloudCorpRecords/mcp-job-tracker",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "space-data-atlas",
+      "name": "space-data-atlas",
+      "url": "https://github.com/swapniltamse/space-data-atlas",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Every NASA Space Apps 2026 challenge, traced to the NASA data that can solve it. Site + MCP server. Independent, not affiliated with NASA.",
+      "signals": {
+        "stars": 0,
+        "license": "MIT",
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/swapniltamse/space-data-atlas",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
+    },
+    {
+      "slug": "structai-mcp-server",
+      "name": "StructAI-MCP-Server",
+      "url": "https://github.com/lkxlzx/StructAI-MCP-Server",
+      "source": "github",
+      "score": 42,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "MIDAS Open API 端点注册表（635 端点 / 615 JSON Schema）与 MCP Server 知识层 —— 含真实实例逐端点实测报告",
+      "signals": {
+        "stars": 0,
+        "license": null,
+        "forks": 0,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/lkxlzx/StructAI-MCP-Server",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-05",
+      "decided": false
     }
   ],
-  "generatedAt": "2026-10-04"
+  "generatedAt": "2026-10-05"
 }
