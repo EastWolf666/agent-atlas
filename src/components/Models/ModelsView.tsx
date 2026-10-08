@@ -229,7 +229,7 @@ export default function ModelsView() {
       {/* 标题区 */}
       <div className="animate-fade-in">
         <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
-          大模型选型对比
+          AI 大模型选型对比
         </h1>
         <p className="mt-1.5 max-w-3xl text-sm text-muted">
           收录 <strong className="text-ink">{stats.total}</strong> 个可经 API 调用的模型，

@@ -148,7 +148,7 @@ export default function App() {
               [
                 ['overview', '概览'],
                 ['browse', 'Agent'],
-                ['models', '模型'],
+                ['models', 'AI 大模型'],
               ] as const
             ).map(([k, label]) => (
               <button
