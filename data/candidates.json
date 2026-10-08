@@ -13497,81 +13497,6 @@
       "decided": false
     },
     {
-      "slug": "aura-a-self-hosted-multi-user-ai-agent-with-per-person-graph",
-      "name": "Aura – a self-hosted, multi-user AI agent with per-person graph memory",
-      "url": "https://github.com/chetto1983/Aura",
-      "source": "hn",
-      "score": 35,
-      "date": "2026-10",
-      "regionHint": "overseas",
-      "tierHint": "vertical",
-      "description": "",
-      "signals": {
-        "hnPoints": 1,
-        "hnComments": 0
-      },
-      "suggestedSources": [
-        {
-          "title": "hn 报道",
-          "url": "https://github.com/chetto1983/Aura",
-          "type": "media",
-          "date": "2026-10"
-        }
-      ],
-      "discoveredAt": "2026-10-08",
-      "decided": false
-    },
-    {
-      "slug": "crashlytics-for-ai-coding-agents",
-      "name": "Crashlytics for AI Coding Agents",
-      "url": "https://github.com/0xfirattamur/xcrashlytics",
-      "source": "hn",
-      "score": 35,
-      "date": "2026-10",
-      "regionHint": "overseas",
-      "tierHint": "coding",
-      "description": "",
-      "signals": {
-        "hnPoints": 1,
-        "hnComments": 0
-      },
-      "suggestedSources": [
-        {
-          "title": "hn 报道",
-          "url": "https://github.com/0xfirattamur/xcrashlytics",
-          "type": "media",
-          "date": "2026-10"
-        }
-      ],
-      "discoveredAt": "2026-10-08",
-      "decided": false
-    },
-    {
-      "slug": "pocketty-iphone-ssh-terminal-that-pings-you-when-an-agent-is",
-      "name": "Pocketty – iPhone SSH terminal that pings you when an agent is blocked",
-      "url": "https://pocketty.app/",
-      "source": "hn",
-      "score": 35,
-      "date": "2026-10",
-      "regionHint": "overseas",
-      "tierHint": "vertical",
-      "description": "",
-      "signals": {
-        "hnPoints": 3,
-        "hnComments": 0
-      },
-      "suggestedSources": [
-        {
-          "title": "hn 报道",
-          "url": "https://pocketty.app/",
-          "type": "media",
-          "date": "2026-10"
-        }
-      ],
-      "discoveredAt": "2026-10-08",
-      "decided": false
-    },
-    {
       "slug": "rinkata-shared-project-context-for-teams-using-coding-agents",
       "name": "Rinkata, shared project context for teams using coding agents",
       "url": "https://rinkata.dev/",
@@ -13606,9 +13531,9 @@
       "tierHint": "infrastructure",
       "description": "An agentic skills framework & software development methodology that works.",
       "signals": {
-        "stars": 296512,
+        "stars": 296499,
         "license": "MIT",
-        "forks": 26481,
+        "forks": 26480,
         "archived": false
       },
       "suggestedSources": [
@@ -13631,9 +13556,9 @@
       "tierHint": "vertical",
       "description": "Skills for Real Engineers. Straight from my .agents directory.",
       "signals": {
-        "stars": 280827,
+        "stars": 280764,
         "license": "MIT",
-        "forks": 23545,
+        "forks": 23537,
         "archived": false
       },
       "suggestedSources": [
@@ -13656,9 +13581,9 @@
       "tierHint": "coding",
       "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
       "signals": {
-        "stars": 275235,
+        "stars": 275203,
         "license": "MIT",
-        "forks": 41078,
+        "forks": 41075,
         "archived": false
       },
       "suggestedSources": [
@@ -13681,9 +13606,9 @@
       "tierHint": "vertical",
       "description": "An agent-managed museum exhibit, built in Rust with Gajae-Code / LazyCodex — developed and maintained with no human intervention.",
       "signals": {
-        "stars": 194995,
+        "stars": 194994,
         "license": "MIT",
-        "forks": 108134,
+        "forks": 108131,
         "archived": false
       },
       "suggestedSources": [
@@ -13706,9 +13631,9 @@
       "tierHint": "vertical",
       "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
       "signals": {
-        "stars": 189583,
+        "stars": 189572,
         "license": "AGPL-3.0",
-        "forks": 10056,
+        "forks": 10054,
         "archived": false
       },
       "suggestedSources": [
@@ -13731,7 +13656,7 @@
       "tierHint": "vertical",
       "description": "Public repository for Agent Skills",
       "signals": {
-        "stars": 179982,
+        "stars": 179976,
         "license": null,
         "forks": 21312,
         "archived": false
@@ -13756,9 +13681,9 @@
       "tierHint": "coding",
       "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
       "signals": {
-        "stars": 129175,
+        "stars": 129174,
         "license": "MIT",
-        "forks": 20243,
+        "forks": 20242,
         "archived": false
       },
       "suggestedSources": [
@@ -13806,7 +13731,7 @@
       "tierHint": "vertical",
       "description": "免费大模型API，支持免费调用GPT、DeepSeek等主流模型，免费额度10000点，每日刷新！另付费价格最低官方1-2折！",
       "signals": {
-        "stars": 43807,
+        "stars": 43805,
         "license": "MIT",
         "forks": 2739,
         "archived": false
@@ -13881,9 +13806,9 @@
       "tierHint": "infrastructure",
       "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
       "signals": {
-        "stars": 110267,
+        "stars": 110264,
         "license": "Apache-2.0",
-        "forks": 21202,
+        "forks": 21201,
         "archived": false
       },
       "suggestedSources": [
@@ -13906,9 +13831,9 @@
       "tierHint": "vertical",
       "description": "A collection of MCP servers.",
       "signals": {
-        "stars": 95933,
+        "stars": 95927,
         "license": "MIT",
-        "forks": 17289,
+        "forks": 17283,
         "archived": false
       },
       "suggestedSources": [
@@ -13931,7 +13856,7 @@
       "tierHint": "coding",
       "description": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
       "signals": {
-        "stars": 74133,
+        "stars": 74132,
         "license": "MIT",
         "forks": 8810,
         "archived": false
@@ -13972,6 +13897,181 @@
       "decided": false
     },
     {
+      "slug": "anvil-offline-llm-chat-and-sdxl-image-generation-on-iphone",
+      "name": "Anvil, offline LLM chat and SDXL image generation on iPhone",
+      "url": "https://testflight.apple.com/join/5JGCZpxt",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://testflight.apple.com/join/5JGCZpxt",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "llm-motion-graphics-benchmark",
+      "name": "LLM Motion Graphics Benchmark",
+      "url": "https://cliphou.se/benchmark/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 1
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://cliphou.se/benchmark/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "accountability-md-a-skill-that-holds-agents-accountable-for-",
+      "name": "Accountability.md – a skill that holds agents accountable for actions",
+      "url": "https://github.com/kenm47/agent_accountability/blob/main/accountability.md",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/kenm47/agent_accountability/blob/main/accountability.md",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "second-brain-network-where-your-agents-learn-at-100x-than-hu",
+      "name": "Second Brain Network – Where your agents learn at 100x than humans",
+      "url": "https://agentsocialx.com/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 6,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://agentsocialx.com/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "aura-a-self-hosted-multi-user-ai-agent-with-per-person-graph",
+      "name": "Aura – a self-hosted, multi-user AI agent with per-person graph memory",
+      "url": "https://github.com/chetto1983/Aura",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 3,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/chetto1983/Aura",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "crashlytics-for-ai-coding-agents",
+      "name": "Crashlytics for AI Coding Agents",
+      "url": "https://github.com/0xfirattamur/xcrashlytics",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 3,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://github.com/0xfirattamur/xcrashlytics",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "pocketty-iphone-ssh-terminal-that-pings-you-when-an-agent-is",
+      "name": "Pocketty – iPhone SSH terminal that pings you when an agent is blocked",
+      "url": "https://pocketty.app/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "",
+      "signals": {
+        "hnPoints": 9,
+        "hnComments": 4
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://pocketty.app/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
       "slug": "superpowers",
       "name": "superpowers",
       "url": "https://github.com/obra/superpowers",
@@ -13981,9 +14081,9 @@
       "tierHint": "infrastructure",
       "description": "An agentic skills framework & software development methodology that works.",
       "signals": {
-        "stars": 296513,
+        "stars": 296555,
         "license": "MIT",
-        "forks": 26481,
+        "forks": 26485,
         "archived": false
       },
       "suggestedSources": [
@@ -14006,9 +14106,9 @@
       "tierHint": "vertical",
       "description": "Skills for Real Engineers. Straight from my .agents directory.",
       "signals": {
-        "stars": 280828,
+        "stars": 281007,
         "license": "MIT",
-        "forks": 23545,
+        "forks": 23554,
         "archived": false
       },
       "suggestedSources": [
@@ -14031,9 +14131,9 @@
       "tierHint": "coding",
       "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
       "signals": {
-        "stars": 275235,
+        "stars": 275364,
         "license": "MIT",
-        "forks": 41078,
+        "forks": 41100,
         "archived": false
       },
       "suggestedSources": [
@@ -14056,9 +14156,9 @@
       "tierHint": "vertical",
       "description": "An agent-managed museum exhibit, built in Rust with Gajae-Code / LazyCodex — developed and maintained with no human intervention.",
       "signals": {
-        "stars": 194995,
+        "stars": 194990,
         "license": "MIT",
-        "forks": 108134,
+        "forks": 108130,
         "archived": false
       },
       "suggestedSources": [
@@ -14081,9 +14181,9 @@
       "tierHint": "vertical",
       "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
       "signals": {
-        "stars": 189583,
+        "stars": 189617,
         "license": "AGPL-3.0",
-        "forks": 10056,
+        "forks": 10058,
         "archived": false
       },
       "suggestedSources": [
@@ -14106,9 +14206,9 @@
       "tierHint": "vertical",
       "description": "Public repository for Agent Skills",
       "signals": {
-        "stars": 179982,
+        "stars": 179991,
         "license": null,
-        "forks": 21312,
+        "forks": 21316,
         "archived": false
       },
       "suggestedSources": [
@@ -14131,9 +14231,9 @@
       "tierHint": "coding",
       "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
       "signals": {
-        "stars": 129175,
+        "stars": 129189,
         "license": "MIT",
-        "forks": 20243,
+        "forks": 20247,
         "archived": false
       },
       "suggestedSources": [
@@ -14156,7 +14256,7 @@
       "tierHint": "coding",
       "description": "【低代码v2.0，一句话即可生成整个系统】企业级AI低代码平台，一键生成前后端代码甚至整个系统。 AI Skills 一句话画流程、设计表单、生成报表、大屏。内置 AI应用平台涵盖：AI聊天、知识库、流程编排、MCP插件等，兼容主流大模型。引领AI低代码「Skills 生成 → 在线配置 → 代码生成 → 手工合并->AI修改」开发模式，解决 Java 项目 90% 重复工作，提高效率又不失灵活。",
       "signals": {
-        "stars": 48113,
+        "stars": 48112,
         "license": "Apache-2.0",
         "forks": 16208,
         "archived": false
@@ -14181,7 +14281,7 @@
       "tierHint": "vertical",
       "description": "免费大模型API，支持免费调用GPT、DeepSeek等主流模型，免费额度10000点，每日刷新！另付费价格最低官方1-2折！",
       "signals": {
-        "stars": 43807,
+        "stars": 43809,
         "license": "MIT",
         "forks": 2739,
         "archived": false
@@ -14206,7 +14306,7 @@
       "tierHint": "vertical",
       "description": "📚 从零开始构建大模型",
       "signals": {
-        "stars": 34235,
+        "stars": 34234,
         "license": "NOASSERTION",
         "forks": 3229,
         "archived": false
@@ -14231,7 +14331,7 @@
       "tierHint": "vertical",
       "description": "基于多智能体LLM的中文金融交易框架 - TradingAgents中文增强版",
       "signals": {
-        "stars": 32219,
+        "stars": 32218,
         "license": "NOASSERTION",
         "forks": 6721,
         "archived": false
@@ -14256,9 +14356,9 @@
       "tierHint": "infrastructure",
       "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
       "signals": {
-        "stars": 110267,
+        "stars": 110282,
         "license": "Apache-2.0",
-        "forks": 21202,
+        "forks": 21208,
         "archived": false
       },
       "suggestedSources": [
@@ -14281,9 +14381,9 @@
       "tierHint": "vertical",
       "description": "A collection of MCP servers.",
       "signals": {
-        "stars": 95933,
+        "stars": 95936,
         "license": "MIT",
-        "forks": 17289,
+        "forks": 17294,
         "archived": false
       },
       "suggestedSources": [
@@ -14306,9 +14406,9 @@
       "tierHint": "coding",
       "description": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
       "signals": {
-        "stars": 74133,
+        "stars": 74142,
         "license": "MIT",
-        "forks": 8810,
+        "forks": 8811,
         "archived": false
       },
       "suggestedSources": [
@@ -14333,7 +14433,7 @@
       "signals": {
         "stars": 57561,
         "license": "Apache-2.0",
-        "forks": 7620,
+        "forks": 7621,
         "archived": false
       },
       "suggestedSources": [
