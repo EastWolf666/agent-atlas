@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --surface: 250250 250;
+    --surface: 250 250 250;
     --panel: 255 255 255;
     --edge: 226 232 240;
     --ink: 15 23 42;

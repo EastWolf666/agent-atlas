@@ -82,17 +82,30 @@ export function RegionTag({ region }: { region: Agent['region'] }) {
  *   混为一谈会让读者以为「高置信度 = 人工核实过」，而自动收录的条目
  *   恰恰常有官方来源（github.com 仓库本身就算official）却是模板填充的。
  */
-export function AutoBadge({ date, size = 'sm' }: { date?: string; size?: 'xs' | 'sm' }) {
+export function AutoBadge({
+  date,
+  size = 'sm',
+  detail,
+}: {
+  date?: string
+  size?: 'xs' | 'sm'
+  /**
+   * 「未核实」的具体含义。Agent 与模型的未核实点完全不同：
+   *   Agent 是编辑字段（定级/描述/适用场景）靠规则推断；
+   *   模型是价格与上下文窗口靠第三方聚合器，未经厂商官方确认。
+   * 不区分的话，同一个徽章在两个页面会给出误导性的解释。
+   */
+  detail?: string
+}) {
+  const reason =
+    detail ??
+    '定级、描述与适用场景均为规则推断，尚未人工核实，请以官方文档为准'
   return (
     <span
       className={`aa-chip border border-dashed border-amber-500/50 bg-amber-500/10 font-medium text-amber-700 dark:text-amber-300 ${
         size === 'xs' ? 'text-[10px]' : 'text-2xs'
       }`}
-      title={
-        date
-          ? `${date} 由每日更新脚本自动收录：定级、描述与适用场景均为规则推断，尚未人工核实，请以官方文档为准`
-          : '由每日更新脚本自动收录：定级、描述与适用场景均为规则推断，尚未人工核实，请以官方文档为准'
-      }
+      title={date ? `${date} 由每日更新脚本自动收录：${reason}` : `由每日更新脚本自动收录：${reason}`}
     >
       自动收录 · 待核实
     </span>

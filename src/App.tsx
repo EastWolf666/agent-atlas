@@ -4,12 +4,13 @@ import { FilterPanel } from './components/Grid/FilterPanel'
 import { AgentCard } from './components/Grid/AgentCard'
 import { DetailPanel } from './components/Detail'
 import { CompareView } from './components/Compare'
+import { ModelsPage } from './components/Models'
 import { EmptyState } from './components/bits'
 import { useFilters, useCompare, useTheme } from './hooks/useAtlas'
 import { agents } from './lib/agents'
 import type { Agent, Tier } from './types'
 
-type View = 'overview' | 'browse'
+type View = 'overview' | 'browse' | 'models'
 
 export default function App() {
   const atlas = useFilters()
@@ -45,21 +46,21 @@ export default function App() {
       if (e.key === '/' && !typing) {
         e.preventDefault()
         /*
-         * 关键：详情面板 / 对比视图打开时，必须先关掉浮层。
-         * 否则焦点会落到被遮罩（或全屏 modal）挡住的搜索框上——
-         * DOM 层面 focus() 成功了，用户却什么也看不到，
-         * 表现为「按了 / 没反应」。
+         * 模型页有自己的搜索框（id=aa-model-search），
+         * 焦点要给它而不是 Agent 页的搜索框——否则按 / 会把焦点
+         * 移到一个当前看不见的输入框上，用户会以为「按了没反应」。
          */
+        const onModels = view === 'models'
         if (detailId) setDetailId(null)
         if (showCompare) setShowCompare(false)
-        setView('browse')
+        if (!onModels) setView('browse')
         /*
          * 双 rAF：等浮层卸载动画走完、搜索框真正挂载后再聚焦。
          * 单 rAF 在快速开关时可能早于 DOM 提交，focus() 会落空。
          */
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            const el = document.getElementById('aa-search')
+            const el = document.getElementById(onModels ? 'aa-model-search' : 'aa-search')
             if (el) el.focus()
           })
         })
@@ -67,7 +68,9 @@ export default function App() {
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [detailId, showCompare])
+    // view 要进依赖：模型页与 Agent 页的搜索框目标不同，
+    // 少了它会在切换标签后按 / 聚焦到错误的输入框。
+  }, [detailId, showCompare, view])
 
   const openDetail = (id: string) => setDetailId(id)
   // 切到浏览页时把窗口滚到最顶部：从概览（通常已下滚）点统计框/分类跳转过来时，
@@ -144,7 +147,8 @@ export default function App() {
             {(
               [
                 ['overview', '概览'],
-                ['browse', '浏览'],
+                ['browse', 'Agent'],
+                ['models', '模型'],
               ] as const
             ).map(([k, label]) => (
               <button
@@ -161,20 +165,28 @@ export default function App() {
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
-            <button
-              onClick={goBrowse}
-              className="hidden items-center gap-2 rounded-lg border border-edge px-2.5 py-1.5 text-2xs text-faint transition-colors hover:border-brand hover:text-brand sm:flex"
-              title="按 / 快速聚焦搜索"
-            >
-              <svg className="size-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4">
-                <circle cx="5" cy="5" r="3.5" />
-                <path d="M7.5 7.5L10.5 10.5" strokeLinecap="round" />
-              </svg>
-              搜索
-              <kbd className="rounded border border-edge px-1 font-mono text-[10px]">/</kbd>
-            </button>
+            {/*
+              搜索框与对比按钮只属于 Agent 页。
+              模型页有自己的搜索框（筛选维度不同），
+              而 Agent 对比弹窗吃的是 agent id，对模型条目无意义——
+              在模型页显示这两个控件会让人点出无反应或错内容。
+            */}
+            {view !== 'models' && (
+              <button
+                onClick={goBrowse}
+                className="hidden items-center gap-2 rounded-lg border border-edge px-2.5 py-1.5 text-2xs text-faint transition-colors hover:border-brand hover:text-brand sm:flex"
+                title="按 / 快速聚焦搜索"
+              >
+                <svg className="size-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4">
+                  <circle cx="5" cy="5" r="3.5" />
+                  <path d="M7.5 7.5L10.5 10.5" strokeLinecap="round" />
+                </svg>
+                搜索
+                <kbd className="rounded border border-edge px-1 font-mono text-[10px]">/</kbd>
+              </button>
+            )}
 
-            {cmp.selected.length > 0 && (
+            {view !== 'models' && cmp.selected.length > 0 && (
               <button
                 onClick={() => setShowCompare(true)}
                 className="flex items-center gap-1.5 rounded-lg bg-brand px-2.5 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
@@ -204,7 +216,15 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6">
-        {view === 'overview' ? (
+        {view === 'models' ? (
+          /*
+           * 模型页不用 Agent 页的侧栏布局：它的筛选维度完全不同
+           * （厂商/模态/价格而非自主性/部署形态），复用 FilterPanel 反而要
+           * 加一堆条件分支。而且模型数量多、需要横向比较，
+           * 整块宽度给表格比挤在 248px 侧栏右侧更合适。
+           */
+          <ModelsPage />
+        ) : view === 'overview' ? (
           <Overview
             onSelect={openDetail}
             onBrowse={goBrowse}

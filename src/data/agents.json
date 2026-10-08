@@ -54,7 +54,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
     "metrics": {
-      "stars": 91079,
+      "stars": 91081,
       "license": "NOASSERTION"
     }
   },
@@ -321,7 +321,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/infiniflow/ragflow",
     "metrics": {
-      "stars": 91845,
+      "stars": 91847,
       "license": "Apache-2.0"
     }
   },
@@ -3329,7 +3329,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
     "metrics": {
-      "stars": 9406,
+      "stars": 9407,
       "license": "NOASSERTION"
     }
   },
@@ -3387,7 +3387,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/langchain-ai/langgraph",
     "metrics": {
-      "stars": 42904,
+      "stars": 42905,
       "license": "MIT"
     }
   },
@@ -3444,7 +3444,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/crewAIInc/crewAI",
     "metrics": {
-      "stars": 59465,
+      "stars": 59467,
       "license": "MIT"
     }
   },
@@ -3503,7 +3503,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/openai/openai-agents-python",
     "metrics": {
-      "stars": 29913,
+      "stars": 29914,
       "license": "MIT"
     }
   },
@@ -3607,7 +3607,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/mem0ai/mem0",
     "metrics": {
-      "stars": 66828,
+      "stars": 66831,
       "license": "Apache-2.0"
     }
   },
@@ -4051,7 +4051,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
     "metrics": {
-      "stars": 187483,
+      "stars": 187485,
       "license": "NOASSERTION"
     }
   },
@@ -5158,7 +5158,7 @@
     "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/deepseek-ai/deepseek-harness",
     "metrics": {
-      "stars": 245625,
+      "stars": 245645,
       "license": "MIT"
     }
   },
@@ -5384,7 +5384,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/NousResearch/hermes-agent",
     "metrics": {
-      "stars": 251991,
+      "stars": 252004,
       "license": "MIT"
     }
   },
@@ -5441,7 +5441,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/anomalyco/opencode",
     "metrics": {
-      "stars": 212175,
+      "stars": 212181,
       "license": "MIT"
     }
   },
@@ -5498,7 +5498,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/stablyai/orca",
     "metrics": {
-      "stars": 87801,
+      "stars": 87829,
       "license": "MIT"
     }
   }

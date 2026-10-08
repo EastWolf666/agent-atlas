@@ -13,11 +13,15 @@
  *   data/candidates.json  ← 新候选池，攒着给人工看
  *
  * 写盘前必经schema 校验；校验不过就abort，一个字节都不落。
+ *
+ * 模型数据（models.json）在第 6 步由独立脚本 fetch-models.mjs 更新，
+ * 两者失败互不影响——详见第 6 步注释。
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { spawnSync } from 'node:child_process'
 
 import { validateAgents, findHardcodedCounts } from './lib/schema.mjs'
 import { loadWatermarks, saveWatermarks, sinceFor, advanceWatermark } from './lib/watermark.mjs'
@@ -54,6 +58,25 @@ function log(msg) {
   console.log(msg)
 }
 
+/**
+ * 调用模型数据管线。
+ *
+ * 用子进程而不是 import 的原因：fetch-models.mjs 自己有「抓 0 个 / 跌幅超 20% 就 abort」
+ * 的熔断，会process.exit(1)。同进程 import 的话这个 exit 会把整个 fetch.mjs 一起带走，
+ * agents 的第 7 步就永远跑不到了。子进程把熔断的影响范围限制在模型管道内部。
+ *
+ * stdio: 'inherit' 让它的日志直接混在主流程里，方便在定时任务的输出里一次看全。
+ */
+function runModelFetch({ dryRun }) {
+  const args = [resolve(__dirname, 'fetch-models.mjs')]
+  if (dryRun) args.push('--dry-run')
+  const r = spawnSync(process.execPath, args, { stdio: 'inherit' })
+  if (r.status !== 0) {
+    throw new Error(`fetch-models.mjs 退出码 ${r.status}${r.signal ? ` (${r.signal})` : ''}`)
+  }
+  return true
+}
+
 async function main() {
   const startedAt = Date.now()
   log(`\n=== Agent Atlas 数据更新 ${new Date().toISOString()} ===`)
@@ -68,9 +91,9 @@ async function main() {
   const failures = []
 
   if (SKIP_FETCH) {
-    log('\n[1/6] --no-fetch：跳过所有网络抓取')
+    log('\n[1/7] --no-fetch：跳过所有网络抓取')
   } else {
-    log('\n[1/6] 抓取候选源')
+    log('\n[1/7] 抓取候选源')
 
     // HN —— 新产品发现主力
     try {
@@ -113,7 +136,7 @@ async function main() {
   }
 
   // ---------------- 2. 刷新存量的客观字段 ----------------
-  log('\n[2/6] 刷新存量客观字段（star / 许可证）')
+  log('\n[2/7] 刷新存量客观字段（star / 许可证）')
   let statusSignals = []
   let refreshedCount = 0
   if (SKIP_FETCH) {
@@ -156,7 +179,7 @@ async function main() {
    * 这里管新增「生成编辑占位」。两者语义不同，强行合并会让 merge.mjs
    * 精心维护的 FORBIDDEN 白名单失效。
    */
-  log('\n[3/6] 自动入库（发现的新品直接进正式数据）')
+  log('\n[3/7] 自动入库（发现的新品直接进正式数据）')
   let admittedRecords = []
   let admissionReport = { found: candidates.length, qualified: 0, admitted: 0, quotaLimited: false, paused: null, rejected: [], accepted: [] }
 
@@ -219,7 +242,7 @@ async function main() {
   }
 
   // ---------------- 4. 重算数字与洞察 ----------------
-  log('\n[4/6] 重算统计口径与洞察文案')
+  log('\n[4/7] 重算统计口径与洞察文案')
   const stats = refreshMetaNumbers(metaJson, agents)
   const changedInsights = refreshInsights(metaJson, agents, stats)
   log(`  total: ${metaJson.meta.total}｜官方来源 ${stats.officialCount}｜非活跃 ${stats.nonActive}`)
@@ -229,7 +252,7 @@ async function main() {
   }
 
   // ---------------- 5. 候选池 ----------------
-  log('\n[5/6] 合并候选池')
+  log('\n[5/7] 合并候选池')
   const existingCandidates = existsSync(CANDIDATES_PATH)
     ? JSON.parse(readFileSync(CANDIDATES_PATH, 'utf8'))
     : { candidates: [] }
@@ -345,8 +368,32 @@ async function main() {
   const pending = existingCandidates.candidates.filter((c) => !c.decided).length
   log(`  其中 ${pending} 条尚未人工处理`)
 
-  // ---------------- 6. 校验后写盘 ----------------
-  log('\n[6/6] schema 校验并写盘')
+  // ---------------- 6. 模型数据 ----------------
+  /*
+   * 为什么不并入第7 步一起校验、一起写盘：
+   *   两份数据的失败模式完全不同。agents 校验失败说明人工数据有结构问题，
+   *   models 校验失败说明上游 API 字段变了（OpenRouter 改一次 schema 就全盘失效）。
+   *   如果绑在一起写，任一方失败另一方也一起不写——等于两个管道互相绑架。
+   *   所以模型单独跑：失败只记警告，agents 的 7 步照常完成。
+   *
+   * 放在写盘之前而不是之后：这样模型数据落盘了、agents 校验没过时，
+   * 至少价格数据是最新的（价格变更是选型里最关键的信息）。
+   */
+  log('\n[6/7] 更新 AI 大模型数据（OpenRouter）')
+  let modelResult = null
+  if (SKIP_FETCH) {
+    log('  --no-fetch：跳过')
+  } else {
+    try {
+      modelResult = await runModelFetch({ dryRun: DRY_RUN })
+    } catch (e) {
+      log(`  ⚠️ 模型数据更新失败（agents 数据不受影响）：${e.message}`)
+      failures.push('models')
+    }
+  }
+
+  // ---------------- 7. 校验后写盘 ----------------
+  log('\n[7/7] schema 校验并写盘')
   const { ok, count, issues } = validateAgents(agents, metaJson)
   if (!ok) {
     console.error(`❌ schema 校验失败（${issues.length} 处），已放弃写盘，线上不受影响：`)
@@ -435,6 +482,11 @@ async function main() {
   log(
     `  自动入库 ${admissionReport.admitted} 条（候选 ${admissionReport.found} → 达门槛 ${admissionReport.qualified}）` +
       (admissionReport.paused ? `｜已暂停：${admissionReport.paused}` : '')
+  )
+  log(
+    modelResult
+      ? '  模型数据 已更新（src/data/models.json）'
+      : '  模型数据 未更新（见上方日志，agents 数据不受影响）'
   )
   log(`  置信度 high ${conf.high ?? 0} / medium ${conf.medium ?? 0} / low ${conf.low ?? 0}`)
   if (statusSignals.length) {
