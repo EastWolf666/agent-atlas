@@ -13495,6 +13495,406 @@
       ],
       "discoveredAt": "2026-10-08",
       "decided": false
+    },
+    {
+      "slug": "rinkata-shared-project-context-for-teams-using-coding-agents",
+      "name": "Rinkata, shared project context for teams using coding agents",
+      "url": "https://rinkata.dev/",
+      "source": "hn",
+      "score": 35,
+      "date": "2026-10",
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "",
+      "signals": {
+        "hnPoints": 3,
+        "hnComments": 0
+      },
+      "suggestedSources": [
+        {
+          "title": "hn 报道",
+          "url": "https://rinkata.dev/",
+          "type": "media",
+          "date": "2026-10"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "superpowers",
+      "name": "superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "source": "github",
+      "score": 72,
+      "regionHint": "overseas",
+      "tierHint": "infrastructure",
+      "description": "An agentic skills framework & software development methodology that works.",
+      "signals": {
+        "stars": 296499,
+        "license": "MIT",
+        "forks": 26480,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/obra/superpowers",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "skills",
+      "name": "skills",
+      "url": "https://github.com/mattpocock/skills",
+      "source": "github",
+      "score": 62,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Skills for Real Engineers. Straight from my .agents directory.",
+      "signals": {
+        "stars": 280764,
+        "license": "MIT",
+        "forks": 23537,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/mattpocock/skills",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "ecc",
+      "name": "ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "source": "github",
+      "score": 72,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "signals": {
+        "stars": 275203,
+        "license": "MIT",
+        "forks": 41075,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/affaan-m/ECC",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "claw-code",
+      "name": "claw-code",
+      "url": "https://github.com/ultraworkers/claw-code",
+      "source": "github",
+      "score": 62,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "An agent-managed museum exhibit, built in Rust with Gajae-Code / LazyCodex — developed and maintained with no human intervention.",
+      "signals": {
+        "stars": 194994,
+        "license": "MIT",
+        "forks": 108131,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/ultraworkers/claw-code",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "firecrawl",
+      "name": "firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "source": "github",
+      "score": 62,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
+      "signals": {
+        "stars": 189572,
+        "license": "AGPL-3.0",
+        "forks": 10054,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/firecrawl/firecrawl",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "skills",
+      "name": "skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "github",
+      "score": 62,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Public repository for Agent Skills",
+      "signals": {
+        "stars": 179976,
+        "license": null,
+        "forks": 21312,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/anthropics/skills",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "moneyprinterturbo",
+      "name": "MoneyPrinterTurbo",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+      "source": "github",
+      "score": 80,
+      "regionHint": "china",
+      "tierHint": "coding",
+      "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+      "signals": {
+        "stars": 129174,
+        "license": "MIT",
+        "forks": 20242,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "jeecgboot",
+      "name": "JeecgBoot",
+      "url": "https://github.com/jeecgboot/JeecgBoot",
+      "source": "github",
+      "score": 72,
+      "regionHint": "china",
+      "tierHint": "coding",
+      "description": "【低代码v2.0，一句话即可生成整个系统】企业级AI低代码平台，一键生成前后端代码甚至整个系统。 AI Skills 一句话画流程、设计表单、生成报表、大屏。内置 AI应用平台涵盖：AI聊天、知识库、流程编排、MCP插件等，兼容主流大模型。引领AI低代码「Skills 生成 → 在线配置 → 代码生成 → 手工合并->AI修改」开发模式，解决 Java 项目 90% 重复工作，提高效率又不失灵活。",
+      "signals": {
+        "stars": 48113,
+        "license": "Apache-2.0",
+        "forks": 16208,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/jeecgboot/JeecgBoot",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "gpt-api-free",
+      "name": "GPT_API_free",
+      "url": "https://github.com/chatanywhere/GPT_API_free",
+      "source": "github",
+      "score": 72,
+      "regionHint": "china",
+      "tierHint": "vertical",
+      "description": "免费大模型API，支持免费调用GPT、DeepSeek等主流模型，免费额度10000点，每日刷新！另付费价格最低官方1-2折！",
+      "signals": {
+        "stars": 43805,
+        "license": "MIT",
+        "forks": 2739,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/chatanywhere/GPT_API_free",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "happy-llm",
+      "name": "happy-llm",
+      "url": "https://github.com/datawhalechina/happy-llm",
+      "source": "github",
+      "score": 72,
+      "regionHint": "china",
+      "tierHint": "vertical",
+      "description": "📚 从零开始构建大模型",
+      "signals": {
+        "stars": 34235,
+        "license": "NOASSERTION",
+        "forks": 3229,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/datawhalechina/happy-llm",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "tradingagents-cn",
+      "name": "TradingAgents-CN",
+      "url": "https://github.com/hsliuping/TradingAgents-CN",
+      "source": "github",
+      "score": 80,
+      "regionHint": "china",
+      "tierHint": "vertical",
+      "description": "基于多智能体LLM的中文金融交易框架 - TradingAgents中文增强版",
+      "signals": {
+        "stars": 32219,
+        "license": "NOASSERTION",
+        "forks": 6721,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/hsliuping/TradingAgents-CN",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "tradingagents",
+      "name": "TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "source": "github",
+      "score": 80,
+      "regionHint": "overseas",
+      "tierHint": "infrastructure",
+      "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "signals": {
+        "stars": 110264,
+        "license": "Apache-2.0",
+        "forks": 21201,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/TauricResearch/TradingAgents",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "awesome-mcp-servers",
+      "name": "awesome-mcp-servers",
+      "url": "https://github.com/punkpeye/awesome-mcp-servers",
+      "source": "github",
+      "score": 62,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "A collection of MCP servers.",
+      "signals": {
+        "stars": 95927,
+        "license": "MIT",
+        "forks": 17283,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/punkpeye/awesome-mcp-servers",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "ruflo",
+      "name": "ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "source": "github",
+      "score": 80,
+      "regionHint": "overseas",
+      "tierHint": "coding",
+      "description": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+      "signals": {
+        "stars": 74132,
+        "license": "MIT",
+        "forks": 8810,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/ruvnet/ruflo",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
+    },
+    {
+      "slug": "private-gpt",
+      "name": "private-gpt",
+      "url": "https://github.com/zylon-ai/private-gpt",
+      "source": "github",
+      "score": 80,
+      "regionHint": "overseas",
+      "tierHint": "vertical",
+      "description": "Complete API layer for private AI applications on local models: RAG, skills, tools, MCP, text-to-sql, and more. Works with any OpenAI-compatible inference server.",
+      "signals": {
+        "stars": 57561,
+        "license": "Apache-2.0",
+        "forks": 7620,
+        "archived": false
+      },
+      "suggestedSources": [
+        {
+          "title": "github 报道",
+          "url": "https://github.com/zylon-ai/private-gpt",
+          "type": "media"
+        }
+      ],
+      "discoveredAt": "2026-10-08",
+      "decided": false
     }
   ],
   "generatedAt": "2026-10-08"
