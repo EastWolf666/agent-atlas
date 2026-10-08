@@ -14,6 +14,8 @@ export interface Filters {
   openSourceOnly: boolean
   /** 仅看非活跃状态（status !== 'active'） */
   nonActiveOnly: boolean
+  /** 仅看脚本自动收录、尚未人工核实的条目 */
+  autoAdmittedOnly: boolean
 }
 
 const EMPTY: Filters = {
@@ -26,6 +28,7 @@ const EMPTY: Filters = {
   pricing: new Set(),
   openSourceOnly: false,
   nonActiveOnly: false,
+  autoAdmittedOnly: false,
 }
 
 /**
@@ -51,6 +54,7 @@ function encodeToUrl(f: Filters): string {
   if (f.pricing.size) p.set('price', [...f.pricing].join(','))
   if (f.openSourceOnly) p.set('oss', '1')
   if (f.nonActiveOnly) p.set('na', '1')
+  if (f.autoAdmittedOnly) p.set('auto', '1')
   return p.toString()
 }
 
@@ -71,6 +75,7 @@ function decodeFromUrl(): Filters {
     pricing: set<PricingModel>(p.get('price')),
     openSourceOnly: p.get('oss') === '1',
     nonActiveOnly: p.get('na') === '1',
+    autoAdmittedOnly: p.get('auto') === '1',
   }
 }
 
@@ -113,6 +118,9 @@ export function useFilters() {
     if (filters.nonActiveOnly) {
       list = list.filter((a) => a.status !== 'active')
     }
+    if (filters.autoAdmittedOnly) {
+      list = list.filter((a) => a.autoAdmitted === true)
+    }
     return list
   }, [filters])
 
@@ -125,6 +133,7 @@ export function useFilters() {
     filters.pricing.size +
     (filters.openSourceOnly ? 1 : 0) +
     (filters.nonActiveOnly ? 1 : 0) +
+    (filters.autoAdmittedOnly ? 1 : 0) +
     (filters.autonomyMin > 0 ? 1 : 0)
 
   return {
@@ -150,6 +159,8 @@ export function useFilters() {
       setFilters((f) => ({ ...f, openSourceOnly: !f.openSourceOnly })),
     toggleNonActive: () =>
       setFilters((f) => ({ ...f, nonActiveOnly: !f.nonActiveOnly })),
+    toggleAutoAdmitted: () =>
+      setFilters((f) => ({ ...f, autoAdmittedOnly: !f.autoAdmittedOnly })),
   }
 }
 

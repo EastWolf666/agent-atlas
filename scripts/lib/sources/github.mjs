@@ -89,6 +89,14 @@ export async function discoverRepos(since, { perGroup = 25 } = {}) {
         },
         fullName: r.full_name,
         pushedAt: r.pushed_at ?? null,
+        /*
+         * homepage —— 自动入库判定的必需输入。
+         * GitHub 仓库的 homepage 字段是「产品官网」，这是 GitHub 源
+         * 唯一能拿到一手官方链接的途径（仓库 URL 本身只能算仓库页）。
+         * 没有它就无法满足 admit.mjs 的「有官方来源」信号组。
+         */
+        homepage: (r.homepage || '').trim() || null,
+        createdAt: r.created_at ?? null,
         queryGroup: group.label,
       })
     }

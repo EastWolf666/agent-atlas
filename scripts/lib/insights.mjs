@@ -83,6 +83,53 @@ export function refreshInsights(metaJson, agents, stats) {
       ins.auto = true
     }
 
+    // 洞察 3：自动收录占比。新增能力带来的结构性变化，必须自动更新——
+    // 否则机器收录的条目会悄悄改变数据构成，而页面文案还停留在手写时的数字。
+    else if (/共\s*\d+\s*条由脚本自动收录/.test(before)) {
+      const auto = agents.filter((a) => a.autoAdmitted).length
+      ins.text = before.replace(/共\s*\d+\s*条由脚本自动收录/, `共 ${auto} 条由脚本自动收录`)
+      ins.basis = `autoAdmitted === true 的条目计数 / 总计 ${total} 条`
+      ins.auto = true
+    }
+
+    // 洞察 0（coding 类 L4 占比）：原为纯手写数字，扩容后必然失真，改为计数生成。
+    else if (/(\d+)\s*个开发工具中\s*\d+\s*个达到长程自治/.test(before)) {
+      const coding = agents.filter((a) => a.tier === 'coding')
+      const l4 = coding.filter((a) => a.autonomyLevel >= 4).length
+      ins.text = before.replace(
+        /\d+\s*个开发工具中\s*\d+\s*个达到长程自治/,
+        `${coding.length} 个开发工具中 ${l4} 个达到长程自治`
+      )
+      ins.basis = `coding 类自主性分布：${l4}/${coding.length} 为 L4 及以上`
+      ins.auto = true
+    }
+
+    // 洞察 4（国内/海外 L4 占比）：同样改为计数生成，含四组数字。
+    else if (/国内产品已达\s*\d+\s*条/.test(before)) {
+      const cn = agents.filter((a) => a.region === 'china')
+      const os = agents.filter((a) => a.region === 'overseas')
+      const cnL4 = cn.filter((a) => a.autonomyLevel >= 4).length
+      const osL4 = os.filter((a) => a.autonomyLevel >= 4).length
+      const cnL3 = cn.filter((a) => a.autonomyLevel === 3).length
+      ins.text = before
+        .replace(/国内产品已达\s*\d+\s*条/, `国内产品已达 ${cn.length} 条`)
+        .replace(
+          /L4 以上占\s*\d+%（\d+\/\d+）/,
+          `L4 以上占 ${cn.length ? Math.round((cnL4 / cn.length) * 100) : 0}%（${cnL4}/${cn.length}）`
+        )
+        .replace(
+          /海外的\s*\d+%（\d+\/\d+）/,
+          `海外的 ${os.length ? Math.round((osL4 / os.length) * 100) : 0}%（${osL4}/${os.length}）`
+        )
+        .replace(/国内卡在 L3 动态规划的有\s*\d+\s*条/, `国内卡在 L3 动态规划的有 ${cnL3} 条`)
+      ins.basis =
+        `按 region 分组统计 autonomyLevel≥4：china ${cnL4}/${cn.length}` +
+        `（${cn.length ? Math.round((cnL4 / cn.length) * 100) : 0}%）、` +
+        `overseas ${osL4}/${os.length}` +
+        `（${os.length ? Math.round((osL4 / os.length) * 100) : 0}%）；国内 L3 共 ${cnL3} 条`
+      ins.auto = true
+    }
+
     if (ins.text !== before || ins.basis !== basisBefore) {
       changed.push({ index: i, before, after: ins.text })
     }

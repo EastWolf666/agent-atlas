@@ -51,10 +51,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
     "metrics": {
-      "stars": 91070,
+      "stars": 90965,
       "license": "NOASSERTION"
     }
   },
@@ -125,10 +125,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/zai-org/Open-AutoGLM",
     "metrics": {
-      "stars": 26352,
+      "stars": 26341,
       "license": "Apache-2.0"
     }
   },
@@ -318,10 +318,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-07",
     "repoUrl": "https://github.com/infiniflow/ragflow",
     "metrics": {
-      "stars": 91782,
+      "stars": 91754,
       "license": "Apache-2.0"
     }
   },
@@ -371,10 +371,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-07",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/xiaYuTian11/maskit",
     "metrics": {
-      "stars": 294,
+      "stars": 291,
       "license": "AGPL-3.0"
     }
   },
@@ -426,10 +426,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/kunpengtalk/OmniStudio",
     "metrics": {
-      "stars": 191,
+      "stars": 186,
       "license": "MIT"
     }
   },
@@ -478,10 +478,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/agents-universe/agents-universe",
     "metrics": {
-      "stars": 495,
+      "stars": 419,
       "license": "Apache-2.0"
     }
   },
@@ -754,13 +754,13 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "relatedIds": [
       "kimi-work"
     ],
     "repoUrl": "https://github.com/MoonshotAI/kimi-code",
     "metrics": {
-      "stars": 7794,
+      "stars": 7760,
       "license": "MIT"
     }
   },
@@ -2166,10 +2166,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
     "metrics": {
-      "stars": 756,
+      "stars": 744,
       "license": "MIT"
     }
   },
@@ -3326,10 +3326,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
     "metrics": {
-      "stars": 9405,
+      "stars": 9368,
       "license": "NOASSERTION"
     }
   },
@@ -3384,10 +3384,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/langchain-ai/langgraph",
     "metrics": {
-      "stars": 42846,
+      "stars": 42656,
       "license": "MIT"
     }
   },
@@ -3441,10 +3441,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/crewAIInc/crewAI",
     "metrics": {
-      "stars": 59429,
+      "stars": 59306,
       "license": "MIT"
     }
   },
@@ -3500,10 +3500,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/openai/openai-agents-python",
     "metrics": {
-      "stars": 29890,
+      "stars": 29821,
       "license": "MIT"
     }
   },
@@ -3553,10 +3553,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/anthropics/claude-agent-sdk-python",
     "metrics": {
-      "stars": 8221,
+      "stars": 8208,
       "license": "MIT"
     }
   },
@@ -3604,10 +3604,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/mem0ai/mem0",
     "metrics": {
-      "stars": 66779,
+      "stars": 66513,
       "license": "Apache-2.0"
     }
   },
@@ -4048,10 +4048,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
     "metrics": {
-      "stars": 187688,
+      "stars": 187647,
       "license": "NOASSERTION"
     }
   },
@@ -4099,7 +4099,7 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "metrics": {
       "stars": 17699,
       "license": "MIT"
@@ -4761,10 +4761,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-03",
     "repoUrl": "https://github.com/dust-tt/dust",
     "metrics": {
-      "stars": 1481,
+      "stars": 1479,
       "license": "MIT"
     }
   },
@@ -5094,5 +5094,183 @@
     ],
     "dataConfidence": "medium",
     "lastVerified": "2026-10"
+  },
+  {
+    "id": "deepseek-harness",
+    "name": "DeepSeek Harness",
+    "nameZh": "深度求索智能体",
+    "vendor": "深度求索（DeepSeek）",
+    "region": "china",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "开源智能体运行时，可自主拉代码、定位并修复 Bug、跑测试直到通过；支持多 Agent 编排与长任务协作，但核心仍是单 Agent 长程执行闭环。",
+    "tagline": "给 DeepSeek 装上「手和脚」的开源 Agent 框架（一切皆插件）",
+    "description": "DeepSeek Harness（命令行 dsh）是深度求索 2026-08-13 发布的首款智能体产品，2026-09-30 推出 v0.2 桌面端（Windows / macOS）。官方定位为「Model + Harness = Agent」——模型负责理解与推理，Harness 负责把能力接入真实环境并执行具体操作。采用「一切皆插件」架构，底层基于 Cordis 框架，模型、工具、会话记忆、任务循环均为可替换插件；内置标准 / 极简 / 创造 / PTC 四种模式，支持 Headless 批量任务与 Python / JSON-RPC SDK。以 MIT 协议开源，发布数日 GitHub Star 突破 8 万，社区插件（dsh-plugin）超 700 个。官方明确提示存在兼容性破坏性变更，适合评估与内部试验。",
+    "highlights": [
+      "MIT 开源，发布数日 Star 破 8 万",
+      "「一切皆插件」架构，模型无关，可接入数十家厂商模型",
+      "支持长任务、多 Agent 编排与完整轨迹可观测",
+      "v0.2 提供 Windows / macOS 桌面端，普通用户免命令行可用"
+    ],
+    "limitations": [
+      "官方提示存在兼容性破坏性变更，不适合作为唯一生产工具",
+      "开放插件架构带来 Shell / 文件系统级攻击面，需自行评估安全",
+      "与 DeepSeek-V4 模型深度绑定，深度能力依赖官方模型演进"
+    ],
+    "bestFor": "希望自建可控、可改装的开源智能体运行时的开发者与团队",
+    "deployment": [
+      "cli",
+      "app",
+      "api",
+      "private"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "本体 MIT 开源免费；调用 DeepSeek 模型按 API 峰谷计费",
+    "contextWindow": "100 万 tokens（配套 V4-Pro）",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 9,
+    "officialUrl": "https://www.deepseek.com/harness/",
+    "sources": [
+      {
+        "title": "DeepSeek Harness 官方文档站",
+        "url": "https://deepseek-harness.github.io/deepseek-harness/",
+        "type": "official",
+        "date": "2026-09"
+      },
+      {
+        "title": "DeepSeek Harness GitHub 仓库",
+        "url": "https://github.com/deepseek-ai/deepseek-harness",
+        "type": "official",
+        "date": "2026-08"
+      },
+      {
+        "title": "DeepSeek Harness 百度百科词条",
+        "url": "https://baike.baidu.com/item/DeepSeek%20Harness/68533699",
+        "type": "media",
+        "date": "2026-08"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10-09",
+    "repoUrl": "https://github.com/deepseek-ai/deepseek-harness",
+    "metrics": {
+      "stars": 80000,
+      "license": "MIT"
+    }
+  },
+  {
+    "id": "openai-dots",
+    "name": "OpenAI dots",
+    "vendor": "OpenAI",
+    "region": "overseas",
+    "tier": "productivity",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "云端 Agent 拥有独立电脑与浏览器，接收一次目标后自行拆解步骤、动手执行并定期汇报，可视为长程自治 + 自检。",
+    "tagline": "交代一次，它自己把活干完的云端自主 Agent",
+    "description": "OpenAI dots 于 2026-09-29 在旧金山发布，是一个云端自主任务 Agent：每个 dot 在云端拥有自己的电脑和浏览器，可连接 4000+ 应用，能在 ChatGPT、Slack、微软 Teams 上对话。用户只需交代一次目标，它自行拆解步骤、动手执行并定期汇报进展——典型用例包括旧接口停用前的应用迁移、跟踪软件故障报告、跟进年度预算。发布同日，DeepSeek 推出 Harness v0.2 桌面端，两家公司将竞争重心从「模型有多聪明」转向「AI 能替你干多少活」。",
+    "highlights": [
+      "云端自带电脑与浏览器，连接 4000+ 应用",
+      "一次交代、长程自治并定期汇报进展",
+      "可在 ChatGPT / Slack / Teams 多端对话"
+    ],
+    "limitations": [
+      "2026-09 刚发布，能力与价格仍在演进",
+      "执行过程依赖云端环境，数据出域需评估"
+    ],
+    "bestFor": "希望把重复性长任务整体外包给云端 Agent 的个人与团队",
+    "deployment": [
+      "web",
+      "saas",
+      "api"
+    ],
+    "pricingModel": "subscription",
+    "pricingNote": "订阅制（具体档位以官方为准）",
+    "contextWindow": "未知",
+    "modalities": [
+      "text"
+    ],
+    "openSource": false,
+    "prominence": 8,
+    "officialUrl": "https://openai.com",
+    "sources": [
+      {
+        "title": "钱江晚报 / 潮新闻：同一天两家 AI 公司发布「替你干活」新产品",
+        "url": "https://www.toutiao.com/article/7691262675334103598/",
+        "type": "media",
+        "date": "2026-09"
+      }
+    ],
+    "dataConfidence": "medium",
+    "lastVerified": "2026-10-09"
+  },
+  {
+    "id": "pi-coding-agent",
+    "name": "Pi",
+    "nameZh": "Pi 极简智能体",
+    "vendor": "Earendil（Mario Zechner）",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "active",
+    "autonomyLevel": 4,
+    "autonomyReason": "终端 coding agent，能自主分析代码库、读写改文件、跑命令与测试直到任务完成；核心仍是单 Agent 长程闭环，生成结果需人工 review。",
+    "tagline": "极简开源 agent harness：用 TypeScript 扩展，而非 fork 整个工具",
+    "description": "Pi 是 Earendil（开发者 Mario Zechner，开源游戏引擎 libGDX 作者）打造的极简开源 agent harness，主体是一个终端 coding agent CLI。2026-10-01 发布 1.0 稳定版，采用「小核心 + 扩展」思路：开箱只给模型 read / write / edit / bash 四个工具，其余能力通过 TypeScript 扩展、skills、prompt 模板与主题扩展，并可打包成「Pi packages」通过 npm 或 git 分享。1.0 新增原生 MCP 支持（Codemode：模型在 QuickJS 沙箱写 JS 并行调工具，宣称省约 40% prompt token）、virtual models（Jev 分类器在 Claude Opus 做规划、GPT 做实现的混合路由）、懒加载工具、全屏 TUI 默认开启，并实验性发布 Pi Durable 长程运行底座。MIT 协议，GitHub 约 11 万 star，每周数十万人使用，可与 Anthropic / OpenAI / Google 等 15+ 厂商模型及本地模型搭配。",
+    "highlights": [
+      "MIT 开源，GitHub 约 11 万 star，每周数十万用户",
+      "「小核心 + 扩展」：四个基础工具起步，用 TypeScript 扩展而非 fork",
+      "1.0 引入 Codemode（JS 沙箱并行调工具）与 virtual models 混合路由",
+      "原生 MCP、懒加载工具、全屏 TUI，可嵌入 SDK 或 RPC 集成"
+    ],
+    "limitations": [
+      "无内置权限沙箱，以启动者账户权限运行，需自行容器化隔离",
+      "模型无关带来灵活性，但也意味着质量取决于所接模型",
+      "1.0 刚发布，部分扩展生态仍在演进"
+    ],
+    "bestFor": "想用极简、可完全自定义的开源 harness 搭建自己工作流的开发者与团队",
+    "deployment": [
+      "cli",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "本体 MIT 开源免费；调用模型按所选厂商计费",
+    "contextWindow": "取决于所接模型",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 9,
+    "officialUrl": "https://pi.dev",
+    "sources": [
+      {
+        "title": "Pi 官方站点",
+        "url": "https://pi.dev",
+        "type": "official",
+        "date": "2026-10"
+      },
+      {
+        "title": "Earendil：Pi 1.0 发布博文",
+        "url": "https://earendil.com/posts/pi-1-0/",
+        "type": "official",
+        "date": "2026-10"
+      },
+      {
+        "title": "GitHub: earendil-works/pi-coding-agent",
+        "url": "https://github.com/earendil-works/pi-coding-agent",
+        "type": "official",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "high",
+    "lastVerified": "2026-10-09",
+    "repoUrl": "https://github.com/earendil-works/pi-coding-agent",
+    "metrics": {
+      "stars": 111000,
+      "license": "MIT"
+    }
   }
 ]

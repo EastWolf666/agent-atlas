@@ -17,6 +17,7 @@ import {
   ConfidenceMark,
   SourceLinks,
   Tag,
+  AutoBadge,
 } from '../bits'
 import type { Agent } from '../../types'
 
@@ -107,6 +108,7 @@ export function DetailPanel({ agent, onClose, onSelect, onToggleCompare, inCompa
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-1.5">
               <RegionTag region={agent.region} />
+              {agent.autoAdmitted && <AutoBadge date={agent.autoAdmittedAt} />}
               <StatusBadge status={agent.status} />
               {agent.openSource && (
                 <span className="aa-chip bg-emerald-500/12 text-emerald-600 dark:text-emerald-400">
@@ -118,6 +120,20 @@ export function DetailPanel({ agent, onClose, onSelect, onToggleCompare, inCompa
             {agent.nameZh && <p className="text-xs text-faint">{agent.nameZh}</p>}
             <p className="mt-1 text-xs text-muted">{agent.vendor}</p>
           </div>
+          {/*
+            自动收录条目的顶部警示。
+            存在的理由：详情页是读者做选型判断的地方，而自动收录条目的
+            autonomyLevel / limitations / bestFor 都是规则推断或占位文案。
+            不明确说清楚，读者会把「有 GitHub 来源」误当成「本站核实过」。
+          */}
+          {agent.autoAdmitted && (
+            <p className="mt-3 rounded-lg border border-amber-500/40 bg-amber-500/8 px-3 py-2 text-2xs leading-relaxed text-amber-800 dark:text-amber-200">
+              本条目由每日更新脚本于 {agent.autoAdmittedAt ?? '近期'} 自动收录
+              {agent.openSource ? '，来源为公开代码仓库' : ''}
+              ：自主性等级、描述与适用场景均为规则推断，尚未人工核实。
+              正式选型请以官方文档为准；发现明显错误可在仓库提交issue反馈。
+            </p>
+          )}
           <button
             onClick={onClose}
             aria-label="关闭"

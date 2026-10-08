@@ -1,5 +1,5 @@
 import { tierColor, tierLabel } from '../../lib/agents'
-import { AutonomyBadge, StatusBadge, RegionTag, Tag } from '../bits'
+import { AutonomyBadge, StatusBadge, RegionTag, Tag, AutoBadge } from '../bits'
 import type { Agent } from '../../types'
 
 interface Props {
@@ -12,12 +12,13 @@ interface Props {
 
 export function AgentCard({ agent, onOpen, onToggleCompare, selected, compareFull }: Props) {
   const disabled = compareFull && !selected
+  const auto = agent.autoAdmitted === true
 
   return (
     <article
       className={`aa-card group relative flex flex-col p-4 ${
         selected ? 'border-brand ring-1 ring-brand' : 'hover:border-brand/40'
-      }`}
+      } ${auto ? 'border-dashed border-amber-500/40' : ''}`}
     >
       {/*
         整卡可点：用一张铺满卡片的透明按钮作点击层（z-[1]），
@@ -67,6 +68,7 @@ export function AgentCard({ agent, onOpen, onToggleCompare, selected, compareFul
 
       <div className="mt-auto flex items-end justify-between gap-2 pt-3.5">
         <div className="flex flex-wrap items-center gap-1.5">
+          {auto && <AutoBadge date={agent.autoAdmittedAt} />}
           <StatusBadge status={agent.status} />
           {agent.openSource && (
             <span className="aa-chip bg-emerald-500/12 text-emerald-600 dark:text-emerald-400">

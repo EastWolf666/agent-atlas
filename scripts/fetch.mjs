@@ -27,6 +27,9 @@ import { fetchFromRSS } from './lib/sources/rss.mjs'
 import { mergeObjective, collectStatusSignals } from './lib/merge.mjs'
 import { refreshMetaNumbers, refreshInsights, confidenceBreakdown } from './lib/insights.mjs'
 import { slugify, guessRegion, guessTier, isReviewable } from './lib/filter.mjs'
+import { selectAdmissible, rejectionSummary } from './lib/admit.mjs'
+import { synthesizeAgent } from './lib/synthesize.mjs'
+import { effectiveLimit, loadState, saveState, DEFAULT_DAILY_LIMIT } from './lib/quota.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
@@ -36,10 +39,16 @@ const META_PATH = resolve(ROOT, 'src/data/meta.json')
 const CANDIDATES_PATH = resolve(ROOT, 'data/candidates.json')
 const WATERMARK_PATH = resolve(ROOT, 'data/.watermark.json')
 const STATUS_SIGNALS_PATH = resolve(ROOT, 'data/status-signals.json')
+const AUTO_ADDED_PATH = resolve(ROOT, 'data/auto-added.json')
+const ADMISSION_STATE_PATH = resolve(ROOT, 'data/.admission-state.json')
 
 /** 允许 CI 里跳过网络步骤（调试用） */
 const SKIP_FETCH = process.argv.includes('--no-fetch')
 const DRY_RUN = process.argv.includes('--dry-run')
+
+/** 单日自动入库上限，可--max=N 覆盖 */
+const MAX_ARG = process.argv.find((a) => a.startsWith('--max='))
+const DAILY_LIMIT = MAX_ARG ? Number(MAX_ARG.split('=')[1]) : DEFAULT_DAILY_LIMIT
 
 function log(msg) {
   console.log(msg)
@@ -132,8 +141,70 @@ async function main() {
     }
   }
 
-  // ---------------- 3. 重算数字与洞察 ----------------
-  log('\n[3/5] 重算统计口径与洞察文案')
+  // ---------------- 3. 自动入库 ----------------
+  /*
+   * 为什么放在「刷新存量」之后、「重算统计」之前：
+   *   - 刷新存量拿到最新的 homepage / star，入库判据要用这些信号；
+   *   - 放在重算之前，新条目的 id 会立刻计入 meta.total 与各条洞察的统计口径，
+   *     不需要再跑一遍。
+   *
+   * 这一步解决的是「发现能力早就有了，但从候选到入库的通道缺失」这个老问题：
+   * 候选池曾堆积 357 条从未被消费，新品永远进不了正式数据。
+   * 这里在严格判据 + 单日配额下，把够格的高质量候选直接写进 agents.json。
+   *
+   * 与 merge.mjs 的关系是**并列而非修改**：merge.mjs 管存量「修正客观值」，
+   * 这里管新增「生成编辑占位」。两者语义不同，强行合并会让 merge.mjs
+   * 精心维护的 FORBIDDEN 白名单失效。
+   */
+  log('\n[3/6] 自动入库（发现的新品直接进正式数据）')
+  let admittedRecords = []
+  let admissionReport = { found: candidates.length, qualified: 0, admitted: 0, quotaLimited: false, paused: null, rejected: [], accepted: [] }
+
+  if (SKIP_FETCH) {
+    log('  --no-fetch：跳过')
+    admissionReport.paused = 'SKIP_FETCH'
+  } else {
+    const knownIds = new Set(agents.map((a) => a.id))
+    const knownUrls = new Set(agents.map((a) => a.officialUrl).filter(Boolean).map((u) => String(u).replace(/\/$/, '')))
+
+    const { accepted, rejected } = selectAdmissible(candidates, { knownIds, knownUrls, now })
+    admissionReport.qualified = accepted.length
+    admissionReport.rejected = rejectionSummary(rejected)
+
+    const quota = effectiveLimit({ failedSources: failures, limit: DAILY_LIMIT })
+    if (quota.limit === 0) {
+      admissionReport.paused = quota.reason
+      log(`  ⏸ ${quota.reason}`)
+      log('  （候选仍会正常进入候选池，只是今日不自动写入正式数据）')
+    } else {
+      const toAdmit = accepted.slice(0, quota.limit)
+      admissionReport.quotaLimited = accepted.length > quota.limit
+
+      for (const item of toAdmit) {
+        const rec = synthesizeAgent(item.cand, item.id, now.toISOString().slice(0, 10))
+        agents.push(rec)
+        admittedRecords.push(rec)
+        knownIds.add(rec.id)
+      }
+      admissionReport.admitted = admittedRecords.length
+      admissionReport.accepted = toAdmit.map((x) => ({ id: x.id, name: x.cand.name, score: x.score, reason: x.reason }))
+
+      log(`  候选 ${candidates.length} 条 → 达门槛 ${accepted.length} 条 → 实际入库 ${admittedRecords.length} 条（上限 ${quota.limit}）`)
+      for (const a of admissionReport.accepted) {
+        log(`    ✓ ${a.id}（${a.name}）— ${a.reason}`)
+      }
+      if (admissionReport.quotaLimited) {
+        log(`  ⚠️ 另有 ${accepted.length - toAdmit.length} 条达门槛候选因单日上限未入库，明日继续`)
+      }
+      if (rejected.length) {
+        const top = admissionReport.rejected.map((r) => `${r.reason} ×${r.count}`).join('；')
+        log(`  拒绝 ${rejected.length} 条，主要原因：${top}`)
+      }
+    }
+  }
+
+  // ---------------- 4. 重算数字与洞察 ----------------
+  log('\n[4/6] 重算统计口径与洞察文案')
   const stats = refreshMetaNumbers(metaJson, agents)
   const changedInsights = refreshInsights(metaJson, agents, stats)
   log(`  total: ${metaJson.meta.total}｜官方来源 ${stats.officialCount}｜非活跃 ${stats.nonActive}`)
@@ -142,8 +213,8 @@ async function main() {
     log(`    [${c.index}] ${c.before.slice(0, 40)}… → ${c.after.slice(0, 40)}…`)
   }
 
-  // ---------------- 4. 候选池 ----------------
-  log('\n[4/5] 合并候选池')
+  // ---------------- 5. 候选池 ----------------
+  log('\n[5/6] 合并候选池')
   const existingCandidates = existsSync(CANDIDATES_PATH)
     ? JSON.parse(readFileSync(CANDIDATES_PATH, 'utf8'))
     : { candidates: [] }
@@ -259,8 +330,8 @@ async function main() {
   const pending = existingCandidates.candidates.filter((c) => !c.decided).length
   log(`  其中 ${pending} 条尚未人工处理`)
 
-  // ---------------- 5. 校验后写盘 ----------------
-  log('\n[5/5] schema 校验并写盘')
+  // ---------------- 6. 校验后写盘 ----------------
+  log('\n[6/6] schema 校验并写盘')
   const { ok, count, issues } = validateAgents(agents, metaJson)
   if (!ok) {
     console.error(`❌ schema 校验失败（${issues.length} 处），已放弃写盘，线上不受影响：`)
@@ -281,6 +352,44 @@ async function main() {
       'utf8'
     )
     saveWatermarks(WATERMARK_PATH, watermarks)
+
+    /*
+     * 自动收录台账。
+     * 存在的意义：自动写入正式数据的条目带 autoAdmitted 标记，
+     * 但「该不该留」最终由人决定。这份台账让人能事后批量审查/清理，
+     * 而不必去 agents.json 里大海捞针（那里 88+ 条里混着两种来源）。
+     */
+    const ledger = existsSync(AUTO_ADDED_PATH)
+      ? JSON.parse(readFileSync(AUTO_ADDED_PATH, 'utf8'))
+      : []
+    const entries = Array.isArray(ledger) ? ledger : (ledger.entries ?? [])
+      const existingIds = new Set(entries.map((e) => e.id))
+      for (const rec of admittedRecords) {
+        if (existingIds.has(rec.id)) continue
+        entries.push({
+          id: rec.id,
+          admittedAt: rec.autoAdmittedAt,
+          source: rec.openSource ? 'github' : 'media',
+          reviewState: 'pending',
+          note: '由每日脚本自动收录，定级与描述尚未人工核实',
+        })
+      }
+      // 台账漂移防护：id 已不在正式数据里的条目自动剔除（对应 reviewState=rejected 被人工删除）
+      const liveIds = new Set(agents.map((a) => a.id))
+      const pruned = entries.filter((e) => liveIds.has(e.id))
+      if (pruned.length !== entries.length) {
+        log(`  台账剔除 ${entries.length - pruned.length} 条已删除的记录`)
+      }
+    writeFileSync(AUTO_ADDED_PATH, JSON.stringify(entries, null, 2) + '\n', 'utf8')
+
+    const quotaState = saveState(ADMISSION_STATE_PATH, now.toISOString().slice(0, 10), {
+      admitted: admittedRecords.length,
+      sourcesHealthy: failures.length === 0,
+    })
+    if (quotaState.shouldWarn) {
+      log(`  ⚠️ 已连续 ${quotaState.zeroStreak} 天「源正常但入库 0 条」，判据可能过严或数据源结构变化，建议人工看一眼`)
+    }
+
     if (statusSignals.length) {
       writeFileSync(
         STATUS_SIGNALS_PATH,
@@ -301,6 +410,10 @@ async function main() {
   const secs = Math.round((Date.now() - startedAt) / 1000)
   log(`\n=== 完成（${secs}s）===`)
   log(`  数据 ${count} 条｜变更 ${refreshedCount} 条｜新候选 ${added} 条｜待人工处理 ${pending} 条`)
+  log(
+    `  自动入库 ${admissionReport.admitted} 条（候选 ${admissionReport.found} → 达门槛 ${admissionReport.qualified}）` +
+      (admissionReport.paused ? `｜已暂停：${admissionReport.paused}` : '')
+  )
   log(`  置信度 high ${conf.high ?? 0} / medium ${conf.medium ?? 0} / low ${conf.low ?? 0}`)
   if (statusSignals.length) {
     log(`  状态信号 ${statusSignals.length} 条（data/status-signals.json，需人工确认）`)

@@ -239,6 +239,31 @@ export function FilterPanel({ filters, actions, resultCount }: Props) {
             />
           </button>
         </div>
+
+        {/*
+          自动收录筛选用虚线边框 + 琥珀色，与其它实线筛选区分开。
+          它筛的不是「某类属性」而是「这条数据可不可信」——所以视觉上
+          刻意不同于普通条件，避免读者把它当成一个中立的分类维度。
+        */}
+        <div className="max-lg:col-span-1">
+          <button
+            onClick={actions.toggleAutoAdmitted}
+            aria-pressed={filters.autoAdmittedOnly}
+            title="只显示由每日脚本自动收录、尚未人工核实的条目"
+            className={`flex w-full items-center justify-between rounded-md border px-2.5 py-1.5 text-2xs font-medium transition-colors lg:py-2 ${
+              filters.autoAdmittedOnly
+                ? 'border-dashed border-amber-500 bg-amber-500 text-white'
+                : 'border-dashed border-amber-500/50 bg-transparent text-amber-700 hover:bg-amber-500/10 dark:text-amber-300'
+            }`}
+          >
+            仅看待核实
+            <span
+              className={`size-3 rounded-full border ${
+                filters.autoAdmittedOnly ? 'border-white bg-white' : 'border-amber-500/60'
+              }`}
+            />
+          </button>
+        </div>
       </div>
     </div>
   )

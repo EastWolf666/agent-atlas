@@ -10,12 +10,30 @@
 const AGENT_TERMS_EN = [
   'agent', 'agentic', 'llm', 'gpt', 'copilot', 'assistant', 'autonomous',
   'multi-agent', 'mcp', 'tool-use', 'rag',
+  /*
+   * 以下三个是实测补的（2026-10-09）。
+   * 原词表只认agent/llm 这类显式词，导致高质量项目被判 0 分而漏掉：
+   *   CopilotKit/OpenBot（6214 star）描述里写的是 "AI coworkers"，
+   *   dsh-desktop（12358 star）写的是 "DeepSeek Harness Desktop"——
+   *   两者都是真产品，但一个没有 agent 字样、一个的 harness/桌面 不在词表里。
+   * harness 是 agent 领域的基本术语（GitHub 官方定义：连接模型与工具的那层），
+   * coworker / 数字同事是国内产品常用的表述，都该算强信号。
+   */
+  'harness', 'coworker', 'digital worker',
 ]
 
-/** 判定为 Agent 产品的关键词（中文） */
+/**
+ * 判定为 Agent 产品的关键词（中文）
+ *
+ * 注意：这里曾混进 'copilot'，导致 guessRegion 把任何提到 CopilotKit 的
+ * 海外项目判成 region=china（实测 CopilotKit/openmuse 被误判）。
+ * copilot 本是英文产品名，不该作为中文信号，现已移除。
+ */
 const AGENT_TERMS_ZH = [
-  '智能体', '代理', '大模型', '大语言模型', 'copilot', '智能助手', 'ai助手',
+  '智能体', '代理', '大模型', '大语言模型', '智能助手', 'ai助手',
   'ai 助手', '工作流', '自动化', '多智能体', '编程助手',
+  // 补：国内产品常见的另两种说法（实测漏过）
+  '数字员工', '数字同事', '智能体框架',
 ]
 
 /** 明确排除的噪声词：这些是 Show HN 里的典型非 AI 项目 */

@@ -1,12 +1,11 @@
 name: Update Data Daily
 
-# 每天北京时间凌晨 6:00 抓一次数据。
-# cron 用 UTC：北京时间 6:00 = UTC 前一天 22:00。
-# 注意 GitHub Actions 的定时任务实际执行常延迟 5-15 分钟（高峰期更久），
-# 实际落点在 5:55-6:15 之间，这是平台行为，无法精确到点。
+# 每日数据更新已迁移到 WorkBuddy 定时任务（每天北京时间 06:00）。
+# 原因：本仓库的 git push 在部分网络下 github.com:443 不可达，
+# 而 api.github.com 可达，改为在沙箱内用 Git Database API 推送更可靠。
+# 停用 schedule 以免与 WorkBuddy 任务同时改同一批数据文件、互相覆盖。
+# 保留 workflow_dispatch，仍可随时手动重跑。
 on:
-  schedule:
-    - cron: '0 22 * * *'
   workflow_dispatch: # 允许手动重跑
 
 permissions:

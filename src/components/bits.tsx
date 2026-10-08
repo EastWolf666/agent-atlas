@@ -72,6 +72,33 @@ export function RegionTag({ region }: { region: Agent['region'] }) {
   )
 }
 
+/* ---------- 自动收录标识 ---------- */
+/**
+ * 标记「这条是每日脚本自动收录的，定级与描述还没人核实过」。
+ *
+ * 为什么用独立徽章而不是复用 dataConfidence：
+ *   dataConfidence 是三档枚举（high/medium/low），low 已经有「待核实」语义，
+ *   但它表达的是「来源可信度低」，不表达「这条是机器生成的、编辑字段是模板」。
+ *   混为一谈会让读者以为「高置信度 = 人工核实过」，而自动收录的条目
+ *   恰恰常有官方来源（github.com 仓库本身就算official）却是模板填充的。
+ */
+export function AutoBadge({ date, size = 'sm' }: { date?: string; size?: 'xs' | 'sm' }) {
+  return (
+    <span
+      className={`aa-chip border border-dashed border-amber-500/50 bg-amber-500/10 font-medium text-amber-700 dark:text-amber-300 ${
+        size === 'xs' ? 'text-[10px]' : 'text-2xs'
+      }`}
+      title={
+        date
+          ? `${date} 由每日更新脚本自动收录：定级、描述与适用场景均为规则推断，尚未人工核实，请以官方文档为准`
+          : '由每日更新脚本自动收录：定级、描述与适用场景均为规则推断，尚未人工核实，请以官方文档为准'
+      }
+    >
+      自动收录 · 待核实
+    </span>
+  )
+}
+
 /* ---------- 通用标签 ---------- */
 export function Tag({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (

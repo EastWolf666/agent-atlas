@@ -71,6 +71,17 @@ export interface Agent {
   sources: Source[]
   dataConfidence: Confidence
   lastVerified: string
+  /**
+   * 是否为每日脚本自动收录（未经人工核实）。
+   *
+   * 存在的意义：自动入库生成的条目，编辑类字段是模板占位而非核实结论。
+   * 读者需要能一眼分辨哪些是人整理的、哪些是机器抓的，
+   * 否则「有官方来源」会被误读成「本站已核实」。
+   * 台账见 data/auto-added.json，便于事后批量清理。
+   */
+  autoAdmitted?: boolean
+  /** 自动收录日期 YYYY-MM-DD */
+  autoAdmittedAt?: string
   /** 关联的同厂商/同分类条目 id */
   relatedIds?: string[]
 }
