@@ -28,5 +28,6 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2",
     "vite": "^6.0.5"
-  }
+  },
+  "validate": "node scripts/lib/schema.mjs --check src/data/agents.json && node scripts/lib/models-schema.mjs --check src/data/models.json && node scripts/lib/alternatives-schema.mjs --check src/data/alternatives.json"
 }

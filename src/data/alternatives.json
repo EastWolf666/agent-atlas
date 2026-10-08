@@ -1,0 +1,1377 @@
+{
+  "meta": {
+    "lastUpdated": "2026-10-09",
+    "source": "人工整理自「国际主流 AI 工具的中国替代」信息图，具体功能与定价以厂商官网为准",
+    "disclaimer": "「替代」仅表示功能场景上的国产对应选项，不等于能力等价；数据为研究快照，可能随时间变化。",
+    "total": 54
+  },
+  "items": [
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "vendor": "OpenAI",
+      "region": "overseas",
+      "category": "chat",
+      "tagline": "OpenAI 推出的对话助手，支持文本、图像与联网搜索。",
+      "description": "OpenAI 推出的对话助手，支持文本、图像与联网搜索。 属于「AI 对话与助手」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://chatgpt.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "多模态对话",
+        "联网搜索",
+        "GPTs 生态"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "vendor": "Anthropic",
+      "region": "overseas",
+      "category": "chat",
+      "tagline": "Anthropic 推出的长上下文对话助手，以推理和安全性见长。",
+      "description": "Anthropic 推出的长上下文对话助手，以推理和安全性见长。 属于「AI 对话与助手」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://claude.ai",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "超长上下文",
+        "推理能力强",
+        "Artifacts 交互"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "vendor": "Google",
+      "region": "overseas",
+      "category": "chat",
+      "tagline": "Google 的多模态对话助手，深度整合 Google 搜索与工作空间。",
+      "description": "Google 的多模态对话助手，深度整合 Google 搜索与工作空间。 属于「AI 对话与助手」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://gemini.google.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "多模态理解",
+        "Google 生态整合",
+        "实时搜索"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "deepseek-chat",
+      "name": "DeepSeek",
+      "vendor": "深度求索",
+      "region": "china",
+      "category": "chat",
+      "tagline": "深度求索推出的对话助手，以高性价比推理和开源模型著称。",
+      "description": "深度求索推出的对话助手，以高性价比推理和开源模型著称。 属于「AI 对话与助手」场景，支持平台包括 web / ios / android / api。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://chat.deepseek.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "api"
+      ],
+      "highlights": [
+        "推理模型",
+        "开源权重",
+        "API 价格低廉"
+      ],
+      "replaces": [
+        "chatgpt"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "kimi",
+      "name": "Kimi",
+      "vendor": "月之暗面",
+      "region": "china",
+      "category": "chat",
+      "tagline": "月之暗面推出的长上下文对话助手，擅长长文档阅读与联网搜索。",
+      "description": "月之暗面推出的长上下文对话助手，擅长长文档阅读与联网搜索。 属于「AI 对话与助手」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://kimi.moonshot.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "超长上下文",
+        "长文档解析",
+        "联网搜索"
+      ],
+      "replaces": [
+        "chatgpt",
+        "claude"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "doubao",
+      "name": "豆包",
+      "vendor": "字节跳动",
+      "region": "china",
+      "category": "chat",
+      "tagline": "字节跳动推出的多模态 AI 助手，集成在抖音/飞书等生态中。",
+      "description": "字节跳动推出的多模态 AI 助手，集成在抖音/飞书等生态中。 属于「AI 对话与助手」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.doubao.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "多模态交互",
+        "字节生态整合",
+        "语音对话"
+      ],
+      "replaces": [
+        "chatgpt",
+        "gemini"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "vendor": "Midjourney",
+      "region": "overseas",
+      "category": "image",
+      "tagline": "以艺术感和提示词理解见长的文生图工具，社区生态成熟。",
+      "description": "以艺术感和提示词理解见长的文生图工具，社区生态成熟。 属于「AI 生图」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.midjourney.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "艺术风格突出",
+        "社区 Prompt 丰富",
+        "Discord 工作流"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "dall-e",
+      "name": "DALL·E",
+      "vendor": "OpenAI",
+      "region": "overseas",
+      "category": "image",
+      "tagline": "OpenAI 的文生图模型，与 ChatGPT 深度集成。",
+      "description": "OpenAI 的文生图模型，与 ChatGPT 深度集成。 属于「AI 生图」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://openai.com/dall-e-3",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "ChatGPT 集成",
+        "语义理解强",
+        "编辑能力强"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "ideogram",
+      "name": "Ideogram",
+      "vendor": "Ideogram",
+      "region": "overseas",
+      "category": "image",
+      "tagline": "擅长在图片中渲染文字和排版的文生图工具。",
+      "description": "擅长在图片中渲染文字和排版的文生图工具。 属于「AI 生图」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://ideogram.ai",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "文字渲染好",
+        "海报/Logo 友好",
+        "排版可控"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "pixpix",
+      "name": "PixPix",
+      "vendor": "PixVerse",
+      "region": "china",
+      "category": "image",
+      "tagline": "PixVerse 推出的 AI 图像创作平台，支持文生图与图生图。",
+      "description": "PixVerse 推出的 AI 图像创作平台，支持文生图与图生图。 属于「AI 生图」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://pixpix.art",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "文生图",
+        "图生图",
+        "风格迁移"
+      ],
+      "replaces": [
+        "midjourney",
+        "ideogram"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "jimeng",
+      "name": "即梦 AI",
+      "vendor": "字节跳动",
+      "region": "china",
+      "category": "image",
+      "tagline": "字节跳动推出的 AI 创作平台，文生图与文生视频一体。",
+      "description": "字节跳动推出的 AI 创作平台，文生图与文生视频一体。 属于「AI 生图」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://jimeng.jianying.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "文生图",
+        "文生视频",
+        "抖音生态"
+      ],
+      "replaces": [
+        "midjourney",
+        "dall-e"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "tongyi-wanxiang",
+      "name": "通义万相",
+      "vendor": "阿里云",
+      "region": "china",
+      "category": "image",
+      "tagline": "阿里云推出的 AI 绘画平台，支持文生图、图生图与虚拟模特。",
+      "description": "阿里云推出的 AI 绘画平台，支持文生图、图生图与虚拟模特。 属于「AI 生图」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://tongyi.aliyun.com/wanxiang",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "中文提示友好",
+        "电商场景",
+        "风格多样"
+      ],
+      "replaces": [
+        "midjourney",
+        "ideogram"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "sora",
+      "name": "Sora",
+      "vendor": "OpenAI",
+      "region": "overseas",
+      "category": "video",
+      "tagline": "OpenAI 推出的文生视频模型，支持长视频与复杂镜头运动。",
+      "description": "OpenAI 推出的文生视频模型，支持长视频与复杂镜头运动。 属于「AI 视频生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://openai.com/sora",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "长视频生成",
+        "物理模拟",
+        "电影级镜头"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "runway",
+      "name": "Runway",
+      "vendor": "Runway",
+      "region": "overseas",
+      "category": "video",
+      "tagline": "创意工作者常用的 AI 视频工具，提供 Gen 系列模型与视频编辑。",
+      "description": "创意工作者常用的 AI 视频工具，提供 Gen 系列模型与视频编辑。 属于「AI 视频生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://runwayml.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "视频编辑",
+        "运动笔刷",
+        "创意工作流"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "pika",
+      "name": "Pika",
+      "vendor": "Pika Labs",
+      "region": "overseas",
+      "category": "video",
+      "tagline": "以快速生成和特效编辑为特色的文生视频工具。",
+      "description": "以快速生成和特效编辑为特色的文生视频工具。 属于「AI 视频生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://pika.art",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "生成速度快",
+        "特效丰富",
+        "社区模板"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "kling",
+      "name": "可灵 AI",
+      "vendor": "快手",
+      "region": "china",
+      "category": "video",
+      "tagline": "快手推出的文生视频模型，支持长视频与复杂动作生成。",
+      "description": "快手推出的文生视频模型，支持长视频与复杂动作生成。 属于「AI 视频生成」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://klingai.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "长视频生成",
+        "动作自然",
+        "中文友好"
+      ],
+      "replaces": [
+        "sora",
+        "runway"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "jimeng-video",
+      "name": "即梦 AI",
+      "vendor": "字节跳动",
+      "region": "china",
+      "category": "video",
+      "tagline": "即梦 AI 的视频生成功能，与图片创作共用工作流。",
+      "description": "即梦 AI 的视频生成功能，与图片创作共用工作流。 属于「AI 视频生成」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://jimeng.jianying.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "文生视频",
+        "图生视频",
+        "抖音模板"
+      ],
+      "replaces": [
+        "sora",
+        "pika"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "hailuo",
+      "name": "海螺 AI",
+      "vendor": "MiniMax",
+      "region": "china",
+      "category": "video",
+      "tagline": "MiniMax 推出的 AI 视频生成工具，角色一致性与动作表现较好。",
+      "description": "MiniMax 推出的 AI 视频生成工具，角色一致性与动作表现较好。 属于「AI 视频生成」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://hailuoai.video",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "角色一致",
+        "动作流畅",
+        "多语言"
+      ],
+      "replaces": [
+        "sora",
+        "pika"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "suno",
+      "name": "Suno",
+      "vendor": "Suno",
+      "region": "overseas",
+      "category": "music",
+      "tagline": "热门的文生音乐工具，支持歌词驱动与多种曲风。",
+      "description": "热门的文生音乐工具，支持歌词驱动与多种曲风。 属于「AI 音乐生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://suno.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "歌词生成",
+        "多曲风",
+        "社区分享"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "udio",
+      "name": "Udio",
+      "vendor": "Udio",
+      "region": "overseas",
+      "category": "music",
+      "tagline": "强调音乐质量和情感表达的文生音乐平台。",
+      "description": "强调音乐质量和情感表达的文生音乐平台。 属于「AI 音乐生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://udio.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "高音质",
+        "情感细腻",
+        "风格控制"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "soundraw",
+      "name": "Soundraw",
+      "vendor": "Soundraw",
+      "region": "overseas",
+      "category": "music",
+      "tagline": "面向创作者的 AI 音乐授权平台，可自定义曲长与情绪。",
+      "description": "面向创作者的 AI 音乐授权平台，可自定义曲长与情绪。 属于「AI 音乐生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://soundraw.io",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "商用授权",
+        "可定制长度",
+        "免版税"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "tiangong-music",
+      "name": "天工音乐",
+      "vendor": "昆仑万维",
+      "region": "china",
+      "category": "music",
+      "tagline": "昆仑万维推出的 AI 音乐生成工具，集成在天工 AI 中。",
+      "description": "昆仑万维推出的 AI 音乐生成工具，集成在天工 AI 中。 属于「AI 音乐生成」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.tiangong.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "文生音乐",
+        "歌词创作",
+        "多风格"
+      ],
+      "replaces": [
+        "suno",
+        "udio"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "wangyi-tianyin",
+      "name": "网易天音",
+      "vendor": "网易",
+      "region": "china",
+      "category": "music",
+      "tagline": "网易推出的 AI 音乐创作平台，支持词曲编唱一体化。",
+      "description": "网易推出的 AI 音乐创作平台，支持词曲编唱一体化。 属于「AI 音乐生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://tianyin.163.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "词曲编唱",
+        "虚拟歌手",
+        "网易云联动"
+      ],
+      "replaces": [
+        "suno"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "skymusic",
+      "name": "天工 SkyMusic",
+      "vendor": "昆仑万维",
+      "region": "china",
+      "category": "music",
+      "tagline": "昆仑万维面向海外市场的 AI 音乐产品，与天工音乐同源。",
+      "description": "昆仑万维面向海外市场的 AI 音乐产品，与天工音乐同源。 属于「AI 音乐生成」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.skovian.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "多语言",
+        "长音频",
+        "商用授权"
+      ],
+      "replaces": [
+        "suno",
+        "soundraw"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "notion-ai",
+      "name": "Notion AI",
+      "vendor": "Notion",
+      "region": "overseas",
+      "category": "office",
+      "tagline": "集成在 Notion 工作空间中的 AI 写作与知识管理助手。",
+      "description": "集成在 Notion 工作空间中的 AI 写作与知识管理助手。 属于「AI 办公与效率」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.notion.so/product/ai",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "知识库整合",
+        "文档生成",
+        "会议纪要"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "ms-copilot",
+      "name": "Microsoft 365 Copilot",
+      "vendor": "Microsoft",
+      "region": "overseas",
+      "category": "office",
+      "tagline": "微软 Office 套件中的 AI 助手，覆盖 Word/Excel/PPT/Teams。",
+      "description": "微软 Office 套件中的 AI 助手，覆盖 Word/Excel/PPT/Teams。 属于「AI 办公与效率」场景，支持平台包括 web / windows / macos / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://copilot.microsoft.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "windows",
+        "macos",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "Office 集成",
+        "企业级安全",
+        "Teams 智能"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "grammarly",
+      "name": "Grammarly",
+      "vendor": "Grammarly",
+      "region": "overseas",
+      "category": "office",
+      "tagline": "英文写作辅助工具，提供语法检查与风格建议。",
+      "description": "英文写作辅助工具，提供语法检查与风格建议。 属于「AI 办公与效率」场景，支持平台包括 web / windows / macos / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.grammarly.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "windows",
+        "macos",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "语法纠错",
+        "风格建议",
+        "浏览器插件"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "dingtalk-ai",
+      "name": "钉钉 AI 助理",
+      "vendor": "阿里巴巴",
+      "region": "china",
+      "category": "office",
+      "tagline": "钉钉推出的办公 AI 助理，集成在钉钉文档、会议与审批中。",
+      "description": "钉钉推出的办公 AI 助理，集成在钉钉文档、会议与审批中。 属于「AI 办公与效率」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.dingtalk.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "钉钉生态",
+        "会议摘要",
+        "审批助手"
+      ],
+      "replaces": [
+        "ms-copilot",
+        "notion-ai"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "feishu-miaoji",
+      "name": "飞书妙记",
+      "vendor": "字节跳动",
+      "region": "china",
+      "category": "office",
+      "tagline": "飞书的会议音视频转写与智能纪要工具。",
+      "description": "飞书的会议音视频转写与智能纪要工具。 属于「AI 办公与效率」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.feishu.cn/product/minutes",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "音视频转写",
+        "智能纪要",
+        "多语言"
+      ],
+      "replaces": [
+        "notion-ai",
+        "ms-copilot"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "youdao-doc-ai",
+      "name": "有道文档 AI",
+      "vendor": "网易",
+      "region": "china",
+      "category": "office",
+      "tagline": "网易有道推出的文档 AI 助手，支持写作、翻译与总结。",
+      "description": "网易有道推出的文档 AI 助手，支持写作、翻译与总结。 属于「AI 办公与效率」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://note.youdao.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "文档 AI",
+        "翻译润色",
+        "教育场景"
+      ],
+      "replaces": [
+        "grammarly",
+        "notion-ai"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "vendor": "GitHub",
+      "region": "overseas",
+      "category": "coding",
+      "tagline": "GitHub 推出的 AI 编程助手，支持代码补全与对话。",
+      "description": "GitHub 推出的 AI 编程助手，支持代码补全与对话。 属于「AI 编程与开发」场景，支持平台包括 web / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://github.com/features/copilot",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "IDE 集成",
+        "代码补全",
+        "Copilot Chat"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "replit",
+      "name": "Replit",
+      "vendor": "Replit",
+      "region": "overseas",
+      "category": "coding",
+      "tagline": "在线 IDE 与 Agent 编程环境，支持自然语言生成应用。",
+      "description": "在线 IDE 与 Agent 编程环境，支持自然语言生成应用。 属于「AI 编程与开发」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://replit.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "在线 IDE",
+        "Agent 编程",
+        "一键部署"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "tabnine",
+      "name": "Tabnine",
+      "vendor": "Tabnine",
+      "region": "overseas",
+      "category": "coding",
+      "tagline": "企业级 AI 代码补全工具，支持私有部署与代码安全。",
+      "description": "企业级 AI 代码补全工具，支持私有部署与代码安全。 属于「AI 编程与开发」场景，支持平台包括 web / windows / macos / linux。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.tabnine.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "highlights": [
+        "企业合规",
+        "私有部署",
+        "代码安全"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "tongyi-lingma",
+      "name": "通义灵码",
+      "vendor": "阿里云",
+      "region": "china",
+      "category": "coding",
+      "tagline": "阿里云推出的 AI 编程助手，支持代码补全与单元测试生成。",
+      "description": "阿里云推出的 AI 编程助手，支持代码补全与单元测试生成。 属于「AI 编程与开发」场景，支持平台包括 web / windows / macos / linux。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://tongyi.aliyun.com/lingma",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "highlights": [
+        "中文注释友好",
+        "IDE 插件",
+        "单元测试"
+      ],
+      "replaces": [
+        "github-copilot"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "codegeex",
+      "name": "CodeGeeX",
+      "vendor": "智谱 AI",
+      "region": "china",
+      "category": "coding",
+      "tagline": "智谱 AI 推出的 AI 编程助手，支持代码补全、注释与翻译。",
+      "description": "智谱 AI 推出的 AI 编程助手，支持代码补全、注释与翻译。 属于「AI 编程与开发」场景，支持平台包括 web / windows / macos / linux。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://codegeex.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "highlights": [
+        "多语言",
+        "代码解释",
+        "IDE 插件"
+      ],
+      "replaces": [
+        "github-copilot",
+        "tabnine"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "tencent-codebuddy",
+      "name": "腾讯云 CodeBuddy",
+      "vendor": "腾讯云",
+      "region": "china",
+      "category": "coding",
+      "tagline": "腾讯云推出的 AI 开发助手，集成在 Cloud Studio 与 IDE 中。",
+      "description": "腾讯云推出的 AI 开发助手，集成在 Cloud Studio 与 IDE 中。 属于「AI 编程与开发」场景，支持平台包括 web / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://cloud.tencent.com/product/codebuddy",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "腾讯云整合",
+        "Cloud Studio",
+        "企业级"
+      ],
+      "replaces": [
+        "github-copilot",
+        "replit"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "canva",
+      "name": "Canva AI",
+      "vendor": "Canva",
+      "region": "overseas",
+      "category": "design",
+      "tagline": "Canva 的设计 AI 功能，支持一键生成海报、PPT 与社交媒体图。",
+      "description": "Canva 的设计 AI 功能，支持一键生成海报、PPT 与社交媒体图。 属于「AI 设计与 PPT」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.canva.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "模板丰富",
+        "一键设计",
+        "团队协作"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "beautiful-ai",
+      "name": "Beautiful.ai",
+      "vendor": "Beautiful.ai",
+      "region": "overseas",
+      "category": "design",
+      "tagline": "智能 PPT 生成工具，自动排版与图表美化。",
+      "description": "智能 PPT 生成工具，自动排版与图表美化。 属于「AI 设计与 PPT」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.beautiful.ai",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "自动排版",
+        "智能图表",
+        "PPT 模板"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "tome",
+      "name": "Tome",
+      "vendor": "Tome",
+      "region": "overseas",
+      "category": "design",
+      "tagline": "AI 叙事与 PPT 生成工具，适合故事化演示。",
+      "description": "AI 叙事与 PPT 生成工具，适合故事化演示。 属于「AI 设计与 PPT」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://tome.app",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "叙事设计",
+        "AI 配图",
+        "互动演示"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "meitu-design",
+      "name": "美图设计室",
+      "vendor": "美图公司",
+      "region": "china",
+      "category": "design",
+      "tagline": "美图推出的 AI 设计工具，支持海报、Logo、电商图生成。",
+      "description": "美图推出的 AI 设计工具，支持海报、Logo、电商图生成。 属于「AI 设计与 PPT」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://design.meitu.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "电商设计",
+        "人像精修",
+        "模板丰富"
+      ],
+      "replaces": [
+        "canva"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "gaoding",
+      "name": "稿定 AI",
+      "vendor": "稿定设计",
+      "region": "china",
+      "category": "design",
+      "tagline": "稿定设计推出的 AI 设计工具，聚焦营销物料与电商场景。",
+      "description": "稿定设计推出的 AI 设计工具，聚焦营销物料与电商场景。 属于「AI 设计与 PPT」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.gaoding.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "营销物料",
+        "AI 抠图",
+        "批量作图"
+      ],
+      "replaces": [
+        "canva",
+        "beautiful-ai"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "kimi-ppt",
+      "name": "Kimi PPT",
+      "vendor": "月之暗面",
+      "region": "china",
+      "category": "design",
+      "tagline": "Kimi 推出的 PPT 智能生成助手，可根据大纲一键排版。",
+      "description": "Kimi 推出的 PPT 智能生成助手，可根据大纲一键排版。 属于「AI 设计与 PPT」场景，支持平台包括 web。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://kimi.moonshot.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "长文转 PPT",
+        "一键排版",
+        "大纲驱动"
+      ],
+      "replaces": [
+        "beautiful-ai",
+        "tome"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "khanmigo",
+      "name": "Khanmigo",
+      "vendor": "Khan Academy",
+      "region": "overseas",
+      "category": "learning",
+      "tagline": "Khan Academy 的 AI 学习助手，覆盖数学、编程与人文。",
+      "description": "Khan Academy 的 AI 学习助手，覆盖数学、编程与人文。 属于「AI 学习与教育」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.khanacademy.org/khan-labs/khanmigo",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "苏格拉底式辅导",
+        "多学科",
+        "非营利"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "quizbot",
+      "name": "QuizBot",
+      "vendor": "QuizBot",
+      "region": "overseas",
+      "category": "learning",
+      "tagline": "AI 驱动的测验与闪卡生成工具，辅助记忆与复习。",
+      "description": "AI 驱动的测验与闪卡生成工具，辅助记忆与复习。 属于「AI 学习与教育」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://quizbot.ai",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "闪卡生成",
+        "测验题库",
+        "记忆曲线"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "photomath",
+      "name": "Photomath",
+      "vendor": "Photomath",
+      "region": "overseas",
+      "category": "learning",
+      "tagline": "拍照解题应用，提供逐步数学解答。",
+      "description": "拍照解题应用，提供逐步数学解答。 属于「AI 学习与教育」场景，支持平台包括 ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://photomath.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "拍照解题",
+        "步骤讲解",
+        "图形计算器"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "zuoyebang-ai",
+      "name": "作业帮 AI",
+      "vendor": "作业帮",
+      "region": "china",
+      "category": "learning",
+      "tagline": "作业帮推出的 AI 学习助手，覆盖拍照搜题与作业辅导。",
+      "description": "作业帮推出的 AI 学习助手，覆盖拍照搜题与作业辅导。 属于「AI 学习与教育」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.zybang.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "拍照搜题",
+        "视频讲解",
+        "全科辅导"
+      ],
+      "replaces": [
+        "photomath",
+        "khanmigo"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "xueersi-jiuzhang",
+      "name": "学而思九章",
+      "vendor": "好未来",
+      "region": "china",
+      "category": "learning",
+      "tagline": "好未来推出的数学与大模型学习助手。",
+      "description": "好未来推出的数学与大模型学习助手。 属于「AI 学习与教育」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://jiuzhang.peiyou.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "数学推理",
+        "大模型答疑",
+        "学而思内容"
+      ],
+      "replaces": [
+        "khanmigo",
+        "quizbot"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "youdao-dict-ai",
+      "name": "网易有道词典 AI",
+      "vendor": "网易有道",
+      "region": "china",
+      "category": "learning",
+      "tagline": "有道词典集成的 AI 翻译、写作与查词助手。",
+      "description": "有道词典集成的 AI 翻译、写作与查词助手。 属于「AI 学习与教育」场景，支持平台包括 web / ios / android / windows / macos。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://dict.youdao.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "AI 翻译",
+        "写作润色",
+        "查词学习"
+      ],
+      "replaces": [
+        "quizbot",
+        "khanmigo"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "vendor": "Perplexity",
+      "region": "overseas",
+      "category": "search",
+      "tagline": "AI 搜索引擎，以引用来源和实时答案见长。",
+      "description": "AI 搜索引擎，以引用来源和实时答案见长。 属于「AI 搜索与研究」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.perplexity.ai",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "来源引用",
+        "实时搜索",
+        "专业模式"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "you",
+      "name": "You.com",
+      "vendor": "You.com",
+      "region": "overseas",
+      "category": "search",
+      "tagline": "强调隐私与个性化的 AI 搜索引擎。",
+      "description": "强调隐私与个性化的 AI 搜索引擎。 属于「AI 搜索与研究」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://you.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "隐私保护",
+        "个性化",
+        "AI 聊天"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "brave-search",
+      "name": "Brave Search",
+      "vendor": "Brave",
+      "region": "overseas",
+      "category": "search",
+      "tagline": "Brave 浏览器的 AI 搜索功能，强调隐私。",
+      "description": "Brave 浏览器的 AI 搜索功能，强调隐私。 属于「AI 搜索与研究」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://search.brave.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "隐私优先",
+        "无跟踪",
+        "Brave 生态"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "metaso",
+      "name": "秘塔 AI 搜索",
+      "vendor": "秘塔科技",
+      "region": "china",
+      "category": "search",
+      "tagline": "国产 AI 搜索引擎，提供结构化答案与思维导图。",
+      "description": "国产 AI 搜索引擎，提供结构化答案与思维导图。 属于「AI 搜索与研究」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://metaso.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "结构化答案",
+        "思维导图",
+        "学术搜索"
+      ],
+      "replaces": [
+        "perplexity"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "tiangong-search",
+      "name": "天工 AI 搜索",
+      "vendor": "昆仑万维",
+      "region": "china",
+      "category": "search",
+      "tagline": "天工 AI 的搜索功能，集成多模态与对话。",
+      "description": "天工 AI 的搜索功能，集成多模态与对话。 属于「AI 搜索与研究」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.tiangong.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "多模态搜索",
+        "对话追问",
+        "长文本"
+      ],
+      "replaces": [
+        "perplexity",
+        "you"
+      ],
+      "lastVerified": "2026-10"
+    },
+    {
+      "id": "quark",
+      "name": "夸克",
+      "vendor": "阿里巴巴",
+      "region": "china",
+      "category": "search",
+      "tagline": "夸克浏览器的 AI 搜索与网盘/文档工具整合。",
+      "description": "夸克浏览器的 AI 搜索与网盘/文档工具整合。 属于「AI 搜索与研究」场景，支持平台包括 web / ios / android。数据整理自公开信息，具体功能与定价以官网为准。",
+      "officialUrl": "https://www.quark.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "基础功能免费，高级功能付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "搜索+网盘",
+        "文档 AI",
+        "夸克生态"
+      ],
+      "replaces": [
+        "perplexity",
+        "brave-search"
+      ],
+      "lastVerified": "2026-10"
+    }
+  ]
+}

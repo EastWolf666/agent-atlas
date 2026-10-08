@@ -5,12 +5,13 @@ import { AgentCard } from './components/Grid/AgentCard'
 import { DetailPanel } from './components/Detail'
 import { CompareView } from './components/Compare'
 import { ModelsPage } from './components/Models'
+import { AlternativesPage } from './components/Alternatives'
 import { EmptyState } from './components/bits'
 import { useFilters, useCompare, useTheme } from './hooks/useAtlas'
 import { agents } from './lib/agents'
 import type { Agent, Tier } from './types'
 
-type View = 'overview' | 'browse' | 'models'
+type View = 'overview' | 'browse' | 'models' | 'alternatives'
 
 export default function App() {
   const atlas = useFilters()
@@ -46,21 +47,21 @@ export default function App() {
       if (e.key === '/' && !typing) {
         e.preventDefault()
         /*
-         * 模型页有自己的搜索框（id=aa-model-search），
-         * 焦点要给它而不是 Agent 页的搜索框——否则按 / 会把焦点
-         * 移到一个当前看不见的输入框上，用户会以为「按了没反应」。
+         * 不同标签页有各自的搜索框 id，焦点必须给当前页面对应的输入框，
+         * 否则按 / 会把焦点移到一个看不见的输入框上，用户会以为「按了没反应」。
          */
-        const onModels = view === 'models'
+        const searchId =
+          view === 'models' ? 'aa-model-search' : view === 'alternatives' ? 'aa-alt-search' : 'aa-search'
         if (detailId) setDetailId(null)
         if (showCompare) setShowCompare(false)
-        if (!onModels) setView('browse')
+        if (view !== 'browse' && view !== 'models' && view !== 'alternatives') setView('browse')
         /*
          * 双 rAF：等浮层卸载动画走完、搜索框真正挂载后再聚焦。
          * 单 rAF 在快速开关时可能早于 DOM 提交，focus() 会落空。
          */
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            const el = document.getElementById(onModels ? 'aa-model-search' : 'aa-search')
+            const el = document.getElementById(searchId)
             if (el) el.focus()
           })
         })
@@ -149,6 +150,7 @@ export default function App() {
                 ['overview', '概览'],
                 ['browse', 'Agent'],
                 ['models', 'AI 大模型'],
+                ['alternatives', 'AI 国产替代'],
               ] as const
             ).map(([k, label]) => (
               <button
@@ -167,11 +169,11 @@ export default function App() {
           <div className="ml-auto flex items-center gap-2">
             {/*
               搜索框与对比按钮只属于 Agent 页。
-              模型页有自己的搜索框（筛选维度不同），
-              而 Agent 对比弹窗吃的是 agent id，对模型条目无意义——
-              在模型页显示这两个控件会让人点出无反应或错内容。
+              模型页和国产替代页有自己的搜索框（筛选维度不同），
+              而 Agent 对比弹窗吃的是 agent id，对其它页面无意义——
+              在非 Agent 页显示这两个控件会让人点出无反应或错内容。
             */}
-            {view !== 'models' && (
+            {(view === 'overview' || view === 'browse') && (
               <button
                 onClick={goBrowse}
                 className="hidden items-center gap-2 rounded-lg border border-edge px-2.5 py-1.5 text-2xs text-faint transition-colors hover:border-brand hover:text-brand sm:flex"
@@ -186,7 +188,7 @@ export default function App() {
               </button>
             )}
 
-            {view !== 'models' && cmp.selected.length > 0 && (
+            {(view === 'overview' || view === 'browse') && cmp.selected.length > 0 && (
               <button
                 onClick={() => setShowCompare(true)}
                 className="flex items-center gap-1.5 rounded-lg bg-brand px-2.5 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
@@ -224,6 +226,12 @@ export default function App() {
            * 整块宽度给表格比挤在 248px 侧栏右侧更合适。
            */
           <ModelsPage />
+        ) : view === 'alternatives' ? (
+          /*
+           * 国产替代页同样采用整宽布局：卡片/表格双视图 + 顶部筛选条，
+           * 与模型页保持一致的体验，避免侧栏挤占表格横向空间。
+           */
+          <AlternativesPage />
         ) : view === 'overview' ? (
           <Overview
             onSelect={openDetail}

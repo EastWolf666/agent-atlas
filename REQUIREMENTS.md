@@ -1,9 +1,11 @@
 # Agent Atlas — 开发需求说明书
 
-> **版本** v1.0（待审核）
-> **日期** 2026-10-03
-> **状态** 🔴 等待审核，尚未开始编码
+> **版本** v2.0
+> **日期** 2026-10-09
+> **状态** 🟢 已上线，持续迭代
 > **项目代号** agent-atlas
+>
+> v2.0 变更：Agent 页已上线；新增 AI 大模型标签页（OpenRouter 数据自动更新）；新增 AI 国产替代标签页（人工维护）。
 
 ---
 
@@ -301,6 +303,128 @@ agent-atlas/
 1. **这个领域有哪些玩家？** → 首屏图谱
 2. **我的场景该选哪个？** → 筛选 + 对比
 3. **这东西靠得住吗？** → 来源标注 + 局限说明
+
+---
+
+## 十、AI 大模型标签页（新增 v2.0）
+
+### 10.1 需求背景
+
+Agent 产品底层依赖大模型，但模型选型信息（价格、上下文、模态、跑分）散落在各厂商定价页和第三方评测中。用户需要一个能横向对比的模型数据页，与 Agent 页形成「产品 → 底座」的上下文明。
+
+### 10.2 数据来源与更新
+
+- **数据源**：OpenRouter 公开 API（`https://openrouter.ai/api/v1/models`），免鉴权、字段完整、覆盖国内外主流可调用模型。
+- **更新方式**：每日定时任务自动全量抓取，脚本 `scripts/fetch-models.mjs` 独立运行，失败不影响 Agent 数据落盘。
+- **数据语义**：全量替换。每次抓取后与上一版做 diff，只比对 `priceInput`、`priceOutput`、`contextWindow`、`releasedAt` 等客观字段；description 文案抖动不计入变更。
+- **熔断规则**：抓到 0 条或数量跌超 20% 立即 abort，不写盘。
+- **调价高亮**：价格变更单独输出并按涨跌幅排序，避免混在「字段变更 N 条」中被淹没。
+
+### 10.3 数据模型
+
+见 `src/types-model.ts` 与 `src/data/models.json`。核心字段：
+
+| 字段 | 说明 |
+|---|---|
+| id / name / vendor / vendorSlug | 模型标识与厂商 |
+| region | overseas / china |
+| contextWindow / maxOutputTokens | 上下文与输出上限 |
+| priceInput / priceOutput / priceCacheRead | 每百万 token 价格（美元） |
+| inputModalities / outputModalities / isMultimodal | 模态支持 |
+| openWeights / openWeightsUrl | 是否开源权重 |
+| releasedAt / knowledgeCutoff | 发布时间与知识截止 |
+| supportsReasoning / reasoningMandatory | 推理能力 |
+| scores.intelligence / coding / agentic | 第三方评测指数（Artificial Analysis） |
+| autoAdmitted / autoAdmittedAt / verifiedBy | 待核实机制 |
+
+### 10.4 页面设计
+
+- **标题区**：AI 大模型选型对比 + 数据更新时间 + 统计 chips。
+- **统计概览**：收录模型数 / 国内模型 / 开源权重 / 完全免费。
+- **控制栏**：搜索框 + 卡片/表格视图切换 + 地区/模态/开源/免费/批处理/路由器筛选 chips。
+- **排序条**：8 个可排序列（名称、厂商、上下文、输入价、输出价、智能指数、Agent 指数、发布时间）。
+- **卡片视图**：模型名、厂商、地区、上下文、价格、模态。
+- **表格视图**：10 列对齐，支持点击行打开详情浮层。
+- **详情浮层**：官网链接、关键指标、模态支持、跑分、开源权重、溯源。
+
+### 10.5 待核实机制
+
+沿用 Agent 页的「自动收录 · 待核实」思路：
+- 模型数据全部来自 OpenRouter 聚合，未经厂商官方确认。
+- 页面显示「自动收录 · 待核实」徽章，详情浮层明确说明价格/上下文/跑分请以厂商官方为准。
+- 人工核实台账存 `data/models-verified.json`，不直接改 400KB 的 `models.json`。
+- CLI：`npm run verify:model -- add <modelId> [核实人]`。
+
+---
+
+## 十一、AI 国产替代标签页（新增 v2.0）
+
+### 11.1 需求背景
+
+基于「国际主流 AI 工具的中国替代」信息图，将 9 个功能场景下的国际工具与国产替代选项结构化呈现，帮助用户在面对海外工具不可用、不合规或成本过高时，快速找到对应的国产方案。
+
+### 11.2 数据来源与更新
+
+- **数据来源**：人工整理自信息图与公开官网信息，无稳定公开 API。
+- **更新方式**：手动维护 `src/data/alternatives.json`。
+- **免责口径**：页面与数据中需明确标注「替代≠能力等价，具体功能、定价与可用性请以厂商官网为准」。
+
+### 11.3 数据模型
+
+见 `src/types-alternative.ts` 与 `src/data/alternatives.json`。核心字段：
+
+| 字段 | 说明 |
+|---|---|
+| id / name / vendor | 工具标识与出品方 |
+| region | overseas / china |
+| category | chat / image / video / music / office / coding / design / learning / search |
+| tagline | 一句话定位 |
+| description | 2-4 句详情 |
+| officialUrl | 官方网站 |
+| pricingModel | free / freemium / subscription / usage / enterprise |
+| pricingNote | 人话定价说明 |
+| platforms | web / ios / android / windows / macos / linux / api |
+| highlights | 核心卖点 2-4 条 |
+| replaces | 国产条目指向海外工具 id 列表；海外条目为空数组 |
+| lastVerified | 核对日期（YYYY-MM 或 YYYY-MM-DD） |
+
+### 11.4 替代关系语义
+
+- 扁平列表 + `replaces` 引用，不按场景嵌套分组。
+- 国产条目 `replaces` 非空，必须指向真实存在的海外工具 id。
+- 海外条目 `replaces` 必须为空。
+- 每个海外 id 至少被一个国产条目引用，保证配对完整。
+
+### 11.5 9 个功能场景
+
+| 场景 | 国际工具示例 | 国产替代示例 |
+|---|---|---|
+| AI 对话与助手 | ChatGPT、Claude、Gemini | DeepSeek、Kimi、豆包 |
+| AI 生图 | Midjourney、DALL·E、Ideogram | PixPix、即梦、通义万象 |
+| AI 视频生成 | Sora、Runway、Pika | 可灵 AI、即梦、海螺 AI |
+| AI 音乐生成 | Suno、Udio、Soundraw | 天工音乐、网易天音、天工 SkyMusic |
+| AI 办公与效率 | Notion AI、Microsoft 365 Copilot、Grammarly | 钉钉 AI 助理、飞书妙记、有道文档 AI |
+| AI 编程与开发 | GitHub Copilot、Replit、Tabnine | 通义灵码、CodeGeeX、腾讯云 CodeBuddy |
+| AI 设计与 PPT | Canva AI、Beautiful.ai、Tome | 美图设计室、稿定 AI、Kimi PPT |
+| AI 学习与教育 | Khanmigo、QuizBot、Photomath | 作业帮 AI、学而思九章、网易有道词典 AI |
+| AI 搜索与研究 | Perplexity、You.com、Brave AI | 秘塔 AI 搜索、天工 AI 搜索、夸克 AI 浏览器 |
+
+### 11.6 页面设计
+
+- **标题区**：AI 国产替代方案地图 + 数据更新时间 + 统计 chips + 待核实徽章。
+- **统计概览**：收录工具 / 国产替代 / 国际主流 / 完全免费。
+- **控制栏**：搜索框 + 卡片/表格视图切换 + 场景单选 chips + 地区三态 chips。
+- **卡片视图**：工具名、厂商、地区、tagline、替代对象、场景、定价模式。
+- **表格视图**：名称、厂商、场景、替代对象、定价、平台、核实时间。
+- **详情浮层**：官网按钮、免责声明、描述、核心卖点、关键指标、替代关系跳转、溯源。
+
+### 11.7 校验规则
+
+`scripts/lib/alternatives-schema.mjs` 负责校验：
+- 必填字段、id 唯一且 slug 规范、枚举白名单、URL 格式。
+- `replaces` 引用完整性：国产条目指向的 id 必须存在且 region 为 overseas。
+- 每个海外 id 至少被一个国产条目引用。
+- `meta.total` 与 `items.length` 一致。
 
 ---
 
