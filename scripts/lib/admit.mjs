@@ -55,7 +55,51 @@ const ADMIT_NOISE = [
   'cheatsheet', 'prompt collection', 'prompt library', 'templates',
   ' Boilerplate', 'starter template', '简历', '教程', '课程', '学习路线',
   '面试题', ' prompt 集合', '提示词合集', '模板库',
+  // 技能/配置合集：名字像 Agent、实际是给 coding agent 装 prompts 的配置仓库
+  'skills for', 'agent skills', 'claude code', 'cursor rules', 'instincts',
+  'dotfiles', 'system prompt',
 ]
+
+/**
+ * 回溯窗口的老项目 star 门槛。
+ *
+ * 回溯窗口（pushed:>90天）捞回来的绝大多数是「一直很火的老项目」——
+ * crewAI（2023）、TradingAgents（2024）都是这样，它们出现在结果里只是因为
+ * star 基数大，不是因为近期发生了什么。这类条目补进来毫无价值：
+ * 它们要么早该入库（属于人工补录），要么根本不是 Agent 产品。
+ *
+ * 真正值得捞的是「仓库存在很久，但最近才突然爆火」——Pi 建仓于 2025-08，
+ * 14 个月里从无人问津涨到 11 万 star，这类项目用 created:> 窗口永远抓不到。
+ *
+ * 为什么门槛定在 30000：
+ *   判据本质是「star / 仓库年龄」的比值，但 GitHub search API 只给当前 star，
+ *   不给历史增长曲线，没法直接算加速度。所以只能用绝对量级近似：
+ *   一个存在 1 年以上的仓库还能有 3 万 star，一定是近期被某个事件引爆的；
+ *   而 crewAI(5.9万/3年)、JeecgBoot(4.8万/8年) 这类是「匀速积累型」，
+ *   它们 star 高但增速平缓——这类该走人工补录，不该自动进。
+ *   30000 是实测卡出来的：能接住 Pi(11万)，能挡住 crewAI/JeecgBoot。
+ */
+const BACKFILL_HOT_STARS = 30000
+
+/**
+ * 回溯入库的仓库年龄上限（按天）。
+ *
+ * 再老的仓库即使 star 极高也不自动入库：
+ *   crewAI 建仓 2023-10，距今近 3 年。这类项目之所以没在库里，
+ *   是当初人工选型时漏了，不是脚本该补的——补进来会绕过人工判断，
+ *   而且这类项目通常已经有一整套完整文档和社区，
+ *   真正需要「快速发现」的从来是近几个月才出现的东西。
+ */
+const BACKFILL_MAX_AGE_DAYS = 730
+
+/**
+ * homepage 不可信域名：指向这些站点说明它不是产品官网。
+ *
+ * arxiv 是论文预印本——TradingAgents 的 homepage 就是 arxiv PDF。
+ * 一个论文链接不能证明「这是个对外发布的产品」，用它冒充官网会把
+ * 研究原型当成商业产品摆到页面上。
+ */
+const UNTRUSTED_HOMEPAGE = ['arxiv.org', 'huggingface.co/papers', 'doi.org', 'wikipedia.org']
 
 /**
  * 归一化域名，用于判断 homepage 是否只是仓库自身的镜像。
@@ -76,6 +120,8 @@ function domainOf(url = '') {
 function hasOfficialSource(cand) {
   if (!cand.homepage) return false
   if (cand.source !== 'github') return true
+  // homepage 指向论文预印本/百科，说明这不是产品官网
+  if (UNTRUSTED_HOMEPAGE.some((d) => cand.homepage.toLowerCase().includes(d))) return false
   // github 源：homepage 必须和仓库不同域，否则等于没提供官网
   const repoDomain = domainOf(cand.url)
   return Boolean(cand.homepage) && domainOf(cand.homepage) !== repoDomain
@@ -87,6 +133,45 @@ function isFresh(cand, now) {
   if (!t) return false
   const days = (now.getTime() - new Date(t).getTime()) / 86400000
   return Number.isFinite(days) && days >= 0 && days <= FRESH_DAYS
+}
+
+/**
+ * 回溯窗口的额外闸门（实测校准，见 github.mjs 的窗口策略说明）。
+ *
+ * 回溯捞回来的项目分两类，必须区别对待：
+ *   a) 最近才建的项目 —— 走正常判据，有官方来源就能入。
+ *   b) 建了很久的老项目 —— 只有 star 高到异常（远超该年龄应有的量级）才入，
+ *      否则一律拒绝。因为光看 star 高说明不了「最近火的」：
+ *      crewAI 59k star 但它2023 年就存在了，那是「一直火」不是「刚火」。
+ *
+ * 这条闸门直接决定了回溯窗口有没有价值：
+ * 没有它，回溯就是在补历史档案（crewAI/TradingAgents 这类该人工补的东西）；
+ * 有了它，回溯只捞「突然爆火的老项目」（Pi 这类真正会漏掉的新品）。
+ */
+function passesBackfillGate(cand, now) {
+  const isBackfill = String(cand.queryGroup ?? '').includes('backfill')
+  if (!isBackfill) return { ok: true }
+
+  const stars = cand.signals?.stars ?? 0
+  const created = cand.createdAt
+  if (!created) return { ok: true }
+
+  const ageDays = (now.getTime() - new Date(created).getTime()) / 86400000
+  if (!Number.isFinite(ageDays) || ageDays <= FRESH_DAYS) return { ok: true }
+
+  if (ageDays > BACKFILL_MAX_AGE_DAYS) {
+    return {
+      ok: false,
+      why: `仓库年龄超 ${BACKFILL_MAX_AGE_DAYS} 天（建仓${String(created).slice(0, 10)}），属人工补录范围`,
+    }
+  }
+  if (stars < BACKFILL_HOT_STARS) {
+    return {
+      ok: false,
+      why: `老项目未达爆火量级（建仓 ${Math.round(ageDays)} 天，star ${stars} < ${BACKFILL_HOT_STARS}）`,
+    }
+  }
+  return { ok: true }
 }
 
 /** 噪声否决 */
@@ -158,6 +243,12 @@ export function evaluateCandidate(cand, ctx) {
   // 6. 噪声否决
   if (looksLikeNoise(text)) {
     return { ok: false, score, reason: '疑似教程/资源合集' }
+  }
+
+  // 6.5 回溯窗口闸门：老项目必须 star 异常高才认定为「近期爆火」
+  const backfill = passesBackfillGate(cand, now)
+  if (!backfill.ok) {
+    return { ok: false, score, reason: backfill.why }
   }
 
   // 7. 信号组合：官方来源(A) 或 热度达标(B)，满足其一

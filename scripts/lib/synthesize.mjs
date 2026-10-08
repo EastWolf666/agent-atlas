@@ -22,7 +22,6 @@
  * =======================================================
  */
 
-import { guessTier } from './filter.mjs'
 
 /** 固定占位文案——统一出口，方便日后统一调整口径 */
 const PLACEHOLDER = {
@@ -66,8 +65,17 @@ function inferAutonomy(text) {
   if (/(cli|terminal|coding agent|code agent|developer|ide|dev tool|编程|代码|开发)/.test(t)) {
     return { level: 3, basis: 'CLI/编程类关键词' }
   }
-  // 拿不准一律给最低的 L2，不猜高
-  return { level: 2, basis: '无明确关键词，取保守默认值' }
+  /*
+   * 兜底分支的措辞要如实，不能说「无明确关键词」。
+   *
+   * 实测踩过的坑：NousResearch/hermes-agent 描述是 "The agent that grows
+   * with you"，命中了 agent 但没命中下面两组正则，于是走进这里。
+   * 如果文案写「无明确关键词」，读者会以为判定脚本连它是不是 Agent
+   * 都没识别出来——实际上识别出来了，只是没能从描述里判断自主性档位。
+   * 这个区别很重要：前者是发现能力的问题，后者是定级精度的问题，
+   * 混为一谈会让人怀疑整套自动入库的可靠性。
+   */
+  return { level: 2, basis: '描述仅表明是 Agent、不足以判断自主性档位，取保守 L2' }
 }
 
 /** star 数 → prominence（1-10）分档 */
@@ -78,6 +86,40 @@ function prominenceByStars(stars) {
   if (n >= 1000) return 6
   if (n >= 200) return 4
   return 3
+}
+
+/*
+ * tier（应用领域）判定——不直接用 filter.mjs 的 guessTier。
+ *
+ * 为什么不能直接用：guessTier 兜底返回 'vertical'，这在候选池里无害
+ * （只是给人看的建议，vertical 覆盖面最广，落在里面不算错）。
+ * 但自动入库的条目会**直接出现在正式页面上**，兜底就成了实质判断：
+ * NousResearch/hermes-agent 描述只有 "The agent that grows with you"，
+ * 没有任何领域词，于是被判成「垂直行业」产品——可它其实是个通用 Agent。
+ * 读者按「垂直行业」去理解一个通用 Agent，分类本身就传达了错误信息。
+ *
+ * 所以这里显式区分两种情况：
+ *   命中任一领域词 → 按词判（confidence: high）
+ *   一个词都没命中→ 归 platform（Agent 平台/工具类，通用 Agent 最接近的桶），
+ *                    且confidence 标 low，说明这是兜底不是判断。
+ *
+ * 为什么兜底选 platform 而不是 vertical：platform 的语义是
+ * 「通用底座/编排层」，而通用 Agent 正属于这一类；
+ * vertical 语义是「面向某个具体行业」，把通用 Agent 归进去是明确错误。
+ * 两者错的方向不一样，前者可接受，后者不可接受。
+ */
+function inferTier(text, name) {
+  const t = `${text} ${name}`.toLowerCase()
+  const rules = [
+    [/(law|legal|contract|compliance|金融|finance|health|medical|教育|客服|customer|hr|recruit)/, 'vertical'],
+    [/(code|coding|developer|ide|编程|代码|开发者)/, 'coding'],
+    [/(sdk|framework|infra|runtime|protocol|框架|协议|基础设施)/, 'infrastructure'],
+    [/(office|productivity|meeting|note|文档|办公|会议)/, 'productivity'],
+  ]
+  for (const [re, value] of rules) {
+    if (re.test(t)) return { value, confidence: 'high' }
+  }
+  return { value: 'platform', confidence: 'low' }
 }
 
 /*
@@ -124,7 +166,17 @@ export function synthesizeAgent(cand, id, today) {
   const signals = cand.signals ?? {}
   const stars = signals.stars ?? 0
 
-  // sources：有 homepage 算官方源，仓库/HN 报道作为补充
+  /*
+   * sources：有 homepage 才算 official，GitHub 仓库页标 community。
+   *
+   * 为什么仓库页不算 official：official 的语义是「产品方自己发布的
+   * 一手资料」，用于让读者确认功能/定价。而 github.com 的仓库页是
+   * 代码托管——它的 README 由社区维护，star 是网友投的，
+   * 和「官方文档」不是一回事。把两者都标 official 会让
+   * 「官方来源覆盖率」这个统计虚高，读者以为每个条目都有一手资料，
+   * 实际其中一半只是个仓库链接。这条正好会自动入库的条目最需要严谨：
+   * 它们的字段本来就没核实过，来源类型再标错，误导就叠加了。
+   */
   const month = today.slice(0, 7)
   const sources = []
   if (cand.homepage) {
@@ -134,7 +186,7 @@ export function synthesizeAgent(cand, id, today) {
     sources.push({
       title: `${cand.fullName ?? 'GitHub'} 仓库`,
       url: cand.url,
-      type: 'official',
+      type: 'community',
       date: month,
     })
   } else {
@@ -159,16 +211,27 @@ export function synthesizeAgent(cand, id, today) {
   const highlights = [`GitHub 公开仓库，star 数 ${stars}（客观信号，每日刷新）`]
   if (desc) highlights.push(`项目自述：${desc.slice(0, 60)}${desc.length > 60 ? '…' : ''}`)
 
+  const tier = inferTier(text, cand.name ?? '')
+
   return {
     id,
     name: cand.name ?? cand.title,
     vendor: deriveVendor(cand),
     region: inferRegion(cand, text),
-    tier: guessTier(text, cand.name ?? ''),
+    tier: tier.value,
     // 新收录产品默认 preview（已发布但未 GA/未核实），不直接标 active
     status: 'preview',
     autonomyLevel: autonomy.level,
     autonomyReason: `按${autonomy.basis}初步推断为 L${autonomy.level}；未核实实际自主性，请以官方文档为准。`,
+    // tier 的判断依据写进 highlights，人工审核时能直接看到「凭什么这么归类」
+    ...(tier.confidence === 'low'
+      ? {
+          highlights: [
+            ...highlights,
+            '应用领域为兜底归类：来源描述未含领域关键词，已归入平台/通用工具类，人工审核时请确认',
+          ],
+        }
+      : {}),
     tagline: firstSentence(desc || cand.name),
     description: `【机器自动收录，字段待核实】${desc}`,
     highlights,

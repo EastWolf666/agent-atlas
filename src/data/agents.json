@@ -51,10 +51,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
     "metrics": {
-      "stars": 90965,
+      "stars": 91079,
       "license": "NOASSERTION"
     }
   },
@@ -125,10 +125,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/zai-org/Open-AutoGLM",
     "metrics": {
-      "stars": 26341,
+      "stars": 26358,
       "license": "Apache-2.0"
     }
   },
@@ -318,10 +318,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-07",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/infiniflow/ragflow",
     "metrics": {
-      "stars": 91754,
+      "stars": 91841,
       "license": "Apache-2.0"
     }
   },
@@ -371,10 +371,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/xiaYuTian11/maskit",
     "metrics": {
-      "stars": 291,
+      "stars": 295,
       "license": "AGPL-3.0"
     }
   },
@@ -426,10 +426,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/kunpengtalk/OmniStudio",
     "metrics": {
-      "stars": 186,
+      "stars": 192,
       "license": "MIT"
     }
   },
@@ -478,10 +478,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/agents-universe/agents-universe",
     "metrics": {
-      "stars": 419,
+      "stars": 504,
       "license": "Apache-2.0"
     }
   },
@@ -754,13 +754,13 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "relatedIds": [
       "kimi-work"
     ],
     "repoUrl": "https://github.com/MoonshotAI/kimi-code",
     "metrics": {
-      "stars": 7760,
+      "stars": 7801,
       "license": "MIT"
     }
   },
@@ -2166,10 +2166,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
     "metrics": {
-      "stars": 744,
+      "stars": 761,
       "license": "MIT"
     }
   },
@@ -3326,10 +3326,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
     "metrics": {
-      "stars": 9368,
+      "stars": 9406,
       "license": "NOASSERTION"
     }
   },
@@ -3384,10 +3384,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/langchain-ai/langgraph",
     "metrics": {
-      "stars": 42656,
+      "stars": 42904,
       "license": "MIT"
     }
   },
@@ -3441,10 +3441,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/crewAIInc/crewAI",
     "metrics": {
-      "stars": 59306,
+      "stars": 59464,
       "license": "MIT"
     }
   },
@@ -3500,10 +3500,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/openai/openai-agents-python",
     "metrics": {
-      "stars": 29821,
+      "stars": 29913,
       "license": "MIT"
     }
   },
@@ -3553,10 +3553,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/anthropics/claude-agent-sdk-python",
     "metrics": {
-      "stars": 8208,
+      "stars": 8224,
       "license": "MIT"
     }
   },
@@ -3604,10 +3604,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/mem0ai/mem0",
     "metrics": {
-      "stars": 66513,
+      "stars": 66828,
       "license": "Apache-2.0"
     }
   },
@@ -4048,10 +4048,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
     "metrics": {
-      "stars": 187647,
+      "stars": 187483,
       "license": "NOASSERTION"
     }
   },
@@ -4099,9 +4099,9 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "metrics": {
-      "stars": 17699,
+      "stars": 17700,
       "license": "MIT"
     }
   },
@@ -4761,10 +4761,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/dust-tt/dust",
     "metrics": {
-      "stars": 1479,
+      "stars": 1482,
       "license": "MIT"
     }
   },
@@ -5155,10 +5155,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-09",
+    "lastVerified": "2026-10-08",
     "repoUrl": "https://github.com/deepseek-ai/deepseek-harness",
     "metrics": {
-      "stars": 80000,
+      "stars": 245626,
       "license": "MIT"
     }
   },
@@ -5270,6 +5270,235 @@
     "repoUrl": "https://github.com/earendil-works/pi-coding-agent",
     "metrics": {
       "stars": 111000,
+      "license": "MIT"
+    }
+  },
+  {
+    "id": "headroom",
+    "name": "headroom",
+    "vendor": "headroomlabs-ai",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "preview",
+    "autonomyLevel": 2,
+    "autonomyReason": "按框架/编排类关键词初步推断为 L2；未核实实际自主性，请以官方文档为准。",
+    "tagline": "Compress tool outputs, logs, files, and…",
+    "description": "【机器自动收录，字段待核实】Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
+    "highlights": [
+      "GitHub 公开仓库，star 数 74733（客观信号，每日刷新）",
+      "项目自述：Compress tool outputs, logs, files, and RAG chunks before th…"
+    ],
+    "limitations": [
+      "信息由机器自动抓取，未经人工核实；实际能力边界需自行验证。"
+    ],
+    "bestFor": "待核实：请查阅官方文档确认适用场景",
+    "deployment": [
+      "cli",
+      "web",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "待核实：定价信息需查官网",
+    "contextWindow": "待核实：需查官方文档",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 8,
+    "officialUrl": "https://docs.headroomlabs.ai/docs",
+    "sources": [
+      {
+        "title": "项目官网",
+        "url": "https://docs.headroomlabs.ai/docs",
+        "type": "official",
+        "date": "2026-10"
+      },
+      {
+        "title": "headroomlabs-ai/headroom 仓库",
+        "url": "https://github.com/headroomlabs-ai/headroom",
+        "type": "community",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "low",
+    "lastVerified": "2026-10-08",
+    "autoAdmitted": true,
+    "autoAdmittedAt": "2026-10-08",
+    "repoUrl": "https://github.com/headroomlabs-ai/headroom",
+    "metrics": {
+      "stars": 74736,
+      "license": "Apache-2.0"
+    }
+  },
+  {
+    "id": "hermes-agent",
+    "name": "hermes-agent",
+    "vendor": "NousResearch",
+    "region": "overseas",
+    "tier": "platform",
+    "status": "preview",
+    "autonomyLevel": 2,
+    "autonomyReason": "描述仅表明是 Agent、不足以判断自主性档位，取保守 L2；未核实实际自主性，请以官方文档为准。",
+    "tagline": "The agent that grows with you",
+    "description": "【机器自动收录，字段待核实】The agent that grows with you",
+    "highlights": [
+      "GitHub 公开仓库，star 数 251987（客观信号，每日刷新）",
+      "项目自述：The agent that grows with you",
+      "应用领域为兜底归类：来源描述未含领域关键词，已归入平台/通用工具类，人工审核时请确认"
+    ],
+    "limitations": [
+      "信息由机器自动抓取，未经人工核实；实际能力边界需自行验证。"
+    ],
+    "bestFor": "待核实：请查阅官方文档确认适用场景",
+    "deployment": [
+      "cli",
+      "web",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "待核实：定价信息需查官网",
+    "contextWindow": "待核实：需查官方文档",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 8,
+    "officialUrl": "https://hermes-agent.nousresearch.com",
+    "sources": [
+      {
+        "title": "项目官网",
+        "url": "https://hermes-agent.nousresearch.com",
+        "type": "official",
+        "date": "2026-10"
+      },
+      {
+        "title": "NousResearch/hermes-agent 仓库",
+        "url": "https://github.com/NousResearch/hermes-agent",
+        "type": "community",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "low",
+    "lastVerified": "2026-10-08",
+    "autoAdmitted": true,
+    "autoAdmittedAt": "2026-10-08",
+    "repoUrl": "https://github.com/NousResearch/hermes-agent",
+    "metrics": {
+      "stars": 251988,
+      "license": "MIT"
+    }
+  },
+  {
+    "id": "opencode",
+    "name": "opencode",
+    "vendor": "anomalyco",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "preview",
+    "autonomyLevel": 3,
+    "autonomyReason": "按CLI/编程类关键词初步推断为 L3；未核实实际自主性，请以官方文档为准。",
+    "tagline": "The open source coding agent.",
+    "description": "【机器自动收录，字段待核实】The open source coding agent.",
+    "highlights": [
+      "GitHub 公开仓库，star 数 212169（客观信号，每日刷新）",
+      "项目自述：The open source coding agent."
+    ],
+    "limitations": [
+      "信息由机器自动抓取，未经人工核实；实际能力边界需自行验证。"
+    ],
+    "bestFor": "待核实：请查阅官方文档确认适用场景",
+    "deployment": [
+      "cli",
+      "web",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "待核实：定价信息需查官网",
+    "contextWindow": "待核实：需查官方文档",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 8,
+    "officialUrl": "https://opencode.ai",
+    "sources": [
+      {
+        "title": "项目官网",
+        "url": "https://opencode.ai",
+        "type": "official",
+        "date": "2026-10"
+      },
+      {
+        "title": "anomalyco/opencode 仓库",
+        "url": "https://github.com/anomalyco/opencode",
+        "type": "community",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "low",
+    "lastVerified": "2026-10-08",
+    "autoAdmitted": true,
+    "autoAdmittedAt": "2026-10-08",
+    "repoUrl": "https://github.com/anomalyco/opencode",
+    "metrics": {
+      "stars": 212171,
+      "license": "MIT"
+    }
+  },
+  {
+    "id": "orca",
+    "name": "orca",
+    "vendor": "stablyai",
+    "region": "overseas",
+    "tier": "coding",
+    "status": "preview",
+    "autonomyLevel": 2,
+    "autonomyReason": "按框架/编排类关键词初步推断为 L2；未核实实际自主性，请以官方文档为准。",
+    "tagline": "Orca is the ADE for working with a fleet…",
+    "description": "【机器自动收录，字段待核实】Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
+    "highlights": [
+      "GitHub 公开仓库，star 数 87785（客观信号，每日刷新）",
+      "项目自述：Orca is the ADE for working with a fleet of parallel agents.…"
+    ],
+    "limitations": [
+      "信息由机器自动抓取，未经人工核实；实际能力边界需自行验证。"
+    ],
+    "bestFor": "待核实：请查阅官方文档确认适用场景",
+    "deployment": [
+      "cli",
+      "web",
+      "api"
+    ],
+    "pricingModel": "open_source",
+    "pricingNote": "待核实：定价信息需查官网",
+    "contextWindow": "待核实：需查官方文档",
+    "modalities": [
+      "text"
+    ],
+    "openSource": true,
+    "prominence": 8,
+    "officialUrl": "https://onOrca.dev",
+    "sources": [
+      {
+        "title": "项目官网",
+        "url": "https://onOrca.dev",
+        "type": "official",
+        "date": "2026-10"
+      },
+      {
+        "title": "stablyai/orca 仓库",
+        "url": "https://github.com/stablyai/orca",
+        "type": "community",
+        "date": "2026-10"
+      }
+    ],
+    "dataConfidence": "low",
+    "lastVerified": "2026-10-08",
+    "autoAdmitted": true,
+    "autoAdmittedAt": "2026-10-08",
+    "repoUrl": "https://github.com/stablyai/orca",
+    "metrics": {
+      "stars": 87785,
       "license": "MIT"
     }
   }

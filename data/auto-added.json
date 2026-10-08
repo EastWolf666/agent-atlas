@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "headroom",
+    "admittedAt": "2026-10-08",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  },
+  {
+    "id": "hermes-agent",
+    "admittedAt": "2026-10-08",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  },
+  {
+    "id": "opencode",
+    "admittedAt": "2026-10-08",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  },
+  {
+    "id": "orca",
+    "admittedAt": "2026-10-08",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  }
+]

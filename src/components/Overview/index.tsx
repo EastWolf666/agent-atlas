@@ -12,6 +12,8 @@ interface Props {
   onStatExplore: (preset: 'all' | 'l4' | 'oss' | 'nonactive') => void
   /** 点击分类分布条目：跳到浏览页并勾上对应 Tier */
   onTierExplore: (tier: Tier) => void
+  /** 点击「待核实」入口：跳到浏览页并只看自动收录条目 */
+  onAutoExplore: () => void
 }
 
 function StatCard({
@@ -50,7 +52,7 @@ function StatCard({
   )
 }
 
-export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatExplore, onTierExplore }: Props) {
+export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatExplore, onTierExplore, onAutoExplore }: Props) {
   const stats = useMemo(() => {
     const total = allAgents.length
     const china = allAgents.filter((a) => a.region === 'china').length
@@ -60,7 +62,23 @@ export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatEx
     const official = allAgents.filter((a) =>
       a.sources.some((s) => s.type === 'official')
     ).length
-    return { total, china, oss, l45, nonActive, official, overseas: total - china }
+    /*
+     * 自动收录条目的数量与最早收录日期。
+     * 这批数据是脚本按规则抓的，定级/描述/适用场景都是推断值，
+     * 页面上必须给一个显眼的入口让人去核实，否则等于把未验证结论
+     * 混在人工核实过的数据里一起呈现。
+     */
+    const autoList = allAgents.filter((a) => a.autoAdmitted === true)
+    const autoAdmitted = autoList.length
+    const autoOldest = autoList.reduce<string | null>(
+      (min, a) => {
+        const d = a.autoAdmittedAt
+        if (!d) return min
+        return min === null || d < min ? d : min
+      },
+      null
+    )
+    return { total, china, oss, l45, nonActive, official, autoAdmitted, autoOldest, overseas: total - china }
   }, [])
 
   const tierDist = useMemo(
@@ -91,6 +109,21 @@ export function Overview({ onSelect, onBrowse, onCompare, compareCount, onStatEx
           <span className="aa-chip bg-faint/15">
             {stats.official}/{stats.total} 条有官方来源
           </span>
+          {/*
+            自动收录入口。只在真的有待核实条目时出现——
+            没有数据时显示「0 条待核实」纯属噪声，不如不出现。
+            虚线边框 + 琥珀色与普通 chip 区分开，避免读者误以为
+            这是和「数据更新」同等级的已核实统计。
+          */}
+          {stats.autoAdmitted > 0 && (
+            <button
+              onClick={onAutoExplore}
+              title={`自${stats.autoOldest}起由每日更新脚本自动收录，定级与描述为规则推断，尚未人工核实`}
+              className="aa-chip border border-dashed border-amber-500/50 bg-amber-500/10 text-amber-700 transition-colors hover:bg-amber-500/20 dark:text-amber-300"
+            >
+              {stats.autoAdmitted} 条自动收录 · 待核实 →
+            </button>
+          )}
           <button
             onClick={onBrowse}
             className="aa-chip bg-brand text-white transition-opacity hover:opacity-90"

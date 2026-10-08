@@ -38,74 +38,116 @@ const QUERY_GROUPS = [
   { label: 'en-framework', q: 'multi-agent OR agent-framework OR agent-runtime OR mcp-server' },
 ]
 
-/**
- * 发现新建的开源 Agent 项目
- * @param {string} since ISO 时间戳
+/*
+ * 时间窗口策略
+ * ----------------
+ * 原先只有 created:> 水位线一个窗口，漏检是结构性的：
+ *
+ *   Pi（Earendil 的 coding agent）就是活生生的例子——仓库早已存在，
+ *   但近期才因为某个事件爆火、star 暴涨。等它被搜索按created 抓到时，
+ *   用户早就用上了，而我们的库里还没有。这不是发现源弱，是查询维度选窄了。
+ *
+ * 所以改成两个互补的窗口：
+ *   created 窗口 —— 只捞「近N 天新建的」，噪声最低，量小。
+ *   backfill 窗口 —— 用 pushed:> 捞「近 N 天有推送」的成熟项目，
+ *                      按 star 降序取头部的 N 个。这一组必然混入大量
+ *                      两年前的经典项目（LangChain、AutoGPT 等），
+ *                      但只要它们已入库，knownIds 就会在admit.mjs 里挡掉；
+ *                      真正入库的只会是 star 涨到门槛以上、库里还没有的老项目。
+ *
+ * backfill 只取最热的 headLimit 个，且不受单日入库上限以外的额外配额，
+ * 因为它天然低产（大部分命中项已在库），但召回价值高。
  */
-export async function discoverRepos(since, { perGroup = 25 } = {}) {
+const BACKFILL_DAYS = 90
+const BACKFILL_PER_GROUP = 8
+
+/**
+ * 发现开源 Agent 项目（新建 + 爆火回溯两个窗口）
+ * @param {string} since ISO 时间戳，水位线
+ * @param {{perGroup?: number, backfill?: boolean}} opts
+ */
+export async function discoverRepos(since, { perGroup = 25, backfill = true } = {}) {
   const sinceDay = since.slice(0, 10)
   const out = []
   const seen = new Set()
 
-  for (const group of QUERY_GROUPS) {
-    // created:>水位线是增量的关键——不加这个条件会每次捞回全库最热的仓库
-    const q = `(${group.q}) created:>${sinceDay}`
-    const url = `${SEARCH}?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=${perGroup}`
+  // 两个窗口：created 保证不漏新建，pushed 补上「老项目近期爆火」
+  const windows = [
+    { label: 'created', timeFilter: `created:>${sinceDay}`, perGroup },
+  ]
+  if (backfill) {
+    const backfillDay = shiftDays(sinceDay, -BACKFILL_DAYS)
+    windows.push({ label: 'backfill', timeFilter: `pushed:>${backfillDay}`, perGroup: BACKFILL_PER_GROUP })
+  }
 
-    let data
-    try {
-      data = await withRetry(() => fetchJson(url))
-    } catch (e) {
-      // 单组失败不影响其他组——search 端点限流最容易在这里发生
-      console.warn(`  ⚠️ GitHub 搜索组${group.label} 失败: ${e.message}`)
-      continue
+  for (const win of windows) {
+    for (const group of QUERY_GROUPS) {
+      const q = `(${group.q}) ${win.timeFilter}`
+      const url = `${SEARCH}?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=${win.perGroup}`
+
+      let data
+      try {
+        data = await withRetry(() => fetchJson(url))
+      } catch (e) {
+        // 单组失败不影响其他组——search 端点限流最容易在这里发生
+        console.warn(`  ⚠️ GitHub 搜索组 ${group.label}/${win.label} 失败: ${e.message}`)
+        continue
+      }
+
+      for (const r of data.items ?? []) {
+        // 已归档的项目没有收录价值——它已经是过去式了
+        if (r.archived) continue
+        if (seen.has(r.full_name.toLowerCase())) continue
+        seen.add(r.full_name.toLowerCase())
+
+        const score = scoreCandidate({
+          title: r.name,
+          description: r.description ?? '',
+          signals: { stars: r.stargazers_count ?? 0 },
+          sourceType: 'github',
+        })
+        if (!shouldEnqueue(score)) continue
+
+        out.push({
+          slugSource: `gh:${r.full_name.toLowerCase()}`,
+          name: r.name,
+          url: r.html_url,
+          score,
+          description: (r.description ?? '').slice(0, 300),
+          signals: {
+            stars: r.stargazers_count ?? 0,
+            license: r.license?.spdx_id ?? null,
+            forks: r.forks_count ?? 0,
+            archived: r.archived,
+          },
+          fullName: r.full_name,
+          pushedAt: r.pushed_at ?? null,
+          /*
+           * homepage —— 自动入库判定的必需输入。
+           * GitHub 仓库的 homepage 字段是「产品官网」，这是 GitHub 源
+           * 唯一能拿到一手官方链接的途径（仓库 URL 本身只能算仓库页）。
+           * 没有它就无法满足 admit.mjs 的「有官方来源」信号组。
+           */
+          homepage: (r.homepage || '').trim() || null,
+          createdAt: r.created_at ?? null,
+          queryGroup: `${group.label}/${win.label}`,
+        })
+      }
+
+      // search 端点鉴权后 30 次/分，这里只有 8 次，仍留 1 秒间隔避免撞线
+      await new Promise((r) => setTimeout(r, 1000))
     }
-
-    for (const r of data.items ?? []) {
-      // 已归档的项目没有收录价值——它已经是过去式了
-      if (r.archived) continue
-      if (seen.has(r.full_name.toLowerCase())) continue
-      seen.add(r.full_name.toLowerCase())
-
-      const score = scoreCandidate({
-        title: r.name,
-        description: r.description ?? '',
-        signals: { stars: r.stargazers_count ?? 0 },
-        sourceType: 'github',
-      })
-      if (!shouldEnqueue(score)) continue
-
-      out.push({
-        slugSource: `gh:${r.full_name.toLowerCase()}`,
-        name: r.name,
-        url: r.html_url,
-        score,
-        description: (r.description ?? '').slice(0, 300),
-        signals: {
-          stars: r.stargazers_count ?? 0,
-          license: r.license?.spdx_id ?? null,
-          forks: r.forks_count ?? 0,
-          archived: r.archived,
-        },
-        fullName: r.full_name,
-        pushedAt: r.pushed_at ?? null,
-        /*
-         * homepage —— 自动入库判定的必需输入。
-         * GitHub 仓库的 homepage 字段是「产品官网」，这是 GitHub 源
-         * 唯一能拿到一手官方链接的途径（仓库 URL 本身只能算仓库页）。
-         * 没有它就无法满足 admit.mjs 的「有官方来源」信号组。
-         */
-        homepage: (r.homepage || '').trim() || null,
-        createdAt: r.created_at ?? null,
-        queryGroup: group.label,
-      })
-    }
-
-    // search 端点鉴权后 30 次/分，这里只有 4 组，仍留 1 秒间隔避免撞线
-    await new Promise((r) => setTimeout(r, 1000))
   }
 
   return out
+}
+
+/** YYYY-MM-DD 前移 n 天。不能用 Date 算，避免时区把日期推错一天。 */
+function shiftDays(day, delta) {
+  const [y, m, d] = day.split('-').map(Number)
+  const t = Date.UTC(y, m - 1, d) + delta * 86400_000
+  const dt = new Date(t)
+  return dt.toISOString().slice(0, 10)
 }
 
 /** 指数退避重试，用于 403/429 限流 */

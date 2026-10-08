@@ -113,6 +113,19 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
+  /*
+   * 概览页「待核实」入口：跳到浏览页并只看自动收录条目。
+   * 单独一个函数而不是往explorePreset 里加 case，是因为它要跳的
+   * 不是数据维度（地域/开源/活跃度），而是「来源可信度」——
+   * 混进同一个 union 会让 StatCard 的语义变模糊。
+   */
+  const exploreAuto = () => {
+    atlas.reset()
+    atlas.toggleAutoAdmitted()
+    setView('browse')
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }
+
   return (
     <div className="min-h-screen">
       {/* 顶栏 */}
@@ -199,6 +212,7 @@ export default function App() {
             compareCount={cmp.selected.length}
             onStatExplore={explorePreset}
             onTierExplore={exploreTier}
+            onAutoExplore={exploreAuto}
           />
         ) : (
           <div className="grid items-start gap-5 lg:grid-cols-[248px_minmax(0,1fr)]">

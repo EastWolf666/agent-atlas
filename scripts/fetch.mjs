@@ -68,9 +68,9 @@ async function main() {
   const failures = []
 
   if (SKIP_FETCH) {
-    log('\n[1/5] --no-fetch：跳过所有网络抓取')
+    log('\n[1/6] --no-fetch：跳过所有网络抓取')
   } else {
-    log('\n[1/5] 抓取候选源')
+    log('\n[1/6] 抓取候选源')
 
     // HN —— 新产品发现主力
     try {
@@ -113,7 +113,7 @@ async function main() {
   }
 
   // ---------------- 2. 刷新存量的客观字段 ----------------
-  log('\n[2/5] 刷新存量客观字段（star / 许可证）')
+  log('\n[2/6] 刷新存量客观字段（star / 许可证）')
   let statusSignals = []
   let refreshedCount = 0
   if (SKIP_FETCH) {
@@ -165,7 +165,22 @@ async function main() {
     admissionReport.paused = 'SKIP_FETCH'
   } else {
     const knownIds = new Set(agents.map((a) => a.id))
-    const knownUrls = new Set(agents.map((a) => a.officialUrl).filter(Boolean).map((u) => String(u).replace(/\/$/, '')))
+    /*
+     * 去重 URL 集合必须同时收officialUrl 和 repoUrl。
+     *
+     * 实测踩过的坑：自动入库记录的 officialUrl 存的是 homepage（项目官网），
+     * 而候选的 url 是 GitHub 仓库地址。两者不是同一个 URL，
+     * 于是 knownUrls 永远匹配不上，同一个仓库每次跑都「没被收录过」，
+     * 于是生成 headroom、headroom-2 两份完全重复的条目。
+     * 第二次跑数据从 92涨到 96 就是这么来的——不是发现了新东西，是同一个
+     * 项目被收了两次。所以这里要把记录里的所有 url 都收进来。
+     */
+    const knownUrls = new Set(
+      agents
+        .flatMap((a) => [a.officialUrl, a.repoUrl, a.url])
+        .filter(Boolean)
+        .map((u) => String(u).replace(/\/$/, ''))
+    )
 
     const { accepted, rejected } = selectAdmissible(candidates, { knownIds, knownUrls, now })
     admissionReport.qualified = accepted.length
@@ -380,7 +395,14 @@ async function main() {
       if (pruned.length !== entries.length) {
         log(`  台账剔除 ${entries.length - pruned.length} 条已删除的记录`)
       }
-    writeFileSync(AUTO_ADDED_PATH, JSON.stringify(entries, null, 2) + '\n', 'utf8')
+      /*
+       * 必须写 pruned 而不是 entries。
+       * 写成entries 是个很隐蔽的 bug：日志会照常打印「剔除 N 条」
+       * （因为比较的是 pruned），但落盘的仍是未剔除的完整列表——
+       * 于是人工删掉条目后台账却一直留着，看起来像剔除功能坏了。
+       * 表现和「漂移保护没生效」一模一样，但真正的原因是写错了变量。
+       */
+      writeFileSync(AUTO_ADDED_PATH, JSON.stringify(pruned, null, 2) + '\n', 'utf8')
 
     const quotaState = saveState(ADMISSION_STATE_PATH, now.toISOString().slice(0, 10), {
       admitted: admittedRecords.length,
