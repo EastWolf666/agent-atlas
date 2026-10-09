@@ -77,6 +77,72 @@ function runModelFetch({ dryRun }) {
   return true
 }
 
+/**
+ * 数据落盘后自动推送到 GitHub Pages 源仓库。
+ *
+ * 设计取舍（与 ghpush.mjs 配合）：
+ *   - ghpush.mjs 只推送「最近一次本地提交改动的文件」，所以这里必须先「只 git add
+ *     本次写盘的数据文件 → 单独 commit」，再调用它。即使工作区还残留未提交的源码改动，
+ *     也绝不会被一起推上去——这是故意的隔离，避免把开发中的半成品发到线上。
+ *   - 只在确有改动时提交并推送；无改动则跳过，不打扰远端。
+ *   - 无 GITHUB_TOKEN / DRY_RUN / SKIP_FETCH 时静默跳过（不报错）。
+ *   - 进程内用 AA_PUSH=0 或 AA_NO_PUSH 可一键关闭（紧急止血用）。
+ *   - 推送失败只记警告、不影响「数据已更新」结论（下次定时任务会再尝试）。
+ */
+function maybeAutoPush({ dryRun, skipFetch }) {
+  if (dryRun || skipFetch) {
+    log('  --dry-run / --no-fetch：跳过自动推送')
+    return
+  }
+  if (process.env.AA_PUSH === '0' || process.env.AA_NO_PUSH) {
+    log('  ⏭ AA_PUSH=0 / AA_NO_PUSH：跳过自动推送')
+    return
+  }
+  if (!process.env.GITHUB_TOKEN) {
+    log('  ⏭ 未配置 GITHUB_TOKEN，跳过自动推送（如需自动发布，请在定时任务环境配置该变量）')
+    return
+  }
+
+  // 本次流程会产出/改动的「数据」文件白名单（不含任何源码）。
+  const DATA_PATHS = [
+    'src/data/agents.json',
+    'src/data/meta.json',
+    'src/data/models.json',
+    'data/candidates.json',
+    'data/auto-added.json',
+    'data/status-signals.json',
+    'data/models-verified.json',
+    'data/.watermark.json',
+    'data/.admission-state.json',
+  ]
+  const existing = DATA_PATHS.filter((p) => existsSync(resolve(ROOT, p)))
+  if (existing.length === 0) {
+    log('  无可提交的数据文件，跳过')
+    return
+  }
+
+  try {
+    sh(`git add -- ${existing.map((p) => JSON.stringify(p)).join(' ')}`)
+    // git diff --cached --quiet：有暂存改动时退出码非 0，无改动时退出码 0
+    const hasChanges = spawnSync('git', ['diff', '--cached', '--quiet'], { cwd: ROOT }).status !== 0
+    if (!hasChanges) {
+      log('  数据文件无变化，无需提交与推送')
+      return
+    }
+    const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ')
+    sh(`git commit -m "data: 每日数据更新 ${stamp}"`)
+    log('  已提交数据变更，调用 ghpush 发布到远端…')
+    const r = spawnSync(process.execPath, [resolve(__dirname, 'ghpush.mjs')], { stdio: 'inherit' })
+    if (r.status !== 0) {
+      log(`  ⚠️ 自动推送失败（数据已更新，下次定时任务会重试）：退出码 ${r.status ?? r.signal ?? '未知'}`)
+    } else {
+      log('  ✅ 已自动推送到远端')
+    }
+  } catch (e) {
+    log(`  ⚠️ 自动推送异常（数据已更新，下次重试）：${e.message}`)
+  }
+}
+
 async function main() {
   const startedAt = Date.now()
   log(`\n=== Agent Atlas 数据更新 ${new Date().toISOString()} ===`)
@@ -498,6 +564,9 @@ async function main() {
   if (failures.length) {
     log(`  ⚠️ 本次失败的源：${failures.join(', ')}（已保持原水位线，下次重试）`)
   }
+
+  // ---------------- 8. 自动发布 ----------------
+  maybeAutoPush({ dryRun: DRY_RUN, skipFetch: SKIP_FETCH })
 }
 
 main().catch((e) => {
