@@ -24,8 +24,10 @@ function ScenarioDiagram({
   items: AltTool[]
   onOpen: (t: AltTool) => void
 }) {
-  const overseas = items.filter((i) => i.region === 'overseas')
-  const domestic = items.filter((i) => i.region === 'china')
+  // 用 useMemo 缓存，依赖 items 引用稳定 —— 否则每次渲染 .filter() 都生成新数组，
+  // 会让 linkDefs / measure 每帧变引用，useLayoutEffect 无限重跑 → Maximum update depth exceeded。
+  const overseas = useMemo(() => items.filter((i) => i.region === 'overseas'), [items])
+  const domestic = useMemo(() => items.filter((i) => i.region === 'china'), [items])
 
   const containerRef = useRef<HTMLDivElement>(null)
   const nodeEls = useRef<Map<string, HTMLButtonElement>>(new Map())
