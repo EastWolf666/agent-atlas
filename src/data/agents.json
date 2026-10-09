@@ -51,10 +51,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
     "metrics": {
-      "stars": 91081,
+      "stars": 91082,
       "license": "NOASSERTION"
     }
   },
@@ -125,10 +125,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/zai-org/Open-AutoGLM",
     "metrics": {
-      "stars": 26360,
+      "stars": 26365,
       "license": "Apache-2.0"
     }
   },
@@ -318,10 +318,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/infiniflow/ragflow",
     "metrics": {
-      "stars": 91854,
+      "stars": 91869,
       "license": "Apache-2.0"
     }
   },
@@ -426,10 +426,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/kunpengtalk/OmniStudio",
     "metrics": {
-      "stars": 192,
+      "stars": 193,
       "license": "MIT"
     }
   },
@@ -478,10 +478,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/agents-universe/agents-universe",
     "metrics": {
-      "stars": 506,
+      "stars": 511,
       "license": "Apache-2.0"
     }
   },
@@ -754,13 +754,13 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "relatedIds": [
       "kimi-work"
     ],
     "repoUrl": "https://github.com/MoonshotAI/kimi-code",
     "metrics": {
-      "stars": 7804,
+      "stars": 7807,
       "license": "MIT"
     }
   },
@@ -2166,10 +2166,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
     "metrics": {
-      "stars": 761,
+      "stars": 762,
       "license": "MIT"
     }
   },
@@ -3326,10 +3326,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
     "metrics": {
-      "stars": 9409,
+      "stars": 9410,
       "license": "NOASSERTION"
     }
   },
@@ -3384,10 +3384,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/langchain-ai/langgraph",
     "metrics": {
-      "stars": 42913,
+      "stars": 42918,
       "license": "MIT"
     }
   },
@@ -3441,10 +3441,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/crewAIInc/crewAI",
     "metrics": {
-      "stars": 59472,
+      "stars": 59477,
       "license": "MIT"
     }
   },
@@ -3500,10 +3500,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/openai/openai-agents-python",
     "metrics": {
-      "stars": 29916,
+      "stars": 29923,
       "license": "MIT"
     }
   },
@@ -3553,10 +3553,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/anthropics/claude-agent-sdk-python",
     "metrics": {
-      "stars": 8225,
+      "stars": 8229,
       "license": "MIT"
     }
   },
@@ -3604,10 +3604,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/mem0ai/mem0",
     "metrics": {
-      "stars": 66838,
+      "stars": 66857,
       "license": "Apache-2.0"
     }
   },
@@ -4048,10 +4048,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
     "metrics": {
-      "stars": 187487,
+      "stars": 187489,
       "license": "NOASSERTION"
     }
   },
@@ -5155,10 +5155,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "repoUrl": "https://github.com/deepseek-ai/deepseek-harness",
     "metrics": {
-      "stars": 245673,
+      "stars": 245807,
       "license": "MIT"
     }
   },
@@ -5321,12 +5321,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/headroomlabs-ai/headroom",
     "metrics": {
-      "stars": 74753,
+      "stars": 74769,
       "license": "Apache-2.0"
     }
   },
@@ -5379,12 +5379,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/NousResearch/hermes-agent",
     "metrics": {
-      "stars": 252030,
+      "stars": 252070,
       "license": "MIT"
     }
   },
@@ -5436,12 +5436,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/anomalyco/opencode",
     "metrics": {
-      "stars": 212196,
+      "stars": 212225,
       "license": "MIT"
     }
   },
@@ -5493,12 +5493,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-09",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/stablyai/orca",
     "metrics": {
-      "stars": 87896,
+      "stars": 88025,
       "license": "MIT"
     }
   }
