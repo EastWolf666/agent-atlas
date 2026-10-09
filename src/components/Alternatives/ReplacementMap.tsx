@@ -4,8 +4,8 @@ import { CATEGORY_LABEL, CATEGORY_ORDER } from '../../lib/alternatives'
 import { LOGOS } from '../../data/logos'
 
 /*
- * 替代关系图：9 个场景同屏网格。每格内「海外(上排) ← 国产(下排)」用 SVG 连线表示替代关系。
- * 三列布局：上排 3 个海外、下排 3 个国产，横向铺满，中间连线区不再留空白。
+ * 替代关系图：9 个场景同屏网格。每格内「海外(左) → 国产(右)」用中间走廊的 SVG 连线表示替代，
+ * 箭头指向被替代的海外工具。左/右两列节点紧凑、中间走廊留白，连线清晰不挤。
  *
  * 节点用 DOM（可点击跳详情、可悬停高亮），连线用一层绝对定位 SVG overlay 画，
  * 节点坐标渲染后用 getBoundingClientRect 量出，响应式改宽高时连线自动重算（ResizeObserver 兜底）。
@@ -24,13 +24,7 @@ function LogoGlyph({ item, size = 18 }: { item: AltTool; size?: number }) {
     const cls = `shrink-0`
     if (logo.kind === 'mono') {
       return (
-        <svg
-          viewBox={logo.viewBox}
-          width={size}
-          height={size}
-          className={cls}
-          aria-hidden
-        >
+        <svg viewBox={logo.viewBox} width={size} height={size} className={cls} aria-hidden>
           <g fill={logo.color} dangerouslySetInnerHTML={{ __html: logo.inner }} />
         </svg>
       )
@@ -57,7 +51,7 @@ function LogoGlyph({ item, size = 18 }: { item: AltTool; size?: number }) {
   )
 }
 
-/** 单场景的关系子图（三列：海外上排 / 国产下排） */
+/** 单场景的关系子图（左右排：海外左 / 国产右，中间走廊连线） */
 function ScenarioDiagram({
   category,
   items,
@@ -90,19 +84,18 @@ function ScenarioDiagram({
     const cr = c.getBoundingClientRect()
     const next = linkDefs
       .map(({ from, to }) => {
-        const f = nodeEls.current.get(from) // 国产（下排）
-        const t = nodeEls.current.get(to) // 海外（上排）
+        const f = nodeEls.current.get(from) // 国产（右列）
+        const t = nodeEls.current.get(to) // 海外（左列）
         if (!f || !t) return null
         const fr = f.getBoundingClientRect()
         const tr = t.getBoundingClientRect()
-        // 国产在上排之下、海外在上排之上；连线从国产(下)指向上方海外
-        const x1 = fr.left - cr.left + fr.width / 2
-        const y1 = fr.top - cr.top
-        const x2 = tr.left - cr.left + tr.width / 2
-        const y2 = tr.bottom - cr.top
-        const dx = Math.max(24, Math.abs(x1 - x2) * 0.5)
-        const my = (y1 + y2) / 2
-        const d = `M ${x1} ${y1} C ${x1 - dx} ${my}, ${x2 + dx} ${my}, ${x2} ${y2}`
+        // 连线从国产(右列左缘)弯到海外(左列右缘)，箭头落在海外（被替代者）
+        const xR = fr.left - cr.left
+        const yR = fr.top - cr.top + fr.height / 2
+        const xL = tr.right - cr.left
+        const yL = tr.top - cr.top + tr.height / 2
+        const dx = Math.max(22, (xR - xL) * 0.45)
+        const d = `M ${xR} ${yR} C ${xR + dx} ${yR}, ${xL - dx} ${yL}, ${xL} ${yL}`
         return { from, to, d }
       })
       .filter(Boolean) as LinkPath[]
@@ -135,7 +128,7 @@ function ScenarioDiagram({
   return (
     <div className="aa-card flex flex-col p-3">
       <h3 className="mb-2 text-xs font-semibold text-ink">{CATEGORY_LABEL[category]}</h3>
-      <div ref={containerRef} className="relative min-h-[150px] flex-1">
+      <div ref={containerRef} className="relative flex min-h-[150px] items-stretch gap-2">
         <svg
           className="pointer-events-none absolute inset-0"
           width={size.w}
@@ -173,19 +166,19 @@ function ScenarioDiagram({
           })}
         </svg>
 
-        <div className="relative z-10 flex flex-col gap-3">
-          {/* 上排：海外（蓝） */}
-          <div className="grid grid-cols-3 gap-1.5">
-            {overseas.map((o) => (
-              <Node key={o.id} item={o} register={register(o.id)} onOpen={onOpen} onHover={setHovered} />
-            ))}
-          </div>
-          {/* 下排：国产（品牌紫） */}
-          <div className="grid grid-cols-3 gap-1.5">
-            {domestic.map((d) => (
-              <Node key={d.id} item={d} register={register(d.id)} onOpen={onOpen} onHover={setHovered} />
-            ))}
-          </div>
+        {/* 左列：海外（蓝） */}
+        <div className="relative z-10 flex w-[42%] flex-col justify-center gap-1.5">
+          {overseas.map((o) => (
+            <Node key={o.id} item={o} register={register(o.id)} onOpen={onOpen} onHover={setHovered} />
+          ))}
+        </div>
+        {/* 中间走廊：仅作连线通道，节点不占位 */}
+        <div className="relative z-0 flex-1" />
+        {/* 右列：国产（品牌紫） */}
+        <div className="relative z-10 flex w-[42%] flex-col justify-center gap-1.5">
+          {domestic.map((d) => (
+            <Node key={d.id} item={d} register={register(d.id)} onOpen={onOpen} onHover={setHovered} />
+          ))}
         </div>
       </div>
     </div>
@@ -263,8 +256,8 @@ const PAD = 24
 const TITLE_H = 34
 const NODE_W = 112
 const NODE_H = 26
-const NODE_GAP = 10
-const ROW_GAP = 22
+const NODE_GAP = 12
+const COL_PAD = 14
 
 function posterSize() {
   const rows = Math.ceil(CATEGORY_ORDER.length / COLS)
@@ -309,7 +302,7 @@ function drawNode(
   )
 }
 
-/** 由数据确定性生成整张大图 SVG（不依赖屏幕布局） */
+/** 由数据确定性生成整张大图 SVG（不依赖屏幕布局，左右排） */
 export function buildPosterSVG(items: AltTool[]): string {
   const { w, h } = posterSize()
   const byCategory = new Map<AltCategory, AltTool[]>()
@@ -338,41 +331,28 @@ export function buildPosterSVG(items: AltTool[]): string {
 
     const overseas = list.filter((i) => i.region === 'overseas')
     const domestic = list.filter((i) => i.region === 'china')
-    const areaTop = py + TITLE_H
-    const colW = (PANEL_W - 24 - (overseas.length - 1) * NODE_GAP) / overseas.length
-    const nodeX = (i: number) => px + 12 + i * (colW + NODE_GAP)
+    const areaTop = py + TITLE_H + 8
+    // 左列节点 x、右列节点 x（中缝 CORRIDOR 留白）
+    const leftX = px + COL_PAD
+    const rightX = px + PANEL_W - COL_PAD - NODE_W
+    const nodeY = (i: number) => areaTop + i * (NODE_H + NODE_GAP)
 
-    // 上排：海外
-    const ovY = areaTop
-    const ovCenters: number[] = []
-    overseas.forEach((o, i) => {
-      const x = nodeX(i)
-      ovCenters.push(ovY + NODE_H / 2)
-      drawNode(rects, texts, x, ovY, o, esc)
-    })
-    // 下排：国产
-    const dnY = areaTop + NODE_H + ROW_GAP
-    const dnCenters: number[] = []
-    domestic.forEach((d, i) => {
-      const x = nodeX(i)
-      dnCenters.push(dnY + NODE_H / 2)
-      drawNode(rects, texts, x, dnY, d, esc)
-    })
+    overseas.forEach((o, i) => drawNode(rects, texts, leftX, nodeY(i), o, esc))
+    domestic.forEach((d, i) => drawNode(rects, texts, rightX, nodeY(i), d, esc))
 
-    // 连线：国产(下) → 海外(上)
+    // 连线：国产(右列左缘) → 海外(左列右缘)，箭头落在海外
     const nameToIdx = new Map(overseas.map((o, i) => [o.id, i]))
     domestic.forEach((d, di) => {
       for (const oid of d.replaces) {
         const oi = nameToIdx.get(oid)
         if (oi === undefined) continue
-        const x1 = nodeX(di) + colW / 2
-        const y1 = dnY
-        const x2 = nodeX(oi) + colW / 2
-        const y2 = ovY + NODE_H
-        const dx = Math.max(24, Math.abs(x1 - x2) * 0.5)
-        const my = (y1 + y2) / 2
+        const xR = rightX
+        const yR = nodeY(di) + NODE_H / 2
+        const xL = leftX + NODE_W
+        const yL = nodeY(oi) + NODE_H / 2
+        const dx = Math.max(22, (xR - xL) * 0.45)
         paths.push(
-          `<path d="M ${x1} ${y1} C ${x1 - dx} ${my}, ${x2 + dx} ${my}, ${x2} ${y2}" fill="none" stroke="#cbd5e1" stroke-width="1.4" marker-end="url(#aaArrow)"/>`
+          `<path d="M ${xR} ${yR} C ${xR + dx} ${yR}, ${xL - dx} ${yL}, ${xL} ${yL}" fill="none" stroke="#cbd5e1" stroke-width="1.4" marker-end="url(#aaArrow)"/>`
         )
       }
     })
