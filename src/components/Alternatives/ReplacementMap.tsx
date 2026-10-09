@@ -285,6 +285,15 @@ function drawNode(
     const lx = x + 6
     const ly = y + (NODE_H - 16) / 2
     rects.push(`<g transform="translate(${lx} ${ly}) scale(${s})" fill="${logo.color}">${logo.inner}</g>`)
+  } else if (logo) {
+    // 彩色 SVG / 位图 data-URI：按 viewBox 等比缩到 16px 方框内，直接内嵌（自带颜色）
+    const [_, __, vw = 24, vh = 24] = logo.viewBox.split(/\s+/).map(Number)
+    const s = 16 / Math.max(vw, vh)
+    const ox = (16 - vw * s) / 2
+    const oy = (16 - vh * s) / 2
+    const lx = x + 6
+    const ly = y + (NODE_H - 16) / 2
+    rects.push(`<g transform="translate(${lx + ox} ${ly + oy}) scale(${s})">${logo.inner}</g>`)
   } else {
     const lx = x + 6
     const ly = y + (NODE_H - 16) / 2
