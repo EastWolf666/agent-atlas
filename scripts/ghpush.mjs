@@ -20,14 +20,35 @@
  *       GH_MSG（提交信息，默认用最近一次本地提交的信息）。
  */
 import { execSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 
+const ROOT = resolve(process.cwd())
+const API_BASE = 'https://api.github.com'
+
+// 兼容本地 .env（密钥文件，已 .gitignore，不入库）。
+// 优先用环境变量里的 GITHUB_TOKEN；没有时回退到 .env，避免 token 出现在命令行/日志。
+function loadDotEnv(root) {
+  if (process.env.GITHUB_TOKEN) return
+  const p = resolve(root, '.env')
+  if (!existsSync(p)) return
+  try {
+    for (const line of readFileSync(p, 'utf8').split('\n')) {
+      const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/)
+      if (!m) continue
+      const key = m[1]
+      let val = m[2]
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) val = val.slice(1, -1)
+      if (!(key in process.env)) process.env[key] = val
+    }
+  } catch {}
+}
+
+loadDotEnv(ROOT)
 const TOKEN = process.env.GITHUB_TOKEN
 const REPO = process.env.GH_REPO || 'EastWolf666/agent-atlas'
 const REF = process.env.GH_REF || 'main'
-const ROOT = resolve(process.cwd())
-const API = `https://api.github.com/repos/${REPO}`
+const API = `${API_BASE}/repos/${REPO}`
 
 if (!TOKEN) {
   console.error('缺少 GITHUB_TOKEN（用法：GITHUB_TOKEN=xxx npm run push）')
