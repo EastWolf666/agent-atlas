@@ -1,20 +1,63 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import type { AltCategory, AltTool } from '../../types-alternative'
 import { CATEGORY_LABEL, CATEGORY_ORDER } from '../../lib/alternatives'
+import { LOGOS } from '../../data/logos'
 
 /*
- * 替代关系图：9 个场景同屏网格，每格内「海外(左) ← 国产(右)」用 SVG 连线表示替代关系。
+ * 替代关系图：9 个场景同屏网格。每格内「海外(上排) ← 国产(下排)」用 SVG 连线表示替代关系。
+ * 三列布局：上排 3 个海外、下排 3 个国产，横向铺满，中间连线区不再留空白。
  *
- * 为什么用 DOM 节点 + SVG 连线、而不是纯 SVG：
- *   节点要可点击跳详情、可悬停高亮，纯 SVG 文本交互比 HTML 麻烦得多；
- *   连线用一层绝对定位的 SVG overlay 画，节点坐标在渲染后用 getBoundingClientRect 量出来，
- *   这样响应式改宽高时连线自动跟着重算（ResizeObserver 兜底）。
+ * 节点用 DOM（可点击跳详情、可悬停高亮），连线用一层绝对定位 SVG overlay 画，
+ * 节点坐标渲染后用 getBoundingClientRect 量出，响应式改宽高时连线自动重算（ResizeObserver 兜底）。
+ * 节点图标：LOGOS 收录的品牌渲染真实 SVG 标（品牌色），其余回退到首字母头像。
  */
 
 type LinkDef = { from: string; to: string }
 type LinkPath = { from: string; to: string; d: string }
 
-/** 单场景的关系子图 */
+/** 品牌标：库里有则渲染真实 SVG，否则回退首字母 */
+function LogoGlyph({ item, size = 18 }: { item: AltTool; size?: number }) {
+  const logo = LOGOS[item.id]
+  const letter = (item.name || item.vendor || '?').trim().charAt(0).toUpperCase()
+  const isCN = item.region === 'china'
+  if (logo) {
+    const cls = `shrink-0`
+    if (logo.kind === 'mono') {
+      return (
+        <svg
+          viewBox={logo.viewBox}
+          width={size}
+          height={size}
+          className={cls}
+          aria-hidden
+        >
+          <g fill={logo.color} dangerouslySetInnerHTML={{ __html: logo.inner }} />
+        </svg>
+      )
+    }
+    return (
+      <svg
+        viewBox={logo.viewBox}
+        width={size}
+        height={size}
+        className={cls}
+        aria-hidden
+        dangerouslySetInnerHTML={{ __html: logo.inner }}
+      />
+    )
+  }
+  return (
+    <span
+      className={`flex size-[18px] shrink-0 items-center justify-center rounded-md text-[11px] font-bold leading-none text-white ${
+        isCN ? 'bg-brand' : 'bg-blue-500'
+      }`}
+    >
+      {letter}
+    </span>
+  )
+}
+
+/** 单场景的关系子图（三列：海外上排 / 国产下排） */
 function ScenarioDiagram({
   category,
   items,
@@ -24,7 +67,7 @@ function ScenarioDiagram({
   items: AltTool[]
   onOpen: (t: AltTool) => void
 }) {
-  // 用 useMemo 缓存，依赖 items 引用稳定 —— 否则每次渲染 .filter() 都生成新数组，
+  // useMemo 缓存，依赖 items 引用稳定 —— 否则每次渲染 .filter() 都生成新数组，
   // 会让 linkDefs / measure 每帧变引用，useLayoutEffect 无限重跑 → Maximum update depth exceeded。
   const overseas = useMemo(() => items.filter((i) => i.region === 'overseas'), [items])
   const domestic = useMemo(() => items.filter((i) => i.region === 'china'), [items])
@@ -47,18 +90,19 @@ function ScenarioDiagram({
     const cr = c.getBoundingClientRect()
     const next = linkDefs
       .map(({ from, to }) => {
-        const f = nodeEls.current.get(from)
-        const t = nodeEls.current.get(to)
+        const f = nodeEls.current.get(from) // 国产（下排）
+        const t = nodeEls.current.get(to) // 海外（上排）
         if (!f || !t) return null
         const fr = f.getBoundingClientRect()
         const tr = t.getBoundingClientRect()
-        // 国产在右 → 取其左边缘；海外在左 → 取其右边缘；连线从国产指向海外
-        const x1 = fr.left - cr.left
-        const y1 = fr.top - cr.top + fr.height / 2
-        const x2 = tr.right - cr.left
-        const y2 = tr.top - cr.top + tr.height / 2
-        const dx = Math.max(44, (x1 - x2) * 0.5)
-        const d = `M ${x1} ${y1} C ${x1 - dx} ${y1}, ${x2 + dx} ${y2}, ${x2} ${y2}`
+        // 国产在上排之下、海外在上排之上；连线从国产(下)指向上方海外
+        const x1 = fr.left - cr.left + fr.width / 2
+        const y1 = fr.top - cr.top
+        const x2 = tr.left - cr.left + tr.width / 2
+        const y2 = tr.bottom - cr.top
+        const dx = Math.max(24, Math.abs(x1 - x2) * 0.5)
+        const my = (y1 + y2) / 2
+        const d = `M ${x1} ${y1} C ${x1 - dx} ${my}, ${x2 + dx} ${my}, ${x2} ${y2}`
         return { from, to, d }
       })
       .filter(Boolean) as LinkPath[]
@@ -75,7 +119,6 @@ function ScenarioDiagram({
     if (!c) return
     const ro = new ResizeObserver(() => measure())
     ro.observe(c)
-    // 字体/布局稳定后再量一次，避免首帧错位
     const raf = requestAnimationFrame(() => measure())
     return () => {
       ro.disconnect()
@@ -84,6 +127,10 @@ function ScenarioDiagram({
   }, [measure])
 
   const arrowId = `aa-arrow-${category}`
+  const register = (id: string) => (el: HTMLButtonElement | null) => {
+    if (el) nodeEls.current.set(id, el)
+    else nodeEls.current.delete(id)
+  }
 
   return (
     <div className="aa-card flex flex-col p-3">
@@ -126,33 +173,17 @@ function ScenarioDiagram({
           })}
         </svg>
 
-        <div className="relative z-10 flex gap-2">
-          <div className="flex min-w-0 flex-1 flex-col items-start gap-1.5">
+        <div className="relative z-10 flex flex-col gap-3">
+          {/* 上排：海外（蓝） */}
+          <div className="grid grid-cols-3 gap-1.5">
             {overseas.map((o) => (
-              <Node
-                key={o.id}
-                item={o}
-                register={(el) => {
-                  if (el) nodeEls.current.set(o.id, el)
-                  else nodeEls.current.delete(o.id)
-                }}
-                onOpen={onOpen}
-                onHover={setHovered}
-              />
+              <Node key={o.id} item={o} register={register(o.id)} onOpen={onOpen} onHover={setHovered} />
             ))}
           </div>
-          <div className="flex min-w-0 flex-1 flex-col items-end gap-1.5">
+          {/* 下排：国产（品牌紫） */}
+          <div className="grid grid-cols-3 gap-1.5">
             {domestic.map((d) => (
-              <Node
-                key={d.id}
-                item={d}
-                register={(el) => {
-                  if (el) nodeEls.current.set(d.id, el)
-                  else nodeEls.current.delete(d.id)
-                }}
-                onOpen={onOpen}
-                onHover={setHovered}
-              />
+              <Node key={d.id} item={d} register={register(d.id)} onOpen={onOpen} onHover={setHovered} />
             ))}
           </div>
         </div>
@@ -173,7 +204,6 @@ function Node({
   onHover: (id: string | null) => void
 }) {
   const isCN = item.region === 'china'
-  const initial = (item.name || item.vendor || '?').trim().charAt(0).toUpperCase()
   return (
     <button
       ref={register}
@@ -181,22 +211,15 @@ function Node({
       onMouseEnter={() => onHover(item.id)}
       onMouseLeave={() => onHover(null)}
       title={`${item.name} · ${item.vendor}`}
-      className={`group flex w-[140px] items-center gap-1.5 rounded-md border px-2 py-1.5 text-left transition-colors ${
+      className={`group flex w-full items-center gap-1.5 rounded-md border px-1.5 py-1 text-left transition-colors ${
         isCN
           ? 'border-brand/40 bg-brand-soft text-brand hover:border-brand'
           : 'border-blue-500/40 bg-blue-500/10 text-blue-700 hover:border-blue-500 dark:text-blue-300'
       }`}
     >
-      <span
-        className={`flex size-6 shrink-0 items-center justify-center rounded-md text-[11px] font-bold leading-none ${
-          isCN ? 'bg-brand text-white' : 'bg-blue-500 text-white'
-        }`}
-      >
-        {initial}
-      </span>
+      <LogoGlyph item={item} />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-2xs font-medium leading-tight">{item.name}</span>
-        <span className="block truncate text-[10px] leading-tight opacity-70">{item.vendor}</span>
+        <span className="block truncate text-[11px] font-medium leading-tight">{item.name}</span>
       </span>
     </button>
   )
@@ -218,7 +241,7 @@ export default function ReplacementMap({
   }, [items])
 
   return (
-    <div className="grid animate-fade-in grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid animate-fade-in grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {CATEGORY_ORDER.map((c) => {
         const list = byCategory.get(c) ?? []
         if (list.length === 0) return null
@@ -234,13 +257,14 @@ export default function ReplacementMap({
 
 const COLS = 3
 const PANEL_W = 384
-const PANEL_H = 252
+const PANEL_H = 250
 const GAP = 18
 const PAD = 24
-const TITLE_H = 36
-const NODE_W = 150
-const NODE_H = 24
+const TITLE_H = 34
+const NODE_W = 112
+const NODE_H = 26
 const NODE_GAP = 10
+const ROW_GAP = 22
 
 function posterSize() {
   const rows = Math.ceil(CATEGORY_ORDER.length / COLS)
@@ -248,6 +272,41 @@ function posterSize() {
     w: PAD * 2 + COLS * PANEL_W + (COLS - 1) * GAP,
     h: PAD * 2 + rows * PANEL_H + (rows - 1) * GAP,
   }
+}
+
+function drawNode(
+  rects: string[],
+  texts: string[],
+  x: number,
+  y: number,
+  item: AltTool,
+  esc: (s: string) => string
+) {
+  const isCN = item.region === 'china'
+  const bg = isCN ? '#f3e8ff' : '#dbeafe'
+  const stroke = isCN ? '#a855f7' : '#3b82f6'
+  rects.push(`<rect x="${x}" y="${y}" width="${NODE_W}" height="${NODE_H}" rx="6" fill="${bg}" stroke="${stroke}"/>`)
+  const logo = LOGOS[item.id]
+  if (logo && logo.kind === 'mono') {
+    const s = 16 / 24
+    const lx = x + 6
+    const ly = y + (NODE_H - 16) / 2
+    rects.push(`<g transform="translate(${lx} ${ly}) scale(${s})" fill="${logo.color}">${logo.inner}</g>`)
+  } else {
+    const lx = x + 6
+    const ly = y + (NODE_H - 16) / 2
+    rects.push(`<rect x="${lx}" y="${ly}" width="16" height="16" rx="4" fill="${stroke}"/>`)
+    texts.push(
+      `<text x="${lx + 8}" y="${ly + 12}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" font-family="sans-serif">${esc(
+        (item.name || '?').trim().charAt(0).toUpperCase()
+      )}</text>`
+    )
+  }
+  texts.push(
+    `<text x="${x + 26}" y="${y + NODE_H / 2 + 4}" text-anchor="start" font-size="12" fill="${
+      isCN ? '#6b21a8' : '#1e3a8a'
+    }" font-family="sans-serif">${esc(item.name)}</text>`
+  )
 }
 
 /** 由数据确定性生成整张大图 SVG（不依赖屏幕布局） */
@@ -260,7 +319,6 @@ export function buildPosterSVG(items: AltTool[]): string {
   const rects: string[] = []
   const texts: string[] = []
   const paths: string[] = []
-
   const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
   CATEGORY_ORDER.forEach((c, k) => {
@@ -271,75 +329,50 @@ export function buildPosterSVG(items: AltTool[]): string {
     const px = PAD + col * (PANEL_W + GAP)
     const py = PAD + row * (PANEL_H + GAP)
 
-    rects.push(
-      `<rect x="${px}" y="${py}" width="${PANEL_W}" height="${PANEL_H}" rx="12" fill="#ffffff" stroke="#e2e8f0"/>`
-    )
+    rects.push(`<rect x="${px}" y="${py}" width="${PANEL_W}" height="${PANEL_H}" rx="12" fill="#ffffff" stroke="#e2e8f0"/>`)
     texts.push(
-      `<text x="${px + PANEL_W / 2}" y="${py + 24}" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a" font-family="sans-serif">${esc(
+      `<text x="${px + PANEL_W / 2}" y="${py + 22}" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a" font-family="sans-serif">${esc(
         CATEGORY_LABEL[c]
       )}</text>`
     )
 
     const overseas = list.filter((i) => i.region === 'overseas')
     const domestic = list.filter((i) => i.region === 'china')
-    const areaTop = py + TITLE_H + 12
-    const avail = PANEL_H - TITLE_H - 24
-    const blockH = (n: number) => n * NODE_H + (n - 1) * NODE_GAP
+    const areaTop = py + TITLE_H
+    const colW = (PANEL_W - 24 - (overseas.length - 1) * NODE_GAP) / overseas.length
+    const nodeX = (i: number) => px + 12 + i * (colW + NODE_GAP)
 
-    const ovX = px + 14
-    const dnX = px + PANEL_W - 14 - NODE_W
-    const ovStart = areaTop + Math.max(0, (avail - blockH(overseas.length)) / 2)
-    const dnStart = areaTop + Math.max(0, (avail - blockH(domestic.length)) / 2)
-
+    // 上排：海外
+    const ovY = areaTop
     const ovCenters: number[] = []
     overseas.forEach((o, i) => {
-      const y = ovStart + i * (NODE_H + NODE_GAP)
-      ovCenters.push(y + NODE_H / 2)
-      rects.push(
-        `<rect x="${ovX}" y="${y}" width="${NODE_W}" height="${NODE_H}" rx="6" fill="#dbeafe" stroke="#3b82f6"/>`,
-        `<rect x="${ovX + 6}" y="${y + 4}" width="16" height="16" rx="4" fill="#3b82f6"/>`
-      )
-      texts.push(
-        `<text x="${ovX + 14}" y="${y + 15}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" font-family="sans-serif">${esc(
-          (o.name || '?').trim().charAt(0).toUpperCase()
-        )}</text>`,
-        `<text x="${ovX + 28}" y="${y + NODE_H / 2 + 4}" text-anchor="start" font-size="12" fill="#1e3a8a" font-family="sans-serif">${esc(
-          o.name
-        )}</text>`
-      )
+      const x = nodeX(i)
+      ovCenters.push(ovY + NODE_H / 2)
+      drawNode(rects, texts, x, ovY, o, esc)
     })
-
+    // 下排：国产
+    const dnY = areaTop + NODE_H + ROW_GAP
     const dnCenters: number[] = []
     domestic.forEach((d, i) => {
-      const y = dnStart + i * (NODE_H + NODE_GAP)
-      dnCenters.push(y + NODE_H / 2)
-      rects.push(
-        `<rect x="${dnX}" y="${y}" width="${NODE_W}" height="${NODE_H}" rx="6" fill="#f3e8ff" stroke="#a855f7"/>`,
-        `<rect x="${dnX + 6}" y="${y + 4}" width="16" height="16" rx="4" fill="#a855f7"/>`
-      )
-      texts.push(
-        `<text x="${dnX + 14}" y="${y + 15}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" font-family="sans-serif">${esc(
-          (d.name || '?').trim().charAt(0).toUpperCase()
-        )}</text>`,
-        `<text x="${dnX + 28}" y="${y + NODE_H / 2 + 4}" text-anchor="start" font-size="12" fill="#6b21a8" font-family="sans-serif">${esc(
-          d.name
-        )}</text>`
-      )
+      const x = nodeX(i)
+      dnCenters.push(dnY + NODE_H / 2)
+      drawNode(rects, texts, x, dnY, d, esc)
     })
 
-    // 连线：国产(右) → 海外(左)
+    // 连线：国产(下) → 海外(上)
     const nameToIdx = new Map(overseas.map((o, i) => [o.id, i]))
     domestic.forEach((d, di) => {
       for (const oid of d.replaces) {
         const oi = nameToIdx.get(oid)
         if (oi === undefined) continue
-        const x1 = dnX
-        const y1 = dnCenters[di]
-        const x2 = ovX + NODE_W
-        const y2 = ovCenters[oi]
-        const dx = Math.max(44, (x1 - x2) * 0.5)
+        const x1 = nodeX(di) + colW / 2
+        const y1 = dnY
+        const x2 = nodeX(oi) + colW / 2
+        const y2 = ovY + NODE_H
+        const dx = Math.max(24, Math.abs(x1 - x2) * 0.5)
+        const my = (y1 + y2) / 2
         paths.push(
-          `<path d="M ${x1} ${y1} C ${x1 - dx} ${y1}, ${x2 + dx} ${y2}, ${x2} ${y2}" fill="none" stroke="#cbd5e1" stroke-width="1.4" marker-end="url(#aaArrow)"/>`
+          `<path d="M ${x1} ${y1} C ${x1 - dx} ${my}, ${x2 + dx} ${my}, ${x2} ${y2}" fill="none" stroke="#cbd5e1" stroke-width="1.4" marker-end="url(#aaArrow)"/>`
         )
       }
     })
