@@ -13,7 +13,8 @@
     "validate": "node scripts/lib/schema.mjs --check src/data/agents.json && node scripts/lib/models-schema.mjs --check src/data/models.json",
     "fetch": "node scripts/fetch.mjs",
     "fetch:models": "node scripts/fetch-models.mjs",
-    "verify:model": "node scripts/verify-model.mjs"
+    "verify:model": "node scripts/verify-model.mjs",
+    "push": "node scripts/ghpush.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
