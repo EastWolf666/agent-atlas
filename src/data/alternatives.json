@@ -1,9 +1,9 @@
 {
   "meta": {
-    "lastUpdated": "2026-10-09",
+    "lastUpdated": "2026-10",
     "source": "人工整理自「国际主流 AI 工具的中国替代」信息图，具体功能与定价以厂商官网为准",
     "disclaimer": "「替代」仅表示功能场景上的国产对应选项，不等于能力等价；数据为研究快照，可能随时间变化。",
-    "total": 54
+    "total": 77
   },
   "items": [
     {
@@ -1372,6 +1372,591 @@
         "brave-search"
       ],
       "lastVerified": "2026-10"
+    },
+    {
+      "id": "deepl",
+      "name": "DeepL",
+      "vendor": "DeepL",
+      "region": "overseas",
+      "category": "translate",
+      "tagline": "欧洲团队的翻译质量标杆，译文自然度公认领先",
+      "description": "来自德国的机器翻译服务，凭自研大模型在欧语系互译上长期拿第一，译文常被拿来当「机器翻译该有的样子」的参照。支持文档整篇翻译（PDF/Word/PPT 保留排版）和 DeepL Write 润色。局限是国内访问不稳定，且中文方向的表现不如欧语系惊艳。",
+      "officialUrl": "https://www.deepl.com",
+      "pricingModel": "freemium",
+      "pricingNote": "免费层每月有限额；Pro Starter 约 $9.99/月",
+      "platforms": [
+        "web",
+        "windows",
+        "macos",
+        "ios",
+        "android",
+        "api"
+      ],
+      "highlights": [
+        "欧语系译文自然度公认第一",
+        "整篇文档翻译保留排版",
+        "DeepL Write 英文润色"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "google-translate",
+      "name": "Google 翻译",
+      "vendor": "Google",
+      "region": "overseas",
+      "category": "translate",
+      "tagline": "全球语言覆盖最广的老牌翻译，实时对话与网页翻译",
+      "description": "Google 出品的翻译服务，支持 130+ 语言互译，网页整页翻译、相机取词、实时对话翻译一应俱全，是覆盖语言数最多的通用翻译工具。强项在语种覆盖和生态集成（Chrome 内置）。局限是国内无法直接访问，且长文本的专业术语一致性一般。",
+      "officialUrl": "https://translate.google.com",
+      "pricingModel": "free",
+      "pricingNote": "完全免费",
+      "platforms": [
+        "web",
+        "android",
+        "ios"
+      ],
+      "highlights": [
+        "130+ 语言覆盖最广",
+        "Chrome 全网页翻译",
+        "相机/对话实时翻译"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "microsoft-translator",
+      "name": "Microsoft Translator",
+      "vendor": "Microsoft",
+      "region": "overseas",
+      "category": "translate",
+      "tagline": "微软系翻译，深度集成 Office 与 Teams 的企业级方案",
+      "description": "微软的翻译服务，直接内置于 Edge 浏览器、Office 全家桶和 Teams 会议字幕，企业用户几乎零成本用上。支持 100+ 语言，提供多设备多人对话翻译。局限是消费端存在感弱，翻译质量在中英方向上不如专门的国产工具贴合语境。",
+      "officialUrl": "https://translator.microsoft.com",
+      "pricingModel": "free",
+      "pricingNote": "完全免费（Azure API 按量计费）",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "api"
+      ],
+      "highlights": [
+        "Office/Teams 深度集成",
+        "多人跨设备对话翻译",
+        "企业 Azure API 成熟"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "youdao-fanyi",
+      "name": "有道翻译",
+      "vendor": "网易有道",
+      "region": "china",
+      "category": "translate",
+      "tagline": "词典生态最深的国产翻译，中英学术翻译口碑稳",
+      "description": "网易有道旗下的翻译服务，背靠十余年词典语料积累，中英互译质量稳定，文档翻译支持 PDF/Word 保留排版，学术论文翻译是招牌场景。提供网页、App、浏览器插件全端。局限是免费额度有页数限制，小语种覆盖不及 Google。",
+      "officialUrl": "https://fanyi.youdao.com",
+      "pricingModel": "freemium",
+      "pricingNote": "网页翻译免费；文档翻译每月免费页数，超出按篇付费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "词典语料积累深厚",
+        "学术论文/文档翻译保留排版",
+        "全端覆盖"
+      ],
+      "replaces": [
+        "deepl",
+        "google-translate",
+        "microsoft-translator"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "baidu-fanyi",
+      "name": "百度翻译",
+      "vendor": "百度",
+      "region": "china",
+      "category": "translate",
+      "tagline": "日均响应千亿字符的国民级翻译，垂直领域术语强",
+      "description": "百度旗下翻译服务，支持 200+ 语言（含大量小语种和中国少数民族语言），音视频同传、拍照翻译、文档翻译齐备，开放平台 API 是国内开发者的常用选择。强项是中文语境理解和垂直领域术语（论文、机械、医药）。局限是文学性文本的译文偏直译。",
+      "officialUrl": "https://fanyi.baidu.com",
+      "pricingModel": "freemium",
+      "pricingNote": "网页/App 免费；API 标准版每月免费额度，超出按字符计费",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "api"
+      ],
+      "highlights": [
+        "200+ 语种覆盖",
+        "同传/拍照/文档全场景",
+        "垂直领域术语库丰富"
+      ],
+      "replaces": [
+        "deepl",
+        "google-translate",
+        "microsoft-translator"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "volcengine-fanyi",
+      "name": "火山翻译",
+      "vendor": "字节跳动",
+      "region": "china",
+      "category": "translate",
+      "tagline": "字节云上的翻译引擎，背靠火山引擎大模型能力",
+      "description": "字节跳动火山引擎推出的机器翻译服务，技术底座与豆包大模型同源，支持 100+ 语种互译与领域术语定制，网页版免费开放，API 面向企业按量计费。优势是与大模型能力结合紧、中文互联网新词跟得快。局限是消费端产品形态较薄，主要面向开发者。",
+      "officialUrl": "https://www.volcengine.com/product/translate",
+      "pricingModel": "freemium",
+      "pricingNote": "网页版免费；API 按字符用量计费",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "与豆包大模型同源",
+        "领域术语定制",
+        "新词热词更新快"
+      ],
+      "replaces": [
+        "deepl",
+        "google-translate",
+        "microsoft-translator"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "vendor": "ElevenLabs",
+      "region": "overseas",
+      "category": "speech",
+      "tagline": "AI 语音克隆的天花板，英文 TTS 自然度标杆",
+      "description": "美国 AI 语音公司，语音克隆和英文 TTS 的自然度是全球公认标杆，几十秒样本即可克隆出以假乱真的声音，支持 30+ 语言与情感控制，被大量播客和有声书团队采用。局限是中文支持偏功能性的可用，韵味不及国产头部，价格按字符计对中文长文不友好。",
+      "officialUrl": "https://elevenlabs.io",
+      "pricingModel": "freemium",
+      "pricingNote": "免费每月约 10 分钟；Starter $5/月起，按用量档位递增",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "声音克隆自然度公认第一",
+        "情感与停顿可控",
+        "30+ 语言 TTS"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "murf",
+      "name": "Murf AI",
+      "vendor": "Murf",
+      "region": "overseas",
+      "category": "speech",
+      "tagline": "面向企业配音的工作台，120+ 商用音色",
+      "description": "面向营销视频、企业培训、播客的 AI 配音工作台，提供 120+ 文本转语音音色，支持时间轴对齐、团队协作和 Google Slides 插件，主打「配音即工作流」。强项是商用授权清晰、与演示场景结合。局限是声音克隆能力不如 ElevenLabs，中文音色较少。",
+      "officialUrl": "https://murf.ai",
+      "pricingModel": "subscription",
+      "pricingNote": "免费试听；付费约 $19/月起（年付更低）",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "120+ 商用授权音色",
+        "时间轴配音工作流",
+        "团队协作"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "speechify",
+      "name": "Speechify",
+      "vendor": "Speechify",
+      "region": "overseas",
+      "category": "speech",
+      "tagline": "「把文字读给你听」的朗读助手，主打阅读效率",
+      "description": "主打「听代替读」的 AI 朗读工具，把网页、PDF、文档转成自然语音，支持调倍速、OCR 拍照读印刷体，面向阅读障碍人群和效率型用户。强项是移动端体验和名人声音（Gwyneth Paltrow 等）。局限是定价偏高（年费制），中文支持有限。",
+      "officialUrl": "https://speechify.com",
+      "pricingModel": "subscription",
+      "pricingNote": "有限免费；Premium 约 $139/年",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "网页/PDF 全文朗读",
+        "拍照 OCR 读印刷体",
+        "倍速最高 4.5x"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "moyin",
+      "name": "魔音工坊",
+      "vendor": "出门问问",
+      "region": "china",
+      "category": "speech",
+      "tagline": "短视频配音国民工具，800+ 音色与精细调音",
+      "description": "出门问问（小问智能）旗下的 AI 配音平台，短视频解说配音领域的国民级工具，800+ 声音、1000+ 风格，支持多音字、停顿、重读等近 20 项逐句调音，配套云剪辑与字幕生成。的优势是中文情感表达和「魔小刚」等明星音色。局限是高级音色需付费解锁，英文能力一般。",
+      "officialUrl": "https://www.moyin.com",
+      "pricingModel": "freemium",
+      "pricingNote": "基础配音免费；会员解锁全量音色与下载权益",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "800+ 音色短视频全覆盖",
+        "近 20 项逐句调音",
+        "配音+云剪辑一体"
+      ],
+      "replaces": [
+        "elevenlabs",
+        "murf",
+        "speechify"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "xunfei-zhizuo",
+      "name": "讯飞智作",
+      "vendor": "科大讯飞",
+      "region": "china",
+      "category": "speech",
+      "tagline": "讯飞语音积灰厚积薄发，方言与长文本播报强项",
+      "description": "科大讯飞面向内容创作者的 AI 配音与虚拟主播平台，依托讯飞近三十年语音合成积累，普通话与方言（粤语、四川话等）表现行业顶尖，长文本播报稳定，配套虚拟主播视频生成。局限是界面与工作流偏传统，声音克隆的细腻度不如新锐产品。",
+      "officialUrl": "https://peiyin.xunfei.cn",
+      "pricingModel": "freemium",
+      "pricingNote": "有免费试用额度；按字数/次数计费，合成约 0.1-0.3 元/百字",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "方言覆盖行业第一梯队",
+        "长文本播报稳定",
+        "虚拟主播配套"
+      ],
+      "replaces": [
+        "elevenlabs",
+        "murf",
+        "speechify"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "minimax-audio",
+      "name": "MiniMax Audio",
+      "vendor": "MiniMax",
+      "region": "china",
+      "category": "speech",
+      "tagline": "海螺同门的语音合成，中文情感与声音克隆新锐",
+      "description": "大模型公司 MiniMax 的 AI 语音产品（海螺 AI 同门），Speech-02 系列模型在中文情感表达和声音克隆上属国产第一梯队，几十秒音频即可克隆，支持中英双语自然切换，出海配音场景常用。局限是产品形态以网页和 API 为主，缺配套剪辑工具。",
+      "officialUrl": "https://www.minimax.io/audio",
+      "pricingModel": "freemium",
+      "pricingNote": "免费试用额度；按字符用量计费",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "中文情感表达第一梯队",
+        "快速声音克隆",
+        "中英混说自然"
+      ],
+      "replaces": [
+        "elevenlabs",
+        "murf",
+        "speechify"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "heygen",
+      "name": "HeyGen",
+      "vendor": "HeyGen",
+      "region": "overseas",
+      "category": "avatar",
+      "tagline": "视频数字人出海标杆，口型同步与多语种克隆",
+      "description": "美国 AI 视频数字人公司（核心团队华人），以「上传一段自拍即得数字分身」的低门槛出名，口型同步和多语种配音克隆是招牌，大量跨境团队用它做本地化营销视频。局限是国内访问不稳，企业定制走代理体系，价格对个人不算便宜。",
+      "officialUrl": "https://www.heygen.com",
+      "pricingModel": "freemium",
+      "pricingNote": "免费做 3 支视频；Creator $29/月起",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "自拍秒级生成数字分身",
+        "多语种口型同步",
+        "本地化营销视频标配"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "synthesia",
+      "name": "Synthesia",
+      "vendor": "Synthesia",
+      "region": "overseas",
+      "category": "avatar",
+      "tagline": "企业培训视频的数字人标准，230+ 虚拟主播",
+      "description": "英国数字人公司，企业级 AI 视频生成平台的代表，230+ 棚拍虚拟主播、140+ 语言，主打「把 PPT 和文档变成培训视频」，被大量财富 500 强用于员工培训。强项是企业合规与模板体系。局限是自定义形象门槛高，C 端个人用户不太友好。",
+      "officialUrl": "https://www.synthesia.io",
+      "pricingModel": "subscription",
+      "pricingNote": "Starter 约 $29/月（年付 $18/月）",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "230+ 棚拍级虚拟主播",
+        "企业培训视频标准",
+        "140+ 语言"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "d-id",
+      "name": "D-ID",
+      "vendor": "D-ID",
+      "region": "overseas",
+      "category": "avatar",
+      "tagline": "「让照片开口说话」的老牌玩家，API 接入灵活",
+      "description": "以色列公司，以「一张照片生成会说话的数字人」出圈，后来转向数字人直播和 Agent 虚拟形象，API 体系成熟，开发者可以把数字人嵌入自己的应用。强项是照片驱动和实时交互。局限是画面写实度不及新一代竞品，中文口型一般。",
+      "officialUrl": "https://www.d-id.com",
+      "pricingModel": "freemium",
+      "pricingNote": "14 天试用；Light 约 $5.9/月起",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "单张照片即可驱动",
+        "实时流式数字人",
+        "API 灵活"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "tencent-zhiying",
+      "name": "腾讯智影",
+      "vendor": "腾讯",
+      "region": "china",
+      "category": "avatar",
+      "tagline": "腾讯生态的数字人平台，视频号直播与企业微信打通",
+      "description": "腾讯的云端智能视频创作平台，数字人播报、文本配音、智能剪辑一体，2026 年上半年以生态打法居国产数字人平台市场份额首位——数字人可直接接入视频号直播、企业微信与腾讯会议。免费额度覆盖个人轻量需求。局限是深度绑定腾讯生态，跨平台分发弱，网页入口不定期调整，企业级能力逐步迁移至腾讯云智能数智人。",
+      "officialUrl": "https://zinying.qq.com",
+      "pricingModel": "freemium",
+      "pricingNote": "免费额度（每月约 30 段视频+数字人播报）；会员约 30 元/月，企业版按量报价",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "视频号/企微生态直通",
+        "数字人+配音+剪辑一体",
+        "国产市占头部"
+      ],
+      "replaces": [
+        "heygen",
+        "synthesia",
+        "d-id"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "guiji",
+      "name": "硅基智能",
+      "vendor": "硅基智能",
+      "region": "china",
+      "category": "avatar",
+      "tagline": "国产数字人出货量头部，DUIX 平台做规模化「硅基劳动力」",
+      "description": "南京硅基智能，2025 年递表港交所的「数字人第一股」候选，落地超 8 万个数字人、服务 50 万用户，标杆案例包括刘润年度演讲分身。自研 DUIX 多模态平台提供数字人直播、交互一体机与形象/声音双克隆，金融、政务、文旅落地深。局限是走 B2B2C 代理模式，个人用户不直接服务。",
+      "officialUrl": "https://www.guiji.ai",
+      "pricingModel": "enterprise",
+      "pricingNote": "按项目与席位报价，toB 为主",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "8 万+ 数字人落地",
+        "港股递表头部厂商",
+        "直播/交互/双克隆全栈"
+      ],
+      "replaces": [
+        "heygen",
+        "synthesia",
+        "d-id"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "shanjian",
+      "name": "闪剪智能",
+      "vendor": "闪剪智能",
+      "region": "china",
+      "category": "avatar",
+      "tagline": "低门槛数字人克隆，C 端直接下单的互联网打法",
+      "description": "深圳闪剪智能，走「直接面向 C 端」的互联网打法，口播视频生成、形象与声音克隆按订阅开通，几十秒素材即可克隆分身并批量产出短视频，营销与知识口播创作者常用。优势是上手快、价格透明。局限是定制深度与企业级能力不及硅基、腾讯的 toB 体系。",
+      "officialUrl": "https://shanjian.tv",
+      "pricingModel": "subscription",
+      "pricingNote": "会员订阅制，克隆形象按年付费",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "C 端直接订阅无门槛",
+        "克隆分身批量出片",
+        "营销短视频场景成熟"
+      ],
+      "replaces": [
+        "heygen",
+        "synthesia",
+        "d-id"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "otter",
+      "name": "Otter.ai",
+      "vendor": "Otter.ai",
+      "region": "overseas",
+      "category": "meeting",
+      "tagline": "英文会议转写的事实标准，实时字幕+AI 纪要",
+      "description": "美国会议转写工具，Zoom/Teams/Meet 实时字幕与自动入会记录的代名词，转写同时生成摘要、待办，英文识别准确率高，免费层每月 300 分钟。局限是只擅长英文语境，中文会议准确率明显下降，国内接入不便。",
+      "officialUrl": "https://otter.ai",
+      "pricingModel": "freemium",
+      "pricingNote": "免费 300 分钟/月；Pro $16.99/月（年付更低）",
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "highlights": [
+        "英文会议转写事实标准",
+        "实时字幕自动入会",
+        "AI 摘要与待办"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "fireflies",
+      "name": "Fireflies.ai",
+      "vendor": "Fireflies",
+      "region": "overseas",
+      "category": "meeting",
+      "tagline": "会议记录 + 知识库，销售团队的会话情报",
+      "description": "AI 会议助手，自动入会记录并转写，强项在会后——全局搜索所有历史会议（「谁在哪次会议里提到过报价」）、话题追踪器和 CRM 集成（Salesforce/HubSpot），销售团队会话情报场景强势。局限是中文支持弱，免费层转写额度有限。",
+      "officialUrl": "https://fireflies.ai",
+      "pricingModel": "freemium",
+      "pricingNote": "免费有限额度；Pro 约 $10/月（年付）",
+      "platforms": [
+        "web",
+        "api"
+      ],
+      "highlights": [
+        "跨会议全局搜索",
+        "CRM 集成会话情报",
+        "话题追踪器"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "tldv",
+      "name": "tl;dv",
+      "vendor": "tl;dv",
+      "region": "overseas",
+      "category": "meeting",
+      "tagline": "免费不限场次的会议记录，多语言团队友好",
+      "description": "欧洲的 AI 会议记录工具，免费层即提供不限场次的会议录制与转写（30+ 语言），自动打时间戳高亮、片段剪辑分享，产品体验轻快。适合跨国团队与用户访谈录制。局限是中文转写质量一般，深度企业治理功能在高层级套餐。",
+      "officialUrl": "https://tldv.io",
+      "pricingModel": "freemium",
+      "pricingNote": "免费不限场次录制；Pro $18/月起",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "免费不限场次",
+        "30+ 语言转写",
+        "片段剪辑分享"
+      ],
+      "replaces": [],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "tingwu",
+      "name": "通义听悟",
+      "vendor": "阿里巴巴",
+      "region": "china",
+      "category": "meeting",
+      "tagline": "阿里出品音视频转写助手，中文会议纪要 5 分钟出稿",
+      "description": "阿里云基于通义大模型的音视频转写工具，中文识别准确率约 97%，实时转写、发言人分离、章节速览、待办提取一应俱全，1 小时音视频最快 5 分钟出纪要，高校师生可领免费时长，企业走百炼 API（约 0.6 元/小时起）。中文会议场景对 Otter 形成直接替代。局限是海外会议平台集成少，多语言仅覆盖中英日等主流语种。",
+      "officialUrl": "https://tingwu.aliyun.com",
+      "pricingModel": "freemium",
+      "pricingNote": "个人有免费时长+高校免费；企业 API 0.6 元/小时起",
+      "platforms": [
+        "web"
+      ],
+      "highlights": [
+        "中文转写准确率约 97%",
+        "纪要/待办/思维导图自动生成",
+        "高校免费时长"
+      ],
+      "replaces": [
+        "otter",
+        "fireflies",
+        "tldv"
+      ],
+      "lastVerified": "2026-10-09"
+    },
+    {
+      "id": "iflyrec",
+      "name": "讯飞听见",
+      "vendor": "科大讯飞",
+      "region": "china",
+      "category": "meeting",
+      "tagline": "讯飞转写技术的 C 端品牌，录音转文字的老牌之选",
+      "description": "科大讯飞的语音转写平台，背靠讯飞在中文语音识别上的长期积累，中英 mixed、方言、专业术语场景稳定，支持录音文件转写、实时字幕机和网站/APP 多端，媒体记者与律师是典型用户群。局限是界面偏工具化，AI 摘要等智能功能不如新派产品完整。",
+      "officialUrl": "https://www.iflyrec.com",
+      "pricingModel": "freemium",
+      "pricingNote": "新用户有免费时长；转写约 0.33 元/小时起，会员制",
+      "platforms": [
+        "web",
+        "ios",
+        "android",
+        "windows",
+        "macos"
+      ],
+      "highlights": [
+        "中文识别长期标杆",
+        "方言/专业术语稳",
+        "全端+实时字幕机"
+      ],
+      "replaces": [
+        "otter",
+        "fireflies",
+        "tldv"
+      ],
+      "lastVerified": "2026-10-09"
     }
   ]
 }

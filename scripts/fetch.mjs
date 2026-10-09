@@ -16,6 +16,8 @@
  *
  * 模型数据（models.json）在第 6 步由独立脚本 fetch-models.mjs 更新，
  * 两者失败互不影响——详见第 6 步注释。
+ * 国产替代候选（alternatives-candidates.json）在第 8 步由 fetch-alternatives.mjs
+ * 从 HN 搜索「海外工具的国产替代」线索，机器发现、人工审核入库。
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
@@ -78,6 +80,27 @@ function runModelFetch({ dryRun }) {
 }
 
 /**
+ * 调用国产替代候选发现管线（fetch-alternatives.mjs）。
+ *
+ * 子进程隔离的原因与 runModelFetch 相同：它有「全部请求失败即 exit(1)」
+ * 的熔断，不能让这个 exit 把 fetch.mjs 主流程带走。
+ *
+ * 排序约束（重要）：本步骤必须放在 [7/8] 写盘之后——
+ * fetch-alternatives.mjs 会推进水位线文件的 'hn-alt' 键，
+ * 而主进程在 [7/8] 用内存副本整体覆盖水位线文件；
+ * 若替代发现先跑，它推进的键会被覆盖，导致同一窗口反复抓。
+ */
+function runAlternativesFetch({ dryRun }) {
+  const args = [resolve(__dirname, 'fetch-alternatives.mjs')]
+  if (dryRun) args.push('--dry-run')
+  const r = spawnSync(process.execPath, args, { stdio: 'inherit' })
+  if (r.status !== 0) {
+    throw new Error(`fetch-alternatives.mjs 退出码 ${r.status}${r.signal ? ` (${r.signal})` : ''}`)
+  }
+  return true
+}
+
+/**
  * 数据落盘后自动推送到 GitHub Pages 源仓库。
  *
  * 设计取舍（与 ghpush.mjs 配合）：
@@ -112,6 +135,7 @@ function maybeAutoPush({ dryRun, skipFetch }) {
     'data/auto-added.json',
     'data/status-signals.json',
     'data/models-verified.json',
+    'data/alternatives-candidates.json',
     'data/.watermark.json',
     'data/.admission-state.json',
   ]
@@ -157,9 +181,9 @@ async function main() {
   const failures = []
 
   if (SKIP_FETCH) {
-    log('\n[1/7] --no-fetch：跳过所有网络抓取')
+    log('\n[1/8] --no-fetch：跳过所有网络抓取')
   } else {
-    log('\n[1/7] 抓取候选源')
+    log('\n[1/8] 抓取候选源')
 
     // HN —— 新产品发现主力
     try {
@@ -202,7 +226,7 @@ async function main() {
   }
 
   // ---------------- 2. 刷新存量的客观字段 ----------------
-  log('\n[2/7] 刷新存量客观字段（star / 许可证）')
+  log('\n[2/8] 刷新存量客观字段（star / 许可证）')
   let statusSignals = []
   let refreshedCount = 0
   if (SKIP_FETCH) {
@@ -245,7 +269,7 @@ async function main() {
    * 这里管新增「生成编辑占位」。两者语义不同，强行合并会让 merge.mjs
    * 精心维护的 FORBIDDEN 白名单失效。
    */
-  log('\n[3/7] 自动入库（发现的新品直接进正式数据）')
+  log('\n[3/8] 自动入库（发现的新品直接进正式数据）')
   let admittedRecords = []
   let admissionReport = { found: candidates.length, qualified: 0, admitted: 0, quotaLimited: false, paused: null, rejected: [], accepted: [] }
 
@@ -308,7 +332,7 @@ async function main() {
   }
 
   // ---------------- 4. 重算数字与洞察 ----------------
-  log('\n[4/7] 重算统计口径与洞察文案')
+  log('\n[4/8] 重算统计口径与洞察文案')
   const stats = refreshMetaNumbers(metaJson, agents)
   const changedInsights = refreshInsights(metaJson, agents, stats)
   log(`  total: ${metaJson.meta.total}｜官方来源 ${stats.officialCount}｜非活跃 ${stats.nonActive}`)
@@ -318,7 +342,7 @@ async function main() {
   }
 
   // ---------------- 5. 候选池 ----------------
-  log('\n[5/7] 合并候选池')
+  log('\n[5/8] 合并候选池')
   const existingCandidates = existsSync(CANDIDATES_PATH)
     ? JSON.parse(readFileSync(CANDIDATES_PATH, 'utf8'))
     : { candidates: [] }
@@ -445,7 +469,7 @@ async function main() {
    * 放在写盘之前而不是之后：这样模型数据落盘了、agents 校验没过时，
    * 至少价格数据是最新的（价格变更是选型里最关键的信息）。
    */
-  log('\n[6/7] 更新 AI 大模型数据（OpenRouter）')
+  log('\n[6/8] 更新 AI 大模型数据（OpenRouter）')
   let modelResult = null
   if (SKIP_FETCH) {
     log('  --no-fetch：跳过')
@@ -459,7 +483,7 @@ async function main() {
   }
 
   // ---------------- 7. 校验后写盘 ----------------
-  log('\n[7/7] schema 校验并写盘')
+  log('\n[7/8] schema 校验并写盘')
   const { ok, count, issues } = validateAgents(agents, metaJson)
   if (!ok) {
     console.error(`❌ schema 校验失败（${issues.length} 处），已放弃写盘，线上不受影响：`)
@@ -565,7 +589,26 @@ async function main() {
     log(`  ⚠️ 本次失败的源：${failures.join(', ')}（已保持原水位线，下次重试）`)
   }
 
-  // ---------------- 8. 自动发布 ----------------
+  // ---------------- 8. 国产替代候选发现 ----------------
+  /*
+   * 放在 [7/8] 写盘之后：fetch-alternatives.mjs 会往水位线文件推进 'hn-alt' 键，
+   * 必须等主进程写完水位线再跑，否则推进值被覆盖（详见 runAlternativesFetch 注释）。
+   * 失败只记警告——替代地图的正式数据（alternatives.json）不受影响，
+   * 候选线索明天会重新搜（水位线没推进）。
+   */
+  log('\n[8/8] 国产替代候选发现（HN 替代关系搜索）')
+  if (SKIP_FETCH) {
+    log('  --no-fetch：跳过')
+  } else {
+    try {
+      await runAlternativesFetch({ dryRun: DRY_RUN })
+    } catch (e) {
+      log(`  ⚠️ 替代候选发现失败（alternatives.json 不受影响）：${e.message}`)
+      failures.push('alternatives')
+    }
+  }
+
+  // ---------------- 9. 自动发布 ----------------
   maybeAutoPush({ dryRun: DRY_RUN, skipFetch: SKIP_FETCH })
 }
 

@@ -87,7 +87,7 @@ export default function AlternativesView() {
       <div className="animate-fade-in">
         <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">AI 国产替代方案地图</h1>
         <p className="mt-1.5 max-w-3xl text-sm text-muted">
-          按 <strong className="text-ink">9 个功能场景</strong> 整理国际主流 AI 工具与对应的国产替代选项，
+          按 <strong className="text-ink">{CATEGORY_ORDER.length} 个功能场景</strong> 整理国际主流 AI 工具与对应的国产替代选项，
           帮助选型时快速定位可落地的国内方案。
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-2 text-2xs text-muted">

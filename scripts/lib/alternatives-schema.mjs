@@ -27,6 +27,10 @@ const CATEGORIES = new Set([
   'design',
   'learning',
   'search',
+  'translate',
+  'speech',
+  'avatar',
+  'meeting',
 ])
 const PLATFORMS = new Set(['web', 'ios', 'android', 'windows', 'macos', 'linux', 'api'])
 const PRICING = new Set(['free', 'freemium', 'subscription', 'usage', 'enterprise'])

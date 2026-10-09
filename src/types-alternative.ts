@@ -1,6 +1,6 @@
 export type AltRegion = 'overseas' | 'china'
 
-/** 9 个功能场景，顺序即 UI 筛选/分组顺序 */
+/** 13 个功能场景，顺序即 UI 筛选/分组顺序 */
 export type AltCategory =
   | 'chat'
   | 'image'
@@ -11,6 +11,10 @@ export type AltCategory =
   | 'design'
   | 'learning'
   | 'search'
+  | 'translate'
+  | 'speech'
+  | 'avatar'
+  | 'meeting'
 
 export type AltPlatform = 'web' | 'ios' | 'android' | 'windows' | 'macos' | 'linux' | 'api'
 

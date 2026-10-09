@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-10-09",
+  "candidates": [
+    {
+      "slug": "hnalt:49964361",
+      "title": "Show HN: Browsentic Open-source Claude for Chrome alternative for any agent CLI",
+      "url": "https://news.ycombinator.com/item?id=49964361",
+      "storyUrl": "https://github.com/imshaikot/browsentic",
+      "source": "hn",
+      "matchedOverseas": [
+        "claude"
+      ],
+      "categoryHint": "chat",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "snippet": "A personal agent harness lives in your existing browser, connects to your claude-code (or any other major harness codex or cursor-cli...) NOT the SDK API, exposes web-optimized tools to the harness - that&#x27;s Browsentic.<p>A free, opensource (Apache 2.0) with rich capabilities",
+      "discoveredAt": "2026-10-09",
+      "decided": false
+    }
+  ]
+}

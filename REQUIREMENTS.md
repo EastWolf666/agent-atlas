@@ -361,12 +361,16 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 
 ### 11.1 需求背景
 
-基于「国际主流 AI 工具的中国替代」信息图，将 9 个功能场景下的国际工具与国产替代选项结构化呈现，帮助用户在面对海外工具不可用、不合规或成本过高时，快速找到对应的国产方案。
+基于「国际主流 AI 工具的中国替代」信息图，将 13 个功能场景下的国际工具与国产替代选项结构化呈现，帮助用户在面对海外工具不可用、不合规或成本过高时，快速找到对应的国产方案。
 
 ### 11.2 数据来源与更新
 
 - **数据来源**：人工整理自信息图与公开官网信息，无稳定公开 API。
-- **更新方式**：手动维护 `src/data/alternatives.json`。
+- **更新方式**：手动维护 `src/data/alternatives.json`；另有一条**候选发现通道**：
+  - `scripts/fetch-alternatives.mjs` 每日随 `npm run fetch` 第 8 步自动运行（WorkBuddy 定时任务每天 06:00 触发），用 HN Algolia 按「已收录海外工具名 × alternative 语义」搜索替代关系讨论；
+  - 判定规则：标题含替代语义且提及已知海外工具 → 直接采信；否则正文须「同一句内既有替代语义又有工具名」（防止正文顺带提及造成误报，实测案例：TradingView 替代品 OpenChart 因正文一句 "we wanted Claude to interface with the markets" 被 #1 版全共现逻辑误判为 Claude 替代）；
+  - 命中线索写入 `data/alternatives-candidates.json` 候选池（`hnalt:{objectID}` 去重、水位线增量、0 条熔断不写盘、全部请求失败才报错），与 Agent 页 `candidates.json` 同模式：**机器发现、人工审核入库**；
+  - 水位线存 `data/.watermark.json` 的 `hn-alt` 键；该步骤必须排在主流程写盘（[7/8]）之后运行，否则主进程写水位线会覆盖掉 `hn-alt` 键导致同窗口反复抓。
 - **免责口径**：页面与数据中需明确标注「替代≠能力等价，具体功能、定价与可用性请以厂商官网为准」。
 
 ### 11.3 数据模型
@@ -377,7 +381,7 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 |---|---|
 | id / name / vendor | 工具标识与出品方 |
 | region | overseas / china |
-| category | chat / image / video / music / office / coding / design / learning / search |
+| category | chat / image / video / music / office / coding / design / learning / search / translate / speech / avatar / meeting |
 | tagline | 一句话定位 |
 | description | 2-4 句详情 |
 | officialUrl | 官方网站 |
@@ -395,7 +399,7 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 - 海外条目 `replaces` 必须为空。
 - 每个海外 id 至少被一个国产条目引用，保证配对完整。
 
-### 11.5 9 个功能场景
+### 11.5 13 个功能场景
 
 | 场景 | 国际工具示例 | 国产替代示例 |
 |---|---|---|
@@ -408,6 +412,10 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 | AI 设计与 PPT | Canva AI、Beautiful.ai、Tome | 美图设计室、稿定 AI、Kimi PPT |
 | AI 学习与教育 | Khanmigo、QuizBot、Photomath | 作业帮 AI、学而思九章、网易有道词典 AI |
 | AI 搜索与研究 | Perplexity、You.com、Brave AI | 秘塔 AI 搜索、天工 AI 搜索、夸克 AI 浏览器 |
+| AI 翻译 | DeepL、Google 翻译、Microsoft Translator | 有道翻译、百度翻译、火山翻译 |
+| AI 语音合成与配音 | ElevenLabs、Murf AI、Speechify | 魔音工坊、讯飞智作、MiniMax Audio |
+| AI 数字人 | HeyGen、Synthesia、D-ID | 腾讯智影、硅基智能、闪剪智能 |
+| AI 会议转写 | Otter.ai、Fireflies.ai、tl;dv | 通义听悟、讯飞听见（2 对 3，持续补位） |
 
 ### 11.6 页面设计
 
@@ -416,7 +424,7 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 - **控制栏**：搜索框 + 卡片 / 表格 / 关系图三视图切换 + 场景单选 chips + 地区三态 chips；关系图视图下额外出现「导出大图 PNG」按钮。
 - **卡片视图**：工具名、厂商、地区、tagline、替代对象、场景、定价模式。
 - **表格视图**：名称、厂商、场景、替代对象、定价、平台、核实时间。
-- **关系图视图**：9 个场景同屏网格，每格内「海外（左，蓝）↔ 国产（右，紫）」左右两列紧凑排布，中间走廊用 SVG 贝塞尔连线表示替代，箭头指向被替代的海外工具；节点带品牌 logo（已收录 21 个真实品牌 SVG，其余回退品牌色首字母头像）；节点可点击打开详情浮层、悬停高亮相关连线；支持一键导出整张大图为 2× PNG（Canvas 不可用时回退下载 SVG）。详见 [11.8](#118-关系图视图关系图视图)。
+- **关系图视图**：13 个场景同屏网格，每格内「海外（左，蓝）↔ 国产（右，紫）」左右两列紧凑排布，中间走廊用 SVG 贝塞尔连线表示替代，箭头指向被替代的海外工具；节点带品牌 logo（已收录 76 个真实品牌标，其余回退品牌色首字母头像）；节点可点击打开详情浮层、悬停高亮相关连线；支持一键导出整张大图为 2× PNG（Canvas 不可用时回退下载 SVG）。详见 [11.8](#118-关系图视图关系图视图)。
 - **详情浮层**：官网按钮、免责声明、描述、核心卖点、关键指标、替代关系跳转、溯源。
 
 ### 11.7 校验规则
@@ -431,23 +439,23 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 
 #### 11.8.1 交互目标
 
-卡片视图适合「按场景浏览」、表格视图适合「横向对比」，但两者都不直观回答「国产 A 到底替代了哪个海外 B」。关系图视图用一张九宫格把 9 个场景的替代关系一次铺开：左列海外、右列国产、中间连线，访客 30 秒内就能看出「谁替代谁」。
+卡片视图适合「按场景浏览」、表格视图适合「横向对比」，但两者都不直观回答「国产 A 到底替代了哪个海外 B」。关系图视图用一张网格把 13 个场景的替代关系一次铺开：左列海外、右列国产、中间连线，访客 30 秒内就能看出「谁替代谁」。
 
 #### 11.8.2 布局与连线
 
-- **九宫格**：`CATEGORY_ORDER` 固定 9 个场景，按 3 列多行网格排布（海报渲染用 `COLS = 3`）。
+- **网格**：`CATEGORY_ORDER` 全部 13 个场景，按 3 列多行网格排布（海报渲染用 `COLS = 3`）。
 - **左右两列**：每格内海外节点靠左（蓝 `#3b82f6` / 浅底 `#dbeafe`）、国产节点靠右（紫 `#a855f7` / 浅底 `#f3e8ff`），中间走廊留白避免连线拥挤。
 - **SVG 连线**：节点用 DOM 渲染（可点击、可悬停），连线上层用一层绝对定位 `<svg>` overlay 画；节点坐标在渲染后用 `getBoundingClientRect` 量出，贝塞尔曲线从国产节点左缘弯到海外节点右缘，**箭头落在海外（被替代者）**；窗口/容器尺寸变化时由 `ResizeObserver` 兜底重算，连线始终贴合。
 - **悬停高亮**：鼠标悬停某节点时，与之相关的连线高亮、无关连线淡出，便于在密集场景里追踪单条替代关系。
 
 #### 11.8.3 节点图标
 
-- 品牌 logo 内联在 `src/data/logos.ts`（`LOGOS` 字典），目前收录 **53 个**真实品牌标，覆盖 54 个节点中的 53 个，来源：
-  - **彩色 SVG 内联**（`kind: 'color'`，自带品牌色）：豆包、可灵、即梦、海螺、天工、PixPix、Ideogram、Pika、CodeGeeX、Midjourney、SkyMusic 等 16 个，取自 iconify 聚合的 `thesvg-color` / `logos` 集合（经 api.iconify.design 抓取后内联，无运行时 CDN 依赖）；
-  - **单色 SVG**（`kind: 'mono'`，渲染时填充品牌色）：simple-icons / Font Awesome / tabler / arcticons；
-  - **位图 data-URI**（`kind: 'image'`，48px 圆角白底 app-icon 风格）：钉钉、飞书、稿定、作业帮、夸克、Runway、网易天音、秘塔、QuizBot、Photomath、Tome、You.com 等 17 个，抓自各官网 favicon / apple-touch-icon / 官方 CDN。
-- 未收录的品牌回退为**品牌色首字母头像**；当前仅「学而思九章」1 个使用首字母（其站点图标为聚合服务兜底假图，弃用）。
-- 运行时零外部请求：所有 logo 均内联进 bundle（替代页 chunk gzip 约 64KB）。
+- 品牌 logo 内联在 `src/data/logos.ts`（`LOGOS` 字典），目前收录 **76 个**真实品牌标，覆盖 77 个节点中的 76 个，来源：
+  - **彩色 SVG 内联**（`kind: 'color'`，自带品牌色）：豆包、可灵、即梦、海螺、天工、PixPix、Ideogram、Pika、CodeGeeX、Midjourney、ElevenLabs、DeepL 等 16 个，取自 iconify 聚合的 `thesvg-color` / `logos` 集合（经 api.iconify.design 抓取后内联，无运行时 CDN 依赖）；
+  - **单色 SVG**（`kind: 'mono'`，渲染时填充品牌色）：simple-icons / Font Awesome / tabler / arcticons，ChatGPT、Claude、DeepL、Google 翻译、Otter、Speechify 等 28 个；
+  - **位图 data-URI**（`kind: 'image'`，48px 圆角白底 app-icon 风格）：钉钉、飞书、稿定、作业帮、夸克、Runway、网易天音、秘塔、Photomath、硅基智能（duix.com）、学而思九章（xueersi.com）等 32 个，抓自各官网 favicon / apple-touch-icon / 官方 CDN。
+- 未收录的品牌回退为**品牌色首字母头像**；当前仅「腾讯智影」1 个使用首字母（zinying.qq.com 不可达、腾讯云 favicon 被 WAF 拦截返回 HTML、聚合服务返回兜底假图，三路均无可靠信源）。
+- 运行时零外部请求：所有 logo 均内联进 bundle。
 
 #### 11.8.4 导出大图（PNG）
 

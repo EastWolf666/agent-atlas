@@ -37,6 +37,10 @@ export const CATEGORY_LABEL: Record<AltCategory, string> = {
   design: 'AI 设计与 PPT',
   learning: 'AI 学习与教育',
   search: 'AI 搜索与研究',
+  translate: 'AI 翻译',
+  speech: 'AI 语音合成与配音',
+  avatar: 'AI 数字人',
+  meeting: 'AI 会议转写',
 }
 
 /** 场景顺序，即 UI 筛选 chips 的展示顺序 */
@@ -50,6 +54,10 @@ export const CATEGORY_ORDER: AltCategory[] = [
   'design',
   'learning',
   'search',
+  'translate',
+  'speech',
+  'avatar',
+  'meeting',
 ]
 
 /** 地区中文名 */
