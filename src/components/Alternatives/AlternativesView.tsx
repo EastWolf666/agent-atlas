@@ -12,6 +12,7 @@ import {
 } from '../../lib/alternatives'
 import type { AltCategory, AltRegion, AltTool } from '../../types-alternative'
 import { AutoBadge } from '../bits'
+import ReplacementMap, { downloadPoster } from './ReplacementMap'
 
 /*
  * 本模块由 index.tsx 动态 import，只有切到「AI 国产替代」标签页才会下载。
@@ -28,7 +29,7 @@ import { AutoBadge } from '../bits'
  *   只有 lastVerified，硬加排序条是过度设计。
  */
 
-type ViewMode = 'grid' | 'table'
+type ViewMode = 'grid' | 'table' | 'map'
 
 export default function AlternativesView() {
   const [query, setQuery] = useState('')
@@ -148,6 +149,7 @@ export default function AlternativesView() {
               [
                 ['grid', '卡片'],
                 ['table', '表格'],
+                ['map', '关系图'],
               ] as const
             ).map(([k, label]) => (
               <button
@@ -162,6 +164,16 @@ export default function AlternativesView() {
               </button>
             ))}
           </div>
+
+          {mode === 'map' && (
+            <button
+              onClick={() => downloadPoster(alternatives)}
+              className="aa-chip shrink-0 bg-brand text-white transition-opacity hover:opacity-90"
+              title="把整张替代关系图导出为 PNG 图片"
+            >
+              导出大图 PNG
+            </button>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
@@ -233,6 +245,21 @@ export default function AlternativesView() {
             清空筛选
           </button>
         </div>
+      ) : mode === 'map' ? (
+        <>
+          <div className="animate-fade-in flex flex-wrap items-center gap-3 text-2xs text-muted">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="size-2.5 rounded-full bg-blue-500" aria-hidden />
+              海外主流
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="size-2.5 rounded-full bg-brand" aria-hidden />
+              国产替代
+            </span>
+            <span className="text-faint">连线表示该国产工具可替代对应海外工具，点击节点看详情</span>
+          </div>
+          <ReplacementMap items={filtered} onOpen={(t) => setDetail(t)} />
+        </>
       ) : mode === 'grid' ? (
         <div className="grid animate-fade-in grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((a) => (
