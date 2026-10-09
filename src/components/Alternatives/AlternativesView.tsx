@@ -33,7 +33,7 @@ type ViewMode = 'grid' | 'table' | 'map'
 
 export default function AlternativesView() {
   const [query, setQuery] = useState('')
-  const [mode, setMode] = useState<ViewMode>('grid')
+  const [mode, setMode] = useState<ViewMode>('map')
   const [category, setCategory] = useState<AltCategory | 'all'>('all')
   const [region, setRegion] = useState<'all' | AltRegion>('all')
   const [detail, setDetail] = useState<AltTool | null>(null)
