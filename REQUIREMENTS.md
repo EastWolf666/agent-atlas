@@ -442,9 +442,12 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 
 #### 11.8.3 节点图标
 
-- 品牌 logo 内联在 `src/data/logos.ts`（`LOGOS` 字典，结构 `{ viewBox, color, inner, kind: 'mono' }`），目前收录 **21 个**真实品牌单色 SVG（取自 simple-icons 最新版 + 旧版 + Font Awesome 品牌标，经 jsdelivr 内联，无外部 CDN 依赖）。
-- 未在 `LOGOS` 收录的品牌（含部分大牌因商标下架未收录）回退为**品牌色首字母头像**（国产紫 / 海外蓝）。
-- 因沙箱网络限制（Wikimedia / Clearbit / 官网 favicon 被墙），其余品牌 logo 暂以首字母呈现；补齐需提供官方 SVG 或可达 URL 后内联进 `logos.ts`。
+- 品牌 logo 内联在 `src/data/logos.ts`（`LOGOS` 字典），目前收录 **53 个**真实品牌标，覆盖 54 个节点中的 53 个，来源：
+  - **彩色 SVG 内联**（`kind: 'color'`，自带品牌色）：豆包、可灵、即梦、海螺、天工、PixPix、Ideogram、Pika、CodeGeeX、Midjourney、SkyMusic 等 16 个，取自 iconify 聚合的 `thesvg-color` / `logos` 集合（经 api.iconify.design 抓取后内联，无运行时 CDN 依赖）；
+  - **单色 SVG**（`kind: 'mono'`，渲染时填充品牌色）：simple-icons / Font Awesome / tabler / arcticons；
+  - **位图 data-URI**（`kind: 'image'`，48px 圆角白底 app-icon 风格）：钉钉、飞书、稿定、作业帮、夸克、Runway、网易天音、秘塔、QuizBot、Photomath、Tome、You.com 等 17 个，抓自各官网 favicon / apple-touch-icon / 官方 CDN。
+- 未收录的品牌回退为**品牌色首字母头像**；当前仅「学而思九章」1 个使用首字母（其站点图标为聚合服务兜底假图，弃用）。
+- 运行时零外部请求：所有 logo 均内联进 bundle（替代页 chunk gzip 约 64KB）。
 
 #### 11.8.4 导出大图（PNG）
 
