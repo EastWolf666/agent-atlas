@@ -57,7 +57,7 @@ function ScenarioDiagram({
         const y1 = fr.top - cr.top + fr.height / 2
         const x2 = tr.right - cr.left
         const y2 = tr.top - cr.top + tr.height / 2
-        const dx = Math.max(36, (x1 - x2) * 0.4)
+        const dx = Math.max(44, (x1 - x2) * 0.5)
         const d = `M ${x1} ${y1} C ${x1 - dx} ${y1}, ${x2 + dx} ${y2}, ${x2} ${y2}`
         return { from, to, d }
       })
@@ -102,8 +102,8 @@ function ScenarioDiagram({
               viewBox="0 0 10 10"
               refX="8"
               refY="5"
-              markerWidth="6"
-              markerHeight="6"
+              markerWidth="7"
+              markerHeight="7"
               orient="auto-start-reverse"
             >
               <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8" />
@@ -117,16 +117,17 @@ function ScenarioDiagram({
                 d={l.d}
                 fill="none"
                 stroke={active ? '#7c3aed' : '#cbd5e1'}
-                strokeWidth={active ? 2.2 : 1.3}
+                strokeWidth={active ? 2.6 : 1.5}
+                strokeOpacity={hovered && !active ? 0.3 : 1}
                 markerEnd={`url(#${arrowId})`}
-                className="transition-[stroke,stroke-width] duration-150"
+                className="transition-[stroke,stroke-width,stroke-opacity] duration-150"
               />
             )
           })}
         </svg>
 
-        <div className="relative z-10 flex gap-3">
-          <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+        <div className="relative z-10 flex gap-2">
+          <div className="flex min-w-0 flex-1 flex-col items-start gap-1.5">
             {overseas.map((o) => (
               <Node
                 key={o.id}
@@ -140,7 +141,7 @@ function ScenarioDiagram({
               />
             ))}
           </div>
-          <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+          <div className="flex min-w-0 flex-1 flex-col items-end gap-1.5">
             {domestic.map((d) => (
               <Node
                 key={d.id}
@@ -172,6 +173,7 @@ function Node({
   onHover: (id: string | null) => void
 }) {
   const isCN = item.region === 'china'
+  const initial = (item.name || item.vendor || '?').trim().charAt(0).toUpperCase()
   return (
     <button
       ref={register}
@@ -179,14 +181,23 @@ function Node({
       onMouseEnter={() => onHover(item.id)}
       onMouseLeave={() => onHover(null)}
       title={`${item.name} · ${item.vendor}`}
-      className={`group w-full rounded-md border px-2 py-1.5 text-left transition-colors ${
+      className={`group flex w-[140px] items-center gap-1.5 rounded-md border px-2 py-1.5 text-left transition-colors ${
         isCN
           ? 'border-brand/40 bg-brand-soft text-brand hover:border-brand'
           : 'border-blue-500/40 bg-blue-500/10 text-blue-700 hover:border-blue-500 dark:text-blue-300'
       }`}
     >
-      <span className="block truncate text-2xs font-medium">{item.name}</span>
-      <span className="block truncate text-[10px] opacity-70">{item.vendor}</span>
+      <span
+        className={`flex size-6 shrink-0 items-center justify-center rounded-md text-[11px] font-bold leading-none ${
+          isCN ? 'bg-brand text-white' : 'bg-blue-500 text-white'
+        }`}
+      >
+        {initial}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-2xs font-medium leading-tight">{item.name}</span>
+        <span className="block truncate text-[10px] leading-tight opacity-70">{item.vendor}</span>
+      </span>
     </button>
   )
 }
@@ -285,10 +296,14 @@ export function buildPosterSVG(items: AltTool[]): string {
       const y = ovStart + i * (NODE_H + NODE_GAP)
       ovCenters.push(y + NODE_H / 2)
       rects.push(
-        `<rect x="${ovX}" y="${y}" width="${NODE_W}" height="${NODE_H}" rx="6" fill="#dbeafe" stroke="#3b82f6"/>`
+        `<rect x="${ovX}" y="${y}" width="${NODE_W}" height="${NODE_H}" rx="6" fill="#dbeafe" stroke="#3b82f6"/>`,
+        `<rect x="${ovX + 6}" y="${y + 4}" width="16" height="16" rx="4" fill="#3b82f6"/>`
       )
       texts.push(
-        `<text x="${ovX + NODE_W / 2}" y="${y + NODE_H / 2 + 4}" text-anchor="middle" font-size="12" fill="#1e3a8a" font-family="sans-serif">${esc(
+        `<text x="${ovX + 14}" y="${y + 15}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" font-family="sans-serif">${esc(
+          (o.name || '?').trim().charAt(0).toUpperCase()
+        )}</text>`,
+        `<text x="${ovX + 28}" y="${y + NODE_H / 2 + 4}" text-anchor="start" font-size="12" fill="#1e3a8a" font-family="sans-serif">${esc(
           o.name
         )}</text>`
       )
@@ -299,10 +314,14 @@ export function buildPosterSVG(items: AltTool[]): string {
       const y = dnStart + i * (NODE_H + NODE_GAP)
       dnCenters.push(y + NODE_H / 2)
       rects.push(
-        `<rect x="${dnX}" y="${y}" width="${NODE_W}" height="${NODE_H}" rx="6" fill="#f3e8ff" stroke="#a855f7"/>`
+        `<rect x="${dnX}" y="${y}" width="${NODE_W}" height="${NODE_H}" rx="6" fill="#f3e8ff" stroke="#a855f7"/>`,
+        `<rect x="${dnX + 6}" y="${y + 4}" width="16" height="16" rx="4" fill="#a855f7"/>`
       )
       texts.push(
-        `<text x="${dnX + NODE_W / 2}" y="${y + NODE_H / 2 + 4}" text-anchor="middle" font-size="12" fill="#6b21a8" font-family="sans-serif">${esc(
+        `<text x="${dnX + 14}" y="${y + 15}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" font-family="sans-serif">${esc(
+          (d.name || '?').trim().charAt(0).toUpperCase()
+        )}</text>`,
+        `<text x="${dnX + 28}" y="${y + NODE_H / 2 + 4}" text-anchor="start" font-size="12" fill="#6b21a8" font-family="sans-serif">${esc(
           d.name
         )}</text>`
       )
@@ -318,7 +337,7 @@ export function buildPosterSVG(items: AltTool[]): string {
         const y1 = dnCenters[di]
         const x2 = ovX + NODE_W
         const y2 = ovCenters[oi]
-        const dx = Math.max(36, (x1 - x2) * 0.4)
+        const dx = Math.max(44, (x1 - x2) * 0.5)
         paths.push(
           `<path d="M ${x1} ${y1} C ${x1 - dx} ${y1}, ${x2 + dx} ${y2}, ${x2} ${y2}" fill="none" stroke="#cbd5e1" stroke-width="1.4" marker-end="url(#aaArrow)"/>`
         )
