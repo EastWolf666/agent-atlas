@@ -361,7 +361,7 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 
 ### 11.1 需求背景
 
-基于「国际主流 AI 工具的中国替代」信息图，将 13 个功能场景下的国际工具与国产替代选项结构化呈现，帮助用户在面对海外工具不可用、不合规或成本过高时，快速找到对应的国产方案。
+基于「国际主流 AI 工具的中国替代」信息图，将 13 个功能场景（每类海外/国产各至多 5 个）下的 130 个国际与国产工具结构化呈现，帮助用户在面对海外工具不可用、不合规或成本过高时，快速找到对应的国产方案。
 
 ### 11.2 数据来源与更新
 
@@ -424,7 +424,7 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 - **控制栏**：搜索框 + 卡片 / 表格 / 关系图三视图切换 + 场景单选 chips + 地区三态 chips；关系图视图下额外出现「导出大图 PNG」按钮。
 - **卡片视图**：工具名、厂商、地区、tagline、替代对象、场景、定价模式。
 - **表格视图**：名称、厂商、场景、替代对象、定价、平台、核实时间。
-- **关系图视图**：13 个场景同屏网格，每格内「海外（左，蓝）↔ 国产（右，紫）」左右两列紧凑排布，中间走廊用 SVG 贝塞尔连线表示替代，箭头指向被替代的海外工具；节点带品牌 logo（已收录 76 个真实品牌标，其余回退品牌色首字母头像）；节点可点击打开详情浮层、悬停高亮相关连线；支持一键导出整张大图为 2× PNG（Canvas 不可用时回退下载 SVG）。详见 [11.8](#118-关系图视图关系图视图)。
+- **关系图视图**：13 个场景同屏网格，每格内「海外（左，蓝）↔ 国产（右，紫）」左右两列紧凑排布，中间走廊用 SVG 贝塞尔连线表示替代，箭头指向被替代的海外工具；节点带品牌 logo（已收录 121 个真实品牌标，其余回退品牌色首字母头像）；节点可点击打开详情浮层、悬停高亮相关连线；支持一键导出整张大图为 2× PNG（Canvas 不可用时回退下载 SVG）。详见 [11.8](#118-关系图视图关系图视图)。
 - **详情浮层**：官网按钮、免责声明、描述、核心卖点、关键指标、替代关系跳转、溯源。
 
 ### 11.7 校验规则
@@ -450,11 +450,11 @@ Agent 产品底层依赖大模型，但模型选型信息（价格、上下文�
 
 #### 11.8.3 节点图标
 
-- 品牌 logo 内联在 `src/data/logos.ts`（`LOGOS` 字典），目前收录 **76 个**真实品牌标，覆盖 77 个节点中的 76 个，来源：
-  - **彩色 SVG 内联**（`kind: 'color'`，自带品牌色）：豆包、可灵、即梦、海螺、天工、PixPix、Ideogram、Pika、CodeGeeX、Midjourney、ElevenLabs、DeepL 等 16 个，取自 iconify 聚合的 `thesvg-color` / `logos` 集合（经 api.iconify.design 抓取后内联，无运行时 CDN 依赖）；
-  - **单色 SVG**（`kind: 'mono'`，渲染时填充品牌色）：simple-icons / Font Awesome / tabler / arcticons，ChatGPT、Claude、DeepL、Google 翻译、Otter、Speechify 等 28 个；
-  - **位图 data-URI**（`kind: 'image'`，48px 圆角白底 app-icon 风格）：钉钉、飞书、稿定、作业帮、夸克、Runway、网易天音、秘塔、Photomath、硅基智能（duix.com）、学而思九章（xueersi.com）等 32 个，抓自各官网 favicon / apple-touch-icon / 官方 CDN。
-- 未收录的品牌回退为**品牌色首字母头像**；当前仅「腾讯智影」1 个使用首字母（zinying.qq.com 不可达、腾讯云 favicon 被 WAF 拦截返回 HTML、聚合服务返回兜底假图，三路均无可靠信源）。
+- 品牌 logo 内联在 `src/data/logos.ts`（`LOGOS` 字典），目前收录 **121 个**真实品牌标，覆盖 130 个节点中的 121 个，来源：
+  - **彩色 SVG 内联**（`kind: 'color'`，自带品牌色）：豆包、可灵、即梦、海螺、天工、PixPix、Ideogram、Pika、CodeGeeX、Midjourney、ElevenLabs、DeepL、混元生图、PixVerse、Luma、Vidu、ima 等 27 个，取自 iconify 聚合的 `thesvg-color` / `logos` 集合（经 api.iconify.design 抓取后内联，无运行时 CDN 依赖）；
+  - **单色 SVG**（`kind: 'mono'`，渲染时填充品牌色）：simple-icons / Font Awesome / tabler / arcticons，ChatGPT、Claude、DeepL、Google 翻译、Otter、Speechify、Meta、Quizlet、Grok、Phind 等 31 个；
+  - **位图 data-URI**（`kind: 'image'`，48px 圆角白底 app-icon 风格）：钉钉、飞书、稿定、作业帮、夸克、Runway、网易天音、秘塔、Photomath、硅基智能、学而思九章、Cursor、Windsurf、Duolingo、腾讯会议、万兴播爆、讯飞虚拟人 等 63 个，抓自各官网 favicon / apple-touch-icon / 官方 CDN，抓自各官网 favicon / apple-touch-icon / 官方 CDN。
+- 未收录的品牌回退为**品牌色首字母头像**；当前 9 个使用首字母（腾讯智影三路信源均不可用；文心一格、Veo、Genspark、Reverso、Play.ht、Resemble、Grain、Notta 为本轮新增，官网 favicon 被 WAF 拦截或聚合服务失效，待后续补源）。
 - 运行时零外部请求：所有 logo 均内联进 bundle。
 
 #### 11.8.4 导出大图（PNG）
