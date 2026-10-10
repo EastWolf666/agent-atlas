@@ -54,7 +54,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
     "metrics": {
-      "stars": 91109,
+      "stars": 91127,
       "license": "NOASSERTION"
     }
   },
@@ -128,7 +128,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/zai-org/Open-AutoGLM",
     "metrics": {
-      "stars": 26368,
+      "stars": 26375,
       "license": "Apache-2.0"
     }
   },
@@ -321,7 +321,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/infiniflow/ragflow",
     "metrics": {
-      "stars": 91940,
+      "stars": 91970,
       "license": "Apache-2.0"
     }
   },
@@ -374,7 +374,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/xiaYuTian11/maskit",
     "metrics": {
-      "stars": 297,
+      "stars": 298,
       "license": "AGPL-3.0"
     }
   },
@@ -429,7 +429,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/kunpengtalk/OmniStudio",
     "metrics": {
-      "stars": 196,
+      "stars": 197,
       "license": "MIT"
     }
   },
@@ -481,7 +481,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/agents-universe/agents-universe",
     "metrics": {
-      "stars": 535,
+      "stars": 544,
       "license": "Apache-2.0"
     }
   },
@@ -760,7 +760,7 @@
     ],
     "repoUrl": "https://github.com/MoonshotAI/kimi-code",
     "metrics": {
-      "stars": 7816,
+      "stars": 7825,
       "license": "MIT"
     }
   },
@@ -2169,7 +2169,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
     "metrics": {
-      "stars": 765,
+      "stars": 767,
       "license": "MIT"
     }
   },
@@ -3329,7 +3329,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
     "metrics": {
-      "stars": 9422,
+      "stars": 9425,
       "license": "NOASSERTION"
     }
   },
@@ -3387,7 +3387,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/langchain-ai/langgraph",
     "metrics": {
-      "stars": 42994,
+      "stars": 43025,
       "license": "MIT"
     }
   },
@@ -3444,7 +3444,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/crewAIInc/crewAI",
     "metrics": {
-      "stars": 59518,
+      "stars": 59540,
       "license": "MIT"
     }
   },
@@ -3503,7 +3503,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/openai/openai-agents-python",
     "metrics": {
-      "stars": 29942,
+      "stars": 29954,
       "license": "MIT"
     }
   },
@@ -3556,7 +3556,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/anthropics/claude-agent-sdk-python",
     "metrics": {
-      "stars": 8238,
+      "stars": 8246,
       "license": "MIT"
     }
   },
@@ -3607,7 +3607,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/mem0ai/mem0",
     "metrics": {
-      "stars": 66923,
+      "stars": 66954,
       "license": "Apache-2.0"
     }
   },
@@ -4051,7 +4051,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
     "metrics": {
-      "stars": 187500,
+      "stars": 187518,
       "license": "NOASSERTION"
     }
   },
@@ -4101,7 +4101,7 @@
     "dataConfidence": "medium",
     "lastVerified": "2026-10-10",
     "metrics": {
-      "stars": 17702,
+      "stars": 17700,
       "license": "MIT"
     }
   },
@@ -4761,10 +4761,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-08",
+    "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/dust-tt/dust",
     "metrics": {
-      "stars": 1482,
+      "stars": 1483,
       "license": "MIT"
     }
   },
@@ -5158,7 +5158,7 @@
     "lastVerified": "2026-10-10",
     "repoUrl": "https://github.com/deepseek-ai/deepseek-harness",
     "metrics": {
-      "stars": 246628,
+      "stars": 247000,
       "license": "MIT"
     }
   },
@@ -5326,7 +5326,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/headroomlabs-ai/headroom",
     "metrics": {
-      "stars": 74863,
+      "stars": 74920,
       "license": "Apache-2.0"
     }
   },
@@ -5384,7 +5384,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/NousResearch/hermes-agent",
     "metrics": {
-      "stars": 252361,
+      "stars": 252538,
       "license": "MIT"
     }
   },
@@ -5441,7 +5441,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/anomalyco/opencode",
     "metrics": {
-      "stars": 212451,
+      "stars": 212551,
       "license": "MIT"
     }
   },
@@ -5498,142 +5498,8 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/stablyai/orca",
     "metrics": {
-      "stars": 88814,
+      "stars": 89156,
       "license": "MIT"
     }
-  },
-  {
-    "id": "meta-muse",
-    "name": "Muse",
-    "nameZh": "Meta Muse 个人智能体",
-    "vendor": "Meta",
-    "region": "overseas",
-    "tier": "productivity",
-    "status": "active",
-    "autonomyLevel": 4,
-    "autonomyReason": "云端专属 Secure VM 内可自主拆解目标、开浏览器填表单、跨应用持续推进，用户关闭应用后仍继续执行；但发邮件、支付等敏感动作必须经 Sentinel 审查并交用户批准。无公开的多智能体并行派发证据，够 L4 不到 L5。",
-    "tagline": "跑在专属安全虚拟机里的个人代办智能体",
-    "description": "Meta 2026-09-08 发布的个人 AI Agent，上线即登美国 App Store 总榜第一。用户在独立 App 或 WhatsApp 里交代目标，Muse 制定计划后在 Muse Secure VM（专属云端虚拟机，隔离存放数据与凭据）里持续推进：打开浏览器、填写表单、发送邮件、预订旅行、完成购物，甚至代表用户议价。系统级隔离的 Sentinel 审查 Agent 对外请求，敏感动作需用户确认并留存完整审计轨迹；密码与支付信息存独立安全区，Muse 自身不可见。具备跨应用长期记忆（可把 Instagram 收藏的食谱转成购物清单），由自研 Muse Spark 模型驱动。目前仅在美国开放（iOS/Android/网页），基础功能免费并附每周约 1 亿 token 额度，另设 $20 与 $100 两档订阅。OpenAI 9 月底发布的 dots 直接对标本产品。",
-    "highlights": [
-      "专属安全 VM 隔离运行",
-      "Sentinel 审查 + 全程审计",
-      "跨应用记忆与主动建议",
-      "支持 Stripe Link 代付"
-    ],
-    "limitations": [
-      "仅美国开放",
-      "敏感动作需人工批准",
-      "依赖 Meta 生态应用",
-      "训练数据退出需手动设置"
-    ],
-    "bestFor": "想要一个能长期记住偏好、代办邮件旅行购物的生活助理个人用户",
-    "deployment": [
-      "app",
-      "web",
-      "saas"
-    ],
-    "pricingModel": "freemium",
-    "pricingNote": "基础功能免费（含每周约 1 亿 token 额度）；订阅 $20/月与 $100/月两档；Meta 计划长期对经由 Muse 完成的交易抽成",
-    "contextWindow": "未公开",
-    "modalities": [
-      "text",
-      "image",
-      "audio"
-    ],
-    "openSource": false,
-    "prominence": 8,
-    "officialUrl": "https://muse.ai/",
-    "sources": [
-      {
-        "title": "Introducing Muse: The World’s First Personal AI Agent Built for Everyone",
-        "url": "https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/",
-        "type": "official",
-        "date": "2026-09"
-      },
-      {
-        "title": "Meta launches personal AI agent, Muse, emphasizes safety and privacy",
-        "url": "https://apnews.com/3a4572eb4cf4e95d8a0dfdad6e6ca065",
-        "type": "media",
-        "date": "2026-09"
-      },
-      {
-        "title": "Muse 百度百科（发布时间线与订阅档位）",
-        "url": "https://baike.baidu.com/item/Muse/68951307",
-        "type": "community",
-        "date": "2026-10"
-      }
-    ],
-    "dataConfidence": "high",
-    "lastVerified": "2026-10",
-    "relatedIds": [
-      "chatgpt-agent",
-      "openai-dots"
-    ]
-  },
-  {
-    "id": "grok-bot",
-    "name": "Grok Bot",
-    "nameZh": "Grok Bot 全天候智能体团队",
-    "vendor": "xAI",
-    "region": "overseas",
-    "tier": "productivity",
-    "status": "preview",
-    "autonomyLevel": 4,
-    "autonomyReason": "每个 Bot 拥有专属云端电脑，登录用户已有工具后端到端完成多步任务，支持 2-6 个 Bot 群聊协作、中途交接任务所有权，用户离线后持续工作；但关键决策仍需返回用户批准，且官方明确多 Bot 共享同一台云电脑不做安全隔离。有多智能体协作证据但审批闸门仍在，定 L4。",
-    "tagline": "自带云电脑、全天候在线的 AI 队友",
-    "description": "xAI 2026-08-11 发布的公测产品：给每个 Bot 配一台专属云端电脑，像给新员工开工牌一样让它登录你已有的工具，跨应用、收件箱持续完成多步工作，只在需要批准时回来找你。支持演示一次即存为 routine 反复执行；多个 Bot（2-6 个）可在群聊里互相交接任务，可设一个「参谋长」Bot 统筹各专职 Bot。随 SuperGrok 与 Cursor 订阅捆绑提供，不单独计价。注意：官方文档明确所有 Bot 共享同一台云电脑（共享 Cookie 与凭据），不能当安全边界；上线时无 SOC 2 等合规认证，xAI 消费端产品此前的护栏问题也值得留意。官网示例场景偏通用办公：销售外呼、招聘、广告投放、报销管理、Bug 复现等。",
-    "highlights": [
-      "每个 Bot 独立云电脑 24/7 工作",
-      "多 Bot 群聊协作与任务交接",
-      "演示一次即可存为 routine",
-      "捆绑 SuperGrok 与 Cursor 订阅"
-    ],
-    "limitations": [
-      "公测阶段能力不稳",
-      "多 Bot 共享云电脑无隔离",
-      "无 SOC 2 等合规认证",
-      "超额按 token 直接计费无上限"
-    ],
-    "bestFor": "已订 SuperGrok Heavy 或 Cursor Ultra、想把重复性跨应用工作整包交出去的团队",
-    "deployment": [
-      "app",
-      "saas"
-    ],
-    "pricingModel": "subscription",
-    "pricingNote": "不单独售卖：随 SuperGrok（Heavy $300/月）、Cursor Ultra $200/月、Cursor Teams Premium $120/席/月 附送；各档含每周用量，超出按模型 token 成本直接计费",
-    "contextWindow": "未公开",
-    "modalities": [
-      "text",
-      "image"
-    ],
-    "openSource": false,
-    "prominence": 7,
-    "officialUrl": "https://x.ai/news/introducing-grok-bot",
-    "sources": [
-      {
-        "title": "Introducing Grok Bot",
-        "url": "https://x.ai/news/introducing-grok-bot",
-        "type": "official",
-        "date": "2026-08"
-      },
-      {
-        "title": "Grok Bot: xAI's Always-On AI Teammates, Explained",
-        "url": "https://toolradar.com/blog/what-is-grok-bot",
-        "type": "media",
-        "date": "2026-09"
-      },
-      {
-        "title": "xAI Launches Grok Bot, Always-On AI Teammates With Their Own Cloud Computers",
-        "url": "https://www.unite.ai/xai-launches-grok-bot-always-on-ai-teammates-with-their-own-cloud-computers/",
-        "type": "media",
-        "date": "2026-08"
-      }
-    ],
-    "dataConfidence": "high",
-    "lastVerified": "2026-10",
-    "relatedIds": [
-      "openai-dots",
-      "chatgpt-agent"
-    ]
   }
 ]
