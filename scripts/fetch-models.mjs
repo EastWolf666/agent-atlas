@@ -28,6 +28,7 @@ const ROOT = resolve(__dirname, '..')
 
 const MODELS_PATH = resolve(ROOT, 'src/data/models.json')
 const VERIFIED_PATH = resolve(ROOT, 'data/models-verified.json')
+const EXTRA_PATH = resolve(ROOT, 'data/models-extra.json')
 const DRY_RUN = process.argv.includes('--dry-run')
 
 function log(msg) {
@@ -61,6 +62,26 @@ function loadPrevModels() {
     return Array.isArray(j.models) ? j.models : []
   } catch {
     return []
+  }
+}
+
+/**
+ * 读手工补充台账（data/models-extra.json）。
+ *
+ * 为什么需要：models.json 是 OpenRouter 的全量镜像，但聚合器不是全网——
+ * 分阶段发布的新旗舰（如 Gemini 4 Argon 只对安全防御者开放）在上架 OpenRouter 之前
+ * 页面上就完全搜不到。这类条目按厂商官方发布信息人工维护在独立台账里，
+ * 每次全量重写时合并进去；与 OpenRouter 重名的以抓取结果为准（台账条目被覆盖）。
+ * 台账格式：{ extras: [ {完整模型字段...} ] }
+ */
+function loadExtraModels() {
+  if (!existsSync(EXTRA_PATH)) return []
+  try {
+    const j = JSON.parse(readFileSync(EXTRA_PATH, 'utf8'))
+    const list = Array.isArray(j) ? j : (j.extras ?? [])
+    return list.filter((m) => m && typeof m.id === 'string')
+  } catch (e) {
+    throw new Error(`data/models-extra.json 解析失败: ${e.message}`)
   }
 }
 
@@ -164,6 +185,17 @@ async function main() {
   log('\n[1/3] 抓取 OpenRouter 模型列表')
   const { models, meta } = await fetchModels()
   log(`  抓取到 ${models.length} 个模型`)
+
+  // 合并手工补充台账（分阶段发布、未上架聚合器的旗舰模型）
+  const extras = loadExtraModels()
+  if (extras.length) {
+    const fetched = new Set(models.map((m) => m.id))
+    const merged = extras.filter((m) => !fetched.has(m.id))
+    const skipped = extras.length - merged.length
+    log(`  手工台账 ${extras.length} 条：合并 ${merged.length}${skipped ? `（${skipped} 条已在上游，跳过）` : ''}`)
+    models.push(...merged)
+    meta.total = models.length
+  }
 
   /*
    * 人工核实标记的来源是 data/models-verified.json，不是上一版 models.json。

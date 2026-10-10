@@ -1,0 +1,39 @@
+{
+  "_comment": "手工补充模型台账：分阶段发布、暂未上架 OpenRouter 的旗舰模型。字段与 models.json 条目同构；一旦上游收录同名 id，以抓取结果为准（本条自动失效）。",
+  "extras": [
+    {
+      "id": "google-gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "vendor": "Google",
+      "vendorSlug": "google",
+      "region": "overseas",
+      "openRouterId": "google/gemini-4-argon",
+      "contextWindow": 1000000,
+      "maxOutputTokens": 1000000,
+      "priceInput": 2,
+      "priceOutput": 10,
+      "priceCacheRead": 0.1,
+      "isRouter": false,
+      "inputModalities": ["text", "image", "video", "file"],
+      "outputModalities": ["text"],
+      "isMultimodal": true,
+      "openWeights": false,
+      "openWeightsUrl": null,
+      "releasedAt": "2026-09-30",
+      "knowledgeCutoff": null,
+      "supportsReasoning": true,
+      "reasoningMandatory": true,
+      "scores": {
+        "intelligence": null,
+        "coding": 77.9,
+        "agentic": null
+      },
+      "officialUrl": "https://deepmind.google/models/gemini/",
+      "isBatch": false,
+      "description": "Gemini 4 Argon 是 Google 2026-09-30 发布的新一代旗舰（Gemini 3.5 Pro 被取消后直接跳代）。主打长程复杂工作流：真实软件工程（DeepSWE v1.1 77.9%）、企业知识工作（法律/金融）、网络安全防御。输出窗口扩到业界最大的 100 万 token。首发推广价 $2/$10 每百万 token，缓存输入 95% 折扣。目前仅通过 Fairwind 计划向可信网络安全防御者开放，暂未上架 OpenRouter 等聚合器，价格为官方发布信息。",
+      "autoAdmitted": true,
+      "autoAdmittedAt": "2026-10-10",
+      "verifiedBy": null
+    }
+  ]
+}
