@@ -13,7 +13,7 @@ import { LOGOS } from '../../data/logos'
  */
 
 type LinkDef = { from: string; to: string }
-type LinkPath = { from: string; to: string; d: string }
+type LinkPath = { from: string; to: string; d: string; xR: number; yR: number; xL: number; yL: number }
 
 /** 品牌标：库里有则渲染真实 SVG，否则回退首字母 */
 function LogoGlyph({ item, size = 18 }: { item: AltTool; size?: number }) {
@@ -96,7 +96,7 @@ function ScenarioDiagram({
         const yL = tr.top - cr.top + tr.height / 2
         const dx = Math.max(22, (xR - xL) * 0.45)
         const d = `M ${xR} ${yR} C ${xR + dx} ${yR}, ${xL - dx} ${yL}, ${xL} ${yL}`
-        return { from, to, d }
+        return { from, to, d, xR, yR, xL, yL }
       })
       .filter(Boolean) as LinkPath[]
     setSize({ w: cr.width, h: cr.height })
@@ -142,12 +142,28 @@ function ScenarioDiagram({
               viewBox="0 0 10 10"
               refX="8"
               refY="5"
-              markerWidth="7"
-              markerHeight="7"
+              markerWidth="6"
+              markerHeight="6"
               orient="auto-start-reverse"
+              className="aa-arrow"
             >
-              <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8" />
+              <path d="M0 0 L10 5 L0 10 z" />
             </marker>
+            {links.map((l) => (
+              <linearGradient
+                key={`g-${l.from}-${l.to}`}
+                id={`${arrowId}-g-${l.from}-${l.to}`}
+                gradientUnits="userSpaceOnUse"
+                x1={l.xR}
+                y1={l.yR}
+                x2={l.xL}
+                y2={l.yL}
+              >
+                {/* 起点（右，国产）紫 → 终点（左，海外）蓝，与两列节点配色一致 */}
+                <stop offset="0%" className="aa-link-from" />
+                <stop offset="100%" className="aa-link-to" />
+              </linearGradient>
+            ))}
           </defs>
           {links.map((l) => {
             const active = hovered === l.from || hovered === l.to
@@ -156,9 +172,12 @@ function ScenarioDiagram({
                 key={`${l.from}-${l.to}`}
                 d={l.d}
                 fill="none"
-                stroke={active ? '#7c3aed' : '#cbd5e1'}
-                strokeWidth={active ? 2.6 : 1.5}
-                strokeOpacity={hovered && !active ? 0.3 : 1}
+                style={{ fill: 'none' }}
+                fillRule="evenodd"
+                stroke={active ? '#7c3aed' : `url(#${arrowId}-g-${l.from}-${l.to})`}
+                strokeWidth={active ? 2.2 : 1}
+                strokeLinecap="round"
+                strokeOpacity={hovered && !active ? 0.2 : 0.85}
                 markerEnd={`url(#${arrowId})`}
                 className="transition-[stroke,stroke-width,stroke-opacity] duration-150"
               />
@@ -361,7 +380,7 @@ export function buildPosterSVG(items: AltTool[]): string {
         const yL = nodeY(oi) + NODE_H / 2
         const dx = Math.max(22, (xR - xL) * 0.45)
         paths.push(
-          `<path d="M ${xR} ${yR} C ${xR + dx} ${yR}, ${xL - dx} ${yL}, ${xL} ${yL}" fill="none" stroke="#cbd5e1" stroke-width="1.4" marker-end="url(#aaArrow)"/>`
+          `<path d="M ${xR} ${yR} C ${xR + dx} ${yR}, ${xL - dx} ${yL}, ${xL} ${yL}" fill="none" stroke="#94a3b8" stroke-width="1" stroke-opacity="0.9" marker-end="url(#aaArrow)"/>`
         )
       }
     })

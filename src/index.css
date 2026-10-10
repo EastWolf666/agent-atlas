@@ -112,6 +112,26 @@
   .aa-panel-scroll::-webkit-scrollbar-thumb:hover {
     background-color: rgb(var(--faint) / 0.7);
   }
+
+  /* 替代关系图连线：国产(紫)→海外(蓝) 渐变，随亮/暗主题切换深浅 */
+  .aa-link-from {
+    stop-color: #a855f7;
+  }
+  .aa-link-to {
+    stop-color: #3b82f6;
+  }
+  .aa-arrow path {
+    fill: #94a3b8;
+  }
+  .dark .aa-link-from {
+    stop-color: #c084fc;
+  }
+  .dark .aa-link-to {
+    stop-color: #60a5fa;
+  }
+  .dark .aa-arrow path {
+    fill: #94a3b8;
+  }
 }
 
 @layer utilities {
