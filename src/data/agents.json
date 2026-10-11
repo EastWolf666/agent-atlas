@@ -51,10 +51,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
     "metrics": {
-      "stars": 91127,
+      "stars": 91149,
       "license": "NOASSERTION"
     }
   },
@@ -125,10 +125,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/zai-org/Open-AutoGLM",
     "metrics": {
-      "stars": 26375,
+      "stars": 26377,
       "license": "Apache-2.0"
     }
   },
@@ -318,10 +318,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/infiniflow/ragflow",
     "metrics": {
-      "stars": 91970,
+      "stars": 92003,
       "license": "Apache-2.0"
     }
   },
@@ -371,10 +371,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/xiaYuTian11/maskit",
     "metrics": {
-      "stars": 298,
+      "stars": 299,
       "license": "AGPL-3.0"
     }
   },
@@ -426,10 +426,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/kunpengtalk/OmniStudio",
     "metrics": {
-      "stars": 197,
+      "stars": 198,
       "license": "MIT"
     }
   },
@@ -478,10 +478,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/agents-universe/agents-universe",
     "metrics": {
-      "stars": 544,
+      "stars": 562,
       "license": "Apache-2.0"
     }
   },
@@ -754,13 +754,13 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "relatedIds": [
       "kimi-work"
     ],
     "repoUrl": "https://github.com/MoonshotAI/kimi-code",
     "metrics": {
-      "stars": 7825,
+      "stars": 7837,
       "license": "MIT"
     }
   },
@@ -2166,10 +2166,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
     "metrics": {
-      "stars": 767,
+      "stars": 775,
       "license": "MIT"
     }
   },
@@ -3267,10 +3267,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-03",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/fanfanyuyang/bid-agent-vscode",
     "metrics": {
-      "stars": 134,
+      "stars": 103,
       "license": null
     }
   },
@@ -3326,10 +3326,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
     "metrics": {
-      "stars": 9425,
+      "stars": 9430,
       "license": "NOASSERTION"
     }
   },
@@ -3384,10 +3384,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/langchain-ai/langgraph",
     "metrics": {
-      "stars": 43025,
+      "stars": 43079,
       "license": "MIT"
     }
   },
@@ -3441,10 +3441,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/crewAIInc/crewAI",
     "metrics": {
-      "stars": 59540,
+      "stars": 59580,
       "license": "MIT"
     }
   },
@@ -3500,10 +3500,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/openai/openai-agents-python",
     "metrics": {
-      "stars": 29954,
+      "stars": 29967,
       "license": "MIT"
     }
   },
@@ -3553,10 +3553,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/anthropics/claude-agent-sdk-python",
     "metrics": {
-      "stars": 8246,
+      "stars": 8249,
       "license": "MIT"
     }
   },
@@ -3604,10 +3604,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/mem0ai/mem0",
     "metrics": {
-      "stars": 66954,
+      "stars": 66994,
       "license": "Apache-2.0"
     }
   },
@@ -4048,10 +4048,10 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
     "metrics": {
-      "stars": 187518,
+      "stars": 187526,
       "license": "NOASSERTION"
     }
   },
@@ -4099,9 +4099,9 @@
       }
     ],
     "dataConfidence": "medium",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "metrics": {
-      "stars": 17700,
+      "stars": 17702,
       "license": "MIT"
     }
   },
@@ -5155,10 +5155,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "repoUrl": "https://github.com/deepseek-ai/deepseek-harness",
     "metrics": {
-      "stars": 247000,
+      "stars": 247479,
       "license": "MIT"
     }
   },
@@ -5321,12 +5321,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/headroomlabs-ai/headroom",
     "metrics": {
-      "stars": 74920,
+      "stars": 75074,
       "license": "Apache-2.0"
     }
   },
@@ -5379,12 +5379,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/NousResearch/hermes-agent",
     "metrics": {
-      "stars": 252538,
+      "stars": 252795,
       "license": "MIT"
     }
   },
@@ -5436,12 +5436,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/anomalyco/opencode",
     "metrics": {
-      "stars": 212551,
+      "stars": 212726,
       "license": "MIT"
     }
   },
@@ -5493,12 +5493,12 @@
       }
     ],
     "dataConfidence": "low",
-    "lastVerified": "2026-10-10",
+    "lastVerified": "2026-10-11",
     "autoAdmitted": true,
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/stablyai/orca",
     "metrics": {
-      "stars": 89156,
+      "stars": 89723,
       "license": "MIT"
     }
   },
