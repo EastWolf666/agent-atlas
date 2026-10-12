@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10",
+  "generatedAt": "2026-10-12",
   "candidates": [
     {
       "slug": "hnalt:49964361",
@@ -59,6 +59,26 @@
       },
       "snippet": null,
       "discoveredAt": "2026-10-10",
+      "decided": false
+    },
+    {
+      "slug": "hnalt:50056749",
+      "title": "Show HN: Llms.py – Lightweight, self-hosted ChatGPT alternative to OpenWebUI",
+      "url": "https://news.ycombinator.com/item?id=50056749",
+      "storyUrl": "https://llmspy.org",
+      "source": "hn",
+      "matchedOverseas": [
+        "chatgpt"
+      ],
+      "categoryHint": "chat",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "snippet": null,
+      "discoveredAt": "2026-10-12",
       "decided": false
     }
   ]
