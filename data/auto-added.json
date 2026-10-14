@@ -26,5 +26,12 @@
     "source": "github",
     "reviewState": "pending",
     "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  },
+  {
+    "id": "rea",
+    "admittedAt": "2026-10-14",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
   }
 ]
