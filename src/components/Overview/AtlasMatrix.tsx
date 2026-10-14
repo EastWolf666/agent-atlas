@@ -403,6 +403,11 @@ export function AtlasMatrix({ agents, onSelect }: Props) {
           <p className="mt-0.5 text-2xs text-muted">
             横轴自主性等级，纵轴应用领域，气泡大小代表相对知名度
           </p>
+          <p className="mt-1 max-w-2xl text-2xs leading-relaxed text-faint">
+            气泡大小依据「知名度」人工评定（1–10 档）：开源项目以 GitHub
+            star 数为主要依据，闭源产品综合公开报道的用户规模与行业影响力估算；
+            图中位置只反映自主性 × 领域两个维度，与排名无关，点按气泡可查看数据来源。
+          </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="hidden text-2xs text-faint sm:inline">滚轮 / 双指缩放</span>
