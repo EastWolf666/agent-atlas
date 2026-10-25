@@ -33,5 +33,19 @@
     "source": "github",
     "reviewState": "pending",
     "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  },
+  {
+    "id": "openvlharness",
+    "admittedAt": "2026-10-25",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  },
+  {
+    "id": "whatsapp-mcp",
+    "admittedAt": "2026-10-25",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
   }
 ]

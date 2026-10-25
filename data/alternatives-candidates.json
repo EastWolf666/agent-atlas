@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14",
+  "generatedAt": "2026-10-25",
   "candidates": [
     {
       "slug": "hnalt:49964361",
@@ -39,6 +39,46 @@
       },
       "snippet": null,
       "discoveredAt": "2026-10-14",
+      "decided": false
+    },
+    {
+      "slug": "hnalt:50086716",
+      "title": "Show HN: Llms.py – Lightweight, self-hosted ChatGPT alternative to OpenWebUI",
+      "url": "https://news.ycombinator.com/item?id=50086716",
+      "storyUrl": "https://llmspy.org",
+      "source": "hn",
+      "matchedOverseas": [
+        "chatgpt"
+      ],
+      "categoryHint": "chat",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "snippet": null,
+      "discoveredAt": "2026-10-25",
+      "decided": false
+    },
+    {
+      "slug": "hnalt:50183892",
+      "title": "Show HN: Omnara – Open-source alternative to Claude Managed Agents",
+      "url": "https://news.ycombinator.com/item?id=50183892",
+      "storyUrl": "https://github.com/omnara-ai/omnara",
+      "source": "hn",
+      "matchedOverseas": [
+        "claude"
+      ],
+      "categoryHint": "chat",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 112,
+        "hnComments": 34
+      },
+      "snippet": "Hey all, Kartik from Omnara (<a href=\"https:&#x2F;&#x2F;omnara.com\">https:&#x2F;&#x2F;omnara.com</a>) here. We&#x27;re building an open-source API for running durable agents. You create an agent with an API call, and Omnara runs the agent loop, gives the agent sandboxes to run co",
+      "discoveredAt": "2026-10-25",
       "decided": false
     }
   ]
