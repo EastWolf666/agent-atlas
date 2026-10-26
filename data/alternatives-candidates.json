@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25",
+  "generatedAt": "2026-10-26",
   "candidates": [
     {
       "slug": "hnalt:49964361",
@@ -79,6 +79,27 @@
       },
       "snippet": "Hey all, Kartik from Omnara (<a href=\"https:&#x2F;&#x2F;omnara.com\">https:&#x2F;&#x2F;omnara.com</a>) here. We&#x27;re building an open-source API for running durable agents. You create an agent with an API call, and Omnara runs the agent loop, gives the agent sandboxes to run co",
       "discoveredAt": "2026-10-25",
+      "decided": false
+    },
+    {
+      "slug": "hnalt:50246238",
+      "title": "Show HN: Hob - Open-source, on device alternative to Claude Cowork and ChatGPT",
+      "url": "https://news.ycombinator.com/item?id=50246238",
+      "storyUrl": "https://github.com/FrigadeHQ/hob",
+      "source": "hn",
+      "matchedOverseas": [
+        "chatgpt",
+        "claude"
+      ],
+      "categoryHint": "chat",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 81,
+        "hnComments": 21
+      },
+      "snippet": "Hey HN, I&#x27;m Christian and this is a new OSS project I&#x27;ve been noodling on for the last couple of weeks. Hob is a free, MIT-licensed desktop app for Mac, Windows and Linux that works on your files the way the Claude and ChatGPT desktop apps do, except the model runs on y",
+      "discoveredAt": "2026-10-26",
       "decided": false
     }
   ]

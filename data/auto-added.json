@@ -47,5 +47,12 @@
     "source": "github",
     "reviewState": "pending",
     "note": "由每日脚本自动收录，定级与描述尚未人工核实"
+  },
+  {
+    "id": "sales-assistant-agent",
+    "admittedAt": "2026-10-26",
+    "source": "github",
+    "reviewState": "pending",
+    "note": "由每日脚本自动收录，定级与描述尚未人工核实"
   }
 ]

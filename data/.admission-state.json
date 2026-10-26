@@ -19,7 +19,11 @@
     "2026-10-25": {
       "admitted": 0,
       "sourcesHealthy": true
+    },
+    "2026-10-26": {
+      "admitted": 1,
+      "sourcesHealthy": true
     }
   },
-  "zeroStreak": 1
+  "zeroStreak": 0
 }
