@@ -482,13 +482,14 @@ Agent 标签页讲「是什么、能做什么」，缺一层「实测表现如�
 
 | 来源 | 内容 | 口径 | 更新 |
 |---|---|---|---|
-| [Assistant Analysis](https://assistantanalysis.com/leaderboard) | 商业数字助理实测榜（9 个系统） | 49 项真实任务的**验证通过率**（达成目标且无越权/安全违规），另附可靠性、任务覆盖 | 评测批次发布时 |
+| [Artificial Analysis · Coding Agent Index](https://artificialanalysis.ai/agents) | 商业编码 Agent 实测榜（Agent × 驱动模型组合，约 22 条 / 9 个 Agent） | FrontierCode v1.1、SWE-Atlas-QnA、Terminal-Bench v4 三项**等权合成的编码指数**（0–100），另附成本/任务、耗时、安全拒绝率 | AA 重算时 |
 | [The Agentic Leaderboard](https://www.theagenticleaderboard.com/agent) | 开源 Agent 综合评分 Top 100 | 可靠性、工具选择质量、平均步数、成本等**加权综合分**（0–100） | 每周一重算 |
 
 - 抓取脚本：`scripts/fetch-agent-scores.mjs`，输出 `src/data/agent-scores.json`。
-- 商业榜是 SPA，用 Playwright 渲染后读表格；开源榜是静态 HTML，直接解析列表，再并发抓详情页补分项（失败条目沿用上一版分项）。
-- 已接入每日管线 `fetch.mjs` 第 9 步（`[9/9] Agent 评分同步`），失败只告警、不影响 Agent/模型主数据。
-- 熔断：开源榜 0 条或较上版腰斩即放弃写盘；商业榜抓取失败保留上一版。
+- 商业榜与大模型评分页同源：两个页面都解析 Artificial Analysis 的 Next.js flight 数据（`self.__next_f.push`），纯 HTTP，不需要浏览器；开源榜是静态 HTML，直接解析列表，再并发抓详情页补分项（失败条目沿用上一版分项）。
+- 已接入每日管线 `fetch.mjs` 第 9 步（`[9/10] Agent 评分同步`），失败只告警、不影响 Agent/模型主数据。
+- 熔断：开源榜 0 条或较上版腰斩即放弃写盘；商业榜 0 条且无同口径历史数据可兜底时放弃写盘（旧口径数据不会被拿来兜底）。
+- 换源记录：商业榜原用 Assistant Analysis，该源只有 9 个系统且快照自 2026-09 起不再更新，2026-10-27 换成 AA Coding Agent Index。
 
 ### 12.3 页面设计
 

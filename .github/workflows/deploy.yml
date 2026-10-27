@@ -17,9 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # playwright 是给每日数据管线抓 Assistant Analysis 商业榜用的（仅沙箱内运行），
-    # 部署完全用不到浏览器。不跳过的话 npm ci 会触发 postinstall 下载 ~150MB 浏览器，
-    # 白白拖慢 Pages 构建。
+    # playwright 只给每日数据管线兜底用（抓渲染后才出数据的页面），当前两个评分源
+    # 都已改成纯 HTTP 解析 Next.js flight 数据，代码里已无引用，留着备用。
+    # 部署完全用不到浏览器，不跳过的话 npm ci 会触发 postinstall 下载 ~150MB，白白拖慢构建。
     env:
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
     steps:

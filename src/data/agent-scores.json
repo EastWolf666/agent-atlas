@@ -3,13 +3,13 @@
     "lastUpdated": "2026-10-27",
     "sources": [
       {
-        "key": "assistant-analysis",
-        "name": "Assistant Analysis",
-        "url": "https://assistantanalysis.com/leaderboard",
-        "version": "v0.2.0",
-        "note": "49 项真实任务逐项验证；主指标为任务验证通过率（达成目标且无越权/安全违规）",
-        "evaluatedAt": "Sep 17, 2026",
-        "count": 9
+        "key": "aa-coding-agents",
+        "name": "Artificial Analysis · Coding Agent Index",
+        "url": "https://artificialanalysis.ai/agents",
+        "version": "FrontierCode v1.1 + SWE-Atlas-QnA + Terminal-Bench v4",
+        "note": "三项数据集等权合成；编码指数 = 各数据集平均 reward（0–100）。一行是一个 Agent × 驱动模型组合",
+        "evaluatedAt": "2026-09-06",
+        "count": 22
       },
       {
         "key": "agentic-leaderboard",
@@ -21,107 +21,712 @@
         "count": 100
       }
     ],
-    "disclaimer": "两个榜单口径不同，不能跨榜比较，也不做合并总分：Assistant Analysis 为任务验证通过率（%），The Agentic Leaderboard 为加权综合分（0–100）。数据由脚本自动抓取，商用决策请以原榜单与方法论文档为准。"
+    "disclaimer": "两个榜单口径不同，不能跨榜比较，也不做合并总分：Artificial Analysis 编码指数是三项数据集的平均 reward（0–100），The Agentic Leaderboard 是加权综合分（0–100）。成本与耗时为榜单测试时点的均值，不是厂商定价。数据由脚本自动抓取，商用决策请以原榜单与方法论文档为准。"
   },
   "commercial": [
     {
       "rank": 1,
-      "name": "Town",
-      "developer": "Town",
-      "score": 94.8,
-      "reliability": 88,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/town"
+      "name": "Devin Fusion CLI - Claude Opus 5.5 Max + GPT-6 Luna High",
+      "agent": "Devin Fusion CLI",
+      "model": "Claude Opus 5.5 Max + GPT-6 Luna High",
+      "developer": "Cognition",
+      "score": 61.5,
+      "costUsd": 8,
+      "wallTimeSec": 3067,
+      "steps": 99,
+      "cacheHitRate": 87,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 53.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 68.3,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 62.6,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 2,
-      "name": "Claude Cowork",
-      "developer": "Anthropic",
-      "score": 93.5,
-      "reliability": 86,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/claude-cowork"
+      "name": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "agent": "Devin Fusion CLI",
+      "model": "Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "developer": "Cognition",
+      "score": 58.7,
+      "costUsd": 8.2,
+      "wallTimeSec": 2254,
+      "steps": 92,
+      "cacheHitRate": 95.8,
+      "safetyRefusalRate": 7.2,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 51.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 68.3,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 56.1,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 3,
-      "name": "Muse",
-      "developer": "Meta",
-      "score": 89,
-      "reliability": 82,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/muse"
+      "name": "Claude Code - Fable 5.1 (max) (with fallback)",
+      "agent": "Claude Code",
+      "model": "Fable 5.1 (max) (with fallback)",
+      "developer": "Anthropic",
+      "score": 57.6,
+      "costUsd": 11.53,
+      "wallTimeSec": 2116,
+      "steps": 42,
+      "cacheHitRate": 92.3,
+      "safetyRefusalRate": 9.1,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 48.9,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 66.4,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 57.6,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 4,
-      "name": "Hermes",
-      "developer": "Hermes",
-      "score": 86.9,
-      "reliability": 90,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/hermes"
+      "name": "Devin Fusion CLI - GPT-6 Astra XHigh + SWE-2 Medium",
+      "agent": "Devin Fusion CLI",
+      "model": "GPT-6 Astra XHigh + SWE-2 Medium",
+      "developer": "Cognition",
+      "score": 53.1,
+      "costUsd": 4.34,
+      "wallTimeSec": 1270,
+      "steps": 59,
+      "cacheHitRate": 91.3,
+      "safetyRefusalRate": 2.2,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 49,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 60.2,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 50,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 5,
-      "name": "Manus",
-      "developer": "Manus",
-      "score": 85.7,
-      "reliability": 65,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/manus"
+      "name": "Opencode - GLM-5.3",
+      "agent": "Opencode",
+      "model": "GLM-5.3",
+      "developer": "OpenCode",
+      "score": 48.9,
+      "costUsd": 5.23,
+      "wallTimeSec": 3370,
+      "steps": 112,
+      "cacheHitRate": 95,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 48.2,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 58.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 39.9,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 6,
-      "name": "instinct",
-      "developer": "unknown",
-      "score": 79.3,
-      "reliability": 70,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/instinct"
+      "name": "Codex - GPT-6.1 Terra (xhigh)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (xhigh)",
+      "developer": "OpenAI",
+      "score": 48.2,
+      "costUsd": 0.69,
+      "wallTimeSec": 982,
+      "steps": 72,
+      "cacheHitRate": 95.7,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 44.9,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 53.8,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 46,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 7,
-      "name": "OpenClaw",
-      "developer": "OpenClaw",
-      "score": 77.4,
-      "reliability": 76,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/openclaw"
+      "name": "Codex - GPT-6.1 Terra (max)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (max)",
+      "developer": "OpenAI",
+      "score": 48.1,
+      "costUsd": 1.24,
+      "wallTimeSec": 1569,
+      "steps": 100,
+      "cacheHitRate": 96.7,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 41.8,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 54,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 48.5,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 8,
-      "name": "Grok Bot",
-      "developer": "xAI",
-      "score": 76.6,
-      "reliability": 73,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/grok-bot"
+      "name": "Codex - DeepSeek V4.1 Flash",
+      "agent": "Codex",
+      "model": "DeepSeek V4.1 Flash",
+      "developer": "OpenAI",
+      "score": 47.3,
+      "costUsd": 0.39,
+      "wallTimeSec": 2284,
+      "steps": 143,
+      "cacheHitRate": 98.3,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 52.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 61,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 28.3,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     },
     {
       "rank": 9,
-      "name": "Play",
-      "developer": "Play",
-      "score": 75.3,
-      "reliability": 67,
-      "coverage": "49 / 49",
-      "lastEvaluated": "Sep 17, 2026",
-      "status": "Verified",
-      "url": "https://assistantanalysis.com/assistants/play"
+      "name": "DeepSeek Harness - DeepSeek V4.1 Flash 1017",
+      "agent": "DeepSeek Harness",
+      "model": "DeepSeek V4.1 Flash 1017",
+      "developer": "DeepSeek",
+      "score": 46.3,
+      "costUsd": 0.3,
+      "wallTimeSec": 1285,
+      "steps": 102,
+      "cacheHitRate": 96.8,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 46.5,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 61.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 30.8,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 10,
+      "name": "Codex - GPT-6.1 Terra (high)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (high)",
+      "developer": "OpenAI",
+      "score": 46.3,
+      "costUsd": 0.54,
+      "wallTimeSec": 759,
+      "steps": 67,
+      "cacheHitRate": 95,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 43.5,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 53,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 42.4,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 11,
+      "name": "Muse Code - Muse Spark 1.3 (max)",
+      "agent": "Muse Code",
+      "model": "Muse Spark 1.3 (max)",
+      "developer": "Meta",
+      "score": 45.7,
+      "costUsd": 3.91,
+      "wallTimeSec": 1398,
+      "steps": 208,
+      "cacheHitRate": 96.7,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 46.7,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 58.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 31.8,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 12,
+      "name": "Claude Code - Step 5 Preview",
+      "agent": "Claude Code",
+      "model": "Step 5 Preview",
+      "developer": "Anthropic",
+      "score": 43.1,
+      "costUsd": 1.84,
+      "wallTimeSec": 3665,
+      "steps": 142,
+      "cacheHitRate": 98.4,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 40.5,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 58.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 30.3,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 13,
+      "name": "Codex - GPT-6.1 Terra (medium)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (medium)",
+      "developer": "OpenAI",
+      "score": 42,
+      "costUsd": 0.39,
+      "wallTimeSec": 611,
+      "steps": 58,
+      "cacheHitRate": 94.2,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 43.8,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 47,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 35.4,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 14,
+      "name": "Kimi Code CLI - Kimi K3",
+      "agent": "Kimi Code CLI",
+      "model": "Kimi K3",
+      "developer": "Kimi",
+      "score": 41.4,
+      "costUsd": 5.17,
+      "wallTimeSec": 3773,
+      "steps": 186,
+      "cacheHitRate": 96,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 43.1,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 59.9,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 21.2,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 15,
+      "name": "Claude Code - Qwen3.8 Max",
+      "agent": "Claude Code",
+      "model": "Qwen3.8 Max",
+      "developer": "Anthropic",
+      "score": 39.2,
+      "costUsd": 3.8,
+      "wallTimeSec": 4568,
+      "steps": 115,
+      "cacheHitRate": 94.7,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 44.8,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 56.2,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 16.7,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 16,
+      "name": "Codex - GPT-6.1 Terra (none)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (none)",
+      "developer": "OpenAI",
+      "score": 39.2,
+      "costUsd": 0.45,
+      "wallTimeSec": 572,
+      "steps": 82,
+      "cacheHitRate": 94.8,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 46.2,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 46.2,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 25.3,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 17,
+      "name": "Claude Code - Haiku 5.5 (max)",
+      "agent": "Claude Code",
+      "model": "Haiku 5.5 (max)",
+      "developer": "Anthropic",
+      "score": 37.3,
+      "costUsd": 2.67,
+      "wallTimeSec": 4256,
+      "steps": 114,
+      "cacheHitRate": 91.8,
+      "safetyRefusalRate": 0.5,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 47.4,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 33.9,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 30.8,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 18,
+      "name": "Codex - GPT-6.1 Terra (low)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (low)",
+      "developer": "OpenAI",
+      "score": 34.9,
+      "costUsd": 0.2,
+      "wallTimeSec": 379,
+      "steps": 43,
+      "cacheHitRate": 92.6,
+      "safetyRefusalRate": 0.2,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 40.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 38.7,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 25.3,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 19,
+      "name": "Antigravity SDK - Gemini 3.8 Flash (high)",
+      "agent": "Antigravity SDK v0.1.12",
+      "model": "Gemini 3.8 Flash (high)",
+      "developer": "Google",
+      "score": 33.3,
+      "costUsd": 2.51,
+      "wallTimeSec": 786,
+      "steps": 203,
+      "cacheHitRate": 87.9,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 40.8,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 44.4,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 14.6,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 20,
+      "name": "Codex - GPT-6 Luna (max)",
+      "agent": "Codex",
+      "model": "GPT-6 Luna (max)",
+      "developer": "OpenAI",
+      "score": 31.1,
+      "costUsd": 0.16,
+      "wallTimeSec": 1276,
+      "steps": 81,
+      "cacheHitRate": 95.5,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 39.5,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 38.2,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 15.7,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 21,
+      "name": "Muse Code - Muse Spark Open (xhigh)",
+      "agent": "Muse Code",
+      "model": "Muse Spark Open (xhigh)",
+      "developer": "Meta",
+      "score": 26.3,
+      "costUsd": 3.54,
+      "wallTimeSec": 1559,
+      "steps": 161,
+      "cacheHitRate": 95.2,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 22.5,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 50.8,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 5.6,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
+    },
+    {
+      "rank": 22,
+      "name": "Mirror - Beam 1.0",
+      "agent": "Mirror",
+      "model": "Beam 1.0",
+      "developer": "Reflection",
+      "score": 20.5,
+      "costUsd": 0.32,
+      "wallTimeSec": 2321,
+      "steps": 93,
+      "cacheHitRate": 95.2,
+      "safetyRefusalRate": 0,
+      "evals": [
+        {
+          "name": "FrontierCode v1.1 Main",
+          "score": 20.3,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "SWE-Atlas-QnA",
+          "score": 37.6,
+          "weight": 0.333333333333333
+        },
+        {
+          "name": "Terminal-Bench v4",
+          "score": 3.5,
+          "weight": 0.333333333333333
+        }
+      ],
+      "url": "https://artificialanalysis.ai/agents",
+      "source": "aa-coding-agents"
     }
   ],
   "openSource": [

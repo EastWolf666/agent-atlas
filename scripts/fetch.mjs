@@ -641,10 +641,10 @@ async function main() {
 
   // ---------------- 9. Agent 评分同步 ----------------
   /*
-   * 外部榜单（Assistant Analysis / The Agentic Leaderboard）独立抓取。
+   * 外部榜单（AA Coding Agent Index / The Agentic Leaderboard）独立抓取。
    * 失败只记警告：评分页保留上一版数据，不影响 Agent / 模型主数据。
    */
-  log('\n[9/10] Agent 评分同步（Assistant Analysis + Agentic Leaderboard）')
+  log('\n[9/10] Agent 评分同步（AA Coding Agent Index + Agentic Leaderboard）')
   if (SKIP_FETCH) {
     log('  --no-fetch：跳过')
   } else {

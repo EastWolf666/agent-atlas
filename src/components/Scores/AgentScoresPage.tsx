@@ -5,7 +5,9 @@ import scoreData from '../../data/agent-scores.json'
  * Agent 评分页
  *
  * 数据来自两个公开评分站，口径不同、互不换算：
- *   - Assistant Analysis：49 项真实任务的「验证通过率」，偏结果可信度；
+ *   - Artificial Analysis Coding Agent Index：商业编码 Agent 的实测编码指数
+ *     （FrontierCode / SWE-Atlas-QnA / Terminal-Bench v4 三项等权），一行是一个
+ *     Agent × 驱动模型组合，所以同一个 Agent 会出现多次——这是刻意的：换模型分数差很多。
  *   - The Agentic Leaderboard：开源 Agent 的加权综合分，偏工程可用性。
  * 所以页面按来源分成两区，不做一个「合并总分」——那种数字看着权威，其实无法解释。
  */
@@ -13,13 +15,18 @@ import scoreData from '../../data/agent-scores.json'
 type Commercial = {
   rank: number
   name: string
+  agent: string | null
+  model: string | null
   developer: string | null
   score: number
-  reliability: number | null
-  coverage: string | null
-  lastEvaluated: string | null
-  status: string | null
+  costUsd: number | null
+  wallTimeSec: number | null
+  steps: number | null
+  cacheHitRate: number | null
+  safetyRefusalRate: number | null
+  evals: { name: string; score: number | null; weight: number | null }[]
   url: string | null
+  source: string
 }
 
 type OpenSource = {
@@ -67,6 +74,16 @@ const fmtCost = (n: number | null) => (n == null ? '—' : `$${n < 0.1 ? n.toFix
 const fmtLatency = (n: number | null) => {
   if (n == null) return '—'
   return n >= 1000 ? `${(n / 1000).toFixed(1)}s` : `${Math.round(n)}ms`
+}
+/** 榜单里的耗时是「跑完一整批任务的墙钟时间」，量级是分钟/小时，不能按毫秒渲染 */
+const fmtDuration = (s: number | null) => {
+  if (s == null) return '—'
+  if (s < 60) return `${s}s`
+  const m = Math.round(s / 60)
+  if (m < 60) return `${m}m`
+  const h = Math.floor(m / 60)
+  const rest = m % 60
+  return rest ? `${h}h ${rest}m` : `${h}h`
 }
 
 /** 分数条：0–100，颜色随区间变化（弱红→中黄→强绿） */
@@ -137,8 +154,9 @@ export default function AgentScoresPage() {
         <div>
           <h1 className="text-lg font-semibold tracking-tight text-ink">Agent 评分</h1>
           <p className="mt-1 max-w-3xl text-xs leading-relaxed text-muted">
-            汇总两个公开 Agent 评分榜的实测结果：一组是商业助手的<strong className="text-ink">任务验证通过率</strong>
-            ，一组是开源 Agent 的<strong className="text-ink">加权综合分</strong>
+            汇总两个公开 Agent 评分榜的实测结果：一组是商业编码 Agent 的
+            <strong className="text-ink">实测编码指数</strong>，一组是开源 Agent 的
+            <strong className="text-ink">加权综合分</strong>
             。两边口径不同，页面<strong className="text-ink">不做跨榜合并</strong>，避免造出无法解释的“总分”。
           </p>
         </div>
@@ -153,28 +171,30 @@ export default function AgentScoresPage() {
         ))}
       </div>
 
-      {/* 商业 Agent 实测榜 */}
+      {/* 商业编码 Agent 实测榜 */}
       <section className="aa-card overflow-hidden">
         <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-edge px-4 py-3">
           <div>
-            <h2 className="text-sm font-semibold text-ink">商业 Agent 实测榜</h2>
+            <h2 className="text-sm font-semibold text-ink">商业编码 Agent 实测榜</h2>
             <p className="mt-0.5 text-2xs text-muted">
-              Assistant Analysis · 49 项真实任务 · 通过率 = 达成目标且无越权/安全违规的比例
+              Artificial Analysis · FrontierCode v1.1 + SWE-Atlas-QnA + Terminal-Bench v4 等权 ·
+              一行 = 一个 Agent × 驱动模型组合
             </p>
           </div>
-          <span className="text-2xs text-faint">{commercial.length} 个系统</span>
+          <span className="text-2xs text-faint">{commercial.length} 个组合</span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[620px] border-collapse text-left">
+          <table className="w-full min-w-[680px] border-collapse text-left">
             <thead>
               <tr className="border-b border-edge text-2xs uppercase tracking-wide text-faint">
                 <th className="w-12 px-4 py-2 font-medium">#</th>
-                <th className="px-2 py-2 font-medium">助手 / 厂商</th>
-                <th className="px-2 py-2 font-medium">验证通过率</th>
-                <th className="px-2 py-2 text-right font-medium">可靠性</th>
-                <th className="px-2 py-2 text-right font-medium">覆盖</th>
-                <th className="px-4 py-2 text-right font-medium">评测</th>
+                <th className="px-2 py-2 font-medium">Agent / 厂商</th>
+                <th className="px-2 py-2 font-medium">驱动模型</th>
+                <th className="px-2 py-2 font-medium">编码指数</th>
+                <th className="px-2 py-2 text-right font-medium">成本/任务</th>
+                <th className="hidden px-2 py-2 text-right font-medium md:table-cell">耗时</th>
+                <th className="hidden px-4 py-2 text-right font-medium lg:table-cell">三项分项</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-edge">
@@ -188,24 +208,38 @@ export default function AgentScoresPage() {
                       rel="noreferrer"
                       className="group-hover:text-brand"
                     >
-                      <div className="text-xs font-medium text-ink">{r.name}</div>
+                      <div className="text-xs font-medium text-ink">{r.agent ?? r.name}</div>
                       <div className="text-2xs text-faint">{r.developer ?? '—'}</div>
                     </a>
+                  </td>
+                  <td className="px-2 py-2.5">
+                    <div className="max-w-[14rem] truncate text-2xs text-muted" title={r.name}>
+                      {r.model ?? '—'}
+                    </div>
                   </td>
                   <td className="px-2 py-2.5">
                     <ScoreBar value={r.score} />
                   </td>
                   <td className="px-2 py-2.5 text-right font-mono text-xs tabular-nums text-muted">
-                    {r.reliability == null ? '—' : `${r.reliability.toFixed(1)}%`}
+                    {fmtCost(r.costUsd)}
                   </td>
-                  <td className="px-2 py-2.5 text-right font-mono text-xs tabular-nums text-muted">
-                    {r.coverage ?? '—'}
+                  <td className="hidden px-2 py-2.5 text-right font-mono text-xs tabular-nums text-muted md:table-cell">
+                    {fmtDuration(r.wallTimeSec)}
                   </td>
-                  <td className="px-4 py-2.5 text-right text-2xs text-faint">{r.lastEvaluated ?? '—'}</td>
+                  <td className="hidden px-4 py-2.5 text-right font-mono text-2xs tabular-nums text-faint lg:table-cell">
+                    {r.evals.length
+                      ? r.evals.map((e) => (e.score == null ? '—' : e.score.toFixed(0))).join(' / ')
+                      : '—'}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="border-t border-edge px-4 py-2.5 text-2xs leading-relaxed text-faint">
+          「三项分项」依次为 FrontierCode v1.1 / SWE-Atlas-QnA / Terminal-Bench v4 的原始通过率（%），
+          未经二次加权；成本与耗时是跑完整批任务的均值，会随驱动模型和推理档位大幅变化，不等于厂商定价。
         </div>
       </section>
 

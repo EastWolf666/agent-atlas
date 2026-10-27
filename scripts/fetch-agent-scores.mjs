@@ -3,16 +3,23 @@
  * Agent 评分数据同步
  *
  * 两个专门给 Agent 打分的公开榜单，口径不同、互不换算：
- *   1) Assistant Analysis（商业数字助理基准 v0.2.0）
- *      49 项真实任务逐项验证，主指标为「验证通过率」（任务达成且无越权/安全违规）。
- *      页面是 SPA，只能渲染后读表格 → 用 Playwright。
+ *   1) Artificial Analysis — Coding Agent Index（商业编码 Agent 实测）
+ *      FrontierCode v1.1、SWE-Atlas-QnA、Terminal-Bench v4 三项等权合成，
+ *      主指标为「编码指数」（0–100，实为各数据集平均 reward）。
+ *      页面是 Next.js，数据以 flight（self.__next_f.push）内嵌，不需要浏览器。
+ *      一行 = 一个「Agent × 驱动模型 × 推理档位」组合，所以同一 Agent 会占多行。
  *   2) The Agentic Leaderboard（开源 Agent 综合评分）
  *      Top 100，每周一重算；总分含可靠性、工具选择质量、平均步数、成本等权重。
  *      静态 HTML 表格，直接解析；详情页补分项。
  *
  * 为什么分两个区展示而不是合成一个总分：
- *   一边是「任务通过率 %」，一边是「加权综合分」，把两者平均没有任何方法论依据，
+ *   一边是「编码指数（任务 reward 均值）」，一边是「加权综合分」，把两者平均没有任何方法论依据，
  *   只会造出一个看似权威、实则无法解释的数字。页面按来源分区，各自标注口径。
+ *
+ * 换源记录（2026-10-27）：
+ *   商业榜原用 Assistant Analysis（49 项任务的验证通过率），但该源只有 9 个系统且快照自
+ *   2026-09 起不再更新，每天抓回来的都是同一批数字；页面还是 SPA，必须靠 Playwright 渲染。
+ *   换成 AA Coding Agent Index 后同源同解析方式（与大模型评分页一致），每日真刷新。
  *
  * 跑法：node scripts/fetch-agent-scores.mjs [--dry-run]
  */
@@ -31,7 +38,9 @@ const UA =
 
 const AL_LIST = 'https://www.theagenticleaderboard.com/agent'
 const AL_AGENT = (slug) => `https://www.theagenticleaderboard.com/agent/${slug}/`
-const AA_BOARD = 'https://assistantanalysis.com/leaderboard'
+const AA_AGENTS = 'https://artificialanalysis.ai/agents'
+/** 换源前的口径标记：旧 Assistant Analysis 数据不能用新源逻辑兜底 */
+const COMMERCIAL_SOURCE = 'aa-coding-agents'
 
 function log(m) {
   console.log(m)
@@ -59,6 +68,59 @@ async function getText(url, timeout = 30000) {
     clearTimeout(t)
   }
 }
+
+/**
+ * 从 Next.js flight 数据里取出指定数组，如 extractFlightArray(html, 'benchmarkRows')
+ * 括号配对必须跳过字符串内部的括号，否则遇到 "Opus 5.5 (max)" 这类值就会提前截断。
+ */
+function extractFlightArray(html, key) {
+  const chunks = [...html.matchAll(/<script>self\.__next_f\.push\(\[1,("[\s\S]*?")\]\)<\/script>/g)]
+  let text = ''
+  for (const c of chunks) {
+    try {
+      text += JSON.parse(c[1])
+    } catch {
+      /* 跳过坏 chunk */
+    }
+  }
+  const at = text.indexOf(`"${key}":[`)
+  if (at < 0) throw new Error(`未找到 ${key}（页面结构可能已变）`)
+  const start = text.indexOf('[', at)
+  let depth = 0
+  let end = -1
+  for (let i = start; i < text.length; i++) {
+    if (text[i] === '"') {
+      i++
+      while (i < text.length) {
+        if (text[i] === '\\') i++
+        else if (text[i] === '"') break
+        i++
+      }
+      continue
+    }
+    if (text[i] === '[') depth++
+    else if (text[i] === ']') {
+      depth--
+      if (depth === 0) {
+        end = i
+        break
+      }
+    }
+  }
+  if (end < 0) throw new Error(`${key} 数组未闭合`)
+  return JSON.parse(text.slice(start, end + 1))
+}
+
+/** 上游偶尔把推理档位配置整段塞进名字里，如 "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})" */
+const cleanName = (s) =>
+  String(s ?? '')
+    .replace(/\s*\(\{[^}]*\}\)\s*/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+
+const round1 = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.round(v * 10) / 10 : null)
+const round2 = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.round(v * 100) / 100 : null)
+const pct = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.round(v * 1000) / 10 : null)
 
 /* ---------------- 1. The Agentic Leaderboard ---------------- */
 
@@ -164,86 +226,62 @@ async function fetchAgentic(prev) {
   return out
 }
 
-/* ---------------- 2. Assistant Analysis ---------------- */
+/* ---------------- 2. Artificial Analysis — Coding Agent Index ---------------- */
 
-async function fetchAssistantAnalysis(prev) {
-  let chromium
-  try {
-    ;({ chromium } = await import('playwright'))
-  } catch {
-    log('  ⚠️ 未安装 playwright，跳过商业榜（保留上一版数据）')
-    return prev || []
-  }
+/**
+ * 商业编码 Agent 实测榜
+ *
+ * 一行 = Agent × 驱动模型 × 推理档位，所以 Claude Code 会占多行（不同模型/档位）。
+ * 这里故意不做 Agent 级去重：同一个 Agent 换模型后分数能差 10 分以上，
+ * 压成一行反而把最有价值的「搭什么模型才划算」这个信息抹掉了。
+ */
+async function fetchAACodingAgents() {
+  const html = await getText(AA_AGENTS, 45000)
+  const rows = extractFlightArray(html, 'benchmarkRows')
+  if (!Array.isArray(rows) || rows.length === 0) throw new Error('benchmarkRows 解析为空')
 
-  const candidates = [undefined, '/usr/bin/chromium', '/usr/bin/google-chrome']
-  let browser = null
-  for (const executablePath of candidates) {
-    try {
-      browser = await chromium.launch(executablePath ? { executablePath } : {})
-      break
-    } catch {
-      /* 试下一个 */
+  const scored = rows.filter((r) => typeof r?.indexScore === 'number')
+  log(`  榜单 ${rows.length} 条，其中有分数 ${scored.length} 条`)
+  if (scored.length === 0) throw new Error('没有带分数的条目（上游可能改版）')
+
+  // 评测时点：取所有条目里最新的驱动版本发布日期
+  let evaluatedAt = null
+  for (const r of scored) {
+    for (const v of Object.values(r.versions || {})) {
+      const d = v?.max?.dateReleased
+      if (typeof d === 'string' && (!evaluatedAt || d > evaluatedAt)) evaluatedAt = d
     }
   }
-  if (!browser) {
-    log('  ⚠️ 无可用 Chromium，跳过商业榜（保留上一版数据）')
-    return prev || []
-  }
 
-  try {
-    const page = await browser.newPage({ viewport: { width: 1400, height: 1000 } })
-    await page.goto(AA_BOARD, { waitUntil: 'networkidle', timeout: 60000 })
-    await page.waitForTimeout(2500)
-    const rows = await page.evaluate(() => {
-      return [...document.querySelectorAll('table tr')]
-        .map((tr) => {
-          const tds = [...tr.querySelectorAll('td')]
-          if (tds.length < 8) return null
-          const link = tds[0].querySelector('a')
-          const nameBlock = (link?.innerText || '').split('\n')
-          const cells = tds.map((td) => td.innerText.trim())
-          return {
-            name: nameBlock[0] || '',
-            developer: nameBlock[1] || null,
-            href: link?.getAttribute('href') || null,
-            score: cells[1],
-            reliability: cells[2],
-            coverage: cells[7],
-            lastEvaluated: cells[8],
-            status: cells[9],
-          }
-        })
-        .filter(Boolean)
-    })
+  const out = scored
+    .slice()
+    .sort((a, b) => b.indexScore - a.indexScore)
+    .map((r, i) => ({
+      rank: i + 1,
+      name: cleanName(r.displayLabel || r.display?.agent || r.agentName || '—'),
+      agent: cleanName(r.agentName) || null,
+      model: cleanName(r.display?.model) || null,
+      developer: r.agentCreator?.name ?? null,
+      score: round1(r.indexScore * 100),
+      costUsd: round2(r.mean?.costUsd),
+      wallTimeSec: typeof r.mean?.agentWallTimeSec === 'number' ? Math.round(r.mean.agentWallTimeSec) : null,
+      steps: typeof r.mean?.steps === 'number' ? Math.round(r.mean.steps) : null,
+      cacheHitRate: pct(r.mean?.cacheHitRate),
+      safetyRefusalRate: pct(r.safety?.rate),
+      evals: (r.evals || [])
+        .map((e) => ({
+          name: e?.evaluationDatasetSlug ?? null,
+          score: pct(e?.mean?.reward),
+          weight: e?.weight ?? null,
+        }))
+        .filter((e) => e.name),
+      url: AA_AGENTS,
+      source: COMMERCIAL_SOURCE,
+    }))
+    .filter((r) => typeof r.score === 'number')
 
-    const parsePct = (s) => {
-      const m = String(s || '').match(/([\d.]+)\s*%/)
-      return m ? Number(m[1]) : null
-    }
-    const out = rows
-      .filter((r) => r.name)
-      .map((r, i) => ({
-        rank: i + 1,
-        name: r.name,
-        developer: r.developer,
-        score: parsePct(r.score),
-        reliability: parsePct(r.reliability),
-        coverage: r.coverage || null,
-        lastEvaluated: r.lastEvaluated || null,
-        status: r.status || null,
-        url: r.href ? new URL(r.href, 'https://assistantanalysis.com').toString() : null,
-      }))
-      .filter((r) => typeof r.score === 'number')
-
-    await page.close()
-    if (out.length === 0) throw new Error('商业榜解析结果为 0 条')
-    return out
-  } catch (e) {
-    log(`  ⚠️ 商业榜抓取失败（${e.message}），保留上一版数据`)
-    return prev || []
-  } finally {
-    await browser.close().catch(() => {})
-  }
+  if (out.length === 0) throw new Error('商业榜解析结果为 0 条')
+  return { rows: out, evaluatedAt }
 }
 
 /* ---------------- main ---------------- */
@@ -254,7 +292,7 @@ async function main() {
   if (existsSync(OUT_PATH)) {
     try {
       const j = JSON.parse(readFileSync(OUT_PATH, 'utf8'))
-      prev = { commercial: j.commercial || [], openSource: j.openSource || [] }
+      prev = { commercial: j.commercial || [], openSource: j.openSource || [], meta: j.meta || null }
     } catch {
       /* 坏文件按首次处理 */
     }
@@ -269,13 +307,26 @@ async function main() {
     log(`  ❌ ${e.message}`)
   }
 
-  log('\n[2/2] Assistant Analysis（商业 Agent）')
+  log('\n[2/2] Artificial Analysis · Coding Agent Index（商业编码 Agent）')
   let commercial = []
+  let aaEvaluatedAt = null
+  // 旧口径（Assistant Analysis）数据不能拿来给新榜兜底——字段和量纲都不同，混着显示是错的
+  const prevSameSource =
+    Array.isArray(prev.commercial) &&
+    prev.commercial.length > 0 &&
+    prev.commercial[0]?.source === COMMERCIAL_SOURCE
   try {
-    commercial = await fetchAssistantAnalysis(prev.commercial)
+    const res = await fetchAACodingAgents()
+    commercial = res.rows
+    aaEvaluatedAt = res.evaluatedAt
     log(`  ✅ ${commercial.length} 条`)
   } catch (e) {
     log(`  ❌ ${e.message}`)
+    if (prevSameSource) {
+      commercial = prev.commercial
+      aaEvaluatedAt = prev.meta?.sources?.find((s) => s.key === COMMERCIAL_SOURCE)?.evaluatedAt ?? null
+      log(`  ↩️ 用上一版同口径数据兜底（${commercial.length} 条）`)
+    }
   }
 
   /* 熔断：任一榜单突然归零/腰斩，几乎都是上游改版，写盘会把页面清空 */
@@ -287,8 +338,8 @@ async function main() {
     console.error(`❌ 开源榜从 ${prev.openSource.length} 跌到 ${openSource.length}，放弃写盘`)
     process.exit(1)
   }
-  if (commercial.length === 0 && prev.commercial.length === 0) {
-    console.error('❌ 商业榜从未成功抓取，放弃写盘')
+  if (commercial.length === 0) {
+    console.error('❌ 商业榜 0 条，且没有同口径历史数据可兜底，放弃写盘')
     process.exit(1)
   }
 
@@ -298,12 +349,12 @@ async function main() {
       lastUpdated: new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10),
       sources: [
         {
-          key: 'assistant-analysis',
-          name: 'Assistant Analysis',
-          url: 'https://assistantanalysis.com/leaderboard',
-          version: 'v0.2.0',
-          note: '49 项真实任务逐项验证；主指标为任务验证通过率（达成目标且无越权/安全违规）',
-          evaluatedAt: commercial[0]?.lastEvaluated || null,
+          key: COMMERCIAL_SOURCE,
+          name: 'Artificial Analysis · Coding Agent Index',
+          url: AA_AGENTS,
+          version: 'FrontierCode v1.1 + SWE-Atlas-QnA + Terminal-Bench v4',
+          note: '三项数据集等权合成；编码指数 = 各数据集平均 reward（0–100）。一行是一个 Agent × 驱动模型组合',
+          evaluatedAt: aaEvaluatedAt,
           count: commercial.length,
         },
         {
@@ -317,8 +368,9 @@ async function main() {
         },
       ],
       disclaimer:
-        '两个榜单口径不同，不能跨榜比较，也不做合并总分：Assistant Analysis 为任务验证通过率（%），' +
-        'The Agentic Leaderboard 为加权综合分（0–100）。数据由脚本自动抓取，商用决策请以原榜单与方法论文档为准。',
+        '两个榜单口径不同，不能跨榜比较，也不做合并总分：Artificial Analysis 编码指数是三项数据集的' +
+        '平均 reward（0–100），The Agentic Leaderboard 是加权综合分（0–100）。' +
+        '成本与耗时为榜单测试时点的均值，不是厂商定价。数据由脚本自动抓取，商用决策请以原榜单与方法论文档为准。',
     },
     commercial,
     openSource,
