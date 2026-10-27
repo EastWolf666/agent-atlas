@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-10-27",
+    "lastUpdated": "2026-10-28",
     "sources": [
       {
         "key": "aa-coding-agents",
@@ -90,9 +90,9 @@
     },
     {
       "rank": 3,
-      "name": "Claude Code - Fable 5.1 (max) (with fallback)",
+      "name": "Claude Code - Claude Fable 5.1 (Max, Default Fallback)",
       "agent": "Claude Code",
-      "model": "Fable 5.1 (max) (with fallback)",
+      "model": "Claude Fable 5.1 (Max, Default Fallback)",
       "developer": "Anthropic",
       "score": 57.6,
       "costUsd": 11.53,
@@ -154,9 +154,9 @@
     },
     {
       "rank": 5,
-      "name": "Opencode - GLM-5.3",
+      "name": "Opencode - GLM-5.3 (Max)",
       "agent": "Opencode",
-      "model": "GLM-5.3",
+      "model": "GLM-5.3 (Max)",
       "developer": "OpenCode",
       "score": 48.9,
       "costUsd": 5.23,
@@ -186,9 +186,9 @@
     },
     {
       "rank": 6,
-      "name": "Codex - GPT-6.1 Terra (xhigh)",
+      "name": "Codex - GPT-6.1 Terra (Xhigh)",
       "agent": "Codex",
-      "model": "GPT-6.1 Terra (xhigh)",
+      "model": "GPT-6.1 Terra (Xhigh)",
       "developer": "OpenAI",
       "score": 48.2,
       "costUsd": 0.69,
@@ -218,9 +218,9 @@
     },
     {
       "rank": 7,
-      "name": "Codex - GPT-6.1 Terra (max)",
+      "name": "Codex - GPT-6.1 Terra (Max)",
       "agent": "Codex",
-      "model": "GPT-6.1 Terra (max)",
+      "model": "GPT-6.1 Terra (Max)",
       "developer": "OpenAI",
       "score": 48.1,
       "costUsd": 1.24,
@@ -250,9 +250,9 @@
     },
     {
       "rank": 8,
-      "name": "Codex - DeepSeek V4.1 Flash",
+      "name": "Codex - DeepSeek V4.1 Flash (Max)",
       "agent": "Codex",
-      "model": "DeepSeek V4.1 Flash",
+      "model": "DeepSeek V4.1 Flash (Max)",
       "developer": "OpenAI",
       "score": 47.3,
       "costUsd": 0.39,
@@ -282,9 +282,9 @@
     },
     {
       "rank": 9,
-      "name": "DeepSeek Harness - DeepSeek V4.1 Flash 1017",
+      "name": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (Max)",
       "agent": "DeepSeek Harness",
-      "model": "DeepSeek V4.1 Flash 1017",
+      "model": "DeepSeek V4.1 Flash 1017 (Max)",
       "developer": "DeepSeek",
       "score": 46.3,
       "costUsd": 0.3,
@@ -314,9 +314,9 @@
     },
     {
       "rank": 10,
-      "name": "Codex - GPT-6.1 Terra (high)",
+      "name": "Codex - GPT-6.1 Terra (High)",
       "agent": "Codex",
-      "model": "GPT-6.1 Terra (high)",
+      "model": "GPT-6.1 Terra (High)",
       "developer": "OpenAI",
       "score": 46.3,
       "costUsd": 0.54,
@@ -346,9 +346,9 @@
     },
     {
       "rank": 11,
-      "name": "Muse Code - Muse Spark 1.3 (max)",
+      "name": "Muse Code - Muse Spark 1.3 (Max)",
       "agent": "Muse Code",
-      "model": "Muse Spark 1.3 (max)",
+      "model": "Muse Spark 1.3 (Max)",
       "developer": "Meta",
       "score": 45.7,
       "costUsd": 3.91,
@@ -410,9 +410,9 @@
     },
     {
       "rank": 13,
-      "name": "Codex - GPT-6.1 Terra (medium)",
+      "name": "Codex - GPT-6.1 Terra (Medium)",
       "agent": "Codex",
-      "model": "GPT-6.1 Terra (medium)",
+      "model": "GPT-6.1 Terra (Medium)",
       "developer": "OpenAI",
       "score": 42,
       "costUsd": 0.39,
@@ -442,9 +442,9 @@
     },
     {
       "rank": 14,
-      "name": "Kimi Code CLI - Kimi K3",
+      "name": "Kimi Code CLI - Kimi K3 (Max)",
       "agent": "Kimi Code CLI",
-      "model": "Kimi K3",
+      "model": "Kimi K3 (Max)",
       "developer": "Kimi",
       "score": 41.4,
       "costUsd": 5.17,
@@ -506,9 +506,9 @@
     },
     {
       "rank": 16,
-      "name": "Codex - GPT-6.1 Terra (none)",
+      "name": "Codex - GPT-6.1 Terra (Non-reasoning)",
       "agent": "Codex",
-      "model": "GPT-6.1 Terra (none)",
+      "model": "GPT-6.1 Terra (Non-reasoning)",
       "developer": "OpenAI",
       "score": 39.2,
       "costUsd": 0.45,
@@ -538,9 +538,9 @@
     },
     {
       "rank": 17,
-      "name": "Claude Code - Haiku 5.5 (max)",
+      "name": "Claude Code - Claude Haiku 5.5 (Max)",
       "agent": "Claude Code",
-      "model": "Haiku 5.5 (max)",
+      "model": "Claude Haiku 5.5 (Max)",
       "developer": "Anthropic",
       "score": 37.3,
       "costUsd": 2.67,
@@ -570,9 +570,9 @@
     },
     {
       "rank": 18,
-      "name": "Codex - GPT-6.1 Terra (low)",
+      "name": "Codex - GPT-6.1 Terra (Low)",
       "agent": "Codex",
-      "model": "GPT-6.1 Terra (low)",
+      "model": "GPT-6.1 Terra (Low)",
       "developer": "OpenAI",
       "score": 34.9,
       "costUsd": 0.2,
@@ -602,9 +602,9 @@
     },
     {
       "rank": 19,
-      "name": "Antigravity SDK - Gemini 3.8 Flash (high)",
+      "name": "Antigravity SDK - Gemini 3.8 Flash (High)",
       "agent": "Antigravity SDK v0.1.12",
-      "model": "Gemini 3.8 Flash (high)",
+      "model": "Gemini 3.8 Flash (High)",
       "developer": "Google",
       "score": 33.3,
       "costUsd": 2.51,
@@ -634,9 +634,9 @@
     },
     {
       "rank": 20,
-      "name": "Codex - GPT-6 Luna (max)",
+      "name": "Codex - GPT-6 Luna (Max)",
       "agent": "Codex",
-      "model": "GPT-6 Luna (max)",
+      "model": "GPT-6 Luna (Max)",
       "developer": "OpenAI",
       "score": 31.1,
       "costUsd": 0.16,
@@ -666,9 +666,9 @@
     },
     {
       "rank": 21,
-      "name": "Muse Code - Muse Spark Open (xhigh)",
+      "name": "Muse Code - Muse Spark Open (Xhigh)",
       "agent": "Muse Code",
-      "model": "Muse Spark Open (xhigh)",
+      "model": "Muse Spark Open (Xhigh)",
       "developer": "Meta",
       "score": 26.3,
       "costUsd": 3.54,
@@ -863,8 +863,7 @@
       "costPerTask": 0.02,
       "latencyMs": 500,
       "stars": 53000,
-      "mindshare": 87.7,
-      "description": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs"
+      "mindshare": 87.7
     },
     {
       "rank": 9,
@@ -880,8 +879,7 @@
       "costPerTask": 0.05,
       "latencyMs": 500,
       "stars": 387200,
-      "mindshare": 100,
-      "description": "Reverse engineer anything with agents, from app behavior down to native binaries."
+      "mindshare": 100
     },
     {
       "rank": 10,

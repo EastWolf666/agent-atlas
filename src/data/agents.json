@@ -54,7 +54,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
     "metrics": {
-      "stars": 91597,
+      "stars": 91609,
       "license": "NOASSERTION"
     }
   },
@@ -128,7 +128,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/zai-org/Open-AutoGLM",
     "metrics": {
-      "stars": 26488,
+      "stars": 26490,
       "license": "Apache-2.0"
     }
   },
@@ -321,7 +321,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/infiniflow/ragflow",
     "metrics": {
-      "stars": 92953,
+      "stars": 92971,
       "license": "Apache-2.0"
     }
   },
@@ -371,10 +371,10 @@
       }
     ],
     "dataConfidence": "high",
-    "lastVerified": "2026-10-26",
+    "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/xiaYuTian11/maskit",
     "metrics": {
-      "stars": 318,
+      "stars": 319,
       "license": "AGPL-3.0"
     }
   },
@@ -481,7 +481,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/agents-universe/agents-universe",
     "metrics": {
-      "stars": 762,
+      "stars": 764,
       "license": "Apache-2.0"
     }
   },
@@ -760,7 +760,7 @@
     ],
     "repoUrl": "https://github.com/MoonshotAI/kimi-code",
     "metrics": {
-      "stars": 8038,
+      "stars": 8039,
       "license": "MIT"
     }
   },
@@ -2169,7 +2169,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/mizzlelover/gongwen-gbt9704-skill",
     "metrics": {
-      "stars": 827,
+      "stars": 828,
       "license": "MIT"
     }
   },
@@ -3329,7 +3329,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/modelcontextprotocol/modelcontextprotocol",
     "metrics": {
-      "stars": 9540,
+      "stars": 9545,
       "license": "NOASSERTION"
     }
   },
@@ -3387,7 +3387,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/langchain-ai/langgraph",
     "metrics": {
-      "stars": 43981,
+      "stars": 44005,
       "license": "MIT"
     }
   },
@@ -3444,7 +3444,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/crewAIInc/crewAI",
     "metrics": {
-      "stars": 60159,
+      "stars": 60182,
       "license": "MIT"
     }
   },
@@ -3503,7 +3503,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/openai/openai-agents-python",
     "metrics": {
-      "stars": 30323,
+      "stars": 30336,
       "license": "MIT"
     }
   },
@@ -3556,7 +3556,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/anthropics/claude-agent-sdk-python",
     "metrics": {
-      "stars": 8359,
+      "stars": 8365,
       "license": "MIT"
     }
   },
@@ -3607,7 +3607,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/mem0ai/mem0",
     "metrics": {
-      "stars": 67896,
+      "stars": 67934,
       "license": "Apache-2.0"
     }
   },
@@ -4051,7 +4051,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
     "metrics": {
-      "stars": 187787,
+      "stars": 187791,
       "license": "NOASSERTION"
     }
   },
@@ -5158,7 +5158,7 @@
     "lastVerified": "2026-10-27",
     "repoUrl": "https://github.com/deepseek-ai/deepseek-harness",
     "metrics": {
-      "stars": 263174,
+      "stars": 263640,
       "license": "MIT"
     }
   },
@@ -5326,7 +5326,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/headroomlabs-ai/headroom",
     "metrics": {
-      "stars": 77974,
+      "stars": 78039,
       "license": "Apache-2.0"
     }
   },
@@ -5384,7 +5384,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/NousResearch/hermes-agent",
     "metrics": {
-      "stars": 257557,
+      "stars": 257737,
       "license": "MIT"
     }
   },
@@ -5441,7 +5441,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/anomalyco/opencode",
     "metrics": {
-      "stars": 222146,
+      "stars": 222360,
       "license": "MIT"
     }
   },
@@ -5498,7 +5498,7 @@
     "autoAdmittedAt": "2026-10-08",
     "repoUrl": "https://github.com/stablyai/orca",
     "metrics": {
-      "stars": 107489,
+      "stars": 108001,
       "license": "MIT"
     }
   },
@@ -5689,7 +5689,7 @@
     "autoAdmittedAt": "2026-10-14",
     "repoUrl": "https://github.com/morluto/rea",
     "metrics": {
-      "stars": 394124,
+      "stars": 397141,
       "license": "MIT",
       "pushedAt": null
     }
@@ -5747,7 +5747,7 @@
     "autoAdmittedAt": "2026-10-25",
     "repoUrl": "https://github.com/uclanlp/OpenVLHarness",
     "metrics": {
-      "stars": 274,
+      "stars": 281,
       "license": "MIT"
     }
   },
@@ -5804,7 +5804,7 @@
     "autoAdmittedAt": "2026-10-25",
     "repoUrl": "https://github.com/finereli/whatsapp-mcp",
     "metrics": {
-      "stars": 389,
+      "stars": 390,
       "license": "MIT"
     }
   },
