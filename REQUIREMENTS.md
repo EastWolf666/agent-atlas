@@ -505,6 +505,37 @@ Agent 标签页讲「是什么、能做什么」，缺一层「实测表现如�
 
 ---
 
+## 十三、大模型评分标签页（新增 v2.2）
+
+### 13.1 需求背景
+
+「AI 大模型」页解决的是选型（价格、上下文、模态），但缺少一个「谁更聪明」的独立量化视角。本页直接镜像第三方评测机构 Artificial Analysis 的 Intelligence Index，帮读者快速定位第一梯队、对比分项能力与性价比。
+
+### 13.2 数据来源与更新
+
+- 来源：[Artificial Analysis — Model Leaderboards](https://artificialanalysis.ai/leaderboards/models)（业界引用最广的独立模型评测之一）。
+- 指标：**Artificial Analysis Intelligence Index v4.3.2**（0–100），由 Terminal-Bench 4.0、SciCode、FrontierCode、MMMU-Pro、AutomationBench、CritPt、Humanity’s Last Exam、Omniscience、长上下文推理等评测加权。
+- 抓取方式：页面为 Next.js，完整数据内嵌在 `self.__next_f.push` flight 数据中，脚本解析 `initialModels` 数组，无需浏览器渲染。
+- 去重口径：同一模型的不同推理档位（Max / Xhigh / High…）只保留 Intelligence Index 最高的一档，`variant` 字段记录档位。
+- 脚本：`scripts/fetch-model-scores.mjs` → `src/data/model-scores.json`；已接入每日管线第 10 步（`[10/10] 大模型评分同步`）。
+- 熔断：解析结果 < 50 条或较上版跌超 40% 即放弃写盘。
+
+### 13.3 页面设计
+
+- 入口：导航「AI 大模型」之后新增「大模型评分」。
+- 顶部四个统计卡：收录模型数、最高综合分、开源权重数、覆盖厂商数。
+- 筛选：搜索（模型/厂商）、厂商下拉、仅开源权重开关。
+- 榜单列：排名、模型/厂商（含开源/推理标记与推理档位）、综合分（分数条）、编码（Terminal-Bench 4.0）、多模态（MMMU-Pro）、自动化（AutomationBench）、成本/任务、输入/输出价格、速度、上下文。
+- 移动端：≥640px 用表格，窄屏切换为卡片式行，避免宽表横向裁切。
+- 底部说明：Index 构成、分项口径（未二次加权）、“—”表示未参加该项评测、免责声明与原始榜单外链。
+
+### 13.4 校验规则
+
+- `scripts/lib/model-scores-schema.mjs`：分数 0–100、分项范围、slug/rank 唯一、价格/速度非负。
+- 已加入 `npm run validate`，构建前强制通过。
+
+---
+
 **审核意见栏**（请在此处填写）
 - 需求是否完整：
 - 需调整的部分：

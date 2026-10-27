@@ -7,12 +7,13 @@ import { CompareView } from './components/Compare'
 import { ModelsPage } from './components/Models'
 import { AlternativesPage } from './components/Alternatives'
 import { AgentScoresPage } from './components/Scores'
+import { ModelScoresPage } from './components/ModelScores'
 import { EmptyState } from './components/bits'
 import { useFilters, useCompare, useTheme } from './hooks/useAtlas'
 import { agents } from './lib/agents'
 import type { Agent, Tier } from './types'
 
-type View = 'overview' | 'browse' | 'scores' | 'models' | 'alternatives'
+type View = 'overview' | 'browse' | 'scores' | 'models' | 'model-scores' | 'alternatives'
 
 export default function App() {
   const atlas = useFilters()
@@ -58,10 +59,19 @@ export default function App() {
               ? 'aa-alt-search'
               : view === 'scores'
                 ? 'aa-score-search'
-                : 'aa-search'
+                : view === 'model-scores'
+                  ? 'aa-model-score-search'
+                  : 'aa-search'
         if (detailId) setDetailId(null)
         if (showCompare) setShowCompare(false)
-        if (view !== 'browse' && view !== 'models' && view !== 'alternatives' && view !== 'scores') setView('browse')
+        if (
+          view !== 'browse' &&
+          view !== 'models' &&
+          view !== 'model-scores' &&
+          view !== 'alternatives' &&
+          view !== 'scores'
+        )
+          setView('browse')
         /*
          * 双 rAF：等浮层卸载动画走完、搜索框真正挂载后再聚焦。
          * 单 rAF 在快速开关时可能早于 DOM 提交，focus() 会落空。
@@ -158,6 +168,7 @@ export default function App() {
                 ['browse', 'Agent'],
                 ['scores', 'Agent 评分'],
                 ['models', 'AI 大模型'],
+                ['model-scores', '大模型评分'],
                 ['alternatives', 'AI 国产替代'],
               ] as const
             ).map(([k, label]) => (
@@ -228,6 +239,8 @@ export default function App() {
       <main className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6">
         {view === 'scores' ? (
           <AgentScoresPage />
+        ) : view === 'model-scores' ? (
+          <ModelScoresPage />
         ) : view === 'models' ? (
           /*
            * 模型页不用 Agent 页的侧栏布局：它的筛选维度完全不同
