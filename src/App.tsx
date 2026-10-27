@@ -6,12 +6,13 @@ import { DetailPanel } from './components/Detail'
 import { CompareView } from './components/Compare'
 import { ModelsPage } from './components/Models'
 import { AlternativesPage } from './components/Alternatives'
+import { AgentScoresPage } from './components/Scores'
 import { EmptyState } from './components/bits'
 import { useFilters, useCompare, useTheme } from './hooks/useAtlas'
 import { agents } from './lib/agents'
 import type { Agent, Tier } from './types'
 
-type View = 'overview' | 'browse' | 'models' | 'alternatives'
+type View = 'overview' | 'browse' | 'scores' | 'models' | 'alternatives'
 
 export default function App() {
   const atlas = useFilters()
@@ -51,10 +52,16 @@ export default function App() {
          * 否则按 / 会把焦点移到一个看不见的输入框上，用户会以为「按了没反应」。
          */
         const searchId =
-          view === 'models' ? 'aa-model-search' : view === 'alternatives' ? 'aa-alt-search' : 'aa-search'
+          view === 'models'
+            ? 'aa-model-search'
+            : view === 'alternatives'
+              ? 'aa-alt-search'
+              : view === 'scores'
+                ? 'aa-score-search'
+                : 'aa-search'
         if (detailId) setDetailId(null)
         if (showCompare) setShowCompare(false)
-        if (view !== 'browse' && view !== 'models' && view !== 'alternatives') setView('browse')
+        if (view !== 'browse' && view !== 'models' && view !== 'alternatives' && view !== 'scores') setView('browse')
         /*
          * 双 rAF：等浮层卸载动画走完、搜索框真正挂载后再聚焦。
          * 单 rAF 在快速开关时可能早于 DOM 提交，focus() 会落空。
@@ -144,11 +151,12 @@ export default function App() {
             <span className="hidden text-sm tracking-tight sm:inline">Agent Atlas</span>
           </button>
 
-          <nav className="ml-2 flex items-center gap-0.5">
+          <nav className="aa-no-scrollbar ml-2 flex items-center gap-0.5 overflow-x-auto">
             {(
               [
                 ['overview', '概览'],
                 ['browse', 'Agent'],
+                ['scores', 'Agent 评分'],
                 ['models', 'AI 大模型'],
                 ['alternatives', 'AI 国产替代'],
               ] as const
@@ -157,7 +165,7 @@ export default function App() {
                 key={k}
                 onClick={() => setView(k)}
                 aria-current={view === k ? 'page' : undefined}
-                className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                className={`shrink-0 whitespace-nowrap rounded-lg px-1.5 py-1.5 text-[11px] font-medium transition-colors sm:px-2.5 sm:text-xs ${
                   view === k ? 'bg-brand-soft text-brand' : 'text-muted hover:text-ink'
                 }`}
               >
@@ -218,7 +226,9 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6">
-        {view === 'models' ? (
+        {view === 'scores' ? (
+          <AgentScoresPage />
+        ) : view === 'models' ? (
           /*
            * 模型页不用 Agent 页的侧栏布局：它的筛选维度完全不同
            * （厂商/模态/价格而非自主性/部署形态），复用 FilterPanel 反而要

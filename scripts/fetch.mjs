@@ -85,9 +85,9 @@ function runModelFetch({ dryRun }) {
  * 子进程隔离的原因与 runModelFetch 相同：它有「全部请求失败即 exit(1)」
  * 的熔断，不能让这个 exit 把 fetch.mjs 主流程带走。
  *
- * 排序约束（重要）：本步骤必须放在 [7/8] 写盘之后——
+ * 排序约束（重要）：本步骤必须放在 [7/9] 写盘之后——
  * fetch-alternatives.mjs 会推进水位线文件的 'hn-alt' 键，
- * 而主进程在 [7/8] 用内存副本整体覆盖水位线文件；
+ * 而主进程在 [7/9] 用内存副本整体覆盖水位线文件；
  * 若替代发现先跑，它推进的键会被覆盖，导致同一窗口反复抓。
  */
 function runAlternativesFetch({ dryRun }) {
@@ -96,6 +96,25 @@ function runAlternativesFetch({ dryRun }) {
   const r = spawnSync(process.execPath, args, { stdio: 'inherit' })
   if (r.status !== 0) {
     throw new Error(`fetch-alternatives.mjs 退出码 ${r.status}${r.signal ? ` (${r.signal})` : ''}`)
+  }
+  return true
+}
+
+/**
+ * 调用 Agent 评分同步管线（fetch-agent-scores.mjs）。
+ *
+ * 同样用子进程隔离：该脚本在「榜单解析 0 条 / 腰斩」时会 exit(1)；
+ * 主流程不能因为它抓不到外部榜单就整个失败。
+ *
+ * 放在 [7/9] 写盘之后：它只写 src/data/agent-scores.json，
+ * 与 agents/models 的写盘互不影响，但独立文件更利于失败定位。
+ */
+function runAgentScoresFetch({ dryRun }) {
+  const args = [resolve(__dirname, 'fetch-agent-scores.mjs')]
+  if (dryRun) args.push('--dry-run')
+  const r = spawnSync(process.execPath, args, { stdio: 'inherit' })
+  if (r.status !== 0) {
+    throw new Error(`fetch-agent-scores.mjs 退出码 ${r.status}${r.signal ? ` (${r.signal})` : ''}`)
   }
   return true
 }
@@ -131,6 +150,7 @@ function maybeAutoPush({ dryRun, skipFetch }) {
     'src/data/agents.json',
     'src/data/meta.json',
     'src/data/models.json',
+    'src/data/agent-scores.json',
     'data/candidates.json',
     'data/auto-added.json',
     'data/status-signals.json',
@@ -181,9 +201,9 @@ async function main() {
   const failures = []
 
   if (SKIP_FETCH) {
-    log('\n[1/8] --no-fetch：跳过所有网络抓取')
+    log('\n[1/9] --no-fetch：跳过所有网络抓取')
   } else {
-    log('\n[1/8] 抓取候选源')
+    log('\n[1/9] 抓取候选源')
 
     // HN —— 新产品发现主力
     try {
@@ -226,7 +246,7 @@ async function main() {
   }
 
   // ---------------- 2. 刷新存量的客观字段 ----------------
-  log('\n[2/8] 刷新存量客观字段（star / 许可证）')
+  log('\n[2/9] 刷新存量客观字段（star / 许可证）')
   let statusSignals = []
   let refreshedCount = 0
   if (SKIP_FETCH) {
@@ -269,7 +289,7 @@ async function main() {
    * 这里管新增「生成编辑占位」。两者语义不同，强行合并会让 merge.mjs
    * 精心维护的 FORBIDDEN 白名单失效。
    */
-  log('\n[3/8] 自动入库（发现的新品直接进正式数据）')
+  log('\n[3/9] 自动入库（发现的新品直接进正式数据）')
   let admittedRecords = []
   let admissionReport = { found: candidates.length, qualified: 0, admitted: 0, quotaLimited: false, paused: null, rejected: [], accepted: [] }
 
@@ -332,7 +352,7 @@ async function main() {
   }
 
   // ---------------- 4. 重算数字与洞察 ----------------
-  log('\n[4/8] 重算统计口径与洞察文案')
+  log('\n[4/9] 重算统计口径与洞察文案')
   const stats = refreshMetaNumbers(metaJson, agents)
   const changedInsights = refreshInsights(metaJson, agents, stats)
   log(`  total: ${metaJson.meta.total}｜官方来源 ${stats.officialCount}｜非活跃 ${stats.nonActive}`)
@@ -342,7 +362,7 @@ async function main() {
   }
 
   // ---------------- 5. 候选池 ----------------
-  log('\n[5/8] 合并候选池')
+  log('\n[5/9] 合并候选池')
   const existingCandidates = existsSync(CANDIDATES_PATH)
     ? JSON.parse(readFileSync(CANDIDATES_PATH, 'utf8'))
     : { candidates: [] }
@@ -469,7 +489,7 @@ async function main() {
    * 放在写盘之前而不是之后：这样模型数据落盘了、agents 校验没过时，
    * 至少价格数据是最新的（价格变更是选型里最关键的信息）。
    */
-  log('\n[6/8] 更新 AI 大模型数据（OpenRouter）')
+  log('\n[6/9] 更新 AI 大模型数据（OpenRouter）')
   let modelResult = null
   if (SKIP_FETCH) {
     log('  --no-fetch：跳过')
@@ -483,7 +503,7 @@ async function main() {
   }
 
   // ---------------- 7. 校验后写盘 ----------------
-  log('\n[7/8] schema 校验并写盘')
+  log('\n[7/9] schema 校验并写盘')
   const { ok, count, issues } = validateAgents(agents, metaJson)
   if (!ok) {
     console.error(`❌ schema 校验失败（${issues.length} 处），已放弃写盘，线上不受影响：`)
@@ -591,12 +611,12 @@ async function main() {
 
   // ---------------- 8. 国产替代候选发现 ----------------
   /*
-   * 放在 [7/8] 写盘之后：fetch-alternatives.mjs 会往水位线文件推进 'hn-alt' 键，
+   * 放在 [7/9] 写盘之后：fetch-alternatives.mjs 会往水位线文件推进 'hn-alt' 键，
    * 必须等主进程写完水位线再跑，否则推进值被覆盖（详见 runAlternativesFetch 注释）。
    * 失败只记警告——替代地图的正式数据（alternatives.json）不受影响，
    * 候选线索明天会重新搜（水位线没推进）。
    */
-  log('\n[8/8] 国产替代候选发现（HN 替代关系搜索）')
+  log('\n[8/9] 国产替代候选发现（HN 替代关系搜索）')
   if (SKIP_FETCH) {
     log('  --no-fetch：跳过')
   } else {
@@ -608,7 +628,24 @@ async function main() {
     }
   }
 
-  // ---------------- 9. 自动发布 ----------------
+  // ---------------- 9. Agent 评分同步 ----------------
+  /*
+   * 外部榜单（Assistant Analysis / The Agentic Leaderboard）独立抓取。
+   * 失败只记警告：评分页保留上一版数据，不影响 Agent / 模型主数据。
+   */
+  log('\n[9/9] Agent 评分同步（Assistant Analysis + Agentic Leaderboard）')
+  if (SKIP_FETCH) {
+    log('  --no-fetch：跳过')
+  } else {
+    try {
+      await runAgentScoresFetch({ dryRun: DRY_RUN })
+    } catch (e) {
+      log(`  ⚠️ Agent 评分同步失败（保留上一版数据）：${e.message}`)
+      failures.push('scores')
+    }
+  }
+
+  // ---------------- 10. 自动发布 ----------------
   maybeAutoPush({ dryRun: DRY_RUN, skipFetch: SKIP_FETCH })
 }
 

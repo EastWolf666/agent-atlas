@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26",
+  "generatedAt": "2026-10-27",
   "candidates": [
     {
       "slug": "hnalt:49964361",
@@ -100,6 +100,26 @@
       },
       "snippet": "Hey HN, I&#x27;m Christian and this is a new OSS project I&#x27;ve been noodling on for the last couple of weeks. Hob is a free, MIT-licensed desktop app for Mac, Windows and Linux that works on your files the way the Claude and ChatGPT desktop apps do, except the model runs on y",
       "discoveredAt": "2026-10-26",
+      "decided": false
+    },
+    {
+      "slug": "hnalt:50253082",
+      "title": "Show HN: Better Design – alternative to Claude Design, for any coding agents",
+      "url": "https://news.ycombinator.com/item?id=50253082",
+      "storyUrl": "https://better-design.com",
+      "source": "hn",
+      "matchedOverseas": [
+        "claude"
+      ],
+      "categoryHint": "chat",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 2,
+        "hnComments": 0
+      },
+      "snippet": null,
+      "discoveredAt": "2026-10-27",
       "decided": false
     }
   ]
