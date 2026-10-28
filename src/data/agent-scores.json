@@ -17,7 +17,7 @@
         "url": "https://www.theagenticleaderboard.com/agent",
         "version": null,
         "note": "开源 Agent 综合评分（可靠性、工具选择质量、平均步数、成本等加权）；每周一重算",
-        "evaluatedAt": "2026-10-27",
+        "evaluatedAt": "2026-10-28",
         "count": 100
       }
     ],
@@ -863,7 +863,8 @@
       "costPerTask": 0.02,
       "latencyMs": 500,
       "stars": 53000,
-      "mindshare": 87.7
+      "mindshare": 87.7,
+      "description": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs"
     },
     {
       "rank": 9,
@@ -879,7 +880,8 @@
       "costPerTask": 0.05,
       "latencyMs": 500,
       "stars": 387200,
-      "mindshare": 100
+      "mindshare": 100,
+      "description": "Reverse engineer anything with agents, from app behavior down to native binaries."
     },
     {
       "rank": 10,
