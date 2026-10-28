@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27",
+  "generatedAt": "2026-10-28",
   "candidates": [
     {
       "slug": "hnalt:49964361",
@@ -120,6 +120,26 @@
       },
       "snippet": null,
       "discoveredAt": "2026-10-27",
+      "decided": false
+    },
+    {
+      "slug": "hnalt:50273127",
+      "title": "OpenMausBot: Open-source Grok Bot alternative with a VM the bot can use",
+      "url": "https://news.ycombinator.com/item?id=50273127",
+      "storyUrl": "https://github.com/milind-soni/OpenMausBot",
+      "source": "hn",
+      "matchedOverseas": [
+        "grok"
+      ],
+      "categoryHint": "chat",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "snippet": null,
+      "discoveredAt": "2026-10-28",
       "decided": false
     }
   ]
