@@ -17,7 +17,7 @@
         "url": "https://www.theagenticleaderboard.com/agent",
         "version": null,
         "note": "开源 Agent 综合评分（可靠性、工具选择质量、平均步数、成本等加权）；每周一重算",
-        "evaluatedAt": "2026-10-28",
+        "evaluatedAt": "2026-10-29",
         "count": 100
       }
     ],
@@ -825,7 +825,8 @@
       "costPerTask": 0.02,
       "latencyMs": 500,
       "stars": 54700,
-      "mindshare": 87
+      "mindshare": 87,
+      "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 250,000+ scientists worldwide. 177 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discove"
     },
     {
       "rank": 3,

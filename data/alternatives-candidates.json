@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28",
+  "generatedAt": "2026-10-29",
   "candidates": [
     {
       "slug": "hnalt:49964361",
@@ -140,6 +140,26 @@
       },
       "snippet": null,
       "discoveredAt": "2026-10-28",
+      "decided": false
+    },
+    {
+      "slug": "hnalt:50282326",
+      "title": "My favorite Grammarly alternative checks writing on my device",
+      "url": "https://news.ycombinator.com/item?id=50282326",
+      "storyUrl": "https://www.makeuseof.com/my-favorite-grammarly-alternative-checks-writing-entirely-on-my-device/",
+      "source": "hn",
+      "matchedOverseas": [
+        "grammarly"
+      ],
+      "categoryHint": "office",
+      "matchLevel": "title",
+      "description": "",
+      "signals": {
+        "hnPoints": 1,
+        "hnComments": 0
+      },
+      "snippet": null,
+      "discoveredAt": "2026-10-29",
       "decided": false
     }
   ]

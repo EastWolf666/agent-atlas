@@ -13,6 +13,15 @@
  *   这里按「去掉括号后缀的名字」聚合，保留 Intelligence Index 最高的一档，
  *   并在 variant 字段记录档位，避免榜单被同款模型刷屏。
  *
+ * 带分条目数会跳变，这是上游常态，不是抓取失败：
+ *   2026-10-29 实测：页面共 273 条，只有 77 条带 intelligenceIndex，去重后 38 条
+ *   （上一版是 190 条）。原因是 AA 换了评测套件——带总分的条目都跑齐了
+ *   terminalbench-4-0 / scicode / automationbench-aa / frontiercode-2-0 / critpt-v2-hard，
+ *   而没有总分的 196 条在这些新评测上缺失 67%~100%，即停留在旧套件、尚未回填。
+ *   已用无头浏览器渲染页面核对：页面上确实是 77 行有分数、196 行显示 `--`，
+ *   与 HTML 里的 flight 数据一致，说明脚本解析无误。
+ *   所以数量下跌只告警不拦（见 main() 里的熔断注释）。
+ *
  * 跑法：node scripts/fetch-model-scores.mjs [--dry-run]
  */
 
@@ -129,16 +138,38 @@ async function main() {
   log('[2/2] 解析并去重')
   const raw = extractModels(html)
   const rows = normalize(raw)
-  log(`  原始 ${raw.length} 条 → 去重后 ${rows.length} 条`)
+  const scored = raw.filter((m) => typeof m.intelligenceIndex === 'number').length
+  log(
+    `  原始 ${raw.length} 条 → 带 Intelligence Index ${scored} 条 → 去重后 ${rows.length} 条` +
+      `（覆盖 ${Math.round((scored / raw.length) * 100)}%）`
+  )
 
-  /* 熔断：AA 从未少于 100 个模型；明显缩水说明页面改版 */
-  if (rows.length < 50) {
-    console.error(`❌ 仅解析到 ${rows.length} 条，判定上游异常，放弃写盘`)
+  /*
+   * 熔断：只拦「评分体系整体消失」这一种真异常。
+   *
+   * 2026-10-29 踩过的坑：AA 升级 Intelligence Index 评测套件后，
+   * 带总分的条目从 190 掉到 38（-80%），旧判据（比上一版跌超 20% 就 abort）
+   * 把它当成异常拒写盘，于是 model-scores.json 一直停在旧套件时代的快照，
+   * 和线上榜单对不上——这比写盘危险得多，读者看到的是早已过期的分数。
+   *
+   * 覆盖波动本来就是上游常态：换套件、分批回填、模型下架都会让数量跳变。
+   * 所以改成：跌了就大声告警，但照常写盘；真要拦，只拦「一个都没有」。
+   */
+  const MIN_SCORED = 10
+  if (rows.length < MIN_SCORED) {
+    console.error(
+      `❌ 仅 ${rows.length} 个模型带 Intelligence Index（下限 ${MIN_SCORED}），` +
+        '判定为上游异常（页面改版或抓取失败），放弃写盘'
+    )
     process.exit(1)
   }
-  if (prev?.models?.length > 100 && rows.length < prev.models.length * 0.6) {
-    console.error(`❌ 从 ${prev.models.length} 跌到 ${rows.length}，放弃写盘`)
-    process.exit(1)
+  const prevCount = prev?.models?.length ?? 0
+  if (prevCount > 0 && rows.length < prevCount * 0.8) {
+    const drop = Math.round((1 - rows.length / prevCount) * 100)
+    log(
+      `  ⚠️ 评分覆盖从 ${prevCount} 条降到 ${rows.length} 条（-${drop}%）：` +
+        '通常是 AA 换了评测套件或分批回填，已照常写盘，请核对最新榜单'
+    )
   }
 
   const payload = {
